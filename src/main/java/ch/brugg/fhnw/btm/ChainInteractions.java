@@ -13,7 +13,7 @@ public class ChainInteractions {
 
 
 
-    private static TransactionReceipt sendEtherToAccount(Web3j web3j, BigInteger gasPrice, BigInteger gasLimit, String accountAddress, TransactionManager transactionManager) throws Exception {
+    public TransactionReceipt sendEtherToAccount(Web3j web3j, BigInteger gasPrice, BigInteger gasLimit, String accountAddress, TransactionManager transactionManager) throws Exception {
 
         Transfer transfer = new Transfer(web3j, transactionManager);
         return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();

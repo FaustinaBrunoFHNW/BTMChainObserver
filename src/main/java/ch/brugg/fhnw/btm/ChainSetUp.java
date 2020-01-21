@@ -14,9 +14,12 @@ import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.TransactionManager;
+import org.web3j.tx.Transfer;
 import org.web3j.tx.gas.DefaultGasProvider;
+import org.web3j.utils.Convert;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class ChainSetUp {
@@ -26,10 +29,10 @@ public class ChainSetUp {
 
     private final String privateKey;
     private static BigInteger REGISTRATION_FEE = BigInteger.valueOf(1000000000000000000L);
-    private static Web3j web3j;
+    private  Web3j web3j;
     private static SimpleCertifier simpleCertifier;
     private static SimpleRegistry simpleRegistry;
-    private static TransactionManager transactionManager;
+    private  TransactionManager transactionManager;
     private static byte[] hash;
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
@@ -174,12 +177,28 @@ public class ChainSetUp {
     }
 
     //TODO evtl ChainInteractions Klasse reinnehmen
-    private  boolean isCertified(String add) {
+    public   boolean isCertified(String add) {
         try {
             return simpleCertifier.certified(add).send();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public   void loadCertifier(String add) {
+
+        simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
+
+    }
+
+    //TODO evtl ChainInteractions Klasse reinnehmen
+    public TransactionReceipt sendEtherToAccount( BigInteger gasPrice, BigInteger gasLimit, String accountAddress) throws Exception {
+
+        Transfer transfer = new Transfer(this.web3j, this.transactionManager);
+        return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
+    }
+    public  Web3j getWeb3j() {
+        return web3j;
     }
 }
