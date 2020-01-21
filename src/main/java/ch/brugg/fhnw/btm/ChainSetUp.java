@@ -2,6 +2,7 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Credentials;
@@ -50,6 +51,28 @@ public class ChainSetUp {
         hash = new BigInteger(str_hash, 16).toByteArray();
     }
 
+    public void setUpAfterChaiStart(String accountAdressToCertify, String privateKey) throws Exception {
+        new ChainSetUp(privateKey);
+
+        //Allgemeine Abfrage zur Chain ob alles funktioniert etc
+        getInfo(web3j);
+
+        loadSimpleRegistry();
+
+
+        //Deploy Simple Cert
+        //Entweder SetUp oder Load
+        //Dieses wird benutzt wenn Chain noch nie gelaufen ist
+        setUpCertifier(accountAdressToCertify);
+
+
+        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
+        subscriptionTX.run();
+
+        log.info("Size of Account -List = " + AccountLoader.getInstance().getAccounts().size());
+
+    }
+
     private  boolean loadSimpleRegistry() {
 
         //TODO Key in Konstante auslagern
@@ -68,7 +91,7 @@ public class ChainSetUp {
 
     }
 
-    private  boolean setUpCertifier(TransactionManager transactionManager, String accountAdressToCertfy) {
+    private  boolean setUpCertifier( String accountAdressToCertfy) {
 
         if (deployCertifier(transactionManager) && registerCertifier() && certifyAccount(accountAdressToCertfy)) {
             log.info("deploy of Certifier worked");
