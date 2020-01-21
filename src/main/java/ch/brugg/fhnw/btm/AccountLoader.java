@@ -15,8 +15,7 @@ public class AccountLoader {
     private HashMap<String, Account> accounts;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
 
-    //TODO path anpassen
-    File file = new File("src/main/resources/accountInput/Accounts.txt");
+    File file = new File("src/main/resources/whitelist/Accounts.txt");
 
     private static final AccountLoader instance = new AccountLoader();
 
