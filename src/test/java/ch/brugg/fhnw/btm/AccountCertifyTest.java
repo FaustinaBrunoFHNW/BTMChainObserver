@@ -1,12 +1,21 @@
 package ch.brugg.fhnw.btm;
 
 import org.junit.Test;
+import org.web3j.tx.TransactionManager;
+
+import java.math.BigInteger;
 
 public class AccountCertifyTest {
 
+    private final static String PRIVATE_KEY = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
+
     private final static String CERTIFIED_ADD = "0x00a329c0648769a73afac7f9381e08fb43dbea72";
-    private final static String UNCERTIFIED_ADD = "0xdb3cc88CA30407c079deCBcfF9c34E4a23Aaa669";
-    private ChainSetUp chainSetUp = new ChainSetUp();
+    private static BigInteger GAS_LIMIT = BigInteger.valueOf(21000L);
+    private static BigInteger GAS_PRICE = BigInteger.valueOf(1000000000); //1 GWEI
+   private TransactionManager transactionManager;
+    // private static BigInteger GAS_PRICE = BigInteger.valueOf(0);
+
+    private ChainSetUp chainSetUp = new ChainSetUp(PRIVATE_KEY);
 
     @Test
     public static void main(String[] args) throws Exception {
