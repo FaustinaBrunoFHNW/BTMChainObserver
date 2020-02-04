@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+
+//TODO als Singelton Paater implementieren
 public class ChainSetUp {
 
     // Tutorial can be found here: https://kauri.io/connecting-to-an-ethereum-client-with-java-eclipse-and-web3j/b9eb647c47a546bc95693acc0be72546/a
@@ -33,7 +35,7 @@ public class ChainSetUp {
     private SimpleCertifier simpleCertifier;
     private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
-    private static byte[] hash;
+    private  byte[] hash;
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
     public ChainSetUp(String privateKey) {
@@ -162,30 +164,6 @@ public class ChainSetUp {
         }
     }
 
-    //TODO evtl ChainInteractions Klasse reinnehmen
-    private boolean certifyAccount(String add) {
-
-        try {
-            log.info("Certifying Account mit folgender Adresse: " + add);
-            simpleCertifier.certify(add).send();
-            log.info(simpleRegistry.getAddress(hash, "A").send());
-            log.info("Done certifying account");
-            return isCertified(add);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    //TODO evtl ChainInteractions Klasse reinnehmen
-    public boolean isCertified(String add) {
-        try {
-            return simpleCertifier.certified(add).send();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     public void loadCertifier(String add) {
 
@@ -212,5 +190,21 @@ public class ChainSetUp {
 
     public void setTransactionManager(TransactionManager transactionManager) {
         this.transactionManager = transactionManager;
+    }
+
+    public SimpleRegistry getSimpleRegistry() {
+        return simpleRegistry;
+    }
+
+    public void setSimpleRegistry(SimpleRegistry simpleRegistry) {
+        this.simpleRegistry = simpleRegistry;
+    }
+
+    public  byte[] getHash() {
+        return hash;
+    }
+
+    public  void setHash(byte[] hash) {
+        this.hash = hash;
     }
 }

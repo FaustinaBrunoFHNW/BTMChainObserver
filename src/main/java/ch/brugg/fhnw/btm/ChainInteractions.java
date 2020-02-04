@@ -1,6 +1,7 @@
 package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
+import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.protocol.Web3j;
@@ -17,20 +18,23 @@ public class ChainInteractions {
     private Logger log = LoggerFactory.getLogger(ChainInteractions.class);
     private ChainSetUp chainSetUp;
     private SimpleCertifier simpleCertifier;
+    private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
     private Web3j web3j;
 
+    //TODO JavaDoc für Constructor
     public ChainInteractions(ChainSetUp chainSetUp) {
         this.chainSetUp = chainSetUp;
         this.simpleCertifier = chainSetUp.getSimpleCertifier();
-        this.web3j=chainSetUp.getWeb3j();
-        this.transactionManager=chainSetUp.getTransactionManager();
+        this.simpleRegistry = chainSetUp.getSimpleRegistry();
+        this.web3j = chainSetUp.getWeb3j();
+        this.transactionManager = chainSetUp.getTransactionManager();
 
     }
 
     //TODO JavaDoc
-    public TransactionReceipt sendEtherToAccount(BigInteger gasPrice, BigInteger gasLimit,
-            String accountAddress ) throws Exception {
+    public TransactionReceipt sendEtherToAccount(BigInteger gasPrice, BigInteger gasLimit, String accountAddress)
+            throws Exception {
         this.log.info("Methode sendEtherToAccount wurde aufgerufen.");
         Transfer transfer = new Transfer(this.web3j, this.transactionManager);
         return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
@@ -42,11 +46,37 @@ public class ChainInteractions {
                 + accountAddress);
         this.simpleCertifier.revoke(accountAddress);
         if (this.simpleCertifier.certified(accountAddress).send()) {
-            this.log.info(accountAddress+" wurde nicht erfolgreich aus der Whiteliste entfernt");
+            this.log.info(accountAddress + " wurde nicht erfolgreich aus der Whiteliste entfernt");
             return false;
         }
-        this.log.info(accountAddress+" wurde erfolgreich aus der Whiteliste entfernt");
+        this.log.info(accountAddress + " wurde erfolgreich aus der Whiteliste entfernt");
         return true;
     }
+
+    //TODO JavaDoc
+    private boolean certifyAccount(String add) {
+
+        try {
+            log.info("Certifying Account mit folgender Adresse: " + add);
+            simpleCertifier.certify(add).send();
+            log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
+            log.info("Done certifying account");
+            return isCertified(add);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //TODO JavaDoc
+    public boolean isCertified(String add) {
+        try {
+            return simpleCertifier.certified(add).send();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }
