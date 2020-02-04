@@ -193,13 +193,6 @@ public class ChainSetUp {
 
     }
 
-    //TODO evtl ChainInteractions Klasse reinnehmen
-    public TransactionReceipt sendEtherToAccount(BigInteger gasPrice, BigInteger gasLimit, String accountAddress)
-            throws Exception {
-
-        Transfer transfer = new Transfer(this.web3j, this.transactionManager);
-        return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
-    }
 
     public Web3j getWeb3j() {
         return web3j;
@@ -211,5 +204,13 @@ public class ChainSetUp {
 
     public void setSimpleCertifier(SimpleCertifier simpleCertifier) {
         this.simpleCertifier = simpleCertifier;
+    }
+
+    public TransactionManager getTransactionManager() {
+        return transactionManager;
+    }
+
+    public void setTransactionManager(TransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 }

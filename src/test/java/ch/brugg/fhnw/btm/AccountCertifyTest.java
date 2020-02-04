@@ -18,7 +18,7 @@ public class AccountCertifyTest {
 
 
     public ChainSetUp chainSetUp = new ChainSetUp(PRIVATE_KEY);
-    private ChainInteractions chainInteractions = new ChainInteractions();
+    private ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
 
     @BeforeClass public void setUpChain() throws Exception {
        // chainSetUp.setUpAfterChaiStart(CERTIFIED_ADD, PRIVATE_KEY);
@@ -45,10 +45,12 @@ public class AccountCertifyTest {
         // doTestTransactionsUnCertified();
 
     }
+
+
     private  void doTestTransactionsCertified() {
         System.out.println("Certified Transaction should work");
         try {
-            boolean status = this.chainSetUp.sendEtherToAccount(GAS_PRICE,GAS_LIMIT,CERTIFIED_ADD).isStatusOK();
+           boolean status = this.chainInteractions.sendEtherToAccount(GAS_PRICE,GAS_LIMIT,CERTIFIED_ADD).isStatusOK();
             if (status == false) {
                 System.out.println("But did not work. Status: " + status);
             } else {
@@ -59,4 +61,5 @@ public class AccountCertifyTest {
         }
 
     }
+
 }

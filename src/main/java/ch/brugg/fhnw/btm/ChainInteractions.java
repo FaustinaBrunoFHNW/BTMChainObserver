@@ -17,18 +17,22 @@ public class ChainInteractions {
     private Logger log = LoggerFactory.getLogger(ChainInteractions.class);
     private ChainSetUp chainSetUp;
     private SimpleCertifier simpleCertifier;
+    private TransactionManager transactionManager;
+    private Web3j web3j;
 
     public ChainInteractions(ChainSetUp chainSetUp) {
         this.chainSetUp = chainSetUp;
-        simpleCertifier = this.chainSetUp.getSimpleCertifier();
+        this.simpleCertifier = chainSetUp.getSimpleCertifier();
+        this.web3j=chainSetUp.getWeb3j();
+        this.transactionManager=chainSetUp.getTransactionManager();
 
     }
 
     //TODO JavaDoc
-    public TransactionReceipt sendEtherToAccount(Web3j web3j, BigInteger gasPrice, BigInteger gasLimit,
-            String accountAddress, TransactionManager transactionManager) throws Exception {
+    public TransactionReceipt sendEtherToAccount(BigInteger gasPrice, BigInteger gasLimit,
+            String accountAddress ) throws Exception {
         this.log.info("Methode sendEtherToAccount wurde aufgerufen.");
-        Transfer transfer = new Transfer(web3j, transactionManager);
+        Transfer transfer = new Transfer(this.web3j, this.transactionManager);
         return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
     }
 
@@ -44,4 +48,5 @@ public class ChainInteractions {
         this.log.info(accountAddress+" wurde erfolgreich aus der Whiteliste entfernt");
         return true;
     }
+
 }
