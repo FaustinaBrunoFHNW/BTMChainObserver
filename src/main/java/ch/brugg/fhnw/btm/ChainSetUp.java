@@ -29,10 +29,10 @@ public class ChainSetUp {
 
     private final String privateKey;
     private static BigInteger REGISTRATION_FEE = BigInteger.valueOf(1000000000000000000L);
-    private  Web3j web3j;
-    private static SimpleCertifier simpleCertifier;
-    private static SimpleRegistry simpleRegistry;
-    private  TransactionManager transactionManager;
+    private Web3j web3j;
+    private SimpleCertifier simpleCertifier;
+    private SimpleRegistry simpleRegistry;
+    private TransactionManager transactionManager;
     private static byte[] hash;
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
@@ -41,7 +41,7 @@ public class ChainSetUp {
         log.info("connecting");
         this.privateKey = privateKey;
         //Verbindungsaufbau zur Chain
-        web3j = Web3j.build(new HttpService("http://192.168.99.100:8545/"));
+        web3j = Web3j.build(new HttpService("http://jurijnas.myqnapcloud.com:8545/"));
 
         //TODO in Test auslagern
         //TM von dem Account mit dem PK
@@ -52,9 +52,10 @@ public class ChainSetUp {
 
         //Umwandeln in Bytearray Hexadecimal
         hash = new BigInteger(str_hash, 16).toByteArray();
+        getInfo(web3j);
     }
 
-    public void setUpAfterChaiStart(String accountAdressToCertify, String privateKey) throws Exception {
+    public void setUpAfterChainStart(String accountAdressToCertify, String privateKey) throws Exception {
         new ChainSetUp(privateKey);
 
         //Allgemeine Abfrage zur Chain ob alles funktioniert etc
@@ -62,12 +63,12 @@ public class ChainSetUp {
 
         loadSimpleRegistry();
 
-
         //Deploy Simple Cert
         //Entweder SetUp oder Load
         //Dieses wird benutzt wenn Chain noch nie gelaufen ist
-        setUpCertifier(accountAdressToCertify);
+        setUpCertifier();
 
+        //TODO adressen registrieren (in Main klasse alle accounts von liste durchgehen und certifien)
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
         subscriptionTX.run();
@@ -76,7 +77,7 @@ public class ChainSetUp {
 
     }
 
-    private  boolean loadSimpleRegistry() {
+    private boolean loadSimpleRegistry() {
 
         //TODO Key in Konstante auslagern
         simpleRegistry = SimpleRegistry
@@ -94,9 +95,9 @@ public class ChainSetUp {
 
     }
 
-    private  boolean setUpCertifier( String accountAdressToCertfy) {
+    private boolean setUpCertifier() {
 
-        if (deployCertifier(transactionManager) && registerCertifier() && certifyAccount(accountAdressToCertfy)) {
+        if (deployCertifier(transactionManager) && registerCertifier()) {
             log.info("deploy of Certifier worked");
             log.info("Registration of Certifier worked");
             log.info("Certifying worked");
@@ -109,11 +110,11 @@ public class ChainSetUp {
         return false;
     }
 
-    private  Credentials getCredentialsFromPrivateKey() {
+    private Credentials getCredentialsFromPrivateKey() {
         return Credentials.create(this.privateKey);
     }
 
-    private  boolean deployCertifier(TransactionManager transactionManager) {
+    private boolean deployCertifier(TransactionManager transactionManager) {
 
         try {
             log.info("Deploying Certifier");
@@ -127,7 +128,7 @@ public class ChainSetUp {
 
     }
 
-    private  boolean registerCertifier() {
+    private boolean registerCertifier() {
 
         try {
             log.info("Registering Certifier");
@@ -144,7 +145,7 @@ public class ChainSetUp {
         return false;
     }
 
-    private  void getInfo(Web3j web3j) {
+    private void getInfo(Web3j web3j) {
         try {
             Web3ClientVersion clientVersion = web3j.web3ClientVersion().send();
 
@@ -162,10 +163,10 @@ public class ChainSetUp {
     }
 
     //TODO evtl ChainInteractions Klasse reinnehmen
-    private  boolean certifyAccount(String add) {
+    private boolean certifyAccount(String add) {
 
         try {
-            log.info("Certifying Account");
+            log.info("Certifying Account mit folgender Adresse: " + add);
             simpleCertifier.certify(add).send();
             log.info(simpleRegistry.getAddress(hash, "A").send());
             log.info("Done certifying account");
@@ -177,7 +178,7 @@ public class ChainSetUp {
     }
 
     //TODO evtl ChainInteractions Klasse reinnehmen
-    public   boolean isCertified(String add) {
+    public boolean isCertified(String add) {
         try {
             return simpleCertifier.certified(add).send();
         } catch (Exception e) {
@@ -186,19 +187,29 @@ public class ChainSetUp {
         return false;
     }
 
-    public   void loadCertifier(String add) {
+    public void loadCertifier(String add) {
 
         simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
 
     }
 
     //TODO evtl ChainInteractions Klasse reinnehmen
-    public TransactionReceipt sendEtherToAccount( BigInteger gasPrice, BigInteger gasLimit, String accountAddress) throws Exception {
+    public TransactionReceipt sendEtherToAccount(BigInteger gasPrice, BigInteger gasLimit, String accountAddress)
+            throws Exception {
 
         Transfer transfer = new Transfer(this.web3j, this.transactionManager);
         return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
     }
-    public  Web3j getWeb3j() {
+
+    public Web3j getWeb3j() {
         return web3j;
+    }
+
+    public SimpleCertifier getSimpleCertifier() {
+        return simpleCertifier;
+    }
+
+    public void setSimpleCertifier(SimpleCertifier simpleCertifier) {
+        this.simpleCertifier = simpleCertifier;
     }
 }

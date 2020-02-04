@@ -8,7 +8,6 @@ import org.web3j.abi.datatypes.Address;
 import java.io.*;
 import java.util.HashMap;
 
-
 //TODO Klasse und Methode in Kommentaren beschreiben
 public class AccountLoader {
 
@@ -19,17 +18,18 @@ public class AccountLoader {
 
     private static final AccountLoader instance = new AccountLoader();
 
-    private AccountLoader(){
-        loadAccounts();
+    public AccountLoader() {
+       //TODO wieso bei initieren schon alle Laden? muss geprüft werden
+       // loadAccounts();
     }
 
     public static AccountLoader getInstance() {
-        return  instance;
+        return instance;
     }
 
+    //TODO Explain java DOC
+    public void loadAccounts() {
 
-    private void loadAccounts(){
-        Account temp;
         accounts = new HashMap<>();
         try {
             FileReader fileReader = new FileReader(file);
@@ -37,20 +37,22 @@ public class AccountLoader {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
-                temp = new Account(line);
-                accounts.put(line,temp);
+                Account account = new Account(line);
+                accounts.put(line, account);
             }
             bufferedReader.close();
             fileReader.close();
-        }catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //TODO Explain java DOC
     public HashMap<String, Account> getAccounts() {
         return accounts;
     }
 
+    //TODO Explain java DOC
     public void addAccount(Address address) {
         if (!accounts.containsKey(address.getValue())) {
             appendAccount(address.getValue().toLowerCase());
@@ -59,13 +61,15 @@ public class AccountLoader {
 
     }
 
+    //TODO Explain java DOC
     public void addAccount(String address) {
-        if (! accounts.containsKey(address.trim().toLowerCase())) {
+        if (!accounts.containsKey(address.trim().toLowerCase())) {
             appendAccount(address);
             loadAccounts();
         }
     }
 
+    //TODO Explain java DOC
     private void appendAccount(String address) {
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
@@ -77,12 +81,12 @@ public class AccountLoader {
         }
     }
 
+    //TODO Explain java DOC
     public void reset() {
         loadAccounts();
     }
 
-
-
+    //TODO Explain java DOC
     public boolean removeAccount(String address) {
         File temp = new File("src/main/resources/accountInput/Accounts_temp.txt");
         try {
@@ -105,7 +109,7 @@ public class AccountLoader {
                 loadAccounts();
                 return true;
             }
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,9 +117,10 @@ public class AccountLoader {
         return false;
     }
 
-    public  boolean increaseCounter(String address){
+    //TODO Explain java DOC
+    public boolean increaseCounter(String address) {
         log.info("increasing counter of " + address);
-        if (accounts.containsKey(address)){
+        if (accounts.containsKey(address)) {
             log.info("account found");
             accounts.get(address).increaseCounter();
             return true;

@@ -21,11 +21,11 @@ public class AccountCertifyTest {
     private ChainInteractions chainInteractions = new ChainInteractions();
 
     @BeforeClass public void setUpChain() throws Exception {
-        chainSetUp.setUpAfterChaiStart(CERTIFIED_ADD, PRIVATE_KEY);
+       // chainSetUp.setUpAfterChaiStart(CERTIFIED_ADD, PRIVATE_KEY);
     }
 
     @Test public void main(String[] args) throws Exception {
-         String adress="";
+         String adress="0x84b51678f9a4869e384f737ed2a5d56c8ca16c81";
         //Load Simple Cert
         //Entweder SetUp oder Load
         //Dieses wird benutzt wenn Chain schonmal gelaufen ist
