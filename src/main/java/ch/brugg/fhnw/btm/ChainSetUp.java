@@ -29,6 +29,7 @@ public class ChainSetUp {
     // Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
 
     private final String privateKey;
+    String certifierAdd;
     private static BigInteger REGISTRATION_FEE = BigInteger.valueOf(1000000000000000000L);
     private Web3j web3j;
     private SimpleCertifier simpleCertifier;
@@ -37,16 +38,16 @@ public class ChainSetUp {
     private byte[] hash;
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
-    public ChainSetUp(String privateKey) {
-
+    public ChainSetUp( String privateKey, String certifierAdd) {
+        this.certifierAdd=certifierAdd;
         log.info("connecting");
         this.privateKey = privateKey;
         //Verbindungsaufbau zur Chain
         web3j = Web3j.build(new HttpService("http://jurijnas.myqnapcloud.com:8545/"));
 
-        //TODO in Test auslagern
+        //TODO in Test auslagern ??
         //TM von dem Account mit dem PK
-        this.transactionManager = new RawTransactionManager(web3j, getCredentialsFromPrivateKey());
+        this.transactionManager = new RawTransactionManager(web3j, this.getCredentialsFromPrivateKey());
 
         //sha3(service_transaction_checker) = 0x6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155
         String str_hash = "6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155";
@@ -63,7 +64,7 @@ public class ChainSetUp {
         getInfo(web3j);
 
         loadSimpleRegistry();
-        this.loadCertifier(privateKey);
+        this.loadCertifier(certifierAdd);
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
         subscriptionTX.run();

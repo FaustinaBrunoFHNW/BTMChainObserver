@@ -41,24 +41,32 @@ public class ChainInteractions {
     }
 
     //TODO java doc
-    public boolean revokeAccount(String accountAddress) throws Exception {
+    public boolean revokeAccount(String accountAddress)   {
         this.log.info("Methode revokeAccount wurde aufgerufen. Folgender Account wird aus der Whiteliste entfernt: "
                 + accountAddress);
-        this.simpleCertifier.revoke(accountAddress);
-        if (this.isCertified(accountAddress)) {
-            this.log.info(accountAddress + " wurde nicht erfolgreich aus der Whiteliste entfernt");
+
+        try {
+            this.simpleCertifier.revoke(accountAddress).send();
+           // log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
             return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        this.log.info(accountAddress + " wurde erfolgreich aus der Whiteliste entfernt");
-        return true;
+
+        if (!this.isCertified(accountAddress)) {
+            this.log.info(accountAddress + " wurde  erfolgreich aus der Whiteliste entfernt");
+            return true;
+        }
+        this.log.info(accountAddress + " wurde NICHT erfolgreich aus der Whiteliste entfernt");
+        return false;
     }
 
     //TODO JavaDoc
-    private boolean certifyAccount(String add) {
+    public boolean certifyAccount(String add) {
 
         try {
             log.info("Certifying Account mit folgender Adresse: " + add);
-            simpleCertifier.certify(add).send();
+            this.simpleCertifier.certify(add).send();
             log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
             log.info("Done certifying account");
             return isCertified(add);

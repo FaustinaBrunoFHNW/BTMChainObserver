@@ -45,8 +45,10 @@ public class SubscriptionTX {
             log.info("Gas price used: " + tx.getGasPrice());
             log.info("Ether moved " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
 
+
+            //TODO increaseCounter wieder einkommentieren und hier die DOS Algo implemeniteren
             if (tx.getGasPrice().equals(BigInteger.ZERO)) {
-                AccountLoader.getInstance().increaseCounter(tx.getFrom().trim().toLowerCase());
+             //   AccountLoader.getInstance().increaseCounter(tx.getFrom().trim().toLowerCase());
             }
         }, Throwable::printStackTrace);
     }

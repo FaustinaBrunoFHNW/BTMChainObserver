@@ -9,15 +9,16 @@ import java.math.BigInteger;
 
 public class AccountCertifyTest {
 
+    //TODO richtige Adressen
     private final static String PRIVATE_KEY = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
-
-    private final static String CERTIFIED_ADD = "0x00a329c0648769a73afac7f9381e08fb43dbea72";
+    private final static String PRIVATE_ADD = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
+    private final static String CERTIFIED_ADD = "0x84b51678f9a4869e384f737ed2a5d56c8ca16c81";
     private static BigInteger GAS_LIMIT = BigInteger.valueOf(21000L);
     private static BigInteger GAS_PRICE = BigInteger.valueOf(1000000000); //1 GWEI
     // private static BigInteger GAS_PRICE = BigInteger.valueOf(0);
 
 
-    public ChainSetUp chainSetUp = new ChainSetUp(PRIVATE_KEY);
+    public ChainSetUp chainSetUp = new ChainSetUp(PRIVATE_KEY, CERTIFIED_ADD);
     private ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
 
     @BeforeClass public void setUpChain() throws Exception {
