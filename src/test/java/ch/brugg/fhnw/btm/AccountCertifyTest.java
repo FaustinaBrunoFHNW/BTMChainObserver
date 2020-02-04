@@ -34,7 +34,7 @@ public class AccountCertifyTest {
 
 
         //Verify
-        System.out.println("Certified Adress is certified: "+ String.valueOf(this.chainSetUp.isCertified(CERTIFIED_ADD) ));
+      //  System.out.println("Certified Adress is certified: "+ String.valueOf(this.chainSetUp.isCertified(CERTIFIED_ADD) ));
         //TODO für uncertified Account
      //   log.info("Uncertified Adress is certified: " + String.valueOf(isCertified(TEST_ADD)));
 

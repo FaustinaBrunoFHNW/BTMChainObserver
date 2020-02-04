@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-
 //TODO als Singelton Paater implementieren
 public class ChainSetUp {
 
@@ -35,7 +34,7 @@ public class ChainSetUp {
     private SimpleCertifier simpleCertifier;
     private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
-    private  byte[] hash;
+    private byte[] hash;
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
     public ChainSetUp(String privateKey) {
@@ -47,7 +46,7 @@ public class ChainSetUp {
 
         //TODO in Test auslagern
         //TM von dem Account mit dem PK
-        transactionManager = new RawTransactionManager(web3j, getCredentialsFromPrivateKey());
+        this.transactionManager = new RawTransactionManager(web3j, getCredentialsFromPrivateKey());
 
         //sha3(service_transaction_checker) = 0x6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155
         String str_hash = "6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155";
@@ -57,8 +56,24 @@ public class ChainSetUp {
         getInfo(web3j);
     }
 
-    public void setUpAfterChainStart(String accountAdressToCertify, String privateKey) throws Exception {
-        new ChainSetUp(privateKey);
+    //TODO JAVA DOC
+    public void setUpAfterChainStart() throws Exception {
+
+        //Allgemeine Abfrage zur Chain ob alles funktioniert etc
+        getInfo(web3j);
+
+        loadSimpleRegistry();
+        this.loadCertifier(privateKey);
+
+        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
+        subscriptionTX.run();
+
+        //TODOIst das hier richtig?
+        //  log.info("Size of Account -List = " + AccountLoader.getInstance().getAccounts().size());
+
+    }
+
+    public void setUpNewChainStart() throws Exception {
 
         //Allgemeine Abfrage zur Chain ob alles funktioniert etc
         getInfo(web3j);
@@ -68,13 +83,12 @@ public class ChainSetUp {
         //Deploy Simple Cert
         //Entweder SetUp oder Load
         //Dieses wird benutzt wenn Chain noch nie gelaufen ist
-        setUpCertifier();
-
-        //TODO adressen registrieren (in Main klasse alle accounts von liste durchgehen und certifien)
+        this.setUpCertifier();
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
         subscriptionTX.run();
 
+        //TODOIst das hier richtig?
         log.info("Size of Account -List = " + AccountLoader.getInstance().getAccounts().size());
 
     }
@@ -164,13 +178,11 @@ public class ChainSetUp {
         }
     }
 
-
     public void loadCertifier(String add) {
 
         simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
 
     }
-
 
     public Web3j getWeb3j() {
         return web3j;
@@ -200,11 +212,11 @@ public class ChainSetUp {
         this.simpleRegistry = simpleRegistry;
     }
 
-    public  byte[] getHash() {
+    public byte[] getHash() {
         return hash;
     }
 
-    public  void setHash(byte[] hash) {
+    public void setHash(byte[] hash) {
         this.hash = hash;
     }
 }

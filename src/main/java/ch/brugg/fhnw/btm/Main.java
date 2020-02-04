@@ -17,6 +17,9 @@ public class Main {
         ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
         Web3j web3j = chainSetUp.getWeb3j();
 
+        chainSetUp.setUpAfterChainStart();
+
+
         //TODO alle Benutzer aus Liste auslesen und certifien
        // accountLoader.loadAccounts();
        // HashMap<BigInteger, Account> accounts = accountLoader.getAccounts();

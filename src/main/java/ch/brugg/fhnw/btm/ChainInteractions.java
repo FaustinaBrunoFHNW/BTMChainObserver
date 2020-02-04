@@ -45,7 +45,7 @@ public class ChainInteractions {
         this.log.info("Methode revokeAccount wurde aufgerufen. Folgender Account wird aus der Whiteliste entfernt: "
                 + accountAddress);
         this.simpleCertifier.revoke(accountAddress);
-        if (this.simpleCertifier.certified(accountAddress).send()) {
+        if (this.isCertified(accountAddress)) {
             this.log.info(accountAddress + " wurde nicht erfolgreich aus der Whiteliste entfernt");
             return false;
         }
@@ -77,6 +77,5 @@ public class ChainInteractions {
         }
         return false;
     }
-
 
 }
