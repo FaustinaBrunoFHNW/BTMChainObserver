@@ -6,12 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.web3j.abi.datatypes.Address;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 //TODO Klasse und Methode in Kommentaren beschreiben
 public class AccountLoader {
 
     private HashMap<String, Account> accounts;
+    private ArrayList<Account> accountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
 
     File file = new File("src/main/resources/whitelist/Accounts.txt");
@@ -19,6 +21,8 @@ public class AccountLoader {
     private static final AccountLoader instance = new AccountLoader();
 
     public AccountLoader() {
+        accounts= new HashMap<>();
+        accountArrayList = new ArrayList();
        //TODO wieso bei initieren schon alle Laden? muss geprüft werden
        // loadAccounts();
     }
@@ -65,8 +69,16 @@ public class AccountLoader {
     public void addAccount(String address) {
         if (!accounts.containsKey(address.trim().toLowerCase())) {
             appendAccount(address);
-            loadAccounts();
+
+            //TODO wieso alle Accounts laden?
+          //  loadAccounts();
         }
+    }
+
+    //TODO Explain java DOC // für Testzwecke
+    public void addAccountToList(String address) {
+     Account account = new Account(address);
+     accountArrayList.add(account);
     }
 
     //TODO Explain java DOC
@@ -127,5 +139,13 @@ public class AccountLoader {
         }
         log.info("unable to find account " + address);
         return false;
+    }
+
+    public ArrayList<Account> getAccountArrayList() {
+        return accountArrayList;
+    }
+
+    public void setAccountArrayList(ArrayList<Account> accountArrayList) {
+        this.accountArrayList = accountArrayList;
     }
 }

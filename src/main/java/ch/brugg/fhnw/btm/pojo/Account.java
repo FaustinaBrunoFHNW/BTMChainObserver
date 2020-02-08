@@ -8,6 +8,7 @@ import org.web3j.abi.datatypes.Address;
 public class Account {
 
     private Address address;
+    private String adressValue;
     private Integer counter;
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
@@ -18,6 +19,7 @@ public class Account {
 
     public Account(String address){
         this.address = new Address(address.trim().toLowerCase());
+        this.adressValue=address;
         this.counter = 0;
     }
 
@@ -41,5 +43,13 @@ public class Account {
         this.counter++;
         log.info("Counter for Account "+ address +" reached count: " +counter);
 
+    }
+
+    public String getAdressValue() {
+        return adressValue;
+    }
+
+    public void setAdressValue(String adressValue) {
+        this.adressValue = adressValue;
     }
 }

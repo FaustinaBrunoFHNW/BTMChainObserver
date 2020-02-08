@@ -66,8 +66,9 @@ public class ChainSetUp {
         loadSimpleRegistry();
         this.loadCertifier(certifierAdd);
 
-        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
-        subscriptionTX.run();
+        //TODO maybe einbauen wenn auf AMIN Methode weg
+       // SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
+      //  subscriptionTX.run();
 
         //TODOIst das hier richtig?
         //  log.info("Size of Account -List = " + AccountLoader.getInstance().getAccounts().size());
@@ -86,8 +87,9 @@ public class ChainSetUp {
         //Dieses wird benutzt wenn Chain noch nie gelaufen ist
         this.setUpCertifier();
 
-        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
-        subscriptionTX.run();
+        //TODO evtl einbauen wenn auf MainMethode weg
+       // SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
+        //subscriptionTX.run();
 
         //TODOIst das hier richtig?
         log.info("Size of Account -List = " + AccountLoader.getInstance().getAccounts().size());
