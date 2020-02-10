@@ -16,15 +16,15 @@ public class AccountLoader {
     private ArrayList<Account> accountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
 
-    File file = new File("src/main/resources/whitelist/Accounts.txt");
+    private File file = new File("src/main/resources/whitelist/Accounts.txt");
 
     private static final AccountLoader instance = new AccountLoader();
 
     public AccountLoader() {
-        accounts= new HashMap<>();
+        accounts = new HashMap<>();
         accountArrayList = new ArrayList();
-       //TODO wieso bei initieren schon alle Laden? muss geprüft werden
-       // loadAccounts();
+        //TODO wieso bei initieren schon alle Laden? muss geprüft werden
+        // loadAccounts();
     }
 
     //TODO für was brauch man das? Lieber Singleton Pattern anwenden.
@@ -32,7 +32,11 @@ public class AccountLoader {
         return instance;
     }
 
-    //TODO Explain java DOC
+
+    /*
+    Läd alle Accounts die im File eingetragen sind, erstellt Accounts und füllt
+    diese in eine ArrayList und in eine Hashmap ein
+     */
     public void loadAccounts() {
 
         accounts = new HashMap<>();
@@ -42,7 +46,7 @@ public class AccountLoader {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
-                System.out.println("Folgender Account wurde geladen: "+line);
+                System.out.println("Folgender Account wurde geladen: " + line);
                 Account account = new Account(line);
                 this.accounts.put(line, account);
                 this.accountArrayList.add(account);
@@ -74,14 +78,14 @@ public class AccountLoader {
             appendAccount(address);
 
             //TODO wieso alle Accounts laden?
-          //  loadAccounts();
+            //  loadAccounts();
         }
     }
 
     //TODO Explain java DOC // für Testzwecke
     public void addAccountToList(String address) {
-     Account account = new Account(address);
-     accountArrayList.add(account);
+        Account account = new Account(address);
+        accountArrayList.add(account);
     }
 
     //TODO Explain java DOC
@@ -97,11 +101,20 @@ public class AccountLoader {
     }
 
     //TODO Explain java DOC
+    /*
+    Läd alle Accounts wieder in die ArrayList und Hashmap
+     */
     public void reset() {
         loadAccounts();
     }
 
     //TODO Explain java DOC
+
+    /**
+     *
+     * @param address
+     * @return
+     */
     public boolean removeAccount(String address) {
         File temp = new File("src/main/resources/accountInput/Accounts_temp.txt");
         try {
@@ -133,6 +146,12 @@ public class AccountLoader {
     }
 
     //TODO Explain java DOC
+
+    /**
+     *
+     * @param address
+     * @return
+     */
     public boolean increaseCounter(String address) {
         log.info("increasing counter of " + address);
         if (accounts.containsKey(address)) {
