@@ -27,6 +27,7 @@ public class AccountLoader {
        // loadAccounts();
     }
 
+    //TODO für was brauch man das? Lieber Singleton Pattern anwenden.
     public static AccountLoader getInstance() {
         return instance;
     }
@@ -41,8 +42,10 @@ public class AccountLoader {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
+                System.out.println("Folgender Account wurde geladen: "+line);
                 Account account = new Account(line);
-                accounts.put(line, account);
+                this.accounts.put(line, account);
+                this.accountArrayList.add(account);
             }
             bufferedReader.close();
             fileReader.close();

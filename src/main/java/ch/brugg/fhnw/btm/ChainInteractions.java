@@ -2,6 +2,7 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
+import ch.brugg.fhnw.btm.pojo.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.protocol.Web3j;
@@ -12,6 +13,7 @@ import org.web3j.utils.Convert;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class ChainInteractions {
 
@@ -61,7 +63,22 @@ public class ChainInteractions {
         return false;
     }
 
-    //TODO JavaDoc
+    /**
+     * In dieser Methode werden alle Account einer Liste in die Whiteliste integriert
+     * @param accounts Liste mit Accounts
+     */
+    public void certifyAccountList(ArrayList<Account> accounts){
+        log.info("Alle Accounts von Liste werden certifyed");
+        for (Account account : accounts) {
+            this.certifyAccount(account.getAdressValue());
+        }
+    }
+
+    /**
+     * Hier wird ein Account in die Whiteliste hinzugefügt
+     * @param add Adresse des Accounts welches in die Whiteliste hinzugefügt wirde
+     * @return es wird ausgegeben ob der Account in der Whiteliste hinzugefügt wurde
+     */
     public boolean certifyAccount(String add) {
 
         try {
