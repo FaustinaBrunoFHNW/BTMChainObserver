@@ -38,6 +38,13 @@ public class ChainSetUp {
     private byte[] hash;
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
+
+    //TODO JAVA DOC
+    /**
+     * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
+     * @param privateKey
+     * @param certifierAdd
+     */
     public ChainSetUp( String privateKey, String certifierAdd) {
         this.certifierAdd=certifierAdd;
         log.info("connecting");
@@ -58,44 +65,41 @@ public class ChainSetUp {
     }
 
     //TODO JAVA DOC
+    /**
+     *
+     * @throws Exception
+     */
     public void setUpAfterChainStart() throws Exception {
 
         //Allgemeine Abfrage zur Chain ob alles funktioniert etc
         getInfo(web3j);
 
-        loadSimpleRegistry();
+        this.loadSimpleRegistry();
         this.loadCertifier(certifierAdd);
-
-        //TODO maybe einbauen wenn auf AMIN Methode weg
-       // SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
-      //  subscriptionTX.run();
-
-        //TODOIst das hier richtig?
-        //  log.info("Size of Account -List = " + AccountLoader.getInstance().getAccounts().size());
 
     }
 
+    //TODO Javadoc
+    /**
+     * Wird ausgeführt bei einer komplett neuer Blockchain (beim Neustart einer Blockchain)
+     * @throws Exception
+     */
     public void setUpNewChainStart() throws Exception {
 
+
+        this.log.info("Simpleregistry und certifier werden aufgesetzt.");
         //Allgemeine Abfrage zur Chain ob alles funktioniert etc
         getInfo(web3j);
 
-        loadSimpleRegistry();
-
-        //Deploy Simple Cert
-        //Entweder SetUp oder Load
-        //Dieses wird benutzt wenn Chain noch nie gelaufen ist
+        this.loadSimpleRegistry();
         this.setUpCertifier();
-
-        //TODO evtl einbauen wenn auf MainMethode weg
-       // SubscriptionTX subscriptionTX = new SubscriptionTX(web3j);
-        //subscriptionTX.run();
-
-        //TODOIst das hier richtig?
-        log.info("Size of Account -List = " + AccountLoader.getInstance().getAccounts().size());
-
     }
 
+    //TODO JAvaDoc
+    /**
+     *
+     * @return
+     */
     private boolean loadSimpleRegistry() {
 
         //TODO Key in Konstante auslagern
@@ -114,6 +118,13 @@ public class ChainSetUp {
 
     }
 
+
+    //TODO JAVA DOC
+
+    /**
+     *
+     * @return
+     */
     private boolean setUpCertifier() {
 
         if (deployCertifier(transactionManager) && registerCertifier()) {
@@ -129,10 +140,23 @@ public class ChainSetUp {
         return false;
     }
 
+    //TODO JAVA DOC
+
+    /**
+     *
+     * @return
+     */
     private Credentials getCredentialsFromPrivateKey() {
         return Credentials.create(this.privateKey);
     }
 
+    //TODO JAVADOC
+
+    /**
+     *
+     * @param transactionManager
+     * @return
+     */
     private boolean deployCertifier(TransactionManager transactionManager) {
 
         try {
@@ -147,6 +171,12 @@ public class ChainSetUp {
 
     }
 
+    //TODO JAVA DOC
+
+    /**
+     *
+     * @return
+     */
     private boolean registerCertifier() {
 
         try {
@@ -164,6 +194,12 @@ public class ChainSetUp {
         return false;
     }
 
+    //TODO JAVADOC
+
+    /**
+     *
+     * @param web3j
+     */
     private void getInfo(Web3j web3j) {
         try {
             Web3ClientVersion clientVersion = web3j.web3ClientVersion().send();
@@ -181,11 +217,20 @@ public class ChainSetUp {
         }
     }
 
+    //TODO JAVA DOC
+    /**
+     *
+     * @param add
+     */
     public void loadCertifier(String add) {
 
         simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
 
     }
+
+
+    //GETTER UND SETTER
+
 
     public Web3j getWeb3j() {
         return web3j;
