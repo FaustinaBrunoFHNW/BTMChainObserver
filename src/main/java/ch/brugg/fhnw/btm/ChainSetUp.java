@@ -2,7 +2,6 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Credentials;
@@ -79,6 +78,8 @@ public class ChainSetUp {
 
     }
 
+
+    //TODO evtl in Genesis Block auslagern
     //TODO Javadoc
     /**
      * Wird ausgeführt bei einer komplett neuer Blockchain (beim Neustart einer Blockchain)

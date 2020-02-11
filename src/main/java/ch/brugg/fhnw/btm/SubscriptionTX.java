@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class SubscriptionTX {
 
     //TODO limite nach Besprechung stellen
-    private final static int TRANSAKTIONS_LIMITE= 5;
+    private final static int TRANSAKTIONS_LIMITE= 3;
     private Web3j web3j;
     private Subscription subscription;
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
@@ -46,8 +46,11 @@ public class SubscriptionTX {
         subscription.dispose();
     }
 
+
+
     void simpleTxFilter() throws Exception {
         Disposable subscription = web3j.transactionFlowable().subscribe(tx -> {
+            //TODO Gas pro Zeiteinheit anzeigen
             log.info("Found a TX from " + tx.getFrom());
             log.info("Gas price used: " + tx.getGasPrice());
             log.info("Ether moved " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
@@ -57,6 +60,7 @@ public class SubscriptionTX {
                 // AccountLoader.getInstance().increaseCounter(tx.getFrom().trim().toLowerCase());
                 log.info("Transaktionskosten waren 0");
                 log.info("Anzahl Accounts:"+accountLoader.getAccountArrayList().size());
+
                 for (Account account : accountLoader.getAccountArrayList()) {
                     if (account.getAdressValue().equals(tx.getFrom())) {
                         account.increaseCounter();
@@ -71,6 +75,9 @@ public class SubscriptionTX {
         }, Throwable::printStackTrace);
     }
 
+    //TODO Admin Account darf unendlich viele Transaktionen machen (ID von Account == dann nicht revoked)
+    //TODO Algo anhand Gasprice und nicht Anzahl Transaktionen
+    //TODO Counter runterzählen
     /**
      * In dieser Methode wird geschaut, wieviel Transaktionen von dem Account gemacht wurden.
      * Wenn dieser Account mehr Transaktionen als die Limite gemacht hat, wird er gesperrt.
@@ -84,6 +91,8 @@ public class SubscriptionTX {
             log.info("Der Acccount "+account.getAdressValue()+" wurde gesperrt. ");
         }
     }
+
+    //TODO Intervall Methode wo alle Counter von Accounts raufzählt
 
 
 }

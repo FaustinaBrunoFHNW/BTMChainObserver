@@ -4,25 +4,51 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.abi.datatypes.Address;
 
-
 public class Account {
 
     private Address address;
     private String adressValue;
-    private Integer counter;
+    private int counter;
+    private int maxCounter;
+    private int revokePeriod;
+
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
-    public Account(Address address) {
+    public Account(Address address, int maxCounter, int revokePeriod) {
         this.address = address;
-        this.counter = 0;
+        this.maxCounter = maxCounter;
+        this.counter = maxCounter;
+        this.revokePeriod = revokePeriod;
     }
 
-    public Account(String address){
+    public Account(String address) {
         this.address = new Address(address.trim().toLowerCase());
-        this.adressValue=address;
+        this.adressValue = address;
         this.counter = 0;
     }
 
+    /**
+     * Erhöht den Counter bis er auf den definiertern maximal Wert komnmt
+     */
+    public void increaseCounter() {
+        if (this.counter < this.maxCounter) {
+            this.counter++;
+        }
+        log.info("Counter von Account " + address + " hat der Wert: " + counter);
+
+    }
+
+    /**
+     * Zählt den Counter runter bis er bei 0 angekommen ist
+     */
+    public void decraseCounter() {
+        if (counter != 0) {
+            this.counter--;
+        }
+        log.info("Counter von Account " + address + " hat der Wert: " + counter);
+    }
+
+    // Getter und Setter
     public Address getAddress() {
         return address;
     }
@@ -39,17 +65,31 @@ public class Account {
         this.counter = counter;
     }
 
-    public void increaseCounter() {
-        this.counter++;
-        log.info("Counter for Account "+ address +" reached count: " +counter);
-
-    }
-
     public String getAdressValue() {
         return adressValue;
     }
 
     public void setAdressValue(String adressValue) {
         this.adressValue = adressValue;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public int getMaxCounter() {
+        return maxCounter;
+    }
+
+    public void setMaxCounter(int maxCounter) {
+        this.maxCounter = maxCounter;
+    }
+
+    public int getRevokePeriod() {
+        return revokePeriod;
+    }
+
+    public void setRevokePeriod(int revokePeriod) {
+        this.revokePeriod = revokePeriod;
     }
 }
