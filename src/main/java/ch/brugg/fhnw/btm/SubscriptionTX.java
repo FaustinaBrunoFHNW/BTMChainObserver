@@ -64,7 +64,7 @@ public class SubscriptionTX {
                 for (Account account : accountLoader.getAccountArrayList()) {
                     if (account.getAdressValue().equals(tx.getFrom())) {
                         account.increaseCounter();
-                        log.info("Account: " + account.getAddress() + " hat " + account.getCounter()
+                        log.info("Account: " + account.getAddress() + " hat " + account.getTransaktionCounter()
                                 + " Transaktionen auf dem Counter");
                         this.dosAlgorithmus(account);
                         break;
@@ -86,10 +86,10 @@ public class SubscriptionTX {
      *
      */
     private void dosAlgorithmus(Account account){
-        if(account.getCounter() > TRANSAKTIONS_LIMITE){
+       // if(account.getTransaktionCounter() > TRANSAKTIONS_LIMITE){
             this.chainInteractions.revokeAccount(account.getAdressValue());
             log.info("Der Acccount "+account.getAdressValue()+" wurde gesperrt. ");
-        }
+    //    }
     }
 
     //TODO Intervall Methode wo alle Counter von Accounts raufzählt

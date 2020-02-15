@@ -4,37 +4,45 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.abi.datatypes.Address;
 
+import java.math.BigInteger;
+
 public class Account {
 
     private Address address;
     private String adressValue;
-    private int counter;
-    private int maxCounter;
+    private BigInteger transaktionCounter;
+    private BigInteger maxTransaktionCounter;
     private int revokePeriod;
+    private BigInteger maxGasUsed;
+    private BigInteger gasUsedCounter;
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
-    public Account(Address address, int maxCounter, int revokePeriod) {
+    public Account(Address address) {
         this.address = address;
-        this.maxCounter = maxCounter;
-        this.counter = maxCounter;
         this.revokePeriod = revokePeriod;
     }
 
-    public Account(String address) {
+    public Account(String address, String maxTransaktionCounter, String maxGasUsed) {
         this.address = new Address(address.trim().toLowerCase());
         this.adressValue = address;
-        this.counter = 0;
+        this.maxTransaktionCounter=new BigInteger(maxTransaktionCounter);
+        this.maxGasUsed= new BigInteger(maxGasUsed);
+
+        //TODO bei abwärtszählen hier den max Wert rein
+        this.transaktionCounter = new BigInteger("0");
+        this.gasUsedCounter= this.maxGasUsed;
     }
 
+    //TODO
     /**
      * Erhöht den Counter bis er auf den definiertern maximal Wert komnmt
      */
     public void increaseCounter() {
-        if (this.counter < this.maxCounter) {
-            this.counter++;
+        if (this.transaktionCounter.compareTo(this.maxTransaktionCounter) <0) {
+            this.transaktionCounter.add(BigInteger.ONE);
         }
-        log.info("Counter von Account " + address + " hat der Wert: " + counter);
+        log.info("Counter von Account " + address + " hat der Wert: " + transaktionCounter);
 
     }
 
@@ -42,10 +50,10 @@ public class Account {
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
     public void decraseCounter() {
-        if (counter != 0) {
-            this.counter--;
-        }
-        log.info("Counter von Account " + address + " hat der Wert: " + counter);
+       // if (transaktionCounter != 0) {
+          //  this.transaktionCounter--;
+     //   }
+       log.info("Counter von Account " + address + " hat der Wert: " + transaktionCounter);
     }
 
     // Getter und Setter
@@ -57,13 +65,6 @@ public class Account {
         this.address = address;
     }
 
-    public Integer getCounter() {
-        return counter;
-    }
-
-    public void setCounter(Integer counter) {
-        this.counter = counter;
-    }
 
     public String getAdressValue() {
         return adressValue;
@@ -73,17 +74,7 @@ public class Account {
         this.adressValue = adressValue;
     }
 
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
 
-    public int getMaxCounter() {
-        return maxCounter;
-    }
-
-    public void setMaxCounter(int maxCounter) {
-        this.maxCounter = maxCounter;
-    }
 
     public int getRevokePeriod() {
         return revokePeriod;
@@ -91,5 +82,39 @@ public class Account {
 
     public void setRevokePeriod(int revokePeriod) {
         this.revokePeriod = revokePeriod;
+    }
+
+
+
+    public BigInteger getMaxGasUsed() {
+        return maxGasUsed;
+    }
+
+    public void setMaxGasUsed(BigInteger maxGasUsed) {
+        this.maxGasUsed = maxGasUsed;
+    }
+
+    public BigInteger getTransaktionCounter() {
+        return transaktionCounter;
+    }
+
+    public void setTransaktionCounter(BigInteger transaktionCounter) {
+        this.transaktionCounter = transaktionCounter;
+    }
+
+    public BigInteger getMaxTransaktionCounter() {
+        return maxTransaktionCounter;
+    }
+
+    public void setMaxTransaktionCounter(BigInteger maxTransaktionCounter) {
+        this.maxTransaktionCounter = maxTransaktionCounter;
+    }
+
+    public BigInteger getGasUsedCounter() {
+        return gasUsedCounter;
+    }
+
+    public void setGasUsedCounter(BigInteger gasUsedCounter) {
+        this.gasUsedCounter = gasUsedCounter;
     }
 }

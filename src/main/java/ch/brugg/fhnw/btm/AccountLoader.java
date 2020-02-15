@@ -6,13 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.web3j.abi.datatypes.Address;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 //TODO Klasse und Methode in Kommentaren beschreiben
 public class AccountLoader {
 
-    private HashMap<String, Account> accounts;
+    // private HashMap<String, Account> accounts;
     private ArrayList<Account> accountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
 
@@ -21,7 +22,7 @@ public class AccountLoader {
     private static final AccountLoader instance = new AccountLoader();
 
     public AccountLoader() {
-        accounts = new HashMap<>();
+        //   accounts = new HashMap<>();
         accountArrayList = new ArrayList();
         //TODO wieso bei initieren schon alle Laden? muss geprüft werden
         // loadAccounts();
@@ -32,24 +33,31 @@ public class AccountLoader {
         return instance;
     }
 
-
     /*
     Läd alle Accounts die im File eingetragen sind, erstellt Accounts und füllt
     diese in eine ArrayList und in eine Hashmap ein
      */
     public void loadAccounts() {
 
-        accounts = new HashMap<>();
+        //   accounts = new HashMap<>();
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
+
+
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
-                System.out.println("Folgender Account wurde geladen: " + line);
-                Account account = new Account(line);
-                this.accounts.put(line, account);
-                this.accountArrayList.add(account);
+                String[] accountArray = line.split(";");
+                if (accountArray.length == 1) {
+                    System.out.println("Intervall wurde auf " + line + " gesetzt");
+                } else {
+
+                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2]);
+                    System.out.println("Folgender Account wurde geladen: " + account.getAdressValue());
+                    this.accountArrayList.add(account);
+                }
+
             }
             bufferedReader.close();
             fileReader.close();
@@ -58,33 +66,9 @@ public class AccountLoader {
         }
     }
 
-    //TODO Explain java DOC
-    public HashMap<String, Account> getAccounts() {
-        return accounts;
-    }
-
-    //TODO Explain java DOC
-    public void addAccount(Address address) {
-        if (!accounts.containsKey(address.getValue())) {
-            appendAccount(address.getValue().toLowerCase());
-            loadAccounts();
-        }
-
-    }
-
-    //TODO Explain java DOC
-    public void addAccount(String address) {
-        if (!accounts.containsKey(address.trim().toLowerCase())) {
-            appendAccount(address);
-
-            //TODO wieso alle Accounts laden?
-            //  loadAccounts();
-        }
-    }
-
     //TODO Explain java DOC // für Testzwecke
-    public void addAccountToList(String address) {
-        Account account = new Account(address);
+    public void addAccountToList(String address, String maxTransaktionen, String maxGasUsed) {
+        Account account = new Account(address, maxTransaktionen, maxGasUsed);
         accountArrayList.add(account);
     }
 
@@ -111,7 +95,6 @@ public class AccountLoader {
     //TODO Explain java DOC
 
     /**
-     *
      * @param address
      * @return
      */
@@ -145,23 +128,7 @@ public class AccountLoader {
         return false;
     }
 
-    //TODO Explain java DOC
-
-    /**
-     *
-     * @param address
-     * @return
-     */
-    public boolean increaseCounter(String address) {
-        log.info("increasing counter of " + address);
-        if (accounts.containsKey(address)) {
-            log.info("account found");
-            accounts.get(address).increaseCounter();
-            return true;
-        }
-        log.info("unable to find account " + address);
-        return false;
-    }
+    //*******************GETTER und SETTER
 
     public ArrayList<Account> getAccountArrayList() {
         return accountArrayList;
