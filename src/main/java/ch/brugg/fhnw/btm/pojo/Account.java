@@ -10,11 +10,11 @@ public class Account {
 
     private Address address;
     private String adressValue;
-    private BigInteger transaktionCounter;
+    private int transaktionCounter;
     private BigInteger maxTransaktionCounter;
     private int revokePeriod;
     private BigInteger maxGasUsed;
-    private BigInteger gasUsedCounter;
+    private int gasUsedCounter;
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
@@ -29,32 +29,51 @@ public class Account {
         this.maxTransaktionCounter=new BigInteger(maxTransaktionCounter);
         this.maxGasUsed= new BigInteger(maxGasUsed);
 
-        //TODO bei abwärtszählen hier den max Wert rein
-        this.transaktionCounter = new BigInteger("0");
-        this.gasUsedCounter= this.maxGasUsed;
+
+        this.transaktionCounter = this.maxTransaktionCounter.intValue();
+        this.gasUsedCounter= this.maxGasUsed.intValue();
     }
 
     //TODO
     /**
      * Erhöht den Counter bis er auf den definiertern maximal Wert komnmt
      */
-    public void increaseCounter() {
-        if (this.transaktionCounter.compareTo(this.maxTransaktionCounter) <0) {
-            this.transaktionCounter.add(BigInteger.ONE);
+    public void increaseTransaktionCounter() {
+        if (this.transaktionCounter<this.maxTransaktionCounter.intValue()) {
+            this.transaktionCounter++;
         }
-        log.info("Counter von Account " + address + " hat der Wert: " + transaktionCounter);
+        log.info("Account " + address + " hat noch " + transaktionCounter+" Transktionen");
 
+    }
+
+    public void increaseGasUsedCounter() {
+        if (this.gasUsedCounter<this.maxTransaktionCounter.intValue()) {
+            this.gasUsedCounter++;
+        }
+        log.info("Account " + address + " hat noch " + gasUsedCounter+" Gas zu verbrauchen");
+
+    }
+
+        /**
+         * Zählt den Counter runter bis er bei 0 angekommen ist
+         */
+    public void decraseTransaktionCounter() {
+       if (transaktionCounter>0) {
+            this.transaktionCounter--;
+        }
+        log.info("Account " + address + " hat noch " + transaktionCounter+" Transktionen");
     }
 
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
-    public void decraseCounter() {
-       // if (transaktionCounter != 0) {
-          //  this.transaktionCounter--;
-     //   }
-       log.info("Counter von Account " + address + " hat der Wert: " + transaktionCounter);
+    public void decraseGasUsedCounter() {
+        if (gasUsedCounter>0) {
+            this.gasUsedCounter--;
+        }
+        log.info("Account " + address + " hat noch " + gasUsedCounter+" Gas zu verbrauchen");
     }
+
 
     // Getter und Setter
     public Address getAddress() {
@@ -94,12 +113,20 @@ public class Account {
         this.maxGasUsed = maxGasUsed;
     }
 
-    public BigInteger getTransaktionCounter() {
+    public int getTransaktionCounter() {
         return transaktionCounter;
     }
 
-    public void setTransaktionCounter(BigInteger transaktionCounter) {
+    public void setTransaktionCounter(int transaktionCounter) {
         this.transaktionCounter = transaktionCounter;
+    }
+
+    public int getGasUsedCounter() {
+        return gasUsedCounter;
+    }
+
+    public void setGasUsedCounter(int gasUsedCounter) {
+        this.gasUsedCounter = gasUsedCounter;
     }
 
     public BigInteger getMaxTransaktionCounter() {
@@ -110,11 +137,5 @@ public class Account {
         this.maxTransaktionCounter = maxTransaktionCounter;
     }
 
-    public BigInteger getGasUsedCounter() {
-        return gasUsedCounter;
-    }
 
-    public void setGasUsedCounter(BigInteger gasUsedCounter) {
-        this.gasUsedCounter = gasUsedCounter;
-    }
 }

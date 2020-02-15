@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class SubscriptionTX {
 
     //TODO limite nach Besprechung stellen
-    private final static int TRANSAKTIONS_LIMITE= 3;
+    private final static int TRANSAKTIONS_LIMITE = 3;
     private Web3j web3j;
     private Subscription subscription;
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
@@ -24,9 +24,8 @@ public class SubscriptionTX {
 
     public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions) {
         this.web3j = web3j;
-        this.accountLoader=accountLoader;
+        this.accountLoader = accountLoader;
         this.chainInteractions = chainInteractions;
-
 
     }
 
@@ -46,8 +45,6 @@ public class SubscriptionTX {
         subscription.dispose();
     }
 
-
-
     void simpleTxFilter() throws Exception {
         Disposable subscription = web3j.transactionFlowable().subscribe(tx -> {
             //TODO Gas pro Zeiteinheit anzeigen
@@ -59,13 +56,17 @@ public class SubscriptionTX {
             if (tx.getGasPrice().equals(BigInteger.ZERO)) {
                 // AccountLoader.getInstance().increaseCounter(tx.getFrom().trim().toLowerCase());
                 log.info("Transaktionskosten waren 0");
-                log.info("Anzahl Accounts:"+accountLoader.getAccountArrayList().size());
+                log.info("Anzahl Accounts:" + accountLoader.getAccountArrayList().size());
 
                 for (Account account : accountLoader.getAccountArrayList()) {
                     if (account.getAdressValue().equals(tx.getFrom())) {
-                        account.increaseCounter();
-                        log.info("Account: " + account.getAddress() + " hat " + account.getTransaktionCounter()
-                                + " Transaktionen auf dem Counter");
+                        account.decraseTransaktionCounter();
+
+                        //TODO DCREASE GASUSED COUNTER
+                        //account.decraseGasUsedCounter(tx.getGas());
+                        log.info("Account: " + account.getAddress() + " hat noch " + account.getTransaktionCounter()
+                                + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + account
+                                .getGasUsedCounter());
                         this.dosAlgorithmus(account);
                         break;
                     }
@@ -78,21 +79,30 @@ public class SubscriptionTX {
     //TODO Admin Account darf unendlich viele Transaktionen machen (ID von Account == dann nicht revoked)
     //TODO Algo anhand Gasprice und nicht Anzahl Transaktionen
     //TODO Counter runterzählen
+
     /**
      * In dieser Methode wird geschaut, wieviel Transaktionen von dem Account gemacht wurden.
      * Wenn dieser Account mehr Transaktionen als die Limite gemacht hat, wird er gesperrt.
+     *
      * @param account Account der inspiziert/kontrolliert wird
-     *
-     *
      */
-    private void dosAlgorithmus(Account account){
-       // if(account.getTransaktionCounter() > TRANSAKTIONS_LIMITE){
+    private void dosAlgorithmus(Account account) {
+        if (account.getTransaktionCounter()==0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
-            log.info("Der Acccount "+account.getAdressValue()+" wurde gesperrt. ");
-    //    }
+            log.info("Der Acccount " + account.getAdressValue() + " wurde gesperrt. ");
+        }
     }
 
     //TODO Intervall Methode wo alle Counter von Accounts raufzählt
 
+    private void setAllCountersToMax(){
+
+        for (Account account :accountLoader.getAccountArrayList() ) {
+            account.setTransaktionCounter(account.getMaxTransaktionCounter().intValue());
+            account.setGasUsedCounter(account.getMaxGasUsed().intValue());
+
+        }
+
+    }
 
 }
