@@ -8,15 +8,15 @@ public class DefaultSettings {
     //intervalRevoke wieviel resetInervalle Account gesperrt ist
     private int intervalRevoke;
     //defaultTransaktionCount
-    private int defaultTransaktionCount;
+    private String defaultTransaktionCount;
     //defaultGasCount
-    private int defaultGasUsedCount;
+    private String defaultGasUsedCount;
 
-    public DefaultSettings(int intervalResetCounter, int intervalRevoke, int defaultTransaktionCount,
-            int defaultGasUsedCount) {
-        this.intervalResetCounter = intervalResetCounter;
-        this.intervalRevoke = intervalRevoke;
-        this.defaultTransaktionCount = defaultTransaktionCount;
+    public DefaultSettings(String intervalResetCounter, String intervalRevoke, String defaultTransaktionCount,
+            String defaultGasUsedCount) {
+        this.intervalResetCounter = Integer.parseInt(intervalResetCounter);
+        this.intervalRevoke = Integer.parseInt(intervalRevoke);
+        this.defaultTransaktionCount =defaultTransaktionCount;
         this.defaultGasUsedCount = defaultGasUsedCount;
     }
 
@@ -36,19 +36,19 @@ public class DefaultSettings {
         this.intervalRevoke = intervalRevoke;
     }
 
-    public int getDefaultTransaktionCount() {
+    public String getDefaultTransaktionCount() {
         return defaultTransaktionCount;
     }
 
-    public void setDefaultTransaktionCount(int defaultTransaktionCount) {
+    public void setDefaultTransaktionCount(String defaultTransaktionCount) {
         this.defaultTransaktionCount = defaultTransaktionCount;
     }
 
-    public int getDefaultGasUsedCount() {
+    public String getDefaultGasUsedCount() {
         return defaultGasUsedCount;
     }
 
-    public void setDefaultGasUsedCount(int defaultGasUsedCount) {
+    public void setDefaultGasUsedCount(String defaultGasUsedCount) {
         this.defaultGasUsedCount = defaultGasUsedCount;
     }
 }

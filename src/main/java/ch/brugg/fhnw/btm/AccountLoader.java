@@ -1,6 +1,7 @@
 package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.abi.datatypes.Address;
@@ -16,6 +17,7 @@ public class AccountLoader {
     // private HashMap<String, Account> accounts;
     private ArrayList<Account> accountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
+    private DefaultSettings defaultSettings;
 
     private File file = new File("src/main/resources/whitelist/Accounts.txt");
 
@@ -45,16 +47,32 @@ public class AccountLoader {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
 
-
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
-                if (accountArray.length == 1) {
-                    System.out.println("Intervall wurde auf " + line + " gesetzt");
-                } else {
+                if (accountArray.length == 4) {
+                    defaultSettings = new DefaultSettings(accountArray[0], accountArray[1], accountArray[2],
+                            accountArray[3]);
+                    System.out.println("******************DEFAULT WERTE***************");
+                    System.out.println("ResetCounter Intervall wurde auf " + accountArray[0] + " Minuten gesetzt");
+                    System.out.println("Revoke Zeit wurde auf " + accountArray[1] + " Intervalle  gesetzt");
+                    System.out.println("Default Max Transaktionen wurden auf " + accountArray[2] + " gesetzt");
+                    System.out.println("Default Max Gas Used wurde auf " + accountArray[3] + " gesetzt");
+                }
+                if (accountArray.length == 3) {
 
                     Account account = new Account(accountArray[0], accountArray[1], accountArray[2]);
-                    System.out.println("Folgender Account wurde geladen: " + account.getAdressValue());
+                    System.out.println(
+                            "Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: "
+                                    + account.getMaxTransaktionCounter() + " und max GasUsed:" + account
+                                    .getMaxGasUsed());
+                    this.accountArrayList.add(account);
+                }
+                if (accountArray.length == 1) {
+                    Account account = new Account(accountArray[0], this.defaultSettings.getDefaultTransaktionCount(),
+                            this.defaultSettings.getDefaultGasUsedCount());
+                    System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
+                            + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
                     this.accountArrayList.add(account);
                 }
 
@@ -136,5 +154,14 @@ public class AccountLoader {
 
     public void setAccountArrayList(ArrayList<Account> accountArrayList) {
         this.accountArrayList = accountArrayList;
+    }
+
+    public DefaultSettings getDefaultSettings() {
+        return defaultSettings;
+    }
+
+    //TODO rausnhemen falls nicht gebraucht
+    private void setDefaultSettings(DefaultSettings defaultSettings) {
+        this.defaultSettings = defaultSettings;
     }
 }
