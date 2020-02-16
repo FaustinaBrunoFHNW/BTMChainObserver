@@ -87,21 +87,45 @@ public class SubscriptionTX {
      * @param account Account der inspiziert/kontrolliert wird
      */
     private void dosAlgorithmus(Account account) {
-        if (account.getTransaktionCounter()==0) {
+        if (account.getTransaktionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
-            log.info("Der Acccount " + account.getAdressValue() + " wurde gesperrt. ");
+            int revokedCounter = account.increaseRevoked();
+            this.accountLoader.getAccountArrayList().add(account);
+            log.info("Der Acccount " + account.getAdressValue() + " wurde zum " + revokedCounter + " Mal gesperrt. ");
         }
     }
 
     //TODO Intervall Methode wo alle Counter von Accounts raufzählt
 
-    private void setAllCountersToMax(){
+    private void setAllCountersToMax() {
 
-        for (Account account :accountLoader.getAccountArrayList() ) {
+        for (Account account : accountLoader.getAccountArrayList()) {
             account.setTransaktionCounter(account.getMaxTransaktionCounter().intValue());
             account.setGasUsedCounter(account.getMaxGasUsed().intValue());
 
         }
+
+    }
+
+    /*
+    Alle Accounts die genug lange gesperrt waren werden wieder entsperrt
+     */
+    private void certifyRevokedAccounts(){
+        for (Account account : accountLoader.getRevokedAccountArrayList()) {
+           if( this.controlRevokePeriode(account)){
+
+               //TODO Methode
+               this.chainInteractions.certifyAccount(account.getAdressValue());
+               this.accountLoader.getAccountArrayList().add(account);
+           }
+        }
+    }
+
+    private boolean controlRevokePeriode(Account account) {
+        if (account.getRevokePeriodCounter() == 0) {
+            return true;
+        }
+        return false;
 
     }
 

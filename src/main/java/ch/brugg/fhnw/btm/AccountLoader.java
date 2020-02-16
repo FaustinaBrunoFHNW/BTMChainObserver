@@ -14,8 +14,8 @@ import java.util.HashMap;
 //TODO Klasse und Methode in Kommentaren beschreiben
 public class AccountLoader {
 
-    // private HashMap<String, Account> accounts;
     private ArrayList<Account> accountArrayList;
+    private ArrayList<Account> revokedAccountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
     private DefaultSettings defaultSettings;
 
@@ -61,7 +61,7 @@ public class AccountLoader {
                 }
                 if (accountArray.length == 3) {
 
-                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2]);
+                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2],defaultSettings.getIntervalRevoke());
                     System.out.println(
                             "Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: "
                                     + account.getMaxTransaktionCounter() + " und max GasUsed:" + account
@@ -70,7 +70,7 @@ public class AccountLoader {
                 }
                 if (accountArray.length == 1) {
                     Account account = new Account(accountArray[0], this.defaultSettings.getDefaultTransaktionCount(),
-                            this.defaultSettings.getDefaultGasUsedCount());
+                            this.defaultSettings.getDefaultGasUsedCount(),defaultSettings.getIntervalRevoke());
                     System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
                             + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
                     this.accountArrayList.add(account);
@@ -85,8 +85,8 @@ public class AccountLoader {
     }
 
     //TODO Explain java DOC // für Testzwecke
-    public void addAccountToList(String address, String maxTransaktionen, String maxGasUsed) {
-        Account account = new Account(address, maxTransaktionen, maxGasUsed);
+    public void addAccountToList(String address, String maxTransaktionen, String maxGasUsed, int revokePeriod) {
+        Account account = new Account(address, maxTransaktionen, maxGasUsed,revokePeriod);
         accountArrayList.add(account);
     }
 
@@ -163,5 +163,13 @@ public class AccountLoader {
     //TODO rausnhemen falls nicht gebraucht
     private void setDefaultSettings(DefaultSettings defaultSettings) {
         this.defaultSettings = defaultSettings;
+    }
+
+    public ArrayList<Account> getRevokedAccountArrayList() {
+        return revokedAccountArrayList;
+    }
+
+    public void setRevokedAccountArrayList(ArrayList<Account> revokedAccountArrayList) {
+        this.revokedAccountArrayList = revokedAccountArrayList;
     }
 }
