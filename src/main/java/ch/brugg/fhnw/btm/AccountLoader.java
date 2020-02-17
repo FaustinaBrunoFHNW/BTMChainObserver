@@ -25,7 +25,8 @@ public class AccountLoader {
 
     public AccountLoader() {
         //   accounts = new HashMap<>();
-        accountArrayList = new ArrayList();
+        this.accountArrayList = new ArrayList();
+        this.revokedAccountArrayList=new ArrayList();
         //TODO wieso bei initieren schon alle Laden? muss geprüft werden
         // loadAccounts();
     }

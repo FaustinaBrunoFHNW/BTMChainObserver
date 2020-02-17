@@ -9,6 +9,7 @@ import org.web3j.protocol.Web3j;
 import org.web3j.utils.Convert;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 //TODO Beschreischbung was diese Klasse macht
@@ -29,10 +30,11 @@ public class SubscriptionTX {
 
     }
 
-    public void run() throws Exception {
+    public void run(int min) throws Exception {
         log.info("Doing simple subscription");
         //        simpleFilterExample();
         simpleTxFilter();
+        this.intervall(min);
 
     }
 
@@ -90,13 +92,16 @@ public class SubscriptionTX {
         if (account.getTransaktionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
             int revokedCounter = account.increaseRevoked();
-            this.accountLoader.getAccountArrayList().add(account);
+            this.accountLoader.getRevokedAccountArrayList().add(account);
             log.info("Der Acccount " + account.getAdressValue() + " wurde zum " + revokedCounter + " Mal gesperrt. ");
         }
     }
 
     //TODO Intervall Methode wo alle Counter von Accounts raufzählt
+//TODO javadoc
+    /*
 
+     */
     private void setAllCountersToMax() {
 
         for (Account account : accountLoader.getAccountArrayList()) {
@@ -111,22 +116,37 @@ public class SubscriptionTX {
     Alle Accounts die genug lange gesperrt waren werden wieder entsperrt
      */
     private void certifyRevokedAccounts(){
-        for (Account account : accountLoader.getRevokedAccountArrayList()) {
+        for (Account account : this.accountLoader.getRevokedAccountArrayList()) {
            if( this.controlRevokePeriode(account)){
-
-               //TODO Methode
                this.chainInteractions.certifyAccount(account.getAdressValue());
                this.accountLoader.getAccountArrayList().add(account);
+               accountLoader.getRevokedAccountArrayList().remove(account);
+           }
+           else{
+               account.setRevokePeriodCounter(account.getRevokePeriodCounter()-1);
            }
         }
     }
 
+
+    //TODO evtl unnötige methode da einzeiler
     private boolean controlRevokePeriode(Account account) {
         if (account.getRevokePeriodCounter() == 0) {
             return true;
         }
         return false;
 
+    }
+
+    //TODO JAVADOV
+    private void intervall(int min) throws InterruptedException {
+        System.out.println("*************Intervall ist gestartet********************");
+        while (true) {
+            System.out.println(new Date());
+            Thread.sleep(min*60 * 1000);
+            this.setAllCountersToMax();
+            this.certifyRevokedAccounts();
+        }
     }
 
 }
