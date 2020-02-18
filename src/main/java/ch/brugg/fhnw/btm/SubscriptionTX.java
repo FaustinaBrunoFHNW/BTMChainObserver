@@ -9,7 +9,9 @@ import org.web3j.protocol.Web3j;
 import org.web3j.utils.Convert;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 //TODO Beschreischbung was diese Klasse macht
@@ -91,14 +93,17 @@ public class SubscriptionTX {
     private void dosAlgorithmus(Account account) {
         if (account.getTransaktionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
-            int revokedCounter = account.increaseRevoked();
+            account.increaseRevoked();
             this.accountLoader.getRevokedAccountArrayList().add(account);
-            log.info("Der Acccount " + account.getAdressValue() + " wurde zum " + revokedCounter + " Mal gesperrt. ");
+            this.accountLoader.getAccountArrayList().remove(account);
+            account.setRevokePeriodCounter(account.getRevokePeriod()*account.getRevoked());
+            log.info("Der Acccount " + account.getAdressValue() + " wurde zum " + account.getRevoked()
+                    + " Mal gesperrt. Die Revoke Periode ist: " + account.getRevokePeriodCounter());
         }
     }
 
     //TODO Intervall Methode wo alle Counter von Accounts raufzählt
-//TODO javadoc
+    //TODO javadoc
     /*
 
      */
@@ -115,19 +120,28 @@ public class SubscriptionTX {
     /*
     Alle Accounts die genug lange gesperrt waren werden wieder entsperrt
      */
-    private void certifyRevokedAccounts(){
-        for (Account account : this.accountLoader.getRevokedAccountArrayList()) {
-           if( this.controlRevokePeriode(account)){
-               this.chainInteractions.certifyAccount(account.getAdressValue());
-               this.accountLoader.getAccountArrayList().add(account);
-               accountLoader.getRevokedAccountArrayList().remove(account);
-           }
-           else{
-               account.setRevokePeriodCounter(account.getRevokePeriodCounter()-1);
-           }
-        }
-    }
+    private void certifyRevokedAccounts() {
+        List<Account> removeFromRevokeList = new ArrayList<>();
 
+        for (Account account : this.accountLoader.getRevokedAccountArrayList()) {
+            if (this.controlRevokePeriode(account)) {
+                this.chainInteractions.certifyAccount(account.getAdressValue());
+                log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
+                account.setRevokePeriodCounter(account.getRevokePeriod() * (account.getRevoked() + 1));
+                this.accountLoader.getAccountArrayList().add(account);
+                removeFromRevokeList.add(account);
+            } else {
+                account.setRevokePeriodCounter(account.getRevokePeriodCounter() - 1);
+
+            }
+        }
+
+        //TODO in eigene Methode auslagern
+        for (Account removeAccount : removeFromRevokeList) {
+            this.accountLoader.getRevokedAccountArrayList().remove(removeAccount);
+        }
+
+    }
 
     //TODO evtl unnötige methode da einzeiler
     private boolean controlRevokePeriode(Account account) {
@@ -143,7 +157,7 @@ public class SubscriptionTX {
         System.out.println("*************Intervall ist gestartet********************");
         while (true) {
             System.out.println(new Date());
-            Thread.sleep(min*60 * 1000);
+            Thread.sleep(min * 60 * 1000);
             this.setAllCountersToMax();
             this.certifyRevokedAccounts();
         }
