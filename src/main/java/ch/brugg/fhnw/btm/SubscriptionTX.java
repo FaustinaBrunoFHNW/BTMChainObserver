@@ -141,6 +141,8 @@ public class SubscriptionTX {
                 this.chainInteractions.certifyAccount(account.getAdressValue());
                 log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
                 account.setRevokePeriodCounter(account.getRevokePeriod() * (account.getRevoked() + 1));
+                account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
+                account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
                 this.accountLoader.getAccountArrayList().add(account);
                 removeFromRevokeList.add(account);
             } else {
