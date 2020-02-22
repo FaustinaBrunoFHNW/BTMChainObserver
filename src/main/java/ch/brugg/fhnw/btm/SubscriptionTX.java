@@ -54,6 +54,8 @@ public class SubscriptionTX {
             //TODO Gas pro Zeiteinheit anzeigen
             log.info("Found a TX from " + tx.getFrom());
             log.info("Gas price used: " + tx.getGasPrice());
+            log.info("Gas : " + tx.getGas());
+            log.info("Gas : " + tx.getGasRaw());
             log.info("Ether moved " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
 
             //TODO increaseCounter wieder einkommentieren und hier die DOS Algo implemeniteren
@@ -65,6 +67,7 @@ public class SubscriptionTX {
                 for (Account account : accountLoader.getAccountArrayList()) {
                     if (account.getAdressValue().equals(tx.getFrom())) {
                         account.decraseTransaktionCounter();
+                        account.decraseGasUsedCounter(Integer.parseInt(tx.getGas().toString()));
 
                         //TODO DCREASE GASUSED COUNTER
                         //account.decraseGasUsedCounter(tx.getGas());
@@ -96,9 +99,19 @@ public class SubscriptionTX {
             account.increaseRevoked();
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
-            account.setRevokePeriodCounter(account.getRevokePeriod()*account.getRevoked());
-            log.info("Der Acccount " + account.getAdressValue() + " wurde zum " + account.getRevoked()
-                    + " Mal gesperrt. Die Revoke Periode ist: " + account.getRevokePeriodCounter());
+            account.setRevokePeriodCounter(account.getRevokePeriod() * account.getRevoked());
+            log.info(
+                    "Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue() + " wurde zum "
+                            + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
+                            .getRevokePeriodCounter());
+        } else if (account.getGasUsedCounter() < 0) {
+            this.chainInteractions.revokeAccount(account.getAdressValue());
+            account.increaseRevoked();
+            this.accountLoader.getRevokedAccountArrayList().add(account);
+            this.accountLoader.getAccountArrayList().remove(account);
+            account.setRevokePeriodCounter(account.getRevokePeriod() * account.getRevoked());
+            log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue() + " wurde zum " + account
+                    .getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account.getRevokePeriodCounter());
         }
     }
 

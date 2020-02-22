@@ -75,9 +75,9 @@ public class Account {
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
-    public void decraseGasUsedCounter() {
+    public void decraseGasUsedCounter(int gasUsedOnTX) {
         if (gasUsedCounter > 0) {
-            this.gasUsedCounter--;
+            this.gasUsedCounter= this.getGasUsedCounter()-gasUsedOnTX;
         }
         log.info("Account " + address + " hat noch " + gasUsedCounter + " Gas zu verbrauchen");
     }
