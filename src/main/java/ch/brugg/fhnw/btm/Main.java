@@ -20,6 +20,8 @@ public class Main {
         String CERTIFIER_ADD = "0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221";
         AccountLoader accountLoader = new AccountLoader();
 
+        BlockedCounterLoader blockedCounterLoader = new BlockedCounterLoader();
+
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
         ChainSetUp chainSetUp = new ChainSetUp(PRIVATE_KEY, CERTIFIER_ADD);
@@ -32,6 +34,8 @@ public class Main {
         //TODO load all accounts from list
         accountLoader.loadAccounts();
         chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
+        blockedCounterLoader.loadBlockedInfo(accountLoader.getAccountArrayList());
+        blockedCounterLoader.loadBlockedInfo(accountLoader.getRevokedAccountArrayList());
 
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 

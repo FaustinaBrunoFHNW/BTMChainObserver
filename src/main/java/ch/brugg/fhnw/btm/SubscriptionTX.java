@@ -25,6 +25,7 @@ public class SubscriptionTX {
     private AccountLoader accountLoader;
     private ChainInteractions chainInteractions;
 
+
     public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions) {
         this.web3j = web3j;
         this.accountLoader = accountLoader;
@@ -96,6 +97,7 @@ public class SubscriptionTX {
     private void dosAlgorithmus(Account account) {
         if (account.getTransaktionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
+
             account.increaseRevoked();
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
@@ -104,6 +106,7 @@ public class SubscriptionTX {
                     "Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue() + " wurde zum "
                             + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
                             .getRevokePeriodCounter());
+            //TODO write/update blockedFile
         } else if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
             account.increaseRevoked();
