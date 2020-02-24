@@ -28,7 +28,7 @@ public class ChainSetUp {
     // Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
 
     private final String privateKey;
-    String certifierAdd;
+    private String certifierAdd;
     private static BigInteger REGISTRATION_FEE = BigInteger.valueOf(1000000000000000000L);
     private Web3j web3j;
     private SimpleCertifier simpleCertifier;
@@ -37,15 +37,17 @@ public class ChainSetUp {
     private byte[] hash;
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
+    //TODO naming
+    //TODO JAVADOC
 
-    //TODO JAVA DOC
     /**
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
+     *
      * @param privateKey
      * @param certifierAdd
      */
-    public ChainSetUp( String privateKey, String certifierAdd) {
-        this.certifierAdd=certifierAdd;
+    public ChainSetUp(String privateKey, String certifierAdd) {
+        this.certifierAdd = certifierAdd;
         log.info("connecting");
         this.privateKey = privateKey;
         //Verbindungsaufbau zur Chain
@@ -63,41 +65,47 @@ public class ChainSetUp {
         getInfo(web3j);
     }
 
-    //TODO JAVA DOC
+    //TODO naming
+
     /**
+     * Wird ausgeführt wenn man das Programm startet und nach dem bei einer Blockchain das setUp schonmal gelaufen ist
      *
      * @throws Exception
      */
     public void setUpAfterChainStart() throws Exception {
 
         //Allgemeine Abfrage zur Chain ob alles funktioniert etc
-        getInfo(web3j);
+        this.getInfo(web3j);
 
         this.loadSimpleRegistry();
         this.loadCertifier(certifierAdd);
 
     }
 
-
     //TODO evtl in Genesis Block auslagern
     //TODO Javadoc
+
     /**
      * Wird ausgeführt bei einer komplett neuer Blockchain (beim Neustart einer Blockchain)
+     *
      * @throws Exception
      */
     public void setUpNewChainStart() throws Exception {
 
-
         this.log.info("Simpleregistry und certifier werden aufgesetzt.");
         //Allgemeine Abfrage zur Chain ob alles funktioniert etc
-        getInfo(web3j);
+        this.getInfo(web3j);
 
         this.loadSimpleRegistry();
         this.setUpCertifier();
     }
 
     //TODO JAvaDoc
+    //TODO return Wert ausbauen
+
     /**
+     * Erstellt die Simple Registry
+     * und speichert den Certifier Owner
      *
      * @return
      */
@@ -109,6 +117,7 @@ public class ChainSetUp {
                         new DefaultGasProvider());
         try {
             log.info("Fee of Registry: " + simpleRegistry.fee().send());
+            //TODO owner speichern in Variable
             log.info("Owner of Registry: " + simpleRegistry.owner().send());
             return true;
         } catch (Exception e) {
@@ -119,33 +128,35 @@ public class ChainSetUp {
 
     }
 
-
     //TODO JAVA DOC
+    //TODO return wert
 
     /**
+     * Hier wird der certifier deployed
+     * Certifier Adresse wird ausgegeben und gespeichert
      *
      * @return
      */
     private boolean setUpCertifier() {
 
         if (deployCertifier(transactionManager) && registerCertifier()) {
-            log.info("deploy of Certifier worked");
-            log.info("Registration of Certifier worked");
-            log.info("Certifying worked");
 
-            log.info("Address of Certifiert: " + simpleCertifier.getContractAddress());
+            log.info("Deployen des Certifier hat funktioniert");
+            log.info("Das Registrieren des Certifiers hat funktioniert");
+            log.info("Certifying hat funktioniert");
+            //TODO
+            log.info("Addresse vom Certifier: " + simpleCertifier.getContractAddress());
 
             return true;
         }
-        log.info("there was an error");
+        log.info("Es gab ein Probelm beim Setup und Deployen und Registrieren des certifier ");
         return false;
     }
 
-    //TODO JAVA DOC
-
     /**
+     * Erstellt die credentials für den Private Key und gibt die wieder
      *
-     * @return
+     * @return Credentials vom Private Key den man mitgeibt
      */
     private Credentials getCredentialsFromPrivateKey() {
         return Credentials.create(this.privateKey);
@@ -154,7 +165,6 @@ public class ChainSetUp {
     //TODO JAVADOC
 
     /**
-     *
      * @param transactionManager
      * @return
      */
@@ -175,7 +185,6 @@ public class ChainSetUp {
     //TODO JAVA DOC
 
     /**
-     *
      * @return
      */
     private boolean registerCertifier() {
@@ -195,9 +204,8 @@ public class ChainSetUp {
         return false;
     }
 
-    //TODO JAVADOC
-
     /**
+     * Gibt Infos der Blockchain aus
      *
      * @param web3j
      */
@@ -219,8 +227,8 @@ public class ChainSetUp {
     }
 
     //TODO JAVA DOC
+
     /**
-     *
      * @param add
      */
     public void loadCertifier(String add) {
@@ -229,9 +237,7 @@ public class ChainSetUp {
 
     }
 
-
     //GETTER UND SETTER
-
 
     public Web3j getWeb3j() {
         return web3j;

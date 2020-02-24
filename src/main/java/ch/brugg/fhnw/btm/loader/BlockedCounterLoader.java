@@ -15,7 +15,6 @@ public class BlockedCounterLoader {
      */
     public void loadBlockedInfo(ArrayList<Account> accountList) {
 
-        //   accounts = new HashMap<>();
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
