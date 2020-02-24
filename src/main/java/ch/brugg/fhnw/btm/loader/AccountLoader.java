@@ -1,15 +1,12 @@
-package ch.brugg.fhnw.btm;
+package ch.brugg.fhnw.btm.loader;
 
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.web3j.abi.datatypes.Address;
 
 import java.io.*;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 //TODO Klasse und Methode in Kommentaren beschreiben
 public class AccountLoader {

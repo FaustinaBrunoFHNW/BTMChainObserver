@@ -1,7 +1,6 @@
-package ch.brugg.fhnw.btm;
+package ch.brugg.fhnw.btm.loader;
 
 import ch.brugg.fhnw.btm.pojo.Account;
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

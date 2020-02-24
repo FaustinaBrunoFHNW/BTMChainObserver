@@ -1,12 +1,8 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.loader.AccountLoader;
+import ch.brugg.fhnw.btm.loader.BlockedCounterLoader;
 import org.web3j.protocol.Web3j;
-
-import java.lang.reflect.Array;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Main {
 
