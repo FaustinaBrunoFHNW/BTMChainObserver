@@ -39,7 +39,7 @@ public class Main {
 
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
-        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, accountLoader, chainInteractions);
+        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, accountLoader, chainInteractions,blockedCounterLoader);
         subscriptionTX.run(accountLoader.getDefaultSettings().getIntervalResetCounter());
     }
 

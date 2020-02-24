@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.web3j.protocol.Web3j;
 import org.web3j.utils.Convert;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,12 +25,14 @@ public class SubscriptionTX {
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
     private AccountLoader accountLoader;
     private ChainInteractions chainInteractions;
+    private BlockedCounterLoader blockedCounterLoader;
 
-
-    public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions) {
+    public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions,
+            BlockedCounterLoader blockedCounterLoader) {
         this.web3j = web3j;
         this.accountLoader = accountLoader;
         this.chainInteractions = chainInteractions;
+        this.blockedCounterLoader = blockedCounterLoader;
 
     }
 
@@ -94,7 +97,7 @@ public class SubscriptionTX {
      *
      * @param account Account der inspiziert/kontrolliert wird
      */
-    private void dosAlgorithmus(Account account) {
+    private void dosAlgorithmus(Account account)  {
         if (account.getTransaktionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
 
@@ -106,7 +109,12 @@ public class SubscriptionTX {
                     "Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue() + " wurde zum "
                             + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
                             .getRevokePeriodCounter());
-            //TODO write/update blockedFile
+            try {
+                this.blockedCounterLoader.writeInFile(this.accountLoader.getAccountArrayList(), this.accountLoader.getRevokedAccountArrayList());
+            }
+            catch (IOException e){
+               log.warn("Probleme beim Schreiben in die BlockedCounter Datei");
+            }
         } else if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
             account.increaseRevoked();

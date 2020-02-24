@@ -2,16 +2,17 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.pojo.DefaultSettings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class BlockedCounterLoader {
     private File file = new File("src/main/resources/whitelist/BlockedCounterList.txt");
-
+    private static Logger log = LoggerFactory.getLogger(BlockedCounterLoader.class);
     //TODO JAVADOC
     /*
-
      */
     public void loadBlockedInfo(ArrayList<Account> accountList) {
 
@@ -56,7 +57,7 @@ public class BlockedCounterLoader {
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        bw.write("tset tset tset");
+        this.log.info("Anzahl Blockierungen wird in File gespeichert.");
 
         for (Account account : accountsBlocked) {
             if (account.getRevoked() > 0) {
