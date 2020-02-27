@@ -9,21 +9,24 @@ import java.io.*;
 import java.util.ArrayList;
 
 //TODO Singleton
-//TODO Klasse und Methode in Kommentaren beschreiben
+
+/**
+ * In dieser Singleton Klasse werden die Accounts wie die Default Settings aus dem File geladen
+ * und die Listen der Accounts generiert
+ */
 public class AccountLoader {
 
-    //TODO HASHSET
+    private static AccountLoader instance;
+
     private ArrayList<Account> accountArrayList;
-    //TODO HASHSET
     private ArrayList<Account> revokedAccountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
     private DefaultSettings defaultSettings;
 
     private File file = new File("src/main/resources/whitelist/Accounts.txt");
 
-    private static final AccountLoader instance = new AccountLoader();
 
-    public AccountLoader() {
+    private AccountLoader() {
         //   accounts = new HashMap<>();
         this.accountArrayList = new ArrayList();
         this.revokedAccountArrayList = new ArrayList();
@@ -31,10 +34,19 @@ public class AccountLoader {
         // loadAccounts();
     }
 
-    //TODO für was brauch man das? Lieber Singleton Pattern anwenden.
+    /**
+     * Instanziert eine Instanz der Klasse falls es noch keine gibt und gibt
+     * die existierende oder eben die neue zurück
+     * @return die einmalige Instanz der Klasse
+     */
     public static AccountLoader getInstance() {
-        return instance;
+
+        if (AccountLoader.instance == null) {
+            AccountLoader.instance = new AccountLoader ();
+        }
+        return AccountLoader.instance;
     }
+
 
     /*
     Läd alle Accounts die im File eingetragen sind, erstellt Accounts und füllt

@@ -20,12 +20,14 @@ import java.util.concurrent.TimeUnit;
 //TODO Beschreischbung was diese Klasse macht
 public class SubscriptionTX {
 
+
+
     //TODO limite nach Besprechung stellen
     private final static int TRANSAKTIONS_LIMITE = 3;
     private Web3j web3j;
     private Subscription subscription;
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
-    private AccountLoader accountLoader;
+    private AccountLoader accountLoader ;
     private ChainInteractions chainInteractions;
     private BlockedCounterLoader blockedCounterLoader;
 
