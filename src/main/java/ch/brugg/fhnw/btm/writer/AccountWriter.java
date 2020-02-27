@@ -1,5 +1,6 @@
 package ch.brugg.fhnw.btm.writer;
 
+import ch.brugg.fhnw.btm.loader.AccountLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
@@ -18,9 +19,10 @@ import java.util.ArrayList;
  */
 public class AccountWriter {
 
-    private File file = new File("src/main/resources/whitelist/AccountList.txt");
+    private File file = new File("src/main/resources/whitelist/Accounts.txt");
     private static AccountWriter instance;
     private static Logger log = LoggerFactory.getLogger(AccountWriter.class);
+    private AccountLoader accountLoader;
 
     //TODO
 
@@ -28,6 +30,7 @@ public class AccountWriter {
      * Privater Constructor für Singleton
      */
     private AccountWriter() {
+        this.accountLoader = AccountLoader.getInstance();
     }
 
     /**
@@ -43,32 +46,35 @@ public class AccountWriter {
     /**
      * Methode fürs Schreiben des Files
      *
-     * @param accountsBlocked   Liste mit allen Blockierten Accounts
-     * @param certifyedAccounts Liste mit allen certifizierten Accounts
-     * @param defaultSettings   Objekt mit allen Default Werten
      * @throws IOException
      */
-    public void writeInFile(ArrayList<Account> accountsBlocked, ArrayList<Account> certifyedAccounts,
-            DefaultSettings defaultSettings) throws IOException {
+    public void writeInFile() throws IOException {
 
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
 
         log.info("Alle Account werden in Datei gespeichert.");
 
-        bw.write(this.prepareDefaultSeetingsLineForFile(defaultSettings));
+        bw.write(this.prepareDefaultSeetingsLineForFile(accountLoader.getDefaultSettings()));
+        bw.newLine();
 
-        for (Account account : accountsBlocked) {
-            if (account.getRevoked() > 0) {
+        log.info(accountLoader.getRevokedAccountArrayList().size()+" Accounts sind blockiert");
+        for (Account account : accountLoader.getRevokedAccountArrayList()) {
+
 
                 bw.write(this.prepareAccountLineForFile(account));
-            }
+                log.info(account.getAdressValue());
+                bw.newLine();
+
         }
 
-        for (Account account : certifyedAccounts) {
-            if (account.getRevoked() > 0) {
+        log.info(accountLoader.getAccountArrayList().size()+" Accounts sind zertifiziert");
+        for (Account account : accountLoader.getAccountArrayList()) {
+
                 bw.write(this.prepareAccountLineForFile(account));
-            }
+                log.info(account.getAdressValue());
+                bw.newLine();
+
         }
         bw.close();
         log.info("Daten wurden in datei gespeichert.");
@@ -87,7 +93,7 @@ public class AccountWriter {
         String accountLine;
         accountLine =
                 account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
-                        + ";" + account.getRevokePeriod() + ";" + account.getRevoked();
+                        + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
 
         return accountLine;
     }

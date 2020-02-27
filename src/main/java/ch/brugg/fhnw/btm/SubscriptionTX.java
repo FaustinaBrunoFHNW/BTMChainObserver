@@ -3,6 +3,7 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.loader.AccountLoader;
 import ch.brugg.fhnw.btm.loader.BlockedCounterLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.writer.AccountWriter;
 import io.reactivex.disposables.Disposable;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
@@ -30,13 +31,17 @@ public class SubscriptionTX {
     private AccountLoader accountLoader ;
     private ChainInteractions chainInteractions;
     private BlockedCounterLoader blockedCounterLoader;
+    AccountWriter accountWriter;
 
     public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions,
             BlockedCounterLoader blockedCounterLoader) {
         this.web3j = web3j;
+        //TODO Singelton laden
         this.accountLoader = accountLoader;
         this.chainInteractions = chainInteractions;
         this.blockedCounterLoader = blockedCounterLoader;
+
+        accountWriter= AccountWriter.getInstance();
 
     }
 
@@ -108,7 +113,8 @@ public class SubscriptionTX {
             account.increaseRevoked();
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
-            account.setRevokePeriodCounter(account.getRevokePeriod() * account.getRevoked());
+            //TODO fixe Revoke Zeit
+            account.setRevokePeriodCounter(account.getRevokePeriod());
             log.info(
                     "Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue() + " wurde zum "
                             + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
@@ -124,7 +130,8 @@ public class SubscriptionTX {
             account.increaseRevoked();
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
-            account.setRevokePeriodCounter(account.getRevokePeriod() * account.getRevoked());
+            //TODO fixe Zeit eingeben
+            account.setRevokePeriodCounter(account.getRevokePeriod());
             log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue() + " wurde zum " + account
                     .getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account.getRevokePeriodCounter());
         }
@@ -155,7 +162,8 @@ public class SubscriptionTX {
             if (this.controlRevokePeriode(account)) {
                 this.chainInteractions.certifyAccount(account.getAdressValue());
                 log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
-                account.setRevokePeriodCounter(account.getRevokePeriod() * (account.getRevoked() + 1));
+                //TODO Revoke Periode muss fix sein
+                account.setRevokePeriodCounter(account.getRevokePeriod());
                 account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
                 account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
                 this.accountLoader.getAccountArrayList().add(account);
@@ -183,13 +191,14 @@ public class SubscriptionTX {
     }
 
     //TODO JAVADOV
-    private void intervall(int min) throws InterruptedException {
+    private void intervall(int min) throws InterruptedException, IOException {
         System.out.println("*************Intervall ist gestartet********************");
         while (true) {
             System.out.println(new Date());
             Thread.sleep(min * 60 * 1000);
             this.setAllCountersToMax();
             this.certifyRevokedAccounts();
+            this.accountWriter.writeInFile();
         }
     }
 

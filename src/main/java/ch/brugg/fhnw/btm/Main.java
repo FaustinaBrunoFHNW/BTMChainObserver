@@ -31,8 +31,8 @@ public class Main {
         //TODO load all accounts from list
         accountLoader.loadAccounts();
         chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
-        blockedCounterLoader.loadBlockedInfo(accountLoader.getAccountArrayList());
-        blockedCounterLoader.loadBlockedInfo(accountLoader.getRevokedAccountArrayList());
+        //blockedCounterLoader.loadBlockedInfo(accountLoader.getAccountArrayList());
+       // blockedCounterLoader.loadBlockedInfo(accountLoader.getRevokedAccountArrayList());
 
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
