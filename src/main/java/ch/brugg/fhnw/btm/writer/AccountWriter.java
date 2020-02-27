@@ -1,4 +1,4 @@
-package ch.brugg.fhnw.btm.loader;
+package ch.brugg.fhnw.btm.writer;
 
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.pojo.DefaultSettings;
