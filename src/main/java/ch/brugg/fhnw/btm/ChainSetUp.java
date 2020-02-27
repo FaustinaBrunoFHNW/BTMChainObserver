@@ -2,6 +2,7 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
+import ch.brugg.fhnw.btm.loader.AccountLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Credentials;
@@ -21,11 +22,22 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+
 //TODO als Singelton Paater implementieren
+//TODO JAVADOC
+/**
+ * In dieser Klasse wird die Blockchain aufgesetzt
+ *
+ * Teile dieser Klasse wurden aus dem Tutorial gezogen
+ *  https://kauri.io/connecting-to-an-ethereum-client-with-java-eclipse-and-web3j/b9eb647c47a546bc95693acc0be72546/a
+ *  Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
+ */
 public class ChainSetUp {
 
-    // Tutorial can be found here: https://kauri.io/connecting-to-an-ethereum-client-with-java-eclipse-and-web3j/b9eb647c47a546bc95693acc0be72546/a
-    // Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
+
+
+
+    private static ChainSetUp instance;
 
     private final String privateKey;
     private String certifierAdd;
@@ -46,7 +58,7 @@ public class ChainSetUp {
      * @param privateKey
      * @param certifierAdd
      */
-    public ChainSetUp(String privateKey, String certifierAdd) {
+    private ChainSetUp(String privateKey, String certifierAdd) {
         this.certifierAdd = certifierAdd;
         log.info("connecting");
         this.privateKey = privateKey;
@@ -64,6 +76,22 @@ public class ChainSetUp {
         hash = new BigInteger(str_hash, 16).toByteArray();
         getInfo(web3j);
     }
+
+
+    /**
+     * Instanziert eine Instanz der Klasse falls es noch keine gibt und gibt
+     * die existierende oder eben die neue zurück
+     * @return die einmalige Instanz der Klasse
+     */
+    public static ChainSetUp getInstance(String privateKey, String certifierAdd) {
+
+        if (ChainSetUp.instance == null) {
+            ChainSetUp.instance = new ChainSetUp (privateKey,certifierAdd);
+        }
+        return ChainSetUp.instance;
+    }
+
+
 
     //TODO naming
 

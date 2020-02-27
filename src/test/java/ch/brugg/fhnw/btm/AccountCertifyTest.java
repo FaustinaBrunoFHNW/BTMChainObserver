@@ -17,8 +17,8 @@ public class AccountCertifyTest {
     private static BigInteger GAS_PRICE = BigInteger.valueOf(1000000000); //1 GWEI
     // private static BigInteger GAS_PRICE = BigInteger.valueOf(0);
 
-
-    public ChainSetUp chainSetUp = new ChainSetUp(PRIVATE_KEY, CERTIFIED_ADD);
+    //TODO Singleton parameter übergeben
+    public ChainSetUp chainSetUp =  ChainSetUp.getInstance(PRIVATE_KEY, CERTIFIED_ADD);
     private ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
 
     @BeforeClass public void setUpChain() throws Exception {

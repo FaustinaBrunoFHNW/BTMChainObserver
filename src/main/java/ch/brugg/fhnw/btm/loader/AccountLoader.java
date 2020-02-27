@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.ArrayList;
 
-//TODO Singleton
-
 /**
  * In dieser Singleton Klasse werden die Accounts wie die Default Settings aus dem File geladen
  * und die Listen der Accounts generiert

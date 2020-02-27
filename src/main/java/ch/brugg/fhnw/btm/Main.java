@@ -20,7 +20,8 @@ public class Main {
 
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
-        ChainSetUp chainSetUp = new ChainSetUp(PRIVATE_KEY, CERTIFIER_ADD);
+        //TODO Singleton parameter übergeben
+        ChainSetUp chainSetUp =  ChainSetUp.getInstance(PRIVATE_KEY, CERTIFIER_ADD);
         chainSetUp.setUpAfterChainStart();
         //       chainSetUp.setUpNewChainStart();
         ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
