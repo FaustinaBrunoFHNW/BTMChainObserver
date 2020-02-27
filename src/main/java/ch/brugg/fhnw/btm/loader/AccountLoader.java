@@ -8,10 +8,13 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.ArrayList;
 
+//TODO Singleton
 //TODO Klasse und Methode in Kommentaren beschreiben
 public class AccountLoader {
 
+    //TODO HASHSET
     private ArrayList<Account> accountArrayList;
+    //TODO HASHSET
     private ArrayList<Account> revokedAccountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
     private DefaultSettings defaultSettings;
@@ -23,7 +26,7 @@ public class AccountLoader {
     public AccountLoader() {
         //   accounts = new HashMap<>();
         this.accountArrayList = new ArrayList();
-        this.revokedAccountArrayList=new ArrayList();
+        this.revokedAccountArrayList = new ArrayList();
         //TODO wieso bei initieren schon alle Laden? muss geprüft werden
         // loadAccounts();
     }
@@ -38,6 +41,7 @@ public class AccountLoader {
     diese in eine ArrayList und in eine Hashmap ein
      */
     public void loadAccounts() {
+        //TODO Spaghetti code auslagern
 
         //   accounts = new HashMap<>();
         try {
@@ -51,24 +55,31 @@ public class AccountLoader {
                 if (accountArray.length == 4) {
                     defaultSettings = new DefaultSettings(accountArray[0], accountArray[1], accountArray[2],
                             accountArray[3]);
+
+                    //TODO logs
                     System.out.println("******************DEFAULT WERTE***************");
                     System.out.println("ResetCounter Intervall wurde auf " + accountArray[0] + " Minuten gesetzt");
                     System.out.println("Revoke Zeit wurde auf " + accountArray[1] + " Intervalle  gesetzt");
                     System.out.println("Default Max Transaktionen wurden auf " + accountArray[2] + " gesetzt");
                     System.out.println("Default Max Gas Used wurde auf " + accountArray[3] + " gesetzt");
-                }
-                if (accountArray.length == 3) {
+                } else if (accountArray.length == 3) {
 
-                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2],defaultSettings.getIntervalRevoke());
+                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2],
+                            defaultSettings.getIntervalRevoke());
                     System.out.println(
                             "Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: "
                                     + account.getMaxTransaktionCounter() + " und max GasUsed:" + account
                                     .getMaxGasUsed());
                     this.accountArrayList.add(account);
-                }
-                if (accountArray.length == 1) {
+                } else if (accountArray.length == 1) {
                     Account account = new Account(accountArray[0], this.defaultSettings.getDefaultTransaktionCount(),
-                            this.defaultSettings.getDefaultGasUsedCount(),defaultSettings.getIntervalRevoke());
+                            this.defaultSettings.getDefaultGasUsedCount(), defaultSettings.getIntervalRevoke());
+                    System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
+                            + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
+                    this.accountArrayList.add(account);
+                } else if (accountArray.length == 5) {
+                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2],
+                            defaultSettings.getIntervalRevoke(), accountArray[3], accountArray[4]);
                     System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
                             + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
                     this.accountArrayList.add(account);
@@ -84,7 +95,7 @@ public class AccountLoader {
 
     //TODO Explain java DOC // für Testzwecke
     public void addAccountToList(String address, String maxTransaktionen, String maxGasUsed, int revokePeriod) {
-        Account account = new Account(address, maxTransaktionen, maxGasUsed,revokePeriod);
+        Account account = new Account(address, maxTransaktionen, maxGasUsed, revokePeriod);
         accountArrayList.add(account);
     }
 

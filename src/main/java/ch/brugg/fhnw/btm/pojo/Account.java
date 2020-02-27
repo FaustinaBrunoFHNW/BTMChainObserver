@@ -3,6 +3,7 @@ package ch.brugg.fhnw.btm.pojo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.abi.datatypes.Address;
+import org.web3j.abi.datatypes.primitive.Int;
 
 import java.math.BigInteger;
 
@@ -24,6 +25,8 @@ public class Account {
         this.address = address;
     }
 
+
+    //TODO JAVADOC Constructor für initial Lesung
     public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokePeriod) {
         this.address = new Address(address.trim().toLowerCase());
         this.adressValue = address;
@@ -35,6 +38,20 @@ public class Account {
         this.transaktionCounter = this.maxTransaktionCounter.intValue();
         this.gasUsedCounter = this.maxGasUsed.intValue();
         this.revoked=0;
+    }
+
+    //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
+    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokePeriod,String revokedPeriodCounter,String revoked) {
+        this.address = new Address(address.trim().toLowerCase());
+        this.adressValue = address;
+        this.maxTransaktionCounter = new BigInteger(maxTransaktionCounter);
+        this.maxGasUsed = new BigInteger(maxGasUsed);
+        this.revokePeriodCounter = Integer.parseInt(revokedPeriodCounter);
+        this.revokePeriod=revokePeriod;
+
+        this.transaktionCounter = this.maxTransaktionCounter.intValue();
+        this.gasUsedCounter = this.maxGasUsed.intValue();
+        this.revoked=Integer.parseInt(revoked);
     }
 
     //TODO

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class BlockedCounterLoader {
     private File file = new File("src/main/resources/whitelist/BlockedCounterList.txt");
     private static Logger log = LoggerFactory.getLogger(BlockedCounterLoader.class);
+
     //TODO JAVADOC
     /*
      */
