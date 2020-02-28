@@ -106,7 +106,7 @@ public class AccountLoader {
                 this.defaultSettings.getDefaultGasUsedCount(), defaultSettings.getIntervalRevoke());
         System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
                 + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
-        this.accountArrayList.add(account);
+        this.addAccountToZertifiedList(account);
     }
 
     /**
@@ -120,7 +120,7 @@ public class AccountLoader {
         System.out.println(
                 "Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: " + account
                         .getMaxTransaktionCounter() + " und max GasUsed:" + account.getMaxGasUsed());
-        this.accountArrayList.add(account);
+        this.addAccountToZertifiedList(account);
     }
 
     /**
@@ -135,23 +135,60 @@ public class AccountLoader {
     private void readAccountValuesComplex(String[] fileInput) {
         Account account = new Account(fileInput[0], fileInput[1], fileInput[2], defaultSettings.getIntervalRevoke(),
                 fileInput[3], fileInput[4]);
-        System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
+        log.info("Folgender Account wurde geladen: " + account.getAdressValue()
                 + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
         if (account.getRevokePeriodCounter() == account.getRevokePeriod()) {
-            this.accountArrayList.add(account);
+            this.addAccountToZertifiedList(account);
         } else {
-            this.revokedAccountArrayList.add(account);
+            this.addAccountToRevokedList(account);
         }
 
     }
 
-    //TODO Explain java DOC // für Testzwecke
-    public void addAccountToList(String address, String maxTransaktionen, String maxGasUsed, int revokePeriod) {
-        Account account = new Account(address, maxTransaktionen, maxGasUsed, revokePeriod);
-        accountArrayList.add(account);
+    /**
+     * Diese Methode Prüft ob der Account schon in der radressListe geführt wird oder nicht.
+     * Wenn nicht, wird er in die AdressListe hinzugefügt
+     *
+     * @param account Objekt welches in die Liste hinzugefügt werden soll
+     */
+    public void addAccountToZertifiedList(Account account) {
+        int counter = 0;
+        for (Account existingAccount : accountArrayList) {
+            if (existingAccount.getAdressValue().equals(account.getAdressValue())) {
+                counter++;
+            }
+        }
+        if (counter == 0) {
+            accountArrayList.add(account);
+        } else {
+            log.info(account.getAdressValue() + " ist doppelt geführt");
+        }
+
+    }
+
+    /**
+     * Diese Methode Prüft ob der Account schon in der revokedListe geführt wird oder nicht.
+     * Wenn nicht, wird er in die RevokedListe hinzugefügt
+     *
+     * @param account Objekt welches in die Liste hinzugefügt werden soll
+     */
+    public void addAccountToRevokedList(Account account) {
+        int counter = 0;
+        for (Account existingAccount : accountArrayList) {
+            if (existingAccount.getAdressValue().equals(account.getAdressValue())) {
+                counter++;
+            }
+        }
+        if (counter == 0) {
+            revokedAccountArrayList.add(account);
+        } else {
+            log.info(account.getAdressValue() + " ist doppelt geführt");
+        }
+
     }
 
     //TODO Explain java DOC
+
     private void appendAccount(String address) {
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
