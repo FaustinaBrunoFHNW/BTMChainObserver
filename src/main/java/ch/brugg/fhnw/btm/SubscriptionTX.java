@@ -1,7 +1,6 @@
 package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.loader.AccountLoader;
-import ch.brugg.fhnw.btm.loader.BlockedCounterLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.writer.AccountWriter;
 import io.reactivex.disposables.Disposable;
@@ -21,27 +20,22 @@ import java.util.concurrent.TimeUnit;
 //TODO Beschreischbung was diese Klasse macht
 public class SubscriptionTX {
 
-
-
     //TODO limite nach Besprechung stellen
     private final static int TRANSAKTIONS_LIMITE = 3;
     private Web3j web3j;
     private Subscription subscription;
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
-    private AccountLoader accountLoader ;
+    private AccountLoader accountLoader;
     private ChainInteractions chainInteractions;
-    private BlockedCounterLoader blockedCounterLoader;
-    AccountWriter accountWriter;
+    private AccountWriter accountWriter;
 
-    public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions,
-            BlockedCounterLoader blockedCounterLoader) {
+    public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions) {
         this.web3j = web3j;
         //TODO Singelton laden
         this.accountLoader = accountLoader;
         this.chainInteractions = chainInteractions;
-        this.blockedCounterLoader = blockedCounterLoader;
 
-        accountWriter= AccountWriter.getInstance();
+        accountWriter = AccountWriter.getInstance();
 
     }
 
@@ -53,14 +47,6 @@ public class SubscriptionTX {
 
     }
 
-    void simpleFilterExample() throws Exception {
-        Disposable subscription = web3j.blockFlowable(false).subscribe(block -> {
-            log.info("Sweet, block number " + block.getBlock().getNumber() + " has just been created");
-        }, Throwable::printStackTrace);
-
-        TimeUnit.MINUTES.sleep(2);
-        subscription.dispose();
-    }
 
     void simpleTxFilter() throws Exception {
         Disposable subscription = web3j.transactionFlowable().subscribe(tx -> {
@@ -106,7 +92,7 @@ public class SubscriptionTX {
      *
      * @param account Account der inspiziert/kontrolliert wird
      */
-    private void dosAlgorithmus(Account account)  {
+    private void dosAlgorithmus(Account account) {
         if (account.getTransaktionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
 
@@ -120,10 +106,9 @@ public class SubscriptionTX {
                             + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
                             .getRevokePeriodCounter());
             try {
-                this.blockedCounterLoader.writeInFile(this.accountLoader.getAccountArrayList(), this.accountLoader.getRevokedAccountArrayList());
-            }
-            catch (IOException e){
-               log.warn("Probleme beim Schreiben in die BlockedCounter Datei");
+                this.accountWriter.writeInFile();
+            } catch (IOException e) {
+                log.warn("Probleme beim Schreiben in die BlockedCounter Datei");
             }
         } else if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());

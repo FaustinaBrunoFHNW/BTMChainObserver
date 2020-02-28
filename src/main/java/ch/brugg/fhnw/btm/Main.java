@@ -1,7 +1,6 @@
 package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.loader.AccountLoader;
-import ch.brugg.fhnw.btm.loader.BlockedCounterLoader;
 import org.web3j.protocol.Web3j;
 
 public class Main {
@@ -16,8 +15,6 @@ public class Main {
         String CERTIFIER_ADD = "0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221";
         AccountLoader accountLoader =  AccountLoader.getInstance();
 
-        BlockedCounterLoader blockedCounterLoader = new BlockedCounterLoader();
-
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
         //TODO Singleton parameter übergeben
@@ -31,12 +28,11 @@ public class Main {
         //TODO load all accounts from list
         accountLoader.loadAccounts();
         chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
-        //blockedCounterLoader.loadBlockedInfo(accountLoader.getAccountArrayList());
-       // blockedCounterLoader.loadBlockedInfo(accountLoader.getRevokedAccountArrayList());
+
 
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
-        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, accountLoader, chainInteractions,blockedCounterLoader);
+        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, accountLoader, chainInteractions);
         subscriptionTX.run(accountLoader.getDefaultSettings().getIntervalResetCounter());
     }
 
