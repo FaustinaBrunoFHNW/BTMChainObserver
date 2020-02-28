@@ -36,4 +36,36 @@ public class Main {
         subscriptionTX.run(accountLoader.getDefaultSettings().getIntervalResetCounter());
     }
 
+
+    //TODO für CML init Methode schreiben
+
+    /**
+     * Auführbare Methode fürs Aufsetzten der Blockchain
+     * Hier wird der certifyer deployed
+     * Die certify Adresse Gebrinted
+     * Zertifizieren des JavaProgramm Accounts
+     * @throws Exception
+     */
+    public static void init() throws Exception {}
+
+    //TODO für CML run Methode schreiiben
+
+    /**
+     * Ausführbare Methode über CMD für das laufen lassen des Programms
+     * Revoken aller Accounts
+     * Alle Accounts aus dem File einlesen
+     * Alle Accounts Zertifizieren
+     * Intervall starten
+     * @throws Exception
+     */
+    public static void run() throws Exception {}
+
+    //TODO für CML stop Methode schreiiben
+
+    /**
+     * Ausführbare Methode fürs stoppen aller Vorgänge und das Revoken aller Accounts
+     * @throws Exception
+     */
+    public static void stop() throws Exception {}
+
 }

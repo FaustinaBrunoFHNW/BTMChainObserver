@@ -23,9 +23,7 @@ public class AccountLoader {
 
     private File file = new File("src/main/resources/whitelist/Accounts.txt");
 
-
     private AccountLoader() {
-        //   accounts = new HashMap<>();
         this.accountArrayList = new ArrayList();
         this.revokedAccountArrayList = new ArrayList();
         //TODO wieso bei initieren schon alle Laden? muss geprüft werden
@@ -35,25 +33,22 @@ public class AccountLoader {
     /**
      * Instanziert eine Instanz der Klasse falls es noch keine gibt und gibt
      * die existierende oder eben die neue zurück
+     *
      * @return die einmalige Instanz der Klasse
      */
     public static AccountLoader getInstance() {
 
         if (AccountLoader.instance == null) {
-            AccountLoader.instance = new AccountLoader ();
+            AccountLoader.instance = new AccountLoader();
         }
         return AccountLoader.instance;
     }
-
 
     /*
     Läd alle Accounts die im File eingetragen sind, erstellt Accounts und füllt
     diese in eine ArrayList und in eine Hashmap ein
      */
     public void loadAccounts() {
-        //TODO Spaghetti code auslagern
-
-        //   accounts = new HashMap<>();
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -63,36 +58,16 @@ public class AccountLoader {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
                 if (accountArray.length == 4) {
-                    defaultSettings = new DefaultSettings(accountArray[0], accountArray[1], accountArray[2],
-                            accountArray[3]);
+                    this.readDefaultValues(accountArray);
 
-                    //TODO logs
-                    System.out.println("******************DEFAULT WERTE***************");
-                    System.out.println("ResetCounter Intervall wurde auf " + accountArray[0] + " Minuten gesetzt");
-                    System.out.println("Revoke Zeit wurde auf " + accountArray[1] + " Intervalle  gesetzt");
-                    System.out.println("Default Max Transaktionen wurden auf " + accountArray[2] + " gesetzt");
-                    System.out.println("Default Max Gas Used wurde auf " + accountArray[3] + " gesetzt");
                 } else if (accountArray.length == 3) {
+                    this.readAccountValuesSimple(accountArray);
 
-                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2],
-                            defaultSettings.getIntervalRevoke());
-                    System.out.println(
-                            "Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: "
-                                    + account.getMaxTransaktionCounter() + " und max GasUsed:" + account
-                                    .getMaxGasUsed());
-                    this.accountArrayList.add(account);
                 } else if (accountArray.length == 1) {
-                    Account account = new Account(accountArray[0], this.defaultSettings.getDefaultTransaktionCount(),
-                            this.defaultSettings.getDefaultGasUsedCount(), defaultSettings.getIntervalRevoke());
-                    System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
-                            + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
-                    this.accountArrayList.add(account);
+                    this.readAccountValuesWithDefault(accountArray);
+
                 } else if (accountArray.length == 5) {
-                    Account account = new Account(accountArray[0], accountArray[1], accountArray[2],
-                            defaultSettings.getIntervalRevoke(), accountArray[3], accountArray[4]);
-                    System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
-                            + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
-                    this.accountArrayList.add(account);
+                    this.readAccountValuesComplex(accountArray);
                 }
 
             }
@@ -101,6 +76,65 @@ public class AccountLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * In dieser Methode wird ein DefaulSettings Objekt aus den ausgelesenen Attributen der Datei
+     * erstellt.
+     *
+     * @param fileInput String Array mit den DefaultSettings Attributen
+     */
+    private void readDefaultValues(String[] fileInput) {
+        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
+
+        log.info("******************DEFAULT WERTE***************");
+        log.info("ResetCounter Intervall wurde auf " + fileInput[0] + " Minuten gesetzt");
+        log.info("Revoke Zeit wurde auf " + fileInput[1] + " Intervalle  gesetzt");
+        log.info("Default Max Transaktionen wurden auf " + fileInput[2] + " gesetzt");
+        log.info("Default Max Gas Used wurde auf " + fileInput[3] + " gesetzt");
+
+    }
+
+    /**
+     * In dieser Methode wird ein Account Objekt aus den ausgelesenen Attributen der Datei und Default Werten
+     * erstellt und in die Account Liste hinzugefügt.
+     *
+     * @param fileInput String Array mit 1 Attributen für das Account Objekt
+     */
+    private void readAccountValuesWithDefault(String[] fileInput) {
+        Account account = new Account(fileInput[0], this.defaultSettings.getDefaultTransaktionCount(),
+                this.defaultSettings.getDefaultGasUsedCount(), defaultSettings.getIntervalRevoke());
+        System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
+                + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
+        this.accountArrayList.add(account);
+    }
+
+    /**
+     * In dieser Methode wird ein Account Objekt aus den ausgelesenen Attributen der Datei
+     * erstellt und in die Account Liste hinzugefügt.
+     *
+     * @param fileInput String Array mit 3 Attributen für das Account Objekt
+     */
+    private void readAccountValuesSimple(String[] fileInput) {
+        Account account = new Account(fileInput[0], fileInput[1], fileInput[2], defaultSettings.getIntervalRevoke());
+        System.out.println(
+                "Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: " + account
+                        .getMaxTransaktionCounter() + " und max GasUsed:" + account.getMaxGasUsed());
+        this.accountArrayList.add(account);
+    }
+
+    /**
+     * In dieser Methode wird ein Account Objekt aus den ausgelesenen Attributen der Datei
+     * erstellt und in die Account Liste hinzugefügt. Hier wird der RevokePeriodCounter und RevokedTimes gesetzt
+     *
+     * @param fileInput String Array mit 5 Attributen für das Account Objekt
+     */
+    private void readAccountValuesComplex(String[] fileInput) {
+        Account account = new Account(fileInput[0], fileInput[1], fileInput[2], defaultSettings.getIntervalRevoke(),
+                fileInput[3], fileInput[4]);
+        System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
+                + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
+        this.accountArrayList.add(account);
     }
 
     //TODO Explain java DOC // für Testzwecke
