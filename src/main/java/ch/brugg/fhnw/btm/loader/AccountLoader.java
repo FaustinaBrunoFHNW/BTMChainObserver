@@ -125,7 +125,10 @@ public class AccountLoader {
 
     /**
      * In dieser Methode wird ein Account Objekt aus den ausgelesenen Attributen der Datei
-     * erstellt und in die Account Liste hinzugefügt. Hier wird der RevokePeriodCounter und RevokedTimes gesetzt
+     * erstellt. Hier wird der RevokePeriodCounter und RevokedTimes gesetzt
+     * Ist der RevokePeriodCounter kleiner als RevokePeriod, ist der Account gesperrt und er
+     * wird in der Liste der gesperrten Accounts hinzugefügt
+     * Ansonsten wird er in die Liste der Zertifizierten Accounts hinzugefügt
      *
      * @param fileInput String Array mit 5 Attributen für das Account Objekt
      */
@@ -134,7 +137,12 @@ public class AccountLoader {
                 fileInput[3], fileInput[4]);
         System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
                 + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
-        this.accountArrayList.add(account);
+        if (account.getRevokePeriodCounter() == account.getRevokePeriod()) {
+            this.accountArrayList.add(account);
+        } else {
+            this.revokedAccountArrayList.add(account);
+        }
+
     }
 
     //TODO Explain java DOC // für Testzwecke
