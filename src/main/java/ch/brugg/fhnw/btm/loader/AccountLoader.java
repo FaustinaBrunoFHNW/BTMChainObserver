@@ -161,7 +161,7 @@ public class AccountLoader {
         if (counter == 0) {
             accountArrayList.add(account);
         } else {
-            log.info(account.getAdressValue() + " ist doppelt geführt");
+            log.info(account.getAdressValue() + " ist doppelt in Liste geführt");
         }
 
     }
@@ -182,7 +182,7 @@ public class AccountLoader {
         if (counter == 0) {
             revokedAccountArrayList.add(account);
         } else {
-            log.info(account.getAdressValue() + " ist doppelt geführt");
+            log.info(account.getAdressValue() + " ist doppelt in Liste geführt");
         }
 
     }
