@@ -18,9 +18,11 @@ public class Main {
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
         //TODO Singleton parameter übergeben
-        ChainSetUp chainSetUp =  ChainSetUp.getInstance(PRIVATE_KEY, CERTIFIER_ADD);
+        ChainSetUp chainSetUp =  ChainSetUp.getInstance();
+        chainSetUp.setCertifierAdd(CERTIFIER_ADD);
+        chainSetUp.setPrivateKey(PRIVATE_KEY);
         chainSetUp.setUpAfterChainStart();
-        //       chainSetUp.setUpNewChainStart();
+        //       chainSetUp.initChain();
         ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
 
         Web3j web3j = chainSetUp.getWeb3j();
@@ -46,7 +48,30 @@ public class Main {
      * Zertifizieren des JavaProgramm Accounts
      * @throws Exception
      */
-    public static void init() throws Exception {}
+    public static void init() throws Exception {
+
+        AccountLoader accountLoader =  AccountLoader.getInstance();
+
+        System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
+
+        //TODO Singleton parameter übergeben
+        ChainSetUp chainSetUp =  ChainSetUp.getInstance();
+        chainSetUp.initChain();
+
+        ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
+
+        Web3j web3j = chainSetUp.getWeb3j();
+
+        accountLoader.loadAccounts();
+        accountLoader.setCertifierAddress(chainSetUp.getCertifierAdd());
+        chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
+
+
+        System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
+        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, accountLoader, chainInteractions);
+        subscriptionTX.run(accountLoader.getDefaultSettings().getIntervalResetCounter());
+
+    }
 
     //TODO für CML run Methode schreiiben
 

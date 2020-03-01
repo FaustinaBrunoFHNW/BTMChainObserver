@@ -84,7 +84,8 @@ public class AccountWriter {
         String defaultSettingsLine;
         defaultSettingsLine =
                 defaultSettings.getIntervalResetCounter() + ";" + defaultSettings.getIntervalRevoke() + ";"
-                        + defaultSettings.getDefaultTransaktionCount() + ";" + defaultSettings.getDefaultGasUsedCount();
+                        + defaultSettings.getDefaultTransaktionCount() + ";" + defaultSettings.getDefaultGasUsedCount()
+                        + ";"+defaultSettings.getCertifyierAdress()+ ";"+"DEFAULSETTINGS" ;
         return defaultSettingsLine;
 
     }

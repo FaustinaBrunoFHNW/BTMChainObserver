@@ -12,6 +12,8 @@ public class DefaultSettings {
     //defaultGasCount
     private String defaultGasUsedCount;
 
+    private String certifyierAdress;
+
     public DefaultSettings(String intervalResetCounter, String intervalRevoke, String defaultTransaktionCount,
             String defaultGasUsedCount) {
         this.intervalResetCounter = Integer.parseInt(intervalResetCounter);
@@ -50,5 +52,13 @@ public class DefaultSettings {
 
     public void setDefaultGasUsedCount(String defaultGasUsedCount) {
         this.defaultGasUsedCount = defaultGasUsedCount;
+    }
+
+    public String getCertifyierAdress() {
+        return certifyierAdress;
+    }
+
+    public void setCertifyierAdress(String certifyierAdress) {
+        this.certifyierAdress = certifyierAdress;
     }
 }

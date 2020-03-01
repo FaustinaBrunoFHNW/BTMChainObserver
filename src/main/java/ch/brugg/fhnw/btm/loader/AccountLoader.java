@@ -20,6 +20,7 @@ public class AccountLoader {
     private ArrayList<Account> revokedAccountArrayList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
     private DefaultSettings defaultSettings;
+    private String certifierAdd;
 
     private File file = new File("src/main/resources/whitelist/Accounts.txt");
 
@@ -68,6 +69,8 @@ public class AccountLoader {
 
                 } else if (accountArray.length == 5) {
                     this.readAccountValuesComplex(accountArray);
+                } else if (accountArray.length == 6) {
+                    this.readDefaultValuesWithCerfierAdd(accountArray);
                 }
 
             }
@@ -79,13 +82,34 @@ public class AccountLoader {
     }
 
     /**
-     * In dieser Methode wird ein DefaulSettings Objekt aus den ausgelesenen Attributen der Datei
+     * In dieser Methode wird ein DefaultSettings Objekt aus den ausgelesenen Attributen der Datei
      * erstellt.
      *
      * @param fileInput String Array mit den DefaultSettings Attributen
      */
     private void readDefaultValues(String[] fileInput) {
         defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
+
+        log.info("******************DEFAULT WERTE***************");
+        log.info("ResetCounter Intervall wurde auf " + fileInput[0] + " Minuten gesetzt");
+        log.info("Revoke Zeit wurde auf " + fileInput[1] + " Intervalle  gesetzt");
+        log.info("Default Max Transaktionen wurden auf " + fileInput[2] + " gesetzt");
+        log.info("Default Max Gas Used wurde auf " + fileInput[3] + " gesetzt");
+
+    }
+
+    /**
+     * In dieser Methode wird ein DefaultSettings Objekt aus den ausgelesenen Attributen der Datei
+     * erstellt. Hier ist die CertifierAdd dabei
+     *
+     * @param fileInput String Array mit den DefaultSettings Attributen
+     */
+    private void readDefaultValuesWithCerfierAdd(String[] fileInput) {
+        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
+        if(fileInput.length>4) {
+            defaultSettings.setCertifyierAdress(fileInput[4]);
+        }
+
 
         log.info("******************DEFAULT WERTE***************");
         log.info("ResetCounter Intervall wurde auf " + fileInput[0] + " Minuten gesetzt");
@@ -187,63 +211,6 @@ public class AccountLoader {
 
     }
 
-    //TODO Explain java DOC
-
-    private void appendAccount(String address) {
-        try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
-            output.newLine();
-            output.append(address.trim().toLowerCase());
-            output.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //TODO Explain java DOC
-    /*
-    Läd alle Accounts wieder in die ArrayList und Hashmap
-     */
-    public void reset() {
-        loadAccounts();
-    }
-
-    //TODO Explain java DOC
-
-    /**
-     * @param address
-     * @return
-     */
-    public boolean removeAccount(String address) {
-        File temp = new File("src/main/resources/accountInput/Accounts_temp.txt");
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(temp));
-
-            String currentLine;
-
-            while ((currentLine = bufferedReader.readLine()) != null) {
-                if (currentLine.trim().toLowerCase().equals(address.trim().toLowerCase())) {
-                    continue;
-                }
-                bufferedWriter.write(currentLine);
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-            bufferedReader.close();
-            file.delete();
-            if (temp.renameTo(file)) {
-                loadAccounts();
-                return true;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     //*******************GETTER und SETTER
 
     public ArrayList<Account> getAccountArrayList() {
@@ -269,5 +236,9 @@ public class AccountLoader {
 
     public void setRevokedAccountArrayList(ArrayList<Account> revokedAccountArrayList) {
         this.revokedAccountArrayList = revokedAccountArrayList;
+    }
+
+    public void setCertifierAddress(String certfierAdd) {
+        this.defaultSettings.setCertifyierAdress(certfierAdd);
     }
 }

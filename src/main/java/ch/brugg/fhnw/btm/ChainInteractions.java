@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
+/**
+ * In dieser Klasse sind alle Interaktionen mit der Blockchain über den SimpleCertifier
+ */
 public class ChainInteractions {
 
     private Logger log = LoggerFactory.getLogger(ChainInteractions.class);

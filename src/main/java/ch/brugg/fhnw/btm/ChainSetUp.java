@@ -22,24 +22,22 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-
 //TODO als Singelton Paater implementieren
 //TODO JAVADOC
+
 /**
  * In dieser Klasse wird die Blockchain aufgesetzt
- *
+ * <p>
  * Teile dieser Klasse wurden aus dem Tutorial gezogen
- *  https://kauri.io/connecting-to-an-ethereum-client-with-java-eclipse-and-web3j/b9eb647c47a546bc95693acc0be72546/a
- *  Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
+ * https://kauri.io/connecting-to-an-ethereum-client-with-java-eclipse-and-web3j/b9eb647c47a546bc95693acc0be72546/a
+ * Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
  */
 public class ChainSetUp {
 
-
-
-
     private static ChainSetUp instance;
 
-    private final String privateKey;
+    //todo WIE MACHEN WIR MIT PRIVATEkEY
+    private String privateKey="0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
     private String certifierAdd;
     private static BigInteger REGISTRATION_FEE = BigInteger.valueOf(1000000000000000000L);
     private Web3j web3j;
@@ -55,14 +53,12 @@ public class ChainSetUp {
     /**
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
      *
-     * @param privateKey
-     * @param certifierAdd
      */
-    private ChainSetUp(String privateKey, String certifierAdd) {
-        this.certifierAdd = certifierAdd;
+    private ChainSetUp() {
         log.info("connecting");
-        this.privateKey = privateKey;
+
         //Verbindungsaufbau zur Chain
+        //TODO KONSTANTE
         web3j = Web3j.build(new HttpService("http://jurijnas.myqnapcloud.com:8545/"));
 
         //TODO in Test auslagern ??
@@ -77,21 +73,19 @@ public class ChainSetUp {
         getInfo(web3j);
     }
 
-
     /**
      * Instanziert eine Instanz der Klasse falls es noch keine gibt und gibt
      * die existierende oder eben die neue zurück
+     *
      * @return die einmalige Instanz der Klasse
      */
-    public static ChainSetUp getInstance(String privateKey, String certifierAdd) {
+    public static ChainSetUp getInstance() {
 
         if (ChainSetUp.instance == null) {
-            ChainSetUp.instance = new ChainSetUp (privateKey,certifierAdd);
+            ChainSetUp.instance = new ChainSetUp();
         }
         return ChainSetUp.instance;
     }
-
-
 
     //TODO naming
 
@@ -118,7 +112,7 @@ public class ChainSetUp {
      *
      * @throws Exception
      */
-    public void setUpNewChainStart() throws Exception {
+    public void initChain() throws Exception {
 
         this.log.info("Simpleregistry und certifier werden aufgesetzt.");
         //Allgemeine Abfrage zur Chain ob alles funktioniert etc
@@ -163,22 +157,20 @@ public class ChainSetUp {
      * Hier wird der certifier deployed
      * Certifier Adresse wird ausgegeben und gespeichert
      *
-     * @return
      */
-    private boolean setUpCertifier() {
+    private void setUpCertifier() {
 
         if (deployCertifier(transactionManager) && registerCertifier()) {
 
             log.info("Deployen des Certifier hat funktioniert");
             log.info("Das Registrieren des Certifiers hat funktioniert");
             log.info("Certifying hat funktioniert");
-            //TODO
             log.info("Addresse vom Certifier: " + simpleCertifier.getContractAddress());
+            this.certifierAdd = simpleCertifier.getContractAddress();
 
-            return true;
         }
-        log.info("Es gab ein Probelm beim Setup und Deployen und Registrieren des certifier ");
-        return false;
+        log.warn("Es gab ein Probelm beim Setup und Deployen und Registrieren des certifier ");
+
     }
 
     /**
@@ -301,5 +293,17 @@ public class ChainSetUp {
 
     public void setHash(byte[] hash) {
         this.hash = hash;
+    }
+
+    public String getCertifierAdd() {
+        return certifierAdd;
+    }
+
+    public void setCertifierAdd(String certifierAdd) {
+        this.certifierAdd = certifierAdd;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
     }
 }
