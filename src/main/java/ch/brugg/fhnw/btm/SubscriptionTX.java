@@ -29,14 +29,11 @@ public class SubscriptionTX {
     private ChainInteractions chainInteractions;
     private AccountWriter accountWriter;
 
-    public SubscriptionTX(Web3j web3j, AccountLoader accountLoader, ChainInteractions chainInteractions) {
+    public SubscriptionTX(Web3j web3j, ChainInteractions chainInteractions) {
         this.web3j = web3j;
-        //TODO Singelton laden
-        this.accountLoader = accountLoader;
+        this.accountLoader = AccountLoader.getInstance();
         this.chainInteractions = chainInteractions;
-
         accountWriter = AccountWriter.getInstance();
-
     }
 
     //TODO JAVADOC
@@ -51,11 +48,11 @@ public class SubscriptionTX {
     void txFilter() throws Exception {
         Disposable subscription = web3j.transactionFlowable().subscribe(tx -> {
             //TODO Gas pro Zeiteinheit anzeigen
-            log.info("Found a TX from " + tx.getFrom());
+            log.info("Eine Transaktion von folgender Adresse wurde gefunden: " + tx.getFrom());
             log.info("Gas price used: " + tx.getGasPrice());
             log.info("Gas : " + tx.getGas());
             log.info("Gas : " + tx.getGasRaw());
-            log.info("Ether moved " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
+            log.info("Transferierter Ether: " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
 
             //TODO increaseCounter wieder einkommentieren und hier die DOS Algo implemeniteren
             if (tx.getGasPrice().equals(BigInteger.ZERO)) {

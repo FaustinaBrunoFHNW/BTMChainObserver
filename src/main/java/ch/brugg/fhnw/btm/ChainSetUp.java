@@ -49,7 +49,6 @@ public class ChainSetUp {
 
     //TODO naming
     //TODO JAVADOC
-
     /**
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
      *
@@ -65,7 +64,6 @@ public class ChainSetUp {
         //TM von dem Account mit dem PK
         this.transactionManager = new RawTransactionManager(web3j, this.getCredentialsFromPrivateKey());
 
-        //sha3(service_transaction_checker) = 0x6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155
         String str_hash = "6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155";
 
         //Umwandeln in Bytearray Hexadecimal
@@ -95,10 +93,7 @@ public class ChainSetUp {
      * @throws Exception
      */
     public void setUpAfterChainStart() throws Exception {
-
-        //Allgemeine Abfrage zur Chain ob alles funktioniert etc
         this.getInfo(web3j);
-
         this.loadSimpleRegistry();
         this.loadCertifier(certifierAdd);
 
@@ -129,7 +124,7 @@ public class ChainSetUp {
      * Erstellt die Simple Registry
      * und speichert den Certifier Owner
      *
-     * @return
+     * @return boolean Wert ob das laden der Simpleregistry funktioniert hat
      */
     private boolean loadSimpleRegistry() {
 
@@ -138,11 +133,12 @@ public class ChainSetUp {
                 .load("0x0000000000000000000000000000000000001337", web3j, getCredentialsFromPrivateKey(),
                         new DefaultGasProvider());
         try {
-            log.info("Fee of Registry: " + simpleRegistry.fee().send());
+           log.info("Fee of Registry: " + simpleRegistry.fee().send());
             //TODO owner speichern in Variable
-            log.info("Owner of Registry: " + simpleRegistry.owner().send());
+           log.info("Besitzer von Registry: " + simpleRegistry.owner().send());
             return true;
         } catch (Exception e) {
+            log.warn("Simple Registry konnte nicht geladen werden");
             e.printStackTrace();
         }
 
@@ -191,11 +187,12 @@ public class ChainSetUp {
     private boolean deployCertifier(TransactionManager transactionManager) {
 
         try {
-            log.info("Deploying Certifier");
+            log.info("Deployment vom Certifier");
             simpleCertifier = SimpleCertifier.deploy(web3j, transactionManager, new DefaultGasProvider()).send();
-            log.info("Deployment of Certifier done");
+            log.info("Deployment vom Certifier erfolgreich");
             return true;
         } catch (Exception e) {
+            log.warn("Deployen vom Certifier hat nicht funktioniert.");
             e.printStackTrace();
         }
         return false;
@@ -210,15 +207,16 @@ public class ChainSetUp {
     private boolean registerCertifier() {
 
         try {
-            log.info("Registering Certifier");
+            log.info("Registrieren vom Certifier");
             TransactionReceipt receipt1 = simpleRegistry.reserve(hash, REGISTRATION_FEE).send();
-            log.info("TX-Hash for reserve: " + receipt1.getTransactionHash());
+            log.info("TX-Hash für reserve: " + receipt1.getTransactionHash());
             TransactionReceipt receipt2 = simpleRegistry.setAddress(hash, "A", simpleCertifier.getContractAddress())
                     .send();
-            log.info("Tx-Hash for setAddress: " + receipt2.getTransactionHash());
-            log.info("Done registering Certifier");
+            log.info("Tx-Hash für setAddress: " + receipt2.getTransactionHash());
+            log.info("Registrierung vom Certifier erfolgreich");
             return true;
         } catch (Exception e) {
+            log.warn("Registrierung vom Certifier hat nicht funktioniert.");
             e.printStackTrace();
         }
         return false;
@@ -237,9 +235,9 @@ public class ChainSetUp {
 
             EthGasPrice gasPrice = web3j.ethGasPrice().send();
 
-            log.info("Client version " + clientVersion.getWeb3ClientVersion());
-            log.info("Block number " + blockNumber.getBlockNumber());
-            log.info("Gas price " + gasPrice.getGasPrice());
+            log.info("Client Version " + clientVersion.getWeb3ClientVersion());
+            log.info("Block Nummer " + blockNumber.getBlockNumber());
+            log.info("Gas Preis " + gasPrice.getGasPrice());
 
         } catch (IOException e) {
             throw new RuntimeException("Error whilst sending json-rpc requests", e);
@@ -254,7 +252,7 @@ public class ChainSetUp {
     public void loadCertifier(String add) {
 
         simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
-
+        log.info("Laden vom Certifier erfolgreich");
     }
 
     //GETTER UND SETTER
