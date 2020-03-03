@@ -19,7 +19,8 @@ import java.util.ArrayList;
  */
 public class AccountWriter {
 
-    private File file = new File("src/main/resources/whitelist/Accounts.txt");
+    private File accountFile = new File("src/main/resources/whitelist/Accounts.txt");
+    private File defaultSettingsFile = new File("src/main/resources/whitelist/DefaultSettings.txt");
     private static AccountWriter instance;
     private static Logger log = LoggerFactory.getLogger(AccountWriter.class);
     private AccountLoader accountLoader;
@@ -50,15 +51,13 @@ public class AccountWriter {
      */
     public void writeAccountsInFile() throws IOException {
 
-        FileWriter fw = new FileWriter(file);
+        FileWriter fw = new FileWriter(accountFile);
         BufferedWriter bw = new BufferedWriter(fw);
 
         log.info("Alle Accounts werden in Datei gespeichert.");
 
         log.info(accountLoader.getRevokedAccountArrayList().size()+" Accounts sind blockiert");
         for (Account account : accountLoader.getRevokedAccountArrayList()) {
-
-
                 bw.write(this.prepareAccountLineForFile(account));
                 log.info(account.getAdressValue());
                 bw.newLine();
@@ -77,10 +76,10 @@ public class AccountWriter {
         log.info("Daten wurden in datei gespeichert.");
     }
 
-
+/**
     //TODO JAVADOC und Impl
     public void writeDefaultSettingsInFile() throws IOException {
-        FileWriter fw = new FileWriter(file);
+        FileWriter fw = new FileWriter(defaultSettingsFile);
         BufferedWriter bw = new BufferedWriter(fw);
         log.info("Default Settings werden in Datei gespeichert.");
         bw.write(this.prepareDefaultSeetingsLineForFile(accountLoader.getDefaultSettings()));
@@ -98,7 +97,7 @@ public class AccountWriter {
         return defaultSettingsLine;
 
     }
-
+*/
     private String prepareAccountLineForFile(Account account) {
         String accountLine;
         accountLine =
