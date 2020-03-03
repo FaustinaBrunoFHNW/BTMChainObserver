@@ -18,12 +18,9 @@ public class Account {
     private int revoked;
     private BigInteger maxGasUsed;
     private int gasUsedCounter;
+    private boolean defaultSettings;
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
-
-    public Account(Address address) {
-        this.address = address;
-    }
 
 
     //TODO JAVADOC Constructor für initial Lesung
@@ -170,5 +167,13 @@ public class Account {
 
     public void setRevoked(int revoked) {
         this.revoked = revoked;
+    }
+
+    public boolean isDefaultSettings() {
+        return defaultSettings;
+    }
+
+    public void setDefaultSettings(boolean defaultSettings) {
+        this.defaultSettings = defaultSettings;
     }
 }

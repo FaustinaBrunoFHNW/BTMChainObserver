@@ -22,7 +22,6 @@ public class AccountLoader {
     private DefaultSettings defaultSettings;
     private String certifierAdd;
 
-
     private File accountsFile = new File("src/main/resources/whitelist/AccountList.txt");
     private File transaktionManagerAccountFile = new File("src/main/resources/whitelist/TransaktionManagerAccount.txt");
     private File defaultSettingsFile = new File("src/main/resources/whitelist/DefaultSettings.txt");
@@ -51,13 +50,13 @@ public class AccountLoader {
     /**
      * Diese Methode startet alle Loader Methoden in der richtigen Rheinfolge
      */
-    public void loadAll(){
+    public void loadAll() {
         this.loadDefaultSettings();
         this.loadAccounts();
-     //   this.loadTransaktionManagerAccount();
+        //   this.loadTransaktionManagerAccount();
     }
 
-    private void loadTransaktionManagerAccount(){
+    private void loadTransaktionManagerAccount() {
         log.info("Laden der Transaktion Manager Account");
         try {
             FileReader fileReader = new FileReader(transaktionManagerAccountFile);
@@ -67,15 +66,18 @@ public class AccountLoader {
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
-                 if (accountArray.length == 3) {
+                if (accountArray.length == 3) {
                     this.readAccountValuesSimple(accountArray);
 
                 } else if (accountArray.length == 1) {
                     this.readAccountValuesWithDefault(accountArray);
 
-                } else if (accountArray.length == 5) {
-                    this.readAccountValuesComplex(accountArray);
                 }
+                //TODO ausbauen
+                /** else if (accountArray.length == 5) {
+                 this.readAccountValuesComplex(accountArray);
+                 }
+                 */
 
             }
             bufferedReader.close();
@@ -85,7 +87,7 @@ public class AccountLoader {
         }
     }
 
-    private void loadDefaultSettings(){
+    private void loadDefaultSettings() {
         log.info("Laden der Default Settings");
         try {
             FileReader fileReader = new FileReader(defaultSettingsFile);
@@ -111,8 +113,6 @@ public class AccountLoader {
         }
     }
 
-
-
     /*
     Läd alle Accounts die im File eingetragen sind, erstellt Accounts und füllt
     diese in eine ArrayList und in eine Hashmap ein
@@ -126,7 +126,7 @@ public class AccountLoader {
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
-               if (accountArray.length == 3) {
+                if (accountArray.length == 3) {
                     this.readAccountValuesSimple(accountArray);
 
                 } else if (accountArray.length == 1) {
@@ -169,10 +169,9 @@ public class AccountLoader {
      */
     private void readDefaultValuesWithCerfierAdd(String[] fileInput) {
         defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
-        if(fileInput.length>4) {
+        if (fileInput.length > 4) {
             defaultSettings.setCertifyierAdress(fileInput[4]);
         }
-
 
         log.info("******************DEFAULT WERTE***************");
         log.info("ResetCounter Intervall wurde auf " + fileInput[0] + " Minuten gesetzt");
@@ -191,7 +190,8 @@ public class AccountLoader {
     private void readAccountValuesWithDefault(String[] fileInput) {
         Account account = new Account(fileInput[0], this.defaultSettings.getDefaultTransaktionCount(),
                 this.defaultSettings.getDefaultGasUsedCount(), defaultSettings.getIntervalRevoke());
-        System.out.println("Folgender Account wurde geladen: " + account.getAdressValue()
+        account.setDefaultSettings(true);
+        log.info("Folgender Account wurde geladen: " + account.getAdressValue()
                 + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
         this.addAccountToZertifiedList(account);
     }
@@ -204,9 +204,9 @@ public class AccountLoader {
      */
     private void readAccountValuesSimple(String[] fileInput) {
         Account account = new Account(fileInput[0], fileInput[1], fileInput[2], defaultSettings.getIntervalRevoke());
-        System.out.println(
-                "Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: " + account
-                        .getMaxTransaktionCounter() + " und max GasUsed:" + account.getMaxGasUsed());
+        account.setDefaultSettings(false);
+        log.info("Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: " + account
+                .getMaxTransaktionCounter() + " und max GasUsed:" + account.getMaxGasUsed());
         this.addAccountToZertifiedList(account);
     }
 

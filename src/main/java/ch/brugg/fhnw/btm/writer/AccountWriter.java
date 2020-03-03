@@ -100,10 +100,15 @@ public class AccountWriter {
 
     private String prepareAccountLineForFile(Account account) {
         String accountLine;
-        accountLine =
-                account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
-                        + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
-
+        //TODO Default Werte nicht speichern
+        if(account.isDefaultSettings()) {
+            accountLine = account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
+                    + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
+        }
+        else{
+            accountLine = account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
+                    + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
+        }
         return accountLine;
     }
 }
