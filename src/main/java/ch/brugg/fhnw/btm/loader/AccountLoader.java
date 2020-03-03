@@ -23,7 +23,7 @@ public class AccountLoader {
     private String certifierAdd;
 
 
-    private File accountsFile = new File("src/main/resources/whitelist/Accounts.txt");
+    private File accountsFile = new File("src/main/resources/whitelist/AccountList.txt");
     private File transaktionManagerAccountFile = new File("src/main/resources/whitelist/TransaktionManagerAccount.txt");
     private File defaultSettingsFile = new File("src/main/resources/whitelist/DefaultSettings.txt");
 
@@ -54,10 +54,10 @@ public class AccountLoader {
     public void loadAll(){
         this.loadDefaultSettings();
         this.loadAccounts();
-     //   this.loadCertifierAccount();
+     //   this.loadTransaktionManagerAccount();
     }
 
-    private void loadCertifierAccount(){
+    private void loadTransaktionManagerAccount(){
         log.info("Laden der Transaktion Manager Account");
         try {
             FileReader fileReader = new FileReader(transaktionManagerAccountFile);
@@ -85,7 +85,7 @@ public class AccountLoader {
         }
     }
 
-    public void loadDefaultSettings(){
+    private void loadDefaultSettings(){
         log.info("Laden der Default Settings");
         try {
             FileReader fileReader = new FileReader(defaultSettingsFile);

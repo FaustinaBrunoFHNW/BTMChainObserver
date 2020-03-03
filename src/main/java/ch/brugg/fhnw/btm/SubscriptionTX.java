@@ -44,7 +44,6 @@ public class SubscriptionTX {
 
     }
 
-
     void txFilter() throws Exception {
         Disposable subscription = web3j.transactionFlowable().subscribe(tx -> {
             //TODO Gas pro Zeiteinheit anzeigen
@@ -97,7 +96,7 @@ public class SubscriptionTX {
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Revoke Zeit
-            account.setRevokePeriodCounter(account.getRevokePeriod()-1);
+            account.setRevokePeriodCounter(account.getRevokePeriod() - 1);
             log.info(
                     "Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue() + " wurde zum "
                             + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
@@ -144,7 +143,6 @@ public class SubscriptionTX {
             if (this.controlRevokePeriode(account)) {
                 this.chainInteractions.certifyAccount(account.getAdressValue());
                 log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
-                //TODO Revoke Periode muss fix sein
                 account.setRevokePeriodCounter(account.getRevokePeriod());
                 account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
                 account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
@@ -165,10 +163,7 @@ public class SubscriptionTX {
 
     //TODO evtl unnötige methode da einzeiler
     private boolean controlRevokePeriode(Account account) {
-        if (account.getRevokePeriodCounter() < 0) {
-            return true;
-        }
-        return false;
+        return account.getRevokePeriodCounter() < 0;
 
     }
 

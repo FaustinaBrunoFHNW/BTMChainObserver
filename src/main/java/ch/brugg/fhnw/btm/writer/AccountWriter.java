@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class AccountWriter {
 
-    private File accountFile = new File("src/main/resources/whitelist/Accounts.txt");
+    private File accountFile = new File("src/main/resources/whitelist/AccountList.txt");
     private File defaultSettingsFile = new File("src/main/resources/whitelist/DefaultSettings.txt");
     private static AccountWriter instance;
     private static Logger log = LoggerFactory.getLogger(AccountWriter.class);
@@ -76,7 +76,7 @@ public class AccountWriter {
         log.info("Daten wurden in datei gespeichert.");
     }
 
-/**
+
     //TODO JAVADOC und Impl
     public void writeDefaultSettingsInFile() throws IOException {
         FileWriter fw = new FileWriter(defaultSettingsFile);
@@ -97,7 +97,7 @@ public class AccountWriter {
         return defaultSettingsLine;
 
     }
-*/
+
     private String prepareAccountLineForFile(Account account) {
         String accountLine;
         accountLine =
