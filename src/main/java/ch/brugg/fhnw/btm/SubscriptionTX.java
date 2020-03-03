@@ -103,7 +103,7 @@ public class SubscriptionTX {
                             + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
                             .getRevokePeriodCounter());
             try {
-                this.accountWriter.writeInFile();
+                this.accountWriter.writeAccountsInFile();
             } catch (IOException e) {
                 log.warn("Probleme beim Schreiben in die BlockedCounter Datei");
             }
@@ -180,7 +180,7 @@ public class SubscriptionTX {
             Thread.sleep(min * 60 * 1000);
             this.setAllCountersToMax();
             this.certifyRevokedAccounts();
-            this.accountWriter.writeInFile();
+            this.accountWriter.writeAccountsInFile();
         }
     }
 

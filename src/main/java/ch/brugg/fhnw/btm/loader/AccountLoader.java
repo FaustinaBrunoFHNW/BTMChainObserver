@@ -22,7 +22,10 @@ public class AccountLoader {
     private DefaultSettings defaultSettings;
     private String certifierAdd;
 
-    private File file = new File("src/main/resources/whitelist/Accounts.txt");
+
+    private File accountsFile = new File("src/main/resources/whitelist/Accounts.txt");
+    private File transaktionManagerAccountFile = new File("src/main/resources/whitelist/TransaktionManagerAccount.txt");
+    private File defaultSettingsFile = new File("src/main/resources/whitelist/DefaultSettings.txt");
 
     private AccountLoader() {
         this.accountArrayList = new ArrayList();
@@ -45,23 +48,26 @@ public class AccountLoader {
         return AccountLoader.instance;
     }
 
-    /*
-    Läd alle Accounts die im File eingetragen sind, erstellt Accounts und füllt
-    diese in eine ArrayList und in eine Hashmap ein
+    /**
+     * Diese Methode startet alle Loader Methoden in der richtigen Rheinfolge
      */
-    public void loadAccounts() {
+    public void loadAll(){
+        this.loadDefaultSettings();
+        this.loadAccounts();
+     //   this.loadCertifierAccount();
+    }
+
+    private void loadCertifierAccount(){
+        log.info("Laden der Transaktion Manager Account");
         try {
-            FileReader fileReader = new FileReader(file);
+            FileReader fileReader = new FileReader(transaktionManagerAccountFile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
-                if (accountArray.length == 4) {
-                    this.readDefaultValues(accountArray);
-
-                } else if (accountArray.length == 3) {
+                 if (accountArray.length == 3) {
                     this.readAccountValuesSimple(accountArray);
 
                 } else if (accountArray.length == 1) {
@@ -69,8 +75,65 @@ public class AccountLoader {
 
                 } else if (accountArray.length == 5) {
                     this.readAccountValuesComplex(accountArray);
+                }
+
+            }
+            bufferedReader.close();
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadDefaultSettings(){
+        log.info("Laden der Default Settings");
+        try {
+            FileReader fileReader = new FileReader(defaultSettingsFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                line = line.trim().toLowerCase();
+                String[] accountArray = line.split(";");
+
+                if (accountArray.length == 4) {
+                    this.readDefaultValues(accountArray);
+
                 } else if (accountArray.length == 6) {
                     this.readDefaultValuesWithCerfierAdd(accountArray);
+                }
+
+            }
+            bufferedReader.close();
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    /*
+    Läd alle Accounts die im File eingetragen sind, erstellt Accounts und füllt
+    diese in eine ArrayList und in eine Hashmap ein
+     */
+    public void loadAccounts() {
+        try {
+            FileReader fileReader = new FileReader(accountsFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                line = line.trim().toLowerCase();
+                String[] accountArray = line.split(";");
+               if (accountArray.length == 3) {
+                    this.readAccountValuesSimple(accountArray);
+
+                } else if (accountArray.length == 1) {
+                    this.readAccountValuesWithDefault(accountArray);
+
+                } else if (accountArray.length == 5) {
+                    this.readAccountValuesComplex(accountArray);
                 }
 
             }

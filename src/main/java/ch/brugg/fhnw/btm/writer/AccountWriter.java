@@ -44,19 +44,16 @@ public class AccountWriter {
     }
 
     /**
-     * Methode fürs Schreiben des Files
+     * Methode fürs Schreiben der Accounts ins AccountFiles
      *
      * @throws IOException
      */
-    public void writeInFile() throws IOException {
+    public void writeAccountsInFile() throws IOException {
 
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        log.info("Alle Account werden in Datei gespeichert.");
-
-        bw.write(this.prepareDefaultSeetingsLineForFile(accountLoader.getDefaultSettings()));
-        bw.newLine();
+        log.info("Alle Accounts werden in Datei gespeichert.");
 
         log.info(accountLoader.getRevokedAccountArrayList().size()+" Accounts sind blockiert");
         for (Account account : accountLoader.getRevokedAccountArrayList()) {
@@ -76,6 +73,18 @@ public class AccountWriter {
                 bw.newLine();
 
         }
+        bw.close();
+        log.info("Daten wurden in datei gespeichert.");
+    }
+
+
+    //TODO JAVADOC und Impl
+    public void writeDefaultSettingsInFile() throws IOException {
+        FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        log.info("Default Settings werden in Datei gespeichert.");
+        bw.write(this.prepareDefaultSeetingsLineForFile(accountLoader.getDefaultSettings()));
+        bw.newLine();
         bw.close();
         log.info("Daten wurden in datei gespeichert.");
     }

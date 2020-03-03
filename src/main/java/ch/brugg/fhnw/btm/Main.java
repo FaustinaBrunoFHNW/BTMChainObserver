@@ -28,7 +28,7 @@ public class Main {
         Web3j web3j = chainSetUp.getWeb3j();
 
         //TODO load all accounts from list
-        accountLoader.loadAccounts();
+        accountLoader.loadAll();
         chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
 
 
@@ -54,6 +54,7 @@ public class Main {
 
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
 
+        //TODO Settings in DfaultSettings File speichern
         //TODO Singleton parameter übergeben
         ChainSetUp chainSetUp =  ChainSetUp.getInstance();
         chainSetUp.initChain();
