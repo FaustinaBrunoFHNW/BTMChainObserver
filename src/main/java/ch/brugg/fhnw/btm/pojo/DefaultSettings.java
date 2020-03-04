@@ -16,6 +16,8 @@ public class DefaultSettings {
 
     private String certifyierAdress;
 
+    private String timestampLastIntervall;
+
     public DefaultSettings(String connectionAddress,String intervalResetCounter, String intervalRevoke, String defaultTransaktionCount,
             String defaultGasUsedCount) {
         this.connectionAddress=connectionAddress;
@@ -71,5 +73,13 @@ public class DefaultSettings {
 
     public void setConnectionAddress(String connectionAddress) {
         this.connectionAddress = connectionAddress;
+    }
+
+    public String getTimestampLastIntervall() {
+        return timestampLastIntervall;
+    }
+
+    public void setTimestampLastIntervall(String timestampLastIntervall) {
+        this.timestampLastIntervall = timestampLastIntervall;
     }
 }
