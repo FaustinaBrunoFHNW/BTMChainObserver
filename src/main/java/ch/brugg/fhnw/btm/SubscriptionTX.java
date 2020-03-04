@@ -1,7 +1,7 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.loader.AccountLoader;
-import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.loader.old.AccountLoader;
+import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.writer.AccountWriter;
 import ch.brugg.fhnw.btm.writer.DefaultSettingsWriter;
@@ -64,13 +64,13 @@ public class SubscriptionTX {
                 log.info("Anzahl Accounts:" + accountLoader.getAccountArrayList().size());
 
                 for (Account account : accountLoader.getAccountArrayList()) {
-                    if (account.getAdressValue().equals(tx.getFrom())) {
-                        account.decraseTransaktionCounter();
-                        account.decraseGasUsedCounter(Integer.parseInt(tx.getGas().toString()));
+                    if (account.getAddress().equals(tx.getFrom())) {
+                        account.decraseTransactionCounter();
+                        account.decreaseGasUsedCounter(Integer.parseInt(tx.getGas().toString()));
 
                         //TODO DCREASE GASUSED COUNTER
                         //account.decraseGasUsedCounter(tx.getGas());
-                        log.info("Account: " + account.getAddress() + " hat noch " + account.getTransaktionCounter()
+                        log.info("Account: " + account.getAddress() + " hat noch " + account.getTransactionCounter()
                                 + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + account
                                 .getGasUsedCounter());
                         this.dosAlgorithmus(account);
@@ -93,32 +93,32 @@ public class SubscriptionTX {
      * @param account Account der inspiziert/kontrolliert wird
      */
     private void dosAlgorithmus(Account account) {
-        if (account.getTransaktionCounter() == 0) {
-            this.chainInteractions.revokeAccount(account.getAdressValue());
+        if (account.getTransactionCounter() == 0) {
+            this.chainInteractions.revokeAccount(account.getAddress());
 
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Revoke Zeit
 
-            log.info("Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue()
+            log.info("Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAddress()
                     + " wurde   gesperrt. Die Revoke Periode ist: " + defaultSettingsLoader.getDefaultSettings()
                     .getRevokeMultiplier());
-            account.setRevokePeriodCounter(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier() - 1);
+            account.setRevokeTime(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier() - 1);
             try {
                 this.accountWriter.writeAccountsInFile();
             } catch (IOException e) {
                 log.warn("Probleme beim Schreiben in die BlockedCounter Datei");
             }
         } else if (account.getGasUsedCounter() < 0) {
-            this.chainInteractions.revokeAccount(account.getAdressValue());
+            this.chainInteractions.revokeAccount(account.getAddress());
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Zeit eingeben
 
-            log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue()
+            log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAddress()
                     + " wurde gesperrt. Die Revoke Periode ist: " + defaultSettingsLoader.getDefaultSettings()
                     .getRevokeMultiplier());
-            account.setRevokePeriodCounter(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier() - 1);
+            account.setRevokeTime(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier() - 1);
         }
     }
 
@@ -130,8 +130,8 @@ public class SubscriptionTX {
     private void setAllCountersToMax() {
 
         for (Account account : accountLoader.getAccountArrayList()) {
-            account.setTransaktionCounter(account.getMaxTransaktionCounter().intValue());
-            account.setGasUsedCounter(account.getMaxGasUsed().intValue());
+            account.setTransactionCounter(account.getTxLimit().intValue());
+            account.setGasUsedCounter(account.getGasLimit().intValue());
 
         }
 
@@ -145,15 +145,15 @@ public class SubscriptionTX {
 
         for (Account account : this.accountLoader.getRevokedAccountArrayList()) {
             if (this.controlRevokePeriode(account)) {
-                this.chainInteractions.certifyAccount(account.getAdressValue());
-                log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
-                account.setRevokePeriodCounter(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
-                account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
-                account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
+                this.chainInteractions.certifyAccount(account.getAddress());
+                log.info("Account wurde wieder certifiziert: " + account.getAddress());
+                account.setRevokeTime(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
+                account.setTransactionCounter(Integer.parseInt(account.getTxLimit().toString()));
+                account.setGasUsedCounter(Integer.parseInt(account.getGasLimit().toString()));
                 this.accountLoader.getAccountArrayList().add(account);
                 removeFromRevokeList.add(account);
             } else {
-                account.setRevokePeriodCounter(account.getRevokePeriodCounter() - 1);
+                account.setRevokeTime(account.getRevokeTime() - 1);
 
             }
         }
@@ -167,7 +167,7 @@ public class SubscriptionTX {
 
     //TODO evtl unnötige methode da einzeiler
     private boolean controlRevokePeriode(Account account) {
-        return account.getRevokePeriodCounter() < 0;
+        return account.getRevokeTime() < 0;
 
     }
 

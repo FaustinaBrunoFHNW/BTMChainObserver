@@ -2,6 +2,7 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
+import ch.brugg.fhnw.btm.loader.JsonDefaultSettingsLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Credentials;
@@ -32,15 +33,15 @@ public class ChainSetUp {
 
     private static ChainSetUp instance;
 
-    //todo WIE MACHEN WIR MIT PRIVATEkEY
-    private String privateKey="0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
-    private String certifierAdd;
+    private String privateKey;
+    private String certifierAddress;
     private static BigInteger REGISTRATION_FEE = BigInteger.valueOf(1000000000000000000L);
     private Web3j web3j;
     private SimpleCertifier simpleCertifier;
     private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
     private byte[] hash;
+    private JsonDefaultSettingsLoader jsonDefaultSettingsLoader = JsonDefaultSettingsLoader.getInstance();
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
     //TODO naming
@@ -49,15 +50,12 @@ public class ChainSetUp {
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
      *
      */
-    private ChainSetUp() {
+    private ChainSetUp(String privateKey, String connection) {
         log.info("connecting");
 
-        //Verbindungsaufbau zur Chain
-        //TODO KONSTANTE
-        web3j = Web3j.build(new HttpService("http://jurijnas.myqnapcloud.com:8545/"));
+        web3j = Web3j.build(new HttpService(connection));
 
-        //TODO in Test auslagern ??
-        //TM von dem Account mit dem PK
+        this.privateKey = privateKey;
         this.transactionManager = new RawTransactionManager(web3j, this.getCredentialsFromPrivateKey());
 
         String str_hash = "6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155";
@@ -68,22 +66,6 @@ public class ChainSetUp {
     }
 
     /**
-     * Instanziert eine Instanz der Klasse falls es noch keine gibt und gibt
-     * die existierende oder eben die neue zurück
-     *
-     * @return die einmalige Instanz der Klasse
-     */
-    public static ChainSetUp getInstance() {
-
-        if (ChainSetUp.instance == null) {
-            ChainSetUp.instance = new ChainSetUp();
-        }
-        return ChainSetUp.instance;
-    }
-
-    //TODO naming
-
-    /**
      * Wird ausgeführt wenn man das Programm startet und nach dem bei einer Blockchain das setUp schonmal gelaufen ist
      *
      * @throws Exception
@@ -91,7 +73,7 @@ public class ChainSetUp {
     public void setUpAfterChainStart() throws Exception {
         this.getInfo(web3j);
         this.loadSimpleRegistry();
-        this.loadCertifier(certifierAdd);
+        this.loadCertifier(certifierAddress);
 
     }
 
@@ -105,16 +87,11 @@ public class ChainSetUp {
      */
     public void initChain() throws Exception {
 
-        this.log.info("Simpleregistry und certifier werden aufgesetzt.");
-        //Allgemeine Abfrage zur Chain ob alles funktioniert etc
-        this.getInfo(web3j);
-
+        this.log.info("Simpleregistry und Certifier werden aufgesetzt.");
         this.loadSimpleRegistry();
         this.setUpCertifier();
     }
 
-    //TODO JAvaDoc
-    //TODO return Wert ausbauen
 
     /**
      * Erstellt die Simple Registry
@@ -122,9 +99,7 @@ public class ChainSetUp {
      *
      * @return boolean Wert ob das laden der Simpleregistry funktioniert hat
      */
-    private boolean loadSimpleRegistry() {
-
-        //TODO Key in Konstante auslagern
+    private void loadSimpleRegistry() {
         simpleRegistry = SimpleRegistry
                 .load("0x0000000000000000000000000000000000001337", web3j, getCredentialsFromPrivateKey(),
                         new DefaultGasProvider());
@@ -132,13 +107,11 @@ public class ChainSetUp {
            log.info("Fee of Registry: " + simpleRegistry.fee().send());
             //TODO owner speichern in Variable
            log.info("Besitzer von Registry: " + simpleRegistry.owner().send());
-            return true;
         } catch (Exception e) {
             log.warn("Simple Registry konnte nicht geladen werden");
             e.printStackTrace();
         }
 
-        return false;
 
     }
 
@@ -158,7 +131,7 @@ public class ChainSetUp {
             log.info("Das Registrieren des Certifiers hat funktioniert");
             log.info("Certifying hat funktioniert");
             log.info("Addresse vom Certifier: " + simpleCertifier.getContractAddress());
-            this.certifierAdd = simpleCertifier.getContractAddress();
+            this.certifierAddress = simpleCertifier.getContractAddress();
 
         }
         log.warn("Es gab ein Probelm beim Setup und Deployen und Registrieren des certifier ");
@@ -289,12 +262,12 @@ public class ChainSetUp {
         this.hash = hash;
     }
 
-    public String getCertifierAdd() {
-        return certifierAdd;
+    public String getCertifierAddress() {
+        return certifierAddress;
     }
 
-    public void setCertifierAdd(String certifierAdd) {
-        this.certifierAdd = certifierAdd;
+    public void setCertifierAddress(String certifierAddress) {
+        this.certifierAddress = certifierAddress;
     }
 
     public void setPrivateKey(String privateKey) {

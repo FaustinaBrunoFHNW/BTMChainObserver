@@ -1,9 +1,7 @@
 package ch.brugg.fhnw.btm.writer;
 
-import ch.brugg.fhnw.btm.loader.AccountLoader;
-import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.loader.old.AccountLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +56,7 @@ public class AccountWriter {
         log.info(accountLoader.getRevokedAccountArrayList().size() + " Accounts sind blockiert");
         for (Account account : accountLoader.getRevokedAccountArrayList()) {
             bw.write(this.prepareAccountLineForFile(account));
-            log.info(account.getAdressValue());
+            log.info(account.getAddress());
             bw.newLine();
 
         }
@@ -67,7 +65,7 @@ public class AccountWriter {
         for (Account account : accountLoader.getAccountArrayList()) {
 
             bw.write(this.prepareAccountLineForFile(account));
-            log.info(account.getAdressValue());
+            log.info(account.getAddress());
             bw.newLine();
 
         }
@@ -81,11 +79,11 @@ public class AccountWriter {
         String accountLine;
         if (account.isDefaultSettings()) {
             accountLine =
-                    account.getAdressValue() + ";" + account.getRevokePeriodCounter();
+                    account.getAddress() + ";" + account.getRevokeTime();
         } else {
             accountLine =
-                    account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
-                            + ";" + account.getRevokePeriodCounter() ;
+                    account.getAddress() + ";" + account.getTxLimit() + ";" + account.getGasLimit()
+                            + ";" + account.getRevokeTime() ;
         }
         return accountLine;
     }

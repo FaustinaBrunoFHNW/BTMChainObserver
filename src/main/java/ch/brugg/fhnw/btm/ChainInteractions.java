@@ -52,8 +52,8 @@ public class ChainInteractions {
     public void revokeAccountList(ArrayList<Account> accounts){
         log.info("Alle Accounts von Liste werden revoked");
         for (Account account : accounts) {
-            log.info("Revoked: "+account.getAdressValue());
-            this.revokeAccount(account.getAdressValue());
+            log.info("Revoked: "+account.getAddress());
+            this.revokeAccount(account.getAddress());
         }
     }
 
@@ -85,7 +85,7 @@ public class ChainInteractions {
     public void certifyAccountList(ArrayList<Account> accounts){
         log.info("Alle Accounts von Liste werden certifyed");
         for (Account account : accounts) {
-            this.certifyAccount(account.getAdressValue());
+            this.certifyAccount(account.getAddress());
         }
     }
 

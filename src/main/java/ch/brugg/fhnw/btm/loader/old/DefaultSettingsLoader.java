@@ -1,6 +1,6 @@
-package ch.brugg.fhnw.btm.loader;
+package ch.brugg.fhnw.btm.loader.old;
 
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
+import ch.brugg.fhnw.btm.pojo.old.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class DefaultSettingsLoader {
 

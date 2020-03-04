@@ -1,46 +1,38 @@
 [
   {
-    "address": null,
-    "adressValue": "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b",
+    "address": "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b",
     "transaktionCounter": 5,
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 5,
     "revokeMultiplier": 2,
     "maxGasUsed": null,
-    "gasUsedCounter": 50000000,
-    "defaultSettings": false
+    "gasUsedCounter": 50000000
   },
   {
-    "address": null,
-    "adressValue": "0xf13264C4bD595AEbb966E089E99435641082ff24",
+    "address": "0xf13264C4bD595AEbb966E089E99435641082ff24",
     "transaktionCounter": 5,
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 0,
     "revokeMultiplier": 2,
     "maxGasUsed": null,
-    "gasUsedCounter": 50000000,
-    "defaultSettings": false
+    "gasUsedCounter": 50000000
   },
   {
-    "address": null,
-    "adressValue": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
+    "address": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
     "transaktionCounter": 5,
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 0,
     "revokeMultiplier": 2,
     "maxGasUsed": null,
-    "gasUsedCounter": 20000000,
-    "defaultSettings": false
+    "gasUsedCounter": 20000000
   },
   {
-    "address": null,
-    "adressValue": "0xaf02DcCdEf3418F8a12f4LDD4ed49FaAa8FD366b",
+    "address": "0xaf02DcCdEf3418F8a12f4LDD4ed49FaAa8FD366b",
     "transaktionCounter": 3,
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 5,
     "revokeMultiplier": 2,
     "maxGasUsed": null,
-    "gasUsedCounter": 50000000,
-    "defaultSettings": false
+    "gasUsedCounter": 50000000
   }
 ]

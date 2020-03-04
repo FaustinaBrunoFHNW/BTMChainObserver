@@ -1,5 +1,6 @@
 package ch.brugg.fhnw.btm.loader;
 
+import ch.brugg.fhnw.btm.loader.old.AccountLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.pojo.MasterKey;
 import com.google.gson.Gson;
@@ -16,13 +17,12 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Instant;
 import java.util.ArrayList;
 
-public class JSONAccountLoader {
+public class JsonAccountLoader {
 
-    private static JSONAccountLoader instance;
-    private static  JSONDefaultSettingsLoader JSONDefaultSettingsLoader;
+    private static JsonAccountLoader instance;
+    private static JsonDefaultSettingsLoader JSONDefaultSettingsLoader;
     private MasterKey masterKey;
 
     private ArrayList<Account> accountArrayList;
@@ -34,15 +34,15 @@ public class JSONAccountLoader {
     private String transaktionManagerAccountFile = "src/main/resources/whitelist/TransaktionsManagerAccount.json";
 
 
-    public static JSONAccountLoader getInstance() {
+    public static JsonAccountLoader getInstance() {
 
-        if (JSONAccountLoader.instance == null) {
-            JSONAccountLoader.instance = new JSONAccountLoader();
+        if (JsonAccountLoader.instance == null) {
+            JsonAccountLoader.instance = new JsonAccountLoader();
         }
-        return JSONAccountLoader.instance;
+        return JsonAccountLoader.instance;
     }
 
-    private JSONAccountLoader(){
+    private JsonAccountLoader(){
         this.JSONDefaultSettingsLoader = JSONDefaultSettingsLoader.getInstance();
     }
 
@@ -63,11 +63,11 @@ public class JSONAccountLoader {
 
     private void setDefaultValues(){
         for (Account acc : accountArrayList){
-            if (acc.getTransaktionCounter() == 0){
-                acc.setTransaktionCounter(JSONDefaultSettingsLoader.getDefaultSettings().getDefaultTransaktionCount());
+            if (acc.getTransactionCounter() == 0){
+                acc.setTransactionCounter(JSONDefaultSettingsLoader.getDefaultSettings().getDefaultTxLimit());
             }
             if (acc.getGasUsedCounter() == 0){
-                acc.setGasUsedCounter(JSONDefaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount());
+                acc.setGasUsedCounter(JSONDefaultSettingsLoader.getDefaultSettings().getDefaultGasLimit());
             }
           /**  if (acc.getRevokeMultiplier()== 0){
                 acc.setRevokeMultiplier(JSONDefaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
@@ -91,8 +91,6 @@ public class JSONAccountLoader {
     }
 
     public boolean writeAccountList() {
-
-
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
             Writer writer = Files.newBufferedWriter(Paths.get(accountsFile));

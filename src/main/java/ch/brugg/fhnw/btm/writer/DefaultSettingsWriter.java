@@ -1,7 +1,7 @@
 package ch.brugg.fhnw.btm.writer;
 
-import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
+import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.pojo.old.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

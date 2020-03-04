@@ -1,4 +1,4 @@
-package ch.brugg.fhnw.btm.pojo;
+package ch.brugg.fhnw.btm.pojo.old;
 
 public class DefaultSettings {
     //TODO impl

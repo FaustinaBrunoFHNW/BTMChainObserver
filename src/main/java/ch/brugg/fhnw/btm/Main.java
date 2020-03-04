@@ -1,22 +1,20 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.loader.AccountLoader;
-import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
-import ch.brugg.fhnw.btm.loader.JSONAccountLoader;
-import ch.brugg.fhnw.btm.loader.JSONDefaultSettingsLoader;
+import ch.brugg.fhnw.btm.loader.old.AccountLoader;
+import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.loader.JsonAccountLoader;
+import ch.brugg.fhnw.btm.loader.JsonDefaultSettingsLoader;
 import org.web3j.protocol.Web3j;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-/**
-        JSONDefaultSettingsLoader jsonDefaultSettingsLoader = JSONDefaultSettingsLoader.getInstance();
+
+        JsonDefaultSettingsLoader jsonDefaultSettingsLoader = JsonDefaultSettingsLoader.getInstance();
 
         jsonDefaultSettingsLoader.loadDefaultSettings();
 
-
-
-        JSONAccountLoader jsonAccountLoader = JSONAccountLoader.getInstance();
+        JsonAccountLoader jsonAccountLoader = JsonAccountLoader.getInstance();
         jsonAccountLoader.loadAccounts();
 
         String PRIVATE_KEY = jsonAccountLoader.getMasterKey();
@@ -26,7 +24,11 @@ public class Main {
         System.out.println("Writing Accounts");
         jsonAccountLoader.writeAccountList();
 
-*/
+    }
+
+
+        /*
+
 
         //TODO revoke all acounts die certifyed sind
 
@@ -61,9 +63,11 @@ public class Main {
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
         subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
 
+
+
     }
 
-
+ */
     //TODO für CML init Methode schreiben
 
     /**
@@ -73,6 +77,7 @@ public class Main {
      * Zertifizieren des JavaProgramm Accounts
      * @throws Exception
      */
+    /*
     public static void init() throws Exception {
 
         AccountLoader accountLoader =  AccountLoader.getInstance();
@@ -93,7 +98,7 @@ public class Main {
         Web3j web3j = chainSetUp.getWeb3j();
 
         accountLoader.loadAccounts();
-        defaultSettingsLoader.setCertifierAddress(chainSetUp.getCertifierAdd());
+        defaultSettingsLoader.setCertifierAddress(chainSetUp.getCertifierAddress());
         //TODO Register ADD speichern
         chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
         chainInteractions.revokeAccountList(accountLoader.getDeleteAccountList());
@@ -106,6 +111,8 @@ public class Main {
         subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
 
     }
+
+     */
 
     //TODO für CML run Methode schreiiben
 

@@ -1,4 +1,4 @@
-package ch.brugg.fhnw.btm.loader;
+package ch.brugg.fhnw.btm.loader.old;
 
 import ch.brugg.fhnw.btm.pojo.Account;
 import org.slf4j.Logger;
@@ -127,9 +127,9 @@ public class AccountLoader {
                 this.defaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount(),
                 this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
         account.setDefaultSettings(true);
-        log.info("Folgender Account wurde geladen: " + account.getAdressValue()
+        log.info("Folgender Account wurde geladen: " + account.getAddress()
                 + " Es wurden die Default werde für max Transaktionen, max Gas Used und Revoke Period gesetzt ");
-        if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
+        if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
             this.addAccountToZertifiedList(account);
         } else {
             this.addAccountToRevokedList(account);
@@ -140,7 +140,7 @@ public class AccountLoader {
     private void readAccountValuesWithDefaultValues(String[] fileInput) {
         if (fileInput[0].equals("d")) {
             Account account = new Account(fileInput[1]);
-            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAddress());
             this.deleteAccountList.add(account);
         } else {
             Account account = new Account(fileInput[0],
@@ -148,9 +148,9 @@ public class AccountLoader {
                     this.defaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount(),
                     Integer.parseInt(fileInput[1]));
             account.setDefaultSettings(true);
-            log.info("Folgender Account wurde geladen: " + account.getAdressValue()
+            log.info("Folgender Account wurde geladen: " + account.getAddress()
                     + " Es wurden die Default werde für max Transaktionen, max Gas Used gesetzt");
-            if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
+            if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
                 this.addAccountToZertifiedList(account);
             } else {
                 this.addAccountToRevokedList(account);
@@ -162,15 +162,15 @@ public class AccountLoader {
     private void readAccountStartValuesNoDefaults(String[] fileInput) {
         if (fileInput[0].equals("d")) {
             Account account = new Account(fileInput[1]);
-            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAddress());
             this.deleteAccountList.add(account);
         } else {
             Account account = new Account(fileInput[0], fileInput[1], fileInput[2],
                     this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
-            log.info("Folgender Account wurde geladen: " + account.getAdressValue()
+            log.info("Folgender Account wurde geladen: " + account.getAddress()
                     + " Es wurden die Default werde für Revoke Period gesetzt");
             account.setDefaultSettings(false);
-            if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
+            if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
                 this.addAccountToZertifiedList(account);
             } else {
                 this.addAccountToRevokedList(account);
@@ -183,13 +183,13 @@ public class AccountLoader {
     private void readAccountValuesNoDefaults(String[] fileInput) {
         if (fileInput[0].equals("d")) {
             Account account = new Account(fileInput[1]);
-            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAddress());
             this.deleteAccountList.add(account);
         } else {
             Account account = new Account(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
-            log.info("Folgender Account wurde geladen: " + account.getAdressValue());
+            log.info("Folgender Account wurde geladen: " + account.getAddress());
             account.setDefaultSettings(false);
-            if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
+            if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
                 this.addAccountToZertifiedList(account);
             } else {
                 this.addAccountToRevokedList(account);
@@ -201,7 +201,7 @@ public class AccountLoader {
     private void readDeletingAccounts(String[] fileInput) {
         if (fileInput[0].equals("d")) {
             Account account = new Account(fileInput[1]);
-            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAddress());
             this.deleteAccountList.add(account);
         } else {
             log.warn("Etwas stimmt im AccountFile nicht mit den zu löschenden Accounts");
@@ -218,14 +218,14 @@ public class AccountLoader {
     public void addAccountToZertifiedList(Account account) {
         int counter = 0;
         for (Account existingAccount : this.accountArrayList) {
-            if (existingAccount.getAdressValue().equals(account.getAdressValue())) {
+            if (existingAccount.getAddress().equals(account.getAddress())) {
                 counter++;
             }
         }
         if (counter == 0) {
             this.accountArrayList.add(account);
         } else {
-            log.info(account.getAdressValue() + " ist doppelt in Liste geführt");
+            log.info(account.getAddress() + " ist doppelt in Liste geführt");
         }
 
     }
@@ -239,14 +239,14 @@ public class AccountLoader {
     public void addAccountToRevokedList(Account account) {
         int counter = 0;
         for (Account existingAccount : this.accountArrayList) {
-            if (existingAccount.getAdressValue().equals(account.getAdressValue())) {
+            if (existingAccount.getAddress().equals(account.getAddress())) {
                 counter++;
             }
         }
         if (counter == 0) {
             this.revokedAccountArrayList.add(account);
         } else {
-            log.info(account.getAdressValue() + " ist doppelt in Liste geführt");
+            log.info(account.getAddress() + " ist doppelt in Liste geführt");
         }
 
     }

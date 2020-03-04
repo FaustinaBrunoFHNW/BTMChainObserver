@@ -1,7 +1,7 @@
 package ch.brugg.fhnw.btm.loader;
 
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
-import ch.brugg.fhnw.btm.pojo.JSONDefaultSettings;
+import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.pojo.JsonDefaultSettings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -16,25 +16,24 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
-import java.time.LocalTime;
 
-public class JSONDefaultSettingsLoader {
+public class JsonDefaultSettingsLoader {
 
     private static Logger log = LoggerFactory.getLogger(DefaultSettingsLoader.class);
 
-    private static JSONDefaultSettingsLoader instance;
+    private static JsonDefaultSettingsLoader instance;
 
-    private JSONDefaultSettings defaultSettings;
+    private JsonDefaultSettings defaultSettings = JsonDefaultSettings.getInstance();
 
     private String defaultSettingsFile = "src/main/resources/whitelist/DefaultSettings.json";
 
 
-    public static JSONDefaultSettingsLoader getInstance() {
+    public static JsonDefaultSettingsLoader getInstance() {
 
-        if (JSONDefaultSettingsLoader.instance == null) {
-            JSONDefaultSettingsLoader.instance = new JSONDefaultSettingsLoader();
+        if (JsonDefaultSettingsLoader.instance == null) {
+            JsonDefaultSettingsLoader.instance = new JsonDefaultSettingsLoader();
         }
-        return JSONDefaultSettingsLoader.instance;
+        return JsonDefaultSettingsLoader.instance;
     }
 
 
@@ -42,7 +41,7 @@ public class JSONDefaultSettingsLoader {
         Gson gson = new Gson();
         try {
             JsonReader reader = new JsonReader(new FileReader(defaultSettingsFile));
-            defaultSettings = gson.fromJson(reader, JSONDefaultSettings.class);
+            defaultSettings = gson.fromJson(reader, JsonDefaultSettings.class);
             System.out.println("done");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -70,7 +69,7 @@ public class JSONDefaultSettingsLoader {
         return true;
     }
 
-    public JSONDefaultSettings getDefaultSettings() {
+    public JsonDefaultSettings getDefaultSettings() {
         return defaultSettings;
     }
 
