@@ -2,7 +2,6 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
-import ch.brugg.fhnw.btm.loader.AccountLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Credentials;
@@ -14,12 +13,9 @@ import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.TransactionManager;
-import org.web3j.tx.Transfer;
 import org.web3j.tx.gas.DefaultGasProvider;
-import org.web3j.utils.Convert;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 //TODO als Singelton Paater implementieren

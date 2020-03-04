@@ -12,14 +12,14 @@ import java.util.ArrayList;
  * In dieser Singleton Klasse werden die Accounts wie die Default Settings aus dem File geladen
  * und die Listen der Accounts generiert
  */
-public class AccountLoader {
+public class FileLoader {
 
-    private static AccountLoader instance;
+    private static FileLoader instance;
 
     private ArrayList<Account> accountArrayList;
     private ArrayList<Account> revokedAccountArrayList;
     private ArrayList<Account> deleteAccountList;
-    private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
+    private static Logger log = LoggerFactory.getLogger(FileLoader.class);
     private DefaultSettings defaultSettings;
     private String certifierAdd;
 
@@ -27,7 +27,7 @@ public class AccountLoader {
     private File transaktionManagerAccountFile = new File("src/main/resources/whitelist/TransaktionManagerAccount.txt");
     private File defaultSettingsFile = new File("src/main/resources/whitelist/DefaultSettings.txt");
 
-    private AccountLoader() {
+    private FileLoader() {
         this.accountArrayList = new ArrayList();
         this.revokedAccountArrayList = new ArrayList();
         this.deleteAccountList = new ArrayList<>();
@@ -41,12 +41,12 @@ public class AccountLoader {
      *
      * @return die einmalige Instanz der Klasse
      */
-    public static AccountLoader getInstance() {
+    public static FileLoader getInstance() {
 
-        if (AccountLoader.instance == null) {
-            AccountLoader.instance = new AccountLoader();
+        if (FileLoader.instance == null) {
+            FileLoader.instance = new FileLoader();
         }
-        return AccountLoader.instance;
+        return FileLoader.instance;
     }
 
     /**

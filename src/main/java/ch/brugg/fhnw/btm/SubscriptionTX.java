@@ -1,6 +1,6 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.loader.AccountLoader;
+import ch.brugg.fhnw.btm.loader.FileLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.writer.AccountWriter;
 import io.reactivex.disposables.Disposable;
@@ -25,13 +25,13 @@ public class SubscriptionTX {
     private Web3j web3j;
     private Subscription subscription;
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
-    private AccountLoader accountLoader;
+    private FileLoader fileLoader;
     private ChainInteractions chainInteractions;
     private AccountWriter accountWriter;
 
     public SubscriptionTX(Web3j web3j, ChainInteractions chainInteractions) {
         this.web3j = web3j;
-        this.accountLoader = AccountLoader.getInstance();
+        this.fileLoader = FileLoader.getInstance();
         this.chainInteractions = chainInteractions;
         accountWriter = AccountWriter.getInstance();
     }
@@ -55,11 +55,11 @@ public class SubscriptionTX {
 
             //TODO increaseCounter wieder einkommentieren und hier die DOS Algo implemeniteren
             if (tx.getGasPrice().equals(BigInteger.ZERO)) {
-                // AccountLoader.getInstance().increaseCounter(tx.getFrom().trim().toLowerCase());
+                // FileLoader.getInstance().increaseCounter(tx.getFrom().trim().toLowerCase());
                 log.info("Transaktionskosten waren 0");
-                log.info("Anzahl Accounts:" + accountLoader.getAccountArrayList().size());
+                log.info("Anzahl Accounts:" + fileLoader.getAccountArrayList().size());
 
-                for (Account account : accountLoader.getAccountArrayList()) {
+                for (Account account : fileLoader.getAccountArrayList()) {
                     if (account.getAdressValue().equals(tx.getFrom())) {
                         account.decraseTransaktionCounter();
                         account.decraseGasUsedCounter(Integer.parseInt(tx.getGas().toString()));
@@ -93,8 +93,8 @@ public class SubscriptionTX {
             this.chainInteractions.revokeAccount(account.getAdressValue());
 
             account.increaseRevoked();
-            this.accountLoader.getRevokedAccountArrayList().add(account);
-            this.accountLoader.getAccountArrayList().remove(account);
+            this.fileLoader.getRevokedAccountArrayList().add(account);
+            this.fileLoader.getAccountArrayList().remove(account);
             //TODO fixe Revoke Zeit
             account.setRevokePeriodCounter(account.getRevokePeriod() - 1);
             log.info(
@@ -109,8 +109,8 @@ public class SubscriptionTX {
         } else if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
             account.increaseRevoked();
-            this.accountLoader.getRevokedAccountArrayList().add(account);
-            this.accountLoader.getAccountArrayList().remove(account);
+            this.fileLoader.getRevokedAccountArrayList().add(account);
+            this.fileLoader.getAccountArrayList().remove(account);
             //TODO fixe Zeit eingeben
             account.setRevokePeriodCounter(account.getRevokePeriod());
             log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue() + " wurde zum " + account
@@ -125,7 +125,7 @@ public class SubscriptionTX {
      */
     private void setAllCountersToMax() {
 
-        for (Account account : accountLoader.getAccountArrayList()) {
+        for (Account account : fileLoader.getAccountArrayList()) {
             account.setTransaktionCounter(account.getMaxTransaktionCounter().intValue());
             account.setGasUsedCounter(account.getMaxGasUsed().intValue());
 
@@ -139,14 +139,14 @@ public class SubscriptionTX {
     private void certifyRevokedAccounts() {
         List<Account> removeFromRevokeList = new ArrayList<>();
 
-        for (Account account : this.accountLoader.getRevokedAccountArrayList()) {
+        for (Account account : this.fileLoader.getRevokedAccountArrayList()) {
             if (this.controlRevokePeriode(account)) {
                 this.chainInteractions.certifyAccount(account.getAdressValue());
                 log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
                 account.setRevokePeriodCounter(account.getRevokePeriod());
                 account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
                 account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
-                this.accountLoader.getAccountArrayList().add(account);
+                this.fileLoader.getAccountArrayList().add(account);
                 removeFromRevokeList.add(account);
             } else {
                 account.setRevokePeriodCounter(account.getRevokePeriodCounter() - 1);
@@ -156,7 +156,7 @@ public class SubscriptionTX {
 
         //TODO in eigene Methode auslagern
         for (Account removeAccount : removeFromRevokeList) {
-            this.accountLoader.getRevokedAccountArrayList().remove(removeAccount);
+            this.fileLoader.getRevokedAccountArrayList().remove(removeAccount);
         }
 
     }
@@ -175,7 +175,7 @@ public class SubscriptionTX {
             Thread.sleep(min * 60 * 1000);
             this.setAllCountersToMax();
             this.certifyRevokedAccounts();
-            this.accountLoader.getDefaultSettings().setTimestampLastReset(new Timestamp(System.currentTimeMillis()).getTime());
+            this.fileLoader.getDefaultSettings().setTimestampLastReset(new Timestamp(System.currentTimeMillis()).getTime());
             this.accountWriter.writeAccountsInFile();
             this.accountWriter.writeDefaultSettingsInFile();
         }

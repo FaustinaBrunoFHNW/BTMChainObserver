@@ -1,6 +1,6 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.loader.AccountLoader;
+import ch.brugg.fhnw.btm.loader.FileLoader;
 import org.web3j.protocol.Web3j;
 
 public class Main {
@@ -13,9 +13,9 @@ public class Main {
         String PRIVATE_KEY = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
         //TODO aus erstem hochfahren rauslesen
         String CERTIFIER_ADD = "0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221";
-        AccountLoader accountLoader =  AccountLoader.getInstance();
+        FileLoader fileLoader =  FileLoader.getInstance();
 
-        System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
+        System.out.println("Anzahl Accounts: " + fileLoader.getAccountArrayList().size());
 
         //TODO Singleton parameter übergeben
         ChainSetUp chainSetUp =  ChainSetUp.getInstance();
@@ -28,16 +28,16 @@ public class Main {
         Web3j web3j = chainSetUp.getWeb3j();
 
         //TODO load all accounts from list
-        accountLoader.loadAll();
-        chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
-        chainInteractions.revokeAccountList(accountLoader.getDeleteAccountList());
+        fileLoader.loadAll();
+        chainInteractions.certifyAccountList(fileLoader.getAccountArrayList());
+        chainInteractions.revokeAccountList(fileLoader.getDeleteAccountList());
 
-        System.out.println("Anzahl zertifizierte Accounts: " + accountLoader.getAccountArrayList().size());
-        System.out.println("Anzahl gesperrte Accounts: " + accountLoader.getRevokedAccountArrayList().size());
-        System.out.println("Anzahl gelöschte Accounts: " + accountLoader.getDeleteAccountList().size());
+        System.out.println("Anzahl zertifizierte Accounts: " + fileLoader.getAccountArrayList().size());
+        System.out.println("Anzahl gesperrte Accounts: " + fileLoader.getRevokedAccountArrayList().size());
+        System.out.println("Anzahl gelöschte Accounts: " + fileLoader.getDeleteAccountList().size());
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
-        subscriptionTX.run(accountLoader.getDefaultSettings().getIntervalResetCounter());
+        subscriptionTX.run(fileLoader.getDefaultSettings().getIntervalResetCounter());
     }
 
 
@@ -52,9 +52,9 @@ public class Main {
      */
     public static void init() throws Exception {
 
-        AccountLoader accountLoader =  AccountLoader.getInstance();
+        FileLoader fileLoader =  FileLoader.getInstance();
 
-        System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
+        System.out.println("Anzahl Accounts: " + fileLoader.getAccountArrayList().size());
 
         //TODO Settings in DfaultSettings File speichern
         //TODO Singleton parameter übergeben
@@ -65,18 +65,18 @@ public class Main {
 
         Web3j web3j = chainSetUp.getWeb3j();
 
-        accountLoader.loadAccounts();
-        accountLoader.setCertifierAddress(chainSetUp.getCertifierAdd());
+        fileLoader.loadAccounts();
+        fileLoader.setCertifierAddress(chainSetUp.getCertifierAdd());
         //TODO Register ADD speichern
-        chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
-        chainInteractions.revokeAccountList(accountLoader.getDeleteAccountList());
+        chainInteractions.certifyAccountList(fileLoader.getAccountArrayList());
+        chainInteractions.revokeAccountList(fileLoader.getDeleteAccountList());
 
 
-        System.out.println("Anzahl zertifizierte Accounts: " + accountLoader.getAccountArrayList().size());
-        System.out.println("Anzahl gesperrte Accounts: " + accountLoader.getRevokedAccountArrayList().size());
-        System.out.println("Anzahl gelöschte Accounts: " + accountLoader.getDeleteAccountList().size());
+        System.out.println("Anzahl zertifizierte Accounts: " + fileLoader.getAccountArrayList().size());
+        System.out.println("Anzahl gesperrte Accounts: " + fileLoader.getRevokedAccountArrayList().size());
+        System.out.println("Anzahl gelöschte Accounts: " + fileLoader.getDeleteAccountList().size());
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
-        subscriptionTX.run(accountLoader.getDefaultSettings().getIntervalResetCounter());
+        subscriptionTX.run(fileLoader.getDefaultSettings().getIntervalResetCounter());
 
     }
 
