@@ -240,15 +240,15 @@ public class AccountLoader {
 
     //TODO JAVADOC
     private void readDeletingAccounts(String[] fileInput) {
-       // if(fileInput[0].equals("D")) {
+        if(fileInput[0].equals("d")) {
             Account account = new Account(fileInput[1]);
             log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
             this.deleteAccountList.add(account);
-      //  }
-       /** else{
+        }
+      else{
             log.warn("Etwas stimmt im AccountFile nicht mit den zu löschenden Accounts");
         }
-*/
+
     }
 
     /**
