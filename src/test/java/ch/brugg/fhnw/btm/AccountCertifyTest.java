@@ -18,7 +18,7 @@ public class AccountCertifyTest {
     // private static BigInteger GAS_PRICE = BigInteger.valueOf(0);
 
     //TODO Singleton parameter übergeben
-    public ChainSetUp chainSetUp =  ChainSetUp.getInstance();
+    public ChainSetUp chainSetUp = new ChainSetUp();
     private ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
 
     @BeforeClass public void setUpChain() throws Exception {

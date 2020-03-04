@@ -46,7 +46,7 @@ public class ChainInteractions {
     }
 
     /**
-     * In dieser Methode werden alle Account einer Liste in die Whiteliste integriert
+     * In dieser Methode werden alle Account einer Liste von der Whiteliste entfernt
      * @param accounts Liste mit Accounts
      */
     public void revokeAccountList(ArrayList<Account> accounts){
@@ -57,15 +57,13 @@ public class ChainInteractions {
         }
     }
 
-    //TODO java doc
+
     public boolean revokeAccount(String accountAddress)   {
         this.log.info("Methode revokeAccount wurde aufgerufen. Folgender Account wird aus der Whiteliste entfernt: "
                 + accountAddress);
 
         try {
             this.simpleCertifier.revoke(accountAddress).send();
-           // log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,7 +81,7 @@ public class ChainInteractions {
      * @param accounts Liste mit Accounts
      */
     public void certifyAccountList(ArrayList<Account> accounts){
-        log.info("Alle Accounts von Liste werden certifyed");
+        log.info("Alle Accounts von Liste werden certified");
         for (Account account : accounts) {
             this.certifyAccount(account.getAddress());
         }

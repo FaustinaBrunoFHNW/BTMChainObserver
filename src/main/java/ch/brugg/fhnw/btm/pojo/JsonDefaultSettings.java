@@ -1,7 +1,5 @@
 package ch.brugg.fhnw.btm.pojo;
 
-import ch.brugg.fhnw.btm.loader.JsonAccountLoader;
-
 public class JsonDefaultSettings {
 
     public static JsonDefaultSettings instance;

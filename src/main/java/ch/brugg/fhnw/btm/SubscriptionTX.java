@@ -1,10 +1,11 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.loader.old.AccountLoader;
-import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
+import ch.brugg.fhnw.btm.handler.old.AccountLoader;
+import ch.brugg.fhnw.btm.handler.old.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
-import ch.brugg.fhnw.btm.writer.AccountWriter;
-import ch.brugg.fhnw.btm.writer.DefaultSettingsWriter;
+import ch.brugg.fhnw.btm.writer.old.AccountWriter;
+import ch.brugg.fhnw.btm.writer.old.DefaultSettingsWriter;
 import io.reactivex.disposables.Disposable;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public class SubscriptionTX {
     private AccountLoader accountLoader;
     private DefaultSettingsLoader defaultSettingsLoader;
     private ChainInteractions chainInteractions;
-    private AccountWriter accountWriter;
+    private JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
     private DefaultSettingsWriter defaultSettingsWriter;
 
     public SubscriptionTX(Web3j web3j, ChainInteractions chainInteractions) {
@@ -36,7 +37,6 @@ public class SubscriptionTX {
         this.accountLoader = AccountLoader.getInstance();
         this.defaultSettingsLoader = DefaultSettingsLoader.getInstance();
         this.chainInteractions = chainInteractions;
-        accountWriter = AccountWriter.getInstance();
         defaultSettingsWriter = DefaultSettingsWriter.getInstance();
     }
 
@@ -104,11 +104,9 @@ public class SubscriptionTX {
                     + " wurde   gesperrt. Die Revoke Periode ist: " + defaultSettingsLoader.getDefaultSettings()
                     .getRevokeMultiplier());
             account.setRevokeTime(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier() - 1);
-            try {
-                this.accountWriter.writeAccountsInFile();
-            } catch (IOException e) {
-                log.warn("Probleme beim Schreiben in die BlockedCounter Datei");
-            }
+
+                accountHandler.writeAccountList();
+
         } else if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAddress());
             this.accountLoader.getRevokedAccountArrayList().add(account);
@@ -181,7 +179,7 @@ public class SubscriptionTX {
             this.certifyRevokedAccounts();
             this.defaultSettingsLoader.getDefaultSettings()
                     .setTimestampLastReset(new Timestamp(System.currentTimeMillis()).getTime());
-            this.accountWriter.writeAccountsInFile();
+           accountHandler.writeAccountList();
             this.defaultSettingsWriter.writeDefaultSettingsInFile();
         }
     }

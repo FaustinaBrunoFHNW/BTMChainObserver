@@ -1,7 +1,8 @@
-package ch.brugg.fhnw.btm.loader;
+package ch.brugg.fhnw.btm.handler;
 
-import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.handler.old.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.JsonDefaultSettings;
+import ch.brugg.fhnw.btm.pojo.MasterKey;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -17,23 +18,25 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
 
-public class JsonDefaultSettingsLoader {
+public class JsonDefaultSettingsHandler {
 
     private static Logger log = LoggerFactory.getLogger(DefaultSettingsLoader.class);
 
-    private static JsonDefaultSettingsLoader instance;
+    private static JsonDefaultSettingsHandler instance;
+    private MasterKey masterKey;
 
     private JsonDefaultSettings defaultSettings = JsonDefaultSettings.getInstance();
 
     private String defaultSettingsFile = "src/main/resources/whitelist/DefaultSettings.json";
+    private String transaktionManagerAccountFile = "src/main/resources/whitelist/TransaktionsManagerAccount.json";
 
 
-    public static JsonDefaultSettingsLoader getInstance() {
+    public static JsonDefaultSettingsHandler getInstance() {
 
-        if (JsonDefaultSettingsLoader.instance == null) {
-            JsonDefaultSettingsLoader.instance = new JsonDefaultSettingsLoader();
+        if (JsonDefaultSettingsHandler.instance == null) {
+            JsonDefaultSettingsHandler.instance = new JsonDefaultSettingsHandler();
         }
-        return JsonDefaultSettingsLoader.instance;
+        return JsonDefaultSettingsHandler.instance;
     }
 
 
@@ -48,25 +51,36 @@ public class JsonDefaultSettingsLoader {
         }
     }
 
-
-    public boolean writeDefaultSettings() {
+    public void writeDefaultSettings() {
 
 
         defaultSettings.setTimestampLastReset(Instant.now().toString());
 
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
-        Writer writer = Files.newBufferedWriter(Paths.get(defaultSettingsFile));
-
-        gson.toJson(defaultSettings,writer);
-
+            Writer writer = Files.newBufferedWriter(Paths.get(defaultSettingsFile));
+            gson.toJson(defaultSettings,writer);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
 
-        return true;
+    }
+
+
+
+    public String getMasterKey(){
+        Gson gson = new Gson();
+        try {
+
+            JsonReader reader = new JsonReader(new FileReader(transaktionManagerAccountFile));
+            masterKey = gson.fromJson(reader, MasterKey.class);
+            return  masterKey.getPrivateKey();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return  null;
+        }
+
     }
 
     public JsonDefaultSettings getDefaultSettings() {

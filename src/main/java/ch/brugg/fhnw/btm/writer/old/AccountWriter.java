@@ -1,13 +1,10 @@
-package ch.brugg.fhnw.btm.writer;
+package ch.brugg.fhnw.btm.writer.old;
 
-import ch.brugg.fhnw.btm.loader.old.AccountLoader;
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.handler.old.AccountLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -46,6 +43,7 @@ public class AccountWriter {
      *
      * @throws IOException
      */
+    /*
     public void writeAccountsInFile() throws IOException {
 
         FileWriter fw = new FileWriter(accountFile);
@@ -87,4 +85,6 @@ public class AccountWriter {
         }
         return accountLine;
     }
+
+ */
 }

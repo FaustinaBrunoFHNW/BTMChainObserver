@@ -2,7 +2,7 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
-import ch.brugg.fhnw.btm.loader.JsonDefaultSettingsLoader;
+import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Credentials;
@@ -41,7 +41,7 @@ public class ChainSetUp {
     private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
     private byte[] hash;
-    private JsonDefaultSettingsLoader jsonDefaultSettingsLoader = JsonDefaultSettingsLoader.getInstance();
+    private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
     private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
 
     //TODO naming
@@ -50,12 +50,12 @@ public class ChainSetUp {
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
      *
      */
-    private ChainSetUp(String privateKey, String connection) {
+    public ChainSetUp() {
         log.info("connecting");
 
-        web3j = Web3j.build(new HttpService(connection));
+        web3j = Web3j.build(new HttpService(jsonDefaultSettingsHandler.getDefaultSettings().getConnectionAddress()));
 
-        this.privateKey = privateKey;
+        this.privateKey = jsonDefaultSettingsHandler.getMasterKey();
         this.transactionManager = new RawTransactionManager(web3j, this.getCredentialsFromPrivateKey());
 
         String str_hash = "6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155";

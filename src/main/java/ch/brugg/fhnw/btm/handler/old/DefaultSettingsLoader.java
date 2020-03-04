@@ -1,4 +1,4 @@
-package ch.brugg.fhnw.btm.loader.old;
+package ch.brugg.fhnw.btm.handler.old;
 
 import ch.brugg.fhnw.btm.pojo.old.DefaultSettings;
 import org.slf4j.Logger;

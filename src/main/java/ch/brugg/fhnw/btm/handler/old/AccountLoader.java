@@ -1,4 +1,4 @@
-package ch.brugg.fhnw.btm.loader.old;
+package ch.brugg.fhnw.btm.handler.old;
 
 import ch.brugg.fhnw.btm.pojo.Account;
 import org.slf4j.Logger;
@@ -126,7 +126,7 @@ public class AccountLoader {
                 this.defaultSettingsLoader.getDefaultSettings().getDefaultTransaktionCount(),
                 this.defaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount(),
                 this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
-        account.setDefaultSettings(true);
+
         log.info("Folgender Account wurde geladen: " + account.getAddress()
                 + " Es wurden die Default werde für max Transaktionen, max Gas Used und Revoke Period gesetzt ");
         if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
@@ -147,7 +147,7 @@ public class AccountLoader {
                     this.defaultSettingsLoader.getDefaultSettings().getDefaultTransaktionCount(),
                     this.defaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount(),
                     Integer.parseInt(fileInput[1]));
-            account.setDefaultSettings(true);
+
             log.info("Folgender Account wurde geladen: " + account.getAddress()
                     + " Es wurden die Default werde für max Transaktionen, max Gas Used gesetzt");
             if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
@@ -169,7 +169,7 @@ public class AccountLoader {
                     this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
             log.info("Folgender Account wurde geladen: " + account.getAddress()
                     + " Es wurden die Default werde für Revoke Period gesetzt");
-            account.setDefaultSettings(false);
+
             if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
                 this.addAccountToZertifiedList(account);
             } else {
@@ -188,7 +188,7 @@ public class AccountLoader {
         } else {
             Account account = new Account(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
             log.info("Folgender Account wurde geladen: " + account.getAddress());
-            account.setDefaultSettings(false);
+
             if (account.getRevokeTime() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
                 this.addAccountToZertifiedList(account);
             } else {

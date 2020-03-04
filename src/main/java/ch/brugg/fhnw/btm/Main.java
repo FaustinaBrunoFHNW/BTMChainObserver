@@ -1,56 +1,43 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.loader.old.AccountLoader;
-import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
-import ch.brugg.fhnw.btm.loader.JsonAccountLoader;
-import ch.brugg.fhnw.btm.loader.JsonDefaultSettingsLoader;
+import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
+import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.web3j.protocol.Web3j;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        JsonDefaultSettingsLoader jsonDefaultSettingsLoader = JsonDefaultSettingsLoader.getInstance();
+        JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
 
-        jsonDefaultSettingsLoader.loadDefaultSettings();
+        jsonDefaultSettingsHandler.loadDefaultSettings();
 
-        JsonAccountLoader jsonAccountLoader = JsonAccountLoader.getInstance();
-        jsonAccountLoader.loadAccounts();
+        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+        jsonAccountHandler.loadAccounts();
 
-        String PRIVATE_KEY = jsonAccountLoader.getMasterKey();
+        String PRIVATE_KEY = jsonDefaultSettingsHandler.getMasterKey();
         System.out.println(PRIVATE_KEY);
 
-        jsonDefaultSettingsLoader.writeDefaultSettings();
+
+        jsonDefaultSettingsHandler.writeDefaultSettings();
         System.out.println("Writing Accounts");
-        jsonAccountLoader.writeAccountList();
-
-    }
+        jsonAccountHandler.writeAccountList();
 
 
-        /*
+
+        System.out.println("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+        jsonDefaultSettingsHandler.loadDefaultSettings();
 
 
-        //TODO revoke all acounts die certifyed sind
+        ChainSetUp chainSetUp =  new ChainSetUp();
 
-        //TODO aus File auslesen
-        String PRIVATE_KEY = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
-        //TODO aus erstem hochfahren rauslesen
-        String CERTIFIER_ADD = "0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221";
-        AccountLoader accountLoader =  AccountLoader.getInstance();
-        DefaultSettingsLoader defaultSettingsLoader = DefaultSettingsLoader.getInstance();
-
-        System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
-        defaultSettingsLoader.loadDefaultSettings();
-        //TODO Singleton parameter übergeben
-        ChainSetUp chainSetUp =  ChainSetUp.getInstance();
-        chainSetUp.setCertifierAdd(CERTIFIER_ADD);
-        chainSetUp.setPrivateKey(PRIVATE_KEY);
         chainSetUp.setUpAfterChainStart();
         //       chainSetUp.initChain();
         ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
 
         Web3j web3j = chainSetUp.getWeb3j();
 
+        /*
         //TODO load all accounts from list
         accountLoader.loadAll();
         chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
@@ -63,11 +50,11 @@ public class Main {
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
         subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
 
-
+*/
 
     }
 
- */
+
     //TODO für CML init Methode schreiben
 
     /**

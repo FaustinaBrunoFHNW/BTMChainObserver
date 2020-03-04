@@ -1,6 +1,6 @@
-package ch.brugg.fhnw.btm.writer;
+package ch.brugg.fhnw.btm.writer.old;
 
-import ch.brugg.fhnw.btm.loader.old.DefaultSettingsLoader;
+import ch.brugg.fhnw.btm.handler.old.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.old.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
