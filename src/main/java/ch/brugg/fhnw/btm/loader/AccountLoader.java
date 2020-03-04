@@ -66,15 +66,15 @@ public class AccountLoader {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
                 if (accountArray.length == 3) {
-                    this.readAccountValuesSimple(accountArray);
+                    this.readAccountValuesWithDefaultValues(accountArray);
 
                 } else if (accountArray.length == 1) {
-                    this.readAccountValuesWithDefault(accountArray);
+                    this.readAccountStartValuesWithDefault(accountArray);
 
                 }
                 //TODO ausbauen
                 /** else if (accountArray.length == 5) {
-                 this.readAccountValuesComplex(accountArray);
+                 this.readAccountStartValuesNoDefaults(accountArray);
                  }
                  */
 
@@ -99,15 +99,16 @@ public class AccountLoader {
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
-                if (accountArray.length == 3) {
-                    this.readAccountValuesSimple(accountArray);
 
-                } else if (accountArray.length == 1) {
-                    this.readAccountValuesWithDefault(accountArray);
-
-                } else if (accountArray.length == 5) {
-                    this.readAccountValuesComplex(accountArray);
-                } else if (accountArray.length == 2 || accountArray.length == 4 || accountArray.length == 6) {
+                if (accountArray.length == 1) {
+                    this.readAccountStartValuesWithDefault(accountArray);
+                } else if (accountArray.length == 2) {
+                    this.readAccountValuesWithDefaultValues(accountArray);
+                } else if (accountArray.length == 3) {
+                    this.readAccountStartValuesNoDefaults(accountArray);
+                } else if (accountArray.length == 4) {
+                    this.readAccountValuesNoDefaults(accountArray);
+                } else if (accountArray.length > 4) {
                     this.readDeletingAccounts(accountArray);
                 }
 
@@ -119,58 +120,81 @@ public class AccountLoader {
         }
     }
 
-    /**
-     * In dieser Methode wird ein Account Objekt aus den ausgelesenen Attributen der Datei und Default Werten
-     * erstellt und in die Account Liste hinzugefügt.
-     *
-     * @param fileInput String Array mit 1 Attributen für das Account Objekt
-     */
-    private void readAccountValuesWithDefault(String[] fileInput) {
+    //TODO JAVADOC
+    private void readAccountStartValuesWithDefault(String[] fileInput) {
         Account account = new Account(fileInput[0],
                 this.defaultSettingsLoader.getDefaultSettings().getDefaultTransaktionCount(),
                 this.defaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount(),
                 this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
         account.setDefaultSettings(true);
         log.info("Folgender Account wurde geladen: " + account.getAdressValue()
-                + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
-        this.addAccountToZertifiedList(account);
-    }
-
-    /**
-     * In dieser Methode wird ein Account Objekt aus den ausgelesenen Attributen der Datei
-     * erstellt und in die Account Liste hinzugefügt.
-     *
-     * @param fileInput String Array mit 3 Attributen für das Account Objekt
-     */
-    private void readAccountValuesSimple(String[] fileInput) {
-        Account account = new Account(fileInput[0], fileInput[1], fileInput[2],
-                this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
-        account.setDefaultSettings(false);
-        log.info("Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: " + account
-                .getMaxTransaktionCounter() + " und max GasUsed:" + account.getMaxGasUsed());
-        this.addAccountToZertifiedList(account);
-    }
-
-    /**
-     * In dieser Methode wird ein Account Objekt aus den ausgelesenen Attributen der Datei
-     * erstellt. Hier wird der RevokePeriodCounter und RevokedTimes gesetzt
-     * Ist der RevokePeriodCounter kleiner als RevokePeriod, ist der Account gesperrt und er
-     * wird in der Liste der gesperrten Accounts hinzugefügt
-     * Ansonsten wird er in die Liste der Zertifizierten Accounts hinzugefügt
-     *
-     * @param fileInput String Array mit 5 Attributen für das Account Objekt
-     */
-    private void readAccountValuesComplex(String[] fileInput) {
-        Account account = new Account(fileInput[0], fileInput[1], fileInput[2],
-                this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier(), fileInput[3], fileInput[4]);
-        log.info("Folgender Account wurde geladen: " + account.getAdressValue()
-                + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
-        if (account.getRevokePeriodCounter() == account.getRevokeMultiplier()) {
+                + " Es wurden die Default werde für max Transaktionen, max Gas Used und Revoke Period gesetzt ");
+        if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
             this.addAccountToZertifiedList(account);
         } else {
             this.addAccountToRevokedList(account);
         }
+    }
 
+    //TODO JAVADOC
+    private void readAccountValuesWithDefaultValues(String[] fileInput) {
+        if (fileInput[0].equals("d")) {
+            Account account = new Account(fileInput[1]);
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            this.deleteAccountList.add(account);
+        } else {
+            Account account = new Account(fileInput[0],
+                    this.defaultSettingsLoader.getDefaultSettings().getDefaultTransaktionCount(),
+                    this.defaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount(),
+                    Integer.parseInt(fileInput[1]));
+            account.setDefaultSettings(true);
+            log.info("Folgender Account wurde geladen: " + account.getAdressValue()
+                    + " Es wurden die Default werde für max Transaktionen, max Gas Used gesetzt");
+            if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
+                this.addAccountToZertifiedList(account);
+            } else {
+                this.addAccountToRevokedList(account);
+            }
+        }
+    }
+
+    //TODO JAVADOC
+    private void readAccountStartValuesNoDefaults(String[] fileInput) {
+        if (fileInput[0].equals("d")) {
+            Account account = new Account(fileInput[1]);
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            this.deleteAccountList.add(account);
+        } else {
+            Account account = new Account(fileInput[0], fileInput[1], fileInput[2],
+                    this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
+            log.info("Folgender Account wurde geladen: " + account.getAdressValue()
+                    + " Es wurden die Default werde für Revoke Period gesetzt");
+            account.setDefaultSettings(false);
+            if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
+                this.addAccountToZertifiedList(account);
+            } else {
+                this.addAccountToRevokedList(account);
+            }
+        }
+
+    }
+
+    //TODO JAVADOC
+    private void readAccountValuesNoDefaults(String[] fileInput) {
+        if (fileInput[0].equals("d")) {
+            Account account = new Account(fileInput[1]);
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            this.deleteAccountList.add(account);
+        } else {
+            Account account = new Account(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
+            log.info("Folgender Account wurde geladen: " + account.getAdressValue());
+            account.setDefaultSettings(false);
+            if (account.getRevokePeriodCounter() == defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier()) {
+                this.addAccountToZertifiedList(account);
+            } else {
+                this.addAccountToRevokedList(account);
+            }
+        }
     }
 
     //TODO JAVADOC

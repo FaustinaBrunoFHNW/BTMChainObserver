@@ -72,9 +72,10 @@ public class JSONAccountLoader {
             if (acc.getGasUsedCounter() == 0){
                 acc.setGasUsedCounter(JSONDefaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount());
             }
-            if (acc.getRevokeMultiplier()== 0){
+          /**  if (acc.getRevokeMultiplier()== 0){
                 acc.setRevokeMultiplier(JSONDefaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
             }
+           */
         }
     }
 
