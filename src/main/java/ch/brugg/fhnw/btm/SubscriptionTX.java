@@ -3,7 +3,6 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.loader.AccountLoader;
 import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import ch.brugg.fhnw.btm.writer.AccountWriter;
 import ch.brugg.fhnw.btm.writer.DefaultSettingsWriter;
 import io.reactivex.disposables.Disposable;
@@ -103,7 +102,7 @@ public class SubscriptionTX {
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Revoke Zeit
-            account.setRevokePeriodCounter(account.getRevokePeriod() - 1);
+            account.setRevokePeriodCounter(account.getRevokeMultiplier() - 1);
             log.info(
                     "Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue() + " wurde zum "
                             + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
@@ -119,7 +118,7 @@ public class SubscriptionTX {
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Zeit eingeben
-            account.setRevokePeriodCounter(account.getRevokePeriod());
+            account.setRevokePeriodCounter(account.getRevokeMultiplier());
             log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue() + " wurde zum " + account
                     .getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account.getRevokePeriodCounter());
         }
@@ -150,7 +149,7 @@ public class SubscriptionTX {
             if (this.controlRevokePeriode(account)) {
                 this.chainInteractions.certifyAccount(account.getAdressValue());
                 log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
-                account.setRevokePeriodCounter(account.getRevokePeriod());
+                account.setRevokePeriodCounter(account.getRevokeMultiplier());
                 account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
                 account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
                 this.accountLoader.getAccountArrayList().add(account);

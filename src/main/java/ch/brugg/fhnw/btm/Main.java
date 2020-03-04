@@ -14,8 +14,18 @@ public class Main {
 
         jsonDefaultSettingsLoader.loadDefaultSettings();
 
+
+
         JSONAccountLoader jsonAccountLoader = JSONAccountLoader.getInstance();
         jsonAccountLoader.loadAccounts();
+
+        String PRIVATE_KEY = jsonAccountLoader.getMasterKey();
+        System.out.println(PRIVATE_KEY);
+
+        jsonDefaultSettingsLoader.writeDefaultSettings();
+        System.out.println("Writing Accounts");
+        jsonAccountLoader.writeAccountList();
+
 
         /*
         //TODO revoke all acounts die certifyed sind

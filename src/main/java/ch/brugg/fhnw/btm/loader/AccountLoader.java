@@ -165,7 +165,7 @@ public class AccountLoader {
                 this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier(), fileInput[3], fileInput[4]);
         log.info("Folgender Account wurde geladen: " + account.getAdressValue()
                 + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
-        if (account.getRevokePeriodCounter() == account.getRevokePeriod()) {
+        if (account.getRevokePeriodCounter() == account.getRevokeMultiplier()) {
             this.addAccountToZertifiedList(account);
         } else {
             this.addAccountToRevokedList(account);

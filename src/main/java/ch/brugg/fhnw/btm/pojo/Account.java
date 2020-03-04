@@ -3,7 +3,6 @@ package ch.brugg.fhnw.btm.pojo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.primitive.Int;
 
 import java.math.BigInteger;
 
@@ -14,10 +13,10 @@ public class Account {
     private int transaktionCounter;
     private BigInteger maxTransaktionCounter;
     private int revokePeriodCounter;
-    private int revokePeriod;
+    private int revokeMultiplier;
     private int revoked;
     private BigInteger maxGasUsed;
-    private int gasUsedCounter;
+    private long gasUsedCounter;
     private boolean defaultSettings;
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
@@ -29,13 +28,13 @@ public class Account {
     }
 
     //TODO JAVADOC Constructor für initial Lesung
-    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokePeriod) {
+    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokeMultiplier) {
         this.address = new Address(address.trim().toLowerCase());
         this.adressValue = address;
         this.maxTransaktionCounter = new BigInteger(maxTransaktionCounter);
         this.maxGasUsed = new BigInteger(maxGasUsed);
-        this.revokePeriodCounter = revokePeriod;
-        this.revokePeriod=revokePeriod;
+        this.revokePeriodCounter = revokeMultiplier;
+        this.revokeMultiplier = revokeMultiplier;
 
         this.transaktionCounter = this.maxTransaktionCounter.intValue();
         this.gasUsedCounter = this.maxGasUsed.intValue();
@@ -43,13 +42,13 @@ public class Account {
     }
 
     //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
-    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokePeriod,String revokedPeriodCounter,String revoked) {
+    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokeMultiplier, String revokedPeriodCounter, String revoked) {
         this.address = new Address(address.trim().toLowerCase());
         this.adressValue = address;
         this.maxTransaktionCounter = new BigInteger(maxTransaktionCounter);
         this.maxGasUsed = new BigInteger(maxGasUsed);
         this.revokePeriodCounter = Integer.parseInt(revokedPeriodCounter);
-        this.revokePeriod=revokePeriod;
+        this.revokeMultiplier = revokeMultiplier;
 
         this.transaktionCounter = this.maxTransaktionCounter.intValue();
         this.gasUsedCounter = this.maxGasUsed.intValue();
@@ -142,11 +141,11 @@ public class Account {
         this.transaktionCounter = transaktionCounter;
     }
 
-    public int getGasUsedCounter() {
+    public long getGasUsedCounter() {
         return gasUsedCounter;
     }
 
-    public void setGasUsedCounter(int gasUsedCounter) {
+    public void setGasUsedCounter(long gasUsedCounter) {
         this.gasUsedCounter = gasUsedCounter;
     }
 
@@ -158,12 +157,12 @@ public class Account {
         this.maxTransaktionCounter = maxTransaktionCounter;
     }
 
-    public int getRevokePeriod() {
-        return revokePeriod;
+    public int getRevokeMultiplier() {
+        return revokeMultiplier;
     }
 
-    public void setRevokePeriod(int revokePeriod) {
-        this.revokePeriod = revokePeriod;
+    public void setRevokeMultiplier(int revokeMultiplier) {
+        this.revokeMultiplier = revokeMultiplier;
     }
 
     public int getRevoked() {

@@ -4,7 +4,7 @@
   "revokeMultiplier": 2,
   "defaultTransaktionCount": 5,
   "defaultGasUsedCount": 50000000,
-  "registerAddress": "0x0000000000000000000000000000000000001337",
   "certifyierAddress": null,
-  "timestampLastReset": null
+  "timestampLastReset": "2020-03-04T16:16:00.125442300Z",
+  "registerAddress": "0x0000000000000000000000000000000000001337"
 }
