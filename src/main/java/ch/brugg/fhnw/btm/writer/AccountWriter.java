@@ -1,6 +1,7 @@
 package ch.brugg.fhnw.btm.writer;
 
-import ch.brugg.fhnw.btm.loader.FileLoader;
+import ch.brugg.fhnw.btm.loader.AccountLoader;
+import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
 import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
@@ -19,10 +20,9 @@ import java.io.IOException;
 public class AccountWriter {
 
     private File accountFile = new File("src/main/resources/whitelist/AccountList.txt");
-    private File defaultSettingsFile = new File("src/main/resources/whitelist/DefaultSettings.txt");
     private static AccountWriter instance;
     private static Logger log = LoggerFactory.getLogger(AccountWriter.class);
-    private FileLoader fileLoader;
+    private AccountLoader accountLoader;
 
     //TODO
 
@@ -30,7 +30,7 @@ public class AccountWriter {
      * Privater Constructor für Singleton
      */
     private AccountWriter() {
-        this.fileLoader = FileLoader.getInstance();
+        this.accountLoader = AccountLoader.getInstance();
     }
 
     /**
@@ -55,16 +55,16 @@ public class AccountWriter {
 
         log.info("Alle Accounts werden in Datei gespeichert.");
 
-        log.info(fileLoader.getRevokedAccountArrayList().size() + " Accounts sind blockiert");
-        for (Account account : fileLoader.getRevokedAccountArrayList()) {
+        log.info(accountLoader.getRevokedAccountArrayList().size() + " Accounts sind blockiert");
+        for (Account account : accountLoader.getRevokedAccountArrayList()) {
             bw.write(this.prepareAccountLineForFile(account));
             log.info(account.getAdressValue());
             bw.newLine();
 
         }
 
-        log.info(fileLoader.getAccountArrayList().size() + " Accounts sind zertifiziert");
-        for (Account account : fileLoader.getAccountArrayList()) {
+        log.info(accountLoader.getAccountArrayList().size() + " Accounts sind zertifiziert");
+        for (Account account : accountLoader.getAccountArrayList()) {
 
             bw.write(this.prepareAccountLineForFile(account));
             log.info(account.getAdressValue());
@@ -75,31 +75,7 @@ public class AccountWriter {
         log.info("Daten wurden in datei gespeichert.");
     }
 
-    //TODO JAVADOC und Impl
-    public void writeDefaultSettingsInFile() throws IOException {
-        FileWriter fw = new FileWriter(defaultSettingsFile);
-        BufferedWriter bw = new BufferedWriter(fw);
-        log.info("Default Settings werden in Datei gespeichert.");
-        bw.write(this.prepareDefaultSeetingsLineForFile(fileLoader.getDefaultSettings()));
-        bw.newLine();
-        bw.close();
-        log.info("Daten wurden in datei gespeichert.");
-    }
 
-    private String prepareDefaultSeetingsLineForFile(DefaultSettings defaultSettings) {
-        String defaultSettingsLine;
-        defaultSettingsLine =
-                defaultSettings.getConnectionAddress() + ";" +
-                        defaultSettings.getIntervalResetCounter() + ";" +
-                        defaultSettings.getIntervalRevoke() + ";" +
-                        defaultSettings.getDefaultTransaktionCount() + ";" +
-                        defaultSettings.getDefaultGasUsedCount() + ";" +
-                        defaultSettings.getRegisterAddress()+ ";" +
-                        defaultSettings.getCertifyierAddress() + ";" +
-                        defaultSettings.getTimestampLastReset();
-        return defaultSettingsLine;
-
-    }
 
     private String prepareAccountLineForFile(Account account) {
         String accountLine;

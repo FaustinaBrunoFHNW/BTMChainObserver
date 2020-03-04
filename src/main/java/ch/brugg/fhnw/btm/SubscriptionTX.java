@@ -1,8 +1,11 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.loader.FileLoader;
+import ch.brugg.fhnw.btm.loader.AccountLoader;
+import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import ch.brugg.fhnw.btm.writer.AccountWriter;
+import ch.brugg.fhnw.btm.writer.DefaultSettingsWriter;
 import io.reactivex.disposables.Disposable;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
@@ -25,15 +28,19 @@ public class SubscriptionTX {
     private Web3j web3j;
     private Subscription subscription;
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
-    private FileLoader fileLoader;
+    private AccountLoader accountLoader;
+    private DefaultSettingsLoader defaultSettingsLoader;
     private ChainInteractions chainInteractions;
     private AccountWriter accountWriter;
+    private DefaultSettingsWriter defaultSettingsWriter;
 
     public SubscriptionTX(Web3j web3j, ChainInteractions chainInteractions) {
         this.web3j = web3j;
-        this.fileLoader = FileLoader.getInstance();
+        this.accountLoader = AccountLoader.getInstance();
+        this.defaultSettingsLoader = DefaultSettingsLoader.getInstance();
         this.chainInteractions = chainInteractions;
         accountWriter = AccountWriter.getInstance();
+        defaultSettingsWriter = DefaultSettingsWriter.getInstance();
     }
 
     //TODO JAVADOC
@@ -57,9 +64,9 @@ public class SubscriptionTX {
             if (tx.getGasPrice().equals(BigInteger.ZERO)) {
                 // FileLoader.getInstance().increaseCounter(tx.getFrom().trim().toLowerCase());
                 log.info("Transaktionskosten waren 0");
-                log.info("Anzahl Accounts:" + fileLoader.getAccountArrayList().size());
+                log.info("Anzahl Accounts:" + accountLoader.getAccountArrayList().size());
 
-                for (Account account : fileLoader.getAccountArrayList()) {
+                for (Account account : accountLoader.getAccountArrayList()) {
                     if (account.getAdressValue().equals(tx.getFrom())) {
                         account.decraseTransaktionCounter();
                         account.decraseGasUsedCounter(Integer.parseInt(tx.getGas().toString()));
@@ -93,8 +100,8 @@ public class SubscriptionTX {
             this.chainInteractions.revokeAccount(account.getAdressValue());
 
             account.increaseRevoked();
-            this.fileLoader.getRevokedAccountArrayList().add(account);
-            this.fileLoader.getAccountArrayList().remove(account);
+            this.accountLoader.getRevokedAccountArrayList().add(account);
+            this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Revoke Zeit
             account.setRevokePeriodCounter(account.getRevokePeriod() - 1);
             log.info(
@@ -109,8 +116,8 @@ public class SubscriptionTX {
         } else if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
             account.increaseRevoked();
-            this.fileLoader.getRevokedAccountArrayList().add(account);
-            this.fileLoader.getAccountArrayList().remove(account);
+            this.accountLoader.getRevokedAccountArrayList().add(account);
+            this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Zeit eingeben
             account.setRevokePeriodCounter(account.getRevokePeriod());
             log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue() + " wurde zum " + account
@@ -125,7 +132,7 @@ public class SubscriptionTX {
      */
     private void setAllCountersToMax() {
 
-        for (Account account : fileLoader.getAccountArrayList()) {
+        for (Account account : accountLoader.getAccountArrayList()) {
             account.setTransaktionCounter(account.getMaxTransaktionCounter().intValue());
             account.setGasUsedCounter(account.getMaxGasUsed().intValue());
 
@@ -139,14 +146,14 @@ public class SubscriptionTX {
     private void certifyRevokedAccounts() {
         List<Account> removeFromRevokeList = new ArrayList<>();
 
-        for (Account account : this.fileLoader.getRevokedAccountArrayList()) {
+        for (Account account : this.accountLoader.getRevokedAccountArrayList()) {
             if (this.controlRevokePeriode(account)) {
                 this.chainInteractions.certifyAccount(account.getAdressValue());
                 log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
                 account.setRevokePeriodCounter(account.getRevokePeriod());
                 account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
                 account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
-                this.fileLoader.getAccountArrayList().add(account);
+                this.accountLoader.getAccountArrayList().add(account);
                 removeFromRevokeList.add(account);
             } else {
                 account.setRevokePeriodCounter(account.getRevokePeriodCounter() - 1);
@@ -156,7 +163,7 @@ public class SubscriptionTX {
 
         //TODO in eigene Methode auslagern
         for (Account removeAccount : removeFromRevokeList) {
-            this.fileLoader.getRevokedAccountArrayList().remove(removeAccount);
+            this.accountLoader.getRevokedAccountArrayList().remove(removeAccount);
         }
 
     }
@@ -175,9 +182,10 @@ public class SubscriptionTX {
             Thread.sleep(min * 60 * 1000);
             this.setAllCountersToMax();
             this.certifyRevokedAccounts();
-            this.fileLoader.getDefaultSettings().setTimestampLastReset(new Timestamp(System.currentTimeMillis()).getTime());
+            this.defaultSettingsLoader.getDefaultSettings()
+                    .setTimestampLastReset(new Timestamp(System.currentTimeMillis()).getTime());
             this.accountWriter.writeAccountsInFile();
-            this.accountWriter.writeDefaultSettingsInFile();
+            this.defaultSettingsWriter.writeDefaultSettingsInFile();
         }
     }
 
