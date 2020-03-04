@@ -6,7 +6,6 @@
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 5,
     "revokeMultiplier": 2,
-    "revoked": 2,
     "maxGasUsed": null,
     "gasUsedCounter": 50000000,
     "defaultSettings": false
@@ -18,7 +17,6 @@
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 0,
     "revokeMultiplier": 2,
-    "revoked": 0,
     "maxGasUsed": null,
     "gasUsedCounter": 50000000,
     "defaultSettings": false
@@ -30,7 +28,6 @@
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 0,
     "revokeMultiplier": 2,
-    "revoked": 0,
     "maxGasUsed": null,
     "gasUsedCounter": 20000000,
     "defaultSettings": false
@@ -42,7 +39,6 @@
     "maxTransaktionCounter": null,
     "revokePeriodCounter": 5,
     "revokeMultiplier": 2,
-    "revoked": 2,
     "maxGasUsed": null,
     "gasUsedCounter": 50000000,
     "defaultSettings": false

@@ -22,8 +22,6 @@ import java.util.List;
 //TODO Beschreischbung was diese Klasse macht
 public class SubscriptionTX {
 
-    //TODO limite nach Besprechung stellen
-    private final static int TRANSAKTIONS_LIMITE = 3;
     private Web3j web3j;
     private Subscription subscription;
     private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
@@ -98,15 +96,14 @@ public class SubscriptionTX {
         if (account.getTransaktionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
 
-            account.increaseRevoked();
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Revoke Zeit
-            account.setRevokePeriodCounter(account.getRevokeMultiplier() - 1);
-            log.info(
-                    "Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue() + " wurde zum "
-                            + account.getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account
-                            .getRevokePeriodCounter());
+
+            log.info("Der Acccount hat zu viele Transaktionen verbruacht und " + account.getAdressValue()
+                    + " wurde   gesperrt. Die Revoke Periode ist: " + defaultSettingsLoader.getDefaultSettings()
+                    .getRevokeMultiplier());
+            account.setRevokePeriodCounter(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier() - 1);
             try {
                 this.accountWriter.writeAccountsInFile();
             } catch (IOException e) {
@@ -114,13 +111,14 @@ public class SubscriptionTX {
             }
         } else if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAdressValue());
-            account.increaseRevoked();
             this.accountLoader.getRevokedAccountArrayList().add(account);
             this.accountLoader.getAccountArrayList().remove(account);
             //TODO fixe Zeit eingeben
-            account.setRevokePeriodCounter(account.getRevokeMultiplier());
-            log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue() + " wurde zum " + account
-                    .getRevoked() + " Mal gesperrt. Die Revoke Periode ist: " + account.getRevokePeriodCounter());
+
+            log.info("Der Acccount hat zu viel Gas verbraucht " + account.getAdressValue()
+                    + " wurde gesperrt. Die Revoke Periode ist: " + defaultSettingsLoader.getDefaultSettings()
+                    .getRevokeMultiplier());
+            account.setRevokePeriodCounter(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier() - 1);
         }
     }
 
@@ -149,7 +147,7 @@ public class SubscriptionTX {
             if (this.controlRevokePeriode(account)) {
                 this.chainInteractions.certifyAccount(account.getAdressValue());
                 log.info("Account wurde wieder certifiziert: " + account.getAdressValue());
-                account.setRevokePeriodCounter(account.getRevokeMultiplier());
+                account.setRevokePeriodCounter(defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
                 account.setTransaktionCounter(Integer.parseInt(account.getMaxTransaktionCounter().toString()));
                 account.setGasUsedCounter(Integer.parseInt(account.getMaxGasUsed().toString()));
                 this.accountLoader.getAccountArrayList().add(account);

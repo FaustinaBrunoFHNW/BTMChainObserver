@@ -13,8 +13,6 @@ public class Account {
     private int transaktionCounter;
     private BigInteger maxTransaktionCounter;
     private int revokePeriodCounter;
-    private int revokeMultiplier;
-    private int revoked;
     private BigInteger maxGasUsed;
     private long gasUsedCounter;
     private boolean defaultSettings;
@@ -28,31 +26,28 @@ public class Account {
     }
 
     //TODO JAVADOC Constructor für initial Lesung
-    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokeMultiplier) {
+    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokedPeriodCounter) {
         this.address = new Address(address.trim().toLowerCase());
         this.adressValue = address;
         this.maxTransaktionCounter = new BigInteger(maxTransaktionCounter);
         this.maxGasUsed = new BigInteger(maxGasUsed);
-        this.revokePeriodCounter = revokeMultiplier;
-        this.revokeMultiplier = revokeMultiplier;
+        this.revokePeriodCounter = revokedPeriodCounter;
 
         this.transaktionCounter = this.maxTransaktionCounter.intValue();
         this.gasUsedCounter = this.maxGasUsed.intValue();
-        this.revoked=0;
     }
 
     //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
-    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokeMultiplier, String revokedPeriodCounter, String revoked) {
+    public Account(String address, String maxTransaktionCounter, String maxGasUsed, String revokedPeriodCounter) {
         this.address = new Address(address.trim().toLowerCase());
         this.adressValue = address;
         this.maxTransaktionCounter = new BigInteger(maxTransaktionCounter);
         this.maxGasUsed = new BigInteger(maxGasUsed);
         this.revokePeriodCounter = Integer.parseInt(revokedPeriodCounter);
-        this.revokeMultiplier = revokeMultiplier;
+
 
         this.transaktionCounter = this.maxTransaktionCounter.intValue();
         this.gasUsedCounter = this.maxGasUsed.intValue();
-        this.revoked=Integer.parseInt(revoked);
     }
 
     //TODO
@@ -76,9 +71,6 @@ public class Account {
 
     }
 
-    public int increaseRevoked(){
-      return   this.revoked++;
-    }
 
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
@@ -155,22 +147,6 @@ public class Account {
 
     public void setMaxTransaktionCounter(BigInteger maxTransaktionCounter) {
         this.maxTransaktionCounter = maxTransaktionCounter;
-    }
-
-    public int getRevokeMultiplier() {
-        return revokeMultiplier;
-    }
-
-    public void setRevokeMultiplier(int revokeMultiplier) {
-        this.revokeMultiplier = revokeMultiplier;
-    }
-
-    public int getRevoked() {
-        return revoked;
-    }
-
-    public void setRevoked(int revoked) {
-        this.revoked = revoked;
     }
 
     public boolean isDefaultSettings() {

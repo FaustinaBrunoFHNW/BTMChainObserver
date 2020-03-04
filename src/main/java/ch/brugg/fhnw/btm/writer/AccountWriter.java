@@ -79,15 +79,13 @@ public class AccountWriter {
 
     private String prepareAccountLineForFile(Account account) {
         String accountLine;
-        //TODO Default Werte nicht speichern
         if (account.isDefaultSettings()) {
             accountLine =
-                    account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
-                            + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
+                    account.getAdressValue() + ";" + account.getRevokePeriodCounter();
         } else {
             accountLine =
                     account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
-                            + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
+                            + ";" + account.getRevokePeriodCounter() ;
         }
         return accountLine;
     }
