@@ -53,6 +53,7 @@ public class ChainSetUp {
     public ChainSetUp() {
         log.info("connecting");
 
+        this.certifierAddress = jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress();
         web3j = Web3j.build(new HttpService(jsonDefaultSettingsHandler.getDefaultSettings().getConnectionAddress()));
 
         this.privateKey = jsonDefaultSettingsHandler.getMasterKey();

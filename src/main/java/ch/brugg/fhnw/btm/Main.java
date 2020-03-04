@@ -37,20 +37,19 @@ public class Main {
 
         Web3j web3j = chainSetUp.getWeb3j();
 
-        /*
         //TODO load all accounts from list
-        accountLoader.loadAll();
-        chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
-        chainInteractions.revokeAccountList(accountLoader.getDeleteAccountList());
+        jsonAccountHandler.loadAccounts();
+        chainInteractions.certifyAccountList(jsonAccountHandler.getAccountList());
+        chainInteractions.revokeAccountList(jsonAccountHandler.getDeleteAccountList());
 
-        System.out.println("Anzahl zertifizierte Accounts: " + accountLoader.getAccountArrayList().size());
-        System.out.println("Anzahl gesperrte Accounts: " + accountLoader.getRevokedAccountArrayList().size());
-        System.out.println("Anzahl gelöschte Accounts: " + accountLoader.getDeleteAccountList().size());
+        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getAccountList().size());
+        System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccountList().size());
+        System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeleteAccountList().size());
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
-        subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
+        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
 
-*/
+
 
     }
 

@@ -17,14 +17,15 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class JsonAccountHandler {
 
     private static JsonAccountHandler instance;
     private static JsonDefaultSettingsHandler JSONDefaultSettingsHandler;
-    private ArrayList<Account> accountList;
-    private ArrayList<Account> revokedAccountList;
-    private ArrayList<Account> deleteAccountList;
+    private ArrayList<Account> accountList = new ArrayList<>();
+    private ArrayList<Account> revokedAccountList = new ArrayList<>();
+    private ArrayList<Account> deleteAccountList = new ArrayList<>();
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
 
     private String accountsFile = "src/main/resources/whitelist/AccountList.json";
@@ -49,9 +50,21 @@ public class JsonAccountHandler {
             JsonReader reader = new JsonReader(new FileReader(accountsFile));
             Type accountListType = new TypeToken<ArrayList<Account>>(){}.getType();
             accountList = gson.fromJson(reader, accountListType);
+            log.info("Accounts wurden aus Datei geladen. Es sind " + accountList.size()+ " Accounts geladen worden ");
 
 
-            System.out.println("done");
+            Iterator<Account> itr = accountList.iterator();
+            while(itr.hasNext()){
+                Account temp = itr.next();
+                if (temp.deleteMe){
+                    log.info("Account zum Löschen wurde gefunden. Folgender Account wird gelöscht: "+temp.getAddress());
+                    itr.remove();
+                }
+
+            }
+
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

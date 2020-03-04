@@ -4,6 +4,6 @@
   "defaultTxLimit": 5,
   "defaultGasLimit": 50000000,
   "certifierAddress": "0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221",
-  "timestampLastReset": "2020-03-04T20:36:05.094Z",
+  "timestampLastReset": "2020-03-04T21:07:18.104Z",
   "nameRegistryAddress": "0x0000000000000000000000000000000000001337"
 }

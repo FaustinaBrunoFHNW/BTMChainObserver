@@ -6,6 +6,7 @@
     "revokeTime": 0,
     "gasLimit": null,
     "gasUsedCounter": 50000000,
+    "deleteMe": false,
     "timeStamp": null
   },
   {
@@ -15,6 +16,7 @@
     "revokeTime": 0,
     "gasLimit": null,
     "gasUsedCounter": 50000000,
+    "deleteMe": false,
     "timeStamp": null
   },
   {
@@ -24,15 +26,7 @@
     "revokeTime": 0,
     "gasLimit": null,
     "gasUsedCounter": 20000000,
-    "timeStamp": null
-  },
-  {
-    "address": "0xaf02DcCdEf3418F8a12f4LDD4ed49FaAa8FD366b",
-    "transactionCounter": 0,
-    "txLimit": null,
-    "revokeTime": 0,
-    "gasLimit": null,
-    "gasUsedCounter": 50000000,
+    "deleteMe": false,
     "timeStamp": null
   }
 ]

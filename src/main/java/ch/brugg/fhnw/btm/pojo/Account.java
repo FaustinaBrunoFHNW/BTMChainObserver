@@ -1,5 +1,6 @@
 package ch.brugg.fhnw.btm.pojo;
 
+import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ public class Account {
     private long revokeTime;
     private BigInteger gasLimit;
     private long gasUsedCounter;
+    public boolean deleteMe = false;
     private Timestamp timeStamp = null;
 
 
@@ -106,6 +108,9 @@ public class Account {
     }
 
     public BigInteger getGasLimit() {
+        if (gasLimit.equals(BigInteger.ZERO)){
+            return BigInteger.valueOf(JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultGasLimit());
+        }
         return gasLimit;
     }
 
@@ -130,6 +135,11 @@ public class Account {
     }
 
     public BigInteger getTxLimit() {
+
+        if (txLimit.equals(BigInteger.ZERO)){
+            return BigInteger.valueOf(JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultTxLimit());
+        }
+
         return txLimit;
     }
 
