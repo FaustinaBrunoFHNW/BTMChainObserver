@@ -18,6 +18,7 @@ public class AccountLoader {
 
     private ArrayList<Account> accountArrayList;
     private ArrayList<Account> revokedAccountArrayList;
+    private ArrayList<Account> deleteAccountList;
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
     private DefaultSettings defaultSettings;
     private String certifierAdd;
@@ -29,6 +30,7 @@ public class AccountLoader {
     private AccountLoader() {
         this.accountArrayList = new ArrayList();
         this.revokedAccountArrayList = new ArrayList();
+        this.deleteAccountList = new ArrayList<>();
         //TODO wieso bei initieren schon alle Laden? muss geprüft werden
         // loadAccounts();
     }
@@ -98,7 +100,7 @@ public class AccountLoader {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
 
-                if (accountArray.length == 4) {
+                if (accountArray.length == 5) {
                     this.readDefaultValues(accountArray);
 
                 } else if (accountArray.length == 6) {
@@ -134,6 +136,8 @@ public class AccountLoader {
 
                 } else if (accountArray.length == 5) {
                     this.readAccountValuesComplex(accountArray);
+                } else if (accountArray.length == 2 || accountArray.length == 4 || accountArray.length == 6) {
+                    this.readDeletingAccounts(accountArray);
                 }
 
             }
@@ -151,13 +155,14 @@ public class AccountLoader {
      * @param fileInput String Array mit den DefaultSettings Attributen
      */
     private void readDefaultValues(String[] fileInput) {
-        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
+        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3], fileInput[4]);
 
         log.info("******************DEFAULT WERTE***************");
-        log.info("ResetCounter Intervall wurde auf " + fileInput[0] + " Minuten gesetzt");
-        log.info("Revoke Zeit wurde auf " + fileInput[1] + " Intervalle  gesetzt");
-        log.info("Default Max Transaktionen wurden auf " + fileInput[2] + " gesetzt");
-        log.info("Default Max Gas Used wurde auf " + fileInput[3] + " gesetzt");
+        log.info("Connection Adresse " + fileInput[0]);
+        log.info("ResetCounter Intervall wurde auf " + fileInput[1] + " Minuten gesetzt");
+        log.info("Revoke Zeit wurde auf " + fileInput[2] + " Intervalle  gesetzt");
+        log.info("Default Max Transaktionen wurden auf " + fileInput[3] + " gesetzt");
+        log.info("Default Max Gas Used wurde auf " + fileInput[4] + " gesetzt");
 
     }
 
@@ -168,16 +173,17 @@ public class AccountLoader {
      * @param fileInput String Array mit den DefaultSettings Attributen
      */
     private void readDefaultValuesWithCerfierAdd(String[] fileInput) {
-        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3]);
-        if (fileInput.length > 4) {
-            defaultSettings.setCertifyierAdress(fileInput[4]);
+        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3], fileInput[4]);
+        if (fileInput.length > 5) {
+            defaultSettings.setCertifyierAdress(fileInput[5]);
         }
 
         log.info("******************DEFAULT WERTE***************");
-        log.info("ResetCounter Intervall wurde auf " + fileInput[0] + " Minuten gesetzt");
-        log.info("Revoke Zeit wurde auf " + fileInput[1] + " Intervalle  gesetzt");
-        log.info("Default Max Transaktionen wurden auf " + fileInput[2] + " gesetzt");
-        log.info("Default Max Gas Used wurde auf " + fileInput[3] + " gesetzt");
+        log.info("Connection Adresse " + fileInput[0]);
+        log.info("ResetCounter Intervall wurde auf " + fileInput[1] + " Minuten gesetzt");
+        log.info("Revoke Zeit wurde auf " + fileInput[2] + " Intervalle  gesetzt");
+        log.info("Default Max Transaktionen wurden auf " + fileInput[3] + " gesetzt");
+        log.info("Default Max Gas Used wurde auf " + fileInput[4] + " gesetzt");
 
     }
 
@@ -230,6 +236,19 @@ public class AccountLoader {
             this.addAccountToRevokedList(account);
         }
 
+    }
+
+    //TODO JAVADOC
+    private void readDeletingAccounts(String[] fileInput) {
+       // if(fileInput[0].equals("D")) {
+            Account account = new Account(fileInput[1]);
+            log.info("Folgender Account wird zur Löschung geladen: " + account.getAdressValue());
+            this.deleteAccountList.add(account);
+      //  }
+       /** else{
+            log.warn("Etwas stimmt im AccountFile nicht mit den zu löschenden Accounts");
+        }
+*/
     }
 
     /**
@@ -303,5 +322,13 @@ public class AccountLoader {
 
     public void setCertifierAddress(String certfierAdd) {
         this.defaultSettings.setCertifyierAdress(certfierAdd);
+    }
+
+    public ArrayList<Account> getDeleteAccountList() {
+        return deleteAccountList;
+    }
+
+    public void setDeleteAccountList(ArrayList<Account> deleteAccountList) {
+        this.deleteAccountList = deleteAccountList;
     }
 }

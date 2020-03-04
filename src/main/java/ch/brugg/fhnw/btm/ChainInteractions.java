@@ -45,6 +45,18 @@ public class ChainInteractions {
         return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
     }
 
+    /**
+     * In dieser Methode werden alle Account einer Liste in die Whiteliste integriert
+     * @param accounts Liste mit Accounts
+     */
+    public void revokeAccountList(ArrayList<Account> accounts){
+        log.info("Alle Accounts von Liste werden revoked");
+        for (Account account : accounts) {
+            log.info("Revoked: "+account.getAdressValue());
+            this.revokeAccount(account.getAdressValue());
+        }
+    }
+
     //TODO java doc
     public boolean revokeAccount(String accountAddress)   {
         this.log.info("Methode revokeAccount wurde aufgerufen. Folgender Account wird aus der Whiteliste entfernt: "

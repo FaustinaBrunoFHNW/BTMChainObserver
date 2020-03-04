@@ -65,10 +65,13 @@ public class Main {
 
         accountLoader.loadAccounts();
         accountLoader.setCertifierAddress(chainSetUp.getCertifierAdd());
+        //TODO Register ADD speichern
         chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
+        chainInteractions.revokeAccountList(accountLoader.getDeleteAccountList());
 
 
         System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
+        System.out.println("Anzahl gelöschte Accounts: " + accountLoader.getDeleteAccountList().size());
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
         subscriptionTX.run(accountLoader.getDefaultSettings().getIntervalResetCounter());
 

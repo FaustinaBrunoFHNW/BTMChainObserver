@@ -4,6 +4,8 @@ public class DefaultSettings {
     //TODO impl
     //intervalResetCounter in min
 
+    private String connectionAddress;
+
     private int intervalResetCounter;
     //intervalRevoke wieviel resetInervalle Account gesperrt ist
     private int intervalRevoke;
@@ -14,8 +16,9 @@ public class DefaultSettings {
 
     private String certifyierAdress;
 
-    public DefaultSettings(String intervalResetCounter, String intervalRevoke, String defaultTransaktionCount,
+    public DefaultSettings(String connectionAddress,String intervalResetCounter, String intervalRevoke, String defaultTransaktionCount,
             String defaultGasUsedCount) {
+        this.connectionAddress=connectionAddress;
         this.intervalResetCounter = Integer.parseInt(intervalResetCounter);
         this.intervalRevoke = Integer.parseInt(intervalRevoke);
         this.defaultTransaktionCount =defaultTransaktionCount;
@@ -60,5 +63,13 @@ public class DefaultSettings {
 
     public void setCertifyierAdress(String certifyierAdress) {
         this.certifyierAdress = certifyierAdress;
+    }
+
+    public String getConnectionAddress() {
+        return connectionAddress;
+    }
+
+    public void setConnectionAddress(String connectionAddress) {
+        this.connectionAddress = connectionAddress;
     }
 }

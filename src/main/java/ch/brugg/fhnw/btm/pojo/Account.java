@@ -22,6 +22,11 @@ public class Account {
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
+    //TODO JAVADOC
+    public Account(String address) {
+        this.address = new Address(address.trim().toLowerCase());
+        this.adressValue = address;
+    }
 
     //TODO JAVADOC Constructor für initial Lesung
     public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokePeriod) {
