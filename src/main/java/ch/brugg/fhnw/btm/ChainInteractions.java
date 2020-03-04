@@ -21,14 +21,14 @@ import java.util.ArrayList;
 public class ChainInteractions {
 
     private Logger log = LoggerFactory.getLogger(ChainInteractions.class);
-    private ChainSetUp chainSetUp;
+    private ChainSetup chainSetUp;
     private SimpleCertifier simpleCertifier;
     private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
     private Web3j web3j;
 
     //TODO JavaDoc für Constructor
-    public ChainInteractions(ChainSetUp chainSetUp) {
+    public ChainInteractions(ChainSetup chainSetUp) {
         this.chainSetUp = chainSetUp;
         this.simpleCertifier = chainSetUp.getSimpleCertifier();
         this.simpleRegistry = chainSetUp.getSimpleRegistry();
@@ -97,6 +97,7 @@ public class ChainInteractions {
         try {
             log.info("Certifying Account mit folgender Adresse: " + add);
             this.simpleCertifier.certify(add).send();
+            //what the cinnamon toast fuck is this?
             log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
             log.info("Done certifying account");
             return isCertified(add);

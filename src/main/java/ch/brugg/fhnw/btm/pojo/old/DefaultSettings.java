@@ -1,5 +1,7 @@
 package ch.brugg.fhnw.btm.pojo.old;
 
+import java.math.BigInteger;
+
 public class DefaultSettings {
     //TODO impl
     //intervalResetCounter in min
@@ -8,7 +10,7 @@ public class DefaultSettings {
 
     private int resetIntervall;
     //intervalRevoke wieviel resetInervalle Account gesperrt ist
-    private int revokeMultiplier;
+    private BigInteger revokeMultiplier;
     //defaultTransaktionCount
     private String defaultTransaktionCount;
     //defaultGasCount
@@ -25,7 +27,7 @@ public class DefaultSettings {
                            String defaultGasUsedCount, String registerAddress) {
         this.connectionAddress=connectionAddress;
         this.resetIntervall = Integer.parseInt(resetIntervall);
-        this.revokeMultiplier = Integer.parseInt(revokeMultiplier);
+        //this.revokeMultiplier = Integer.parseInt(revokeMultiplier);
         this.defaultTransaktionCount =defaultTransaktionCount;
         this.defaultGasUsedCount = defaultGasUsedCount;
         this.registerAddress=registerAddress;
@@ -39,11 +41,11 @@ public class DefaultSettings {
         this.resetIntervall = resetIntervall;
     }
 
-    public int getRevokeMultiplier() {
+    public BigInteger getRevokeMultiplier() {
         return revokeMultiplier;
     }
 
-    public void setRevokeMultiplier(int revokeMultiplier) {
+    public void setRevokeMultiplier(BigInteger revokeMultiplier) {
         this.revokeMultiplier = revokeMultiplier;
     }
 

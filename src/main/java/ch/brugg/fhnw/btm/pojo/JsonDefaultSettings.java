@@ -1,5 +1,7 @@
 package ch.brugg.fhnw.btm.pojo;
 
+import java.math.BigInteger;
+
 public class JsonDefaultSettings {
 
     public static JsonDefaultSettings instance;
@@ -17,14 +19,35 @@ public class JsonDefaultSettings {
 
     private int resetInterval;
 
-    private int defaultTxLimit;
+    private BigInteger defaultTxLimit;
 
-    private long defaultGasLimit;
+    private BigInteger defaultGasLimit;
 
     private String certifierAddress;
 
     private String timestampLastReset;
     private String nameRegistryAddress;
+
+
+    private  BigInteger defaultRevokeTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public String getConnectionAddress() {
         return connectionAddress;
@@ -35,11 +58,11 @@ public class JsonDefaultSettings {
     }
 
 
-    public int getDefaultTxLimit() {
+    public BigInteger getDefaultTxLimit() {
         return defaultTxLimit;
     }
 
-    public Long getDefaultGasLimit() {
+    public BigInteger getDefaultGasLimit() {
         return defaultGasLimit;
     }
 
@@ -62,4 +85,9 @@ public class JsonDefaultSettings {
     public void setTimestampLastReset(String timestampLastReset) {
         this.timestampLastReset = timestampLastReset;
     }
+
+    public BigInteger getDefaultRevokeTime() {
+        return defaultRevokeTime;
+    }
+
 }

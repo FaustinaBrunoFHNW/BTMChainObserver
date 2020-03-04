@@ -24,9 +24,8 @@ public class JsonAccountHandler {
     private static JsonAccountHandler instance;
     private static JsonDefaultSettingsHandler JSONDefaultSettingsHandler;
     private ArrayList<Account> accountList = new ArrayList<>();
-    private ArrayList<Account> revokedAccountList = new ArrayList<>();
-    private ArrayList<Account> deleteAccountList = new ArrayList<>();
     private static Logger log = LoggerFactory.getLogger(AccountLoader.class);
+    private int deletedAccounts = 0, revokedAccounts = 0;
 
     private String accountsFile = "src/main/resources/whitelist/AccountList.json";
 
@@ -58,6 +57,7 @@ public class JsonAccountHandler {
                 Account temp = itr.next();
                 if (temp.deleteMe){
                     log.info("Account zum Löschen wurde gefunden. Folgender Account wird gelöscht: "+temp.getAddress());
+                    deletedAccounts++;
                     itr.remove();
                 }
 
@@ -91,19 +91,11 @@ public class JsonAccountHandler {
         this.accountList = accountList;
     }
 
-    public ArrayList<Account> getRevokedAccountList() {
-        return revokedAccountList;
+    public int getDeletedAccounts() {
+        return deletedAccounts;
     }
 
-    public void setRevokedAccountList(ArrayList<Account> revokedAccountList) {
-        this.revokedAccountList = revokedAccountList;
-    }
-
-    public ArrayList<Account> getDeleteAccountList() {
-        return deleteAccountList;
-    }
-
-    public void setDeleteAccountList(ArrayList<Account> deleteAccountList) {
-        this.deleteAccountList = deleteAccountList;
+    public int getRevokedAccounts() {
+        return revokedAccounts;
     }
 }

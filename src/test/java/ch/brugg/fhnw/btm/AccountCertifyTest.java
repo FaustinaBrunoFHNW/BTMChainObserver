@@ -1,9 +1,7 @@
 package ch.brugg.fhnw.btm;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.web3j.tx.TransactionManager;
 
 import java.math.BigInteger;
 
@@ -18,7 +16,7 @@ public class AccountCertifyTest {
     // private static BigInteger GAS_PRICE = BigInteger.valueOf(0);
 
     //TODO Singleton parameter übergeben
-    public ChainSetUp chainSetUp = new ChainSetUp();
+    public ChainSetup chainSetUp = new ChainSetup();
     private ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
 
     @BeforeClass public void setUpChain() throws Exception {

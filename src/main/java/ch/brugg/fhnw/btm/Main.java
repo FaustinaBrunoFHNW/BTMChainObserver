@@ -15,12 +15,8 @@ public class Main {
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.loadAccounts();
 
-        String PRIVATE_KEY = jsonDefaultSettingsHandler.getMasterKey();
-        System.out.println(PRIVATE_KEY);
-
-
         jsonDefaultSettingsHandler.writeDefaultSettings();
-        System.out.println("Writing Accounts");
+        System.out.println("Schreiben von Accounts Accounts");
         jsonAccountHandler.writeAccountList();
 
 
@@ -29,22 +25,22 @@ public class Main {
         jsonDefaultSettingsHandler.loadDefaultSettings();
 
 
-        ChainSetUp chainSetUp =  new ChainSetUp();
 
-        chainSetUp.setUpAfterChainStart();
+
+        ChainSetup.getInstance().setUpAfterChainStart();
         //       chainSetUp.initChain();
-        ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
+        ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
 
-        Web3j web3j = chainSetUp.getWeb3j();
+        Web3j web3j = ChainSetup.getInstance().getWeb3j();
 
         //TODO load all accounts from list
         jsonAccountHandler.loadAccounts();
         chainInteractions.certifyAccountList(jsonAccountHandler.getAccountList());
-        chainInteractions.revokeAccountList(jsonAccountHandler.getDeleteAccountList());
+       // chainInteractions.revokeAccountList(jsonAccountHandler.getDeleteAccountList());
 
         System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getAccountList().size());
-        System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccountList().size());
-        System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeleteAccountList().size());
+        System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
+        System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
         subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());

@@ -12,39 +12,46 @@ public class Account {
     private String address;
     private int transactionCounter;
     private BigInteger txLimit;
-    private long revokeTime;
+    private BigInteger revokeTime;
     private BigInteger gasLimit;
     private long gasUsedCounter;
     public boolean deleteMe = false;
     private Timestamp timeStamp = null;
 
+    public Timestamp getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Timestamp timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
-    //TODO JAVADOC
-    public Account(String address) {
-        this.address = address;
-    }
-
-    //TODO JAVADOC Constructor für initial Lösung
-    public Account(String address, String txLimit, String gasLimit, int revokedPeriodCounter) {
-        this.address = address;
-        this.txLimit = new BigInteger(txLimit);
-        this.gasLimit = new BigInteger(gasLimit);
-        this.revokeTime = revokedPeriodCounter;
-        this.transactionCounter = this.txLimit.intValue();
-        this.gasUsedCounter = this.gasLimit.intValue();
-    }
-
-    //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
-    public Account(String address, String txLimit, String gasLimit, String revokedPeriodCounter) {
-        this.address = address;
-        this.txLimit = new BigInteger(txLimit);
-        this.gasLimit = new BigInteger(gasLimit);
-        this.revokeTime = Integer.parseInt(revokedPeriodCounter);
-        this.transactionCounter = this.txLimit.intValue();
-        this.gasUsedCounter = this.gasLimit.intValue();
-    }
+//    //TODO JAVADOC
+//    public Account(String address) {
+//        this.address = address;
+//    }
+//
+//    //TODO JAVADOC Constructor für initial Lösung
+//    public Account(String address, String txLimit, String gasLimit, Double revokedPeriodCounter) {
+//        this.address = address;
+//        this.txLimit = new BigInteger(txLimit);
+//        this.gasLimit = new BigInteger(gasLimit);
+//        this.revokeTime = revokedPeriodCounter;
+//        this.transactionCounter = this.txLimit.intValue();
+//        this.gasUsedCounter = this.gasLimit.intValue();
+//    }
+//
+//    //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
+//    public Account(String address, String txLimit, String gasLimit, String revokedPeriodCounter) {
+//        this.address = address;
+//        this.txLimit = new BigInteger(txLimit);
+//        this.gasLimit = new BigInteger(gasLimit);
+//        this.revokeTime = Integer.parseInt(revokedPeriodCounter);
+//        this.transactionCounter = this.txLimit.intValue();
+//        this.gasUsedCounter = this.gasLimit.intValue();
+//    }
 
     //TODO
 
@@ -99,17 +106,20 @@ public class Account {
         this.address = address;
     }
 
-    public long getRevokeTime() {
+    public BigInteger getRevokeTime() {
+        if (revokeTime == null){
+            return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultRevokeTime();
+        }
         return revokeTime;
     }
 
-    public void setRevokeTime(long revokeTime) {
+    public void setRevokeTime(BigInteger revokeTime) {
         this.revokeTime = revokeTime;
     }
 
     public BigInteger getGasLimit() {
-        if (gasLimit.equals(BigInteger.ZERO)){
-            return BigInteger.valueOf(JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultGasLimit());
+        if (gasLimit == null){
+            return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultGasLimit();
         }
         return gasLimit;
     }
@@ -136,8 +146,8 @@ public class Account {
 
     public BigInteger getTxLimit() {
 
-        if (txLimit.equals(BigInteger.ZERO)){
-            return BigInteger.valueOf(JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultTxLimit());
+        if (txLimit == null){
+            return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultTxLimit();
         }
 
         return txLimit;

@@ -29,9 +29,9 @@ import java.math.BigInteger;
  * https://kauri.io/connecting-to-an-ethereum-client-with-java-eclipse-and-web3j/b9eb647c47a546bc95693acc0be72546/a
  * Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
  */
-public class ChainSetUp {
+public class ChainSetup {
 
-    private static ChainSetUp instance;
+    public static ChainSetup instance;
 
     private String privateKey;
     private String certifierAddress;
@@ -42,7 +42,16 @@ public class ChainSetUp {
     private TransactionManager transactionManager;
     private byte[] hash;
     private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
-    private static Logger log = LoggerFactory.getLogger(ChainSetUp.class);
+    private static Logger log = LoggerFactory.getLogger(ChainSetup.class);
+
+
+    public static ChainSetup getInstance(){
+        if (ChainSetup.instance == null){
+            ChainSetup.instance = new ChainSetup();
+        }
+        return ChainSetup.instance;
+    }
+
 
     //TODO naming
     //TODO JAVADOC
@@ -50,7 +59,7 @@ public class ChainSetUp {
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
      *
      */
-    public ChainSetUp() {
+    private ChainSetup() {
         log.info("connecting");
 
         this.certifierAddress = jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress();
