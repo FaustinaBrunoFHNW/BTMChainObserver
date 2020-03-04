@@ -10,7 +10,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Diese Klasse ist dafür da,
@@ -56,26 +55,25 @@ public class AccountWriter {
 
         log.info("Alle Accounts werden in Datei gespeichert.");
 
-        log.info(accountLoader.getRevokedAccountArrayList().size()+" Accounts sind blockiert");
+        log.info(accountLoader.getRevokedAccountArrayList().size() + " Accounts sind blockiert");
         for (Account account : accountLoader.getRevokedAccountArrayList()) {
-                bw.write(this.prepareAccountLineForFile(account));
-                log.info(account.getAdressValue());
-                bw.newLine();
+            bw.write(this.prepareAccountLineForFile(account));
+            log.info(account.getAdressValue());
+            bw.newLine();
 
         }
 
-        log.info(accountLoader.getAccountArrayList().size()+" Accounts sind zertifiziert");
+        log.info(accountLoader.getAccountArrayList().size() + " Accounts sind zertifiziert");
         for (Account account : accountLoader.getAccountArrayList()) {
 
-                bw.write(this.prepareAccountLineForFile(account));
-                log.info(account.getAdressValue());
-                bw.newLine();
+            bw.write(this.prepareAccountLineForFile(account));
+            log.info(account.getAdressValue());
+            bw.newLine();
 
         }
         bw.close();
         log.info("Daten wurden in datei gespeichert.");
     }
-
 
     //TODO JAVADOC und Impl
     public void writeDefaultSettingsInFile() throws IOException {
@@ -91,9 +89,14 @@ public class AccountWriter {
     private String prepareDefaultSeetingsLineForFile(DefaultSettings defaultSettings) {
         String defaultSettingsLine;
         defaultSettingsLine =
-                defaultSettings.getIntervalResetCounter() + ";" + defaultSettings.getIntervalRevoke() + ";"
-                        + defaultSettings.getDefaultTransaktionCount() + ";" + defaultSettings.getDefaultGasUsedCount()
-                        + ";"+defaultSettings.getCertifyierAdress()+ ";"+"DEFAULSETTINGS" ;
+                defaultSettings.getConnectionAddress() + ";" +
+                        defaultSettings.getIntervalResetCounter() + ";" +
+                        defaultSettings.getIntervalRevoke() + ";" +
+                        defaultSettings.getDefaultTransaktionCount() + ";" +
+                        defaultSettings.getDefaultGasUsedCount() + ";" +
+                        defaultSettings.getRegisterAddress()+ ";" +
+                        defaultSettings.getCertifyierAddress() + ";" +
+                        defaultSettings.getTimestampLastReset();
         return defaultSettingsLine;
 
     }
@@ -101,13 +104,14 @@ public class AccountWriter {
     private String prepareAccountLineForFile(Account account) {
         String accountLine;
         //TODO Default Werte nicht speichern
-        if(account.isDefaultSettings()) {
-            accountLine = account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
-                    + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
-        }
-        else{
-            accountLine = account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
-                    + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
+        if (account.isDefaultSettings()) {
+            accountLine =
+                    account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
+                            + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
+        } else {
+            accountLine =
+                    account.getAdressValue() + ";" + account.getMaxTransaktionCounter() + ";" + account.getMaxGasUsed()
+                            + ";" + account.getRevokePeriodCounter() + ";" + account.getRevoked();
         }
         return accountLine;
     }

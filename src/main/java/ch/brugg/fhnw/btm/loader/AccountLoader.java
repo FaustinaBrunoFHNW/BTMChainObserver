@@ -100,10 +100,10 @@ public class AccountLoader {
                 line = line.trim().toLowerCase();
                 String[] accountArray = line.split(";");
 
-                if (accountArray.length == 5) {
+                if (accountArray.length == 6) {
                     this.readDefaultValues(accountArray);
 
-                } else if (accountArray.length == 6) {
+                } else if (accountArray.length == 8) {
                     this.readDefaultValuesWithCerfierAdd(accountArray);
                 }
 
@@ -155,7 +155,7 @@ public class AccountLoader {
      * @param fileInput String Array mit den DefaultSettings Attributen
      */
     private void readDefaultValues(String[] fileInput) {
-        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3], fileInput[4]);
+        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3], fileInput[4], fileInput[5]);
 
         log.info("******************DEFAULT WERTE***************");
         log.info("Connection Adresse " + fileInput[0]);
@@ -163,6 +163,7 @@ public class AccountLoader {
         log.info("Revoke Zeit wurde auf " + fileInput[2] + " Intervalle  gesetzt");
         log.info("Default Max Transaktionen wurden auf " + fileInput[3] + " gesetzt");
         log.info("Default Max Gas Used wurde auf " + fileInput[4] + " gesetzt");
+        log.info("Register Adresse: ");
 
     }
 
@@ -173,9 +174,10 @@ public class AccountLoader {
      * @param fileInput String Array mit den DefaultSettings Attributen
      */
     private void readDefaultValuesWithCerfierAdd(String[] fileInput) {
-        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3], fileInput[4]);
-        if (fileInput.length > 5) {
-            defaultSettings.setCertifyierAdress(fileInput[5]);
+        defaultSettings = new DefaultSettings(fileInput[0], fileInput[1], fileInput[2], fileInput[3], fileInput[4],fileInput[5]);
+        if (fileInput.length > 6) {
+            defaultSettings.setCertifyierAddress(fileInput[6]);
+            defaultSettings.setTimestampLastReset(Long.parseLong(fileInput[7]));
         }
 
         log.info("******************DEFAULT WERTE***************");
@@ -321,7 +323,7 @@ public class AccountLoader {
     }
 
     public void setCertifierAddress(String certfierAdd) {
-        this.defaultSettings.setCertifyierAdress(certfierAdd);
+        this.defaultSettings.setCertifyierAddress(certfierAdd);
     }
 
     public ArrayList<Account> getDeleteAccountList() {

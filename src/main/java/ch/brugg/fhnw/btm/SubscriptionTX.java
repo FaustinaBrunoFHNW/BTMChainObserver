@@ -12,10 +12,10 @@ import org.web3j.utils.Convert;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 //TODO Beschreischbung was diese Klasse macht
 public class SubscriptionTX {
@@ -175,7 +175,9 @@ public class SubscriptionTX {
             Thread.sleep(min * 60 * 1000);
             this.setAllCountersToMax();
             this.certifyRevokedAccounts();
+            this.accountLoader.getDefaultSettings().setTimestampLastReset(new Timestamp(System.currentTimeMillis()).getTime());
             this.accountWriter.writeAccountsInFile();
+            this.accountWriter.writeDefaultSettingsInFile();
         }
     }
 

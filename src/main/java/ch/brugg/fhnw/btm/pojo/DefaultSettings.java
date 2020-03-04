@@ -14,17 +14,19 @@ public class DefaultSettings {
     //defaultGasCount
     private String defaultGasUsedCount;
 
-    private String certifyierAdress;
+    private String certifyierAddress;
 
-    private String timestampLastIntervall;
+    private long timestampLastReset;
+    private String registerAddress;
 
     public DefaultSettings(String connectionAddress,String intervalResetCounter, String intervalRevoke, String defaultTransaktionCount,
-            String defaultGasUsedCount) {
+            String defaultGasUsedCount,String registerAddress) {
         this.connectionAddress=connectionAddress;
         this.intervalResetCounter = Integer.parseInt(intervalResetCounter);
         this.intervalRevoke = Integer.parseInt(intervalRevoke);
         this.defaultTransaktionCount =defaultTransaktionCount;
         this.defaultGasUsedCount = defaultGasUsedCount;
+        this.registerAddress=registerAddress;
     }
 
     public int getIntervalResetCounter() {
@@ -59,12 +61,12 @@ public class DefaultSettings {
         this.defaultGasUsedCount = defaultGasUsedCount;
     }
 
-    public String getCertifyierAdress() {
-        return certifyierAdress;
+    public String getCertifyierAddress() {
+        return certifyierAddress;
     }
 
-    public void setCertifyierAdress(String certifyierAdress) {
-        this.certifyierAdress = certifyierAdress;
+    public void setCertifyierAddress(String certifyierAddress) {
+        this.certifyierAddress = certifyierAddress;
     }
 
     public String getConnectionAddress() {
@@ -75,11 +77,19 @@ public class DefaultSettings {
         this.connectionAddress = connectionAddress;
     }
 
-    public String getTimestampLastIntervall() {
-        return timestampLastIntervall;
+    public long getTimestampLastReset() {
+        return timestampLastReset;
     }
 
-    public void setTimestampLastIntervall(String timestampLastIntervall) {
-        this.timestampLastIntervall = timestampLastIntervall;
+    public void setTimestampLastReset(long timestampLastReset) {
+        this.timestampLastReset = timestampLastReset;
+    }
+
+    public String getRegisterAddress() {
+        return registerAddress;
+    }
+
+    public void setRegisterAddress(String registerAddress) {
+        this.registerAddress = registerAddress;
     }
 }
