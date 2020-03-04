@@ -2,13 +2,22 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.loader.AccountLoader;
 import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
+import ch.brugg.fhnw.btm.loader.JSONAccountLoader;
+import ch.brugg.fhnw.btm.loader.JSONDefaultSettingsLoader;
 import org.web3j.protocol.Web3j;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        JSONDefaultSettingsLoader jsonDefaultSettingsLoader = JSONDefaultSettingsLoader.getInstance();
+
+        jsonDefaultSettingsLoader.loadDefaultSettings();
+
+        JSONAccountLoader jsonAccountLoader = JSONAccountLoader.getInstance();
+        jsonAccountLoader.loadAccounts();
+
+        /*
         //TODO revoke all acounts die certifyed sind
 
         //TODO aus File auslesen
@@ -40,7 +49,9 @@ public class Main {
         System.out.println("Anzahl gelöschte Accounts: " + accountLoader.getDeleteAccountList().size());
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
-        subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getIntervalResetCounter());
+        subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
+
+         */
     }
 
 
@@ -83,7 +94,7 @@ public class Main {
         System.out.println("Anzahl gesperrte Accounts: " + accountLoader.getRevokedAccountArrayList().size());
         System.out.println("Anzahl gelöschte Accounts: " + accountLoader.getDeleteAccountList().size());
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
-        subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getIntervalResetCounter());
+        subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
 
     }
 

@@ -6,9 +6,9 @@ public class DefaultSettings {
 
     private String connectionAddress;
 
-    private int intervalResetCounter;
+    private int resetIntervall;
     //intervalRevoke wieviel resetInervalle Account gesperrt ist
-    private int intervalRevoke;
+    private int revokeMultiplier;
     //defaultTransaktionCount
     private String defaultTransaktionCount;
     //defaultGasCount
@@ -19,30 +19,32 @@ public class DefaultSettings {
     private long timestampLastReset;
     private String registerAddress;
 
-    public DefaultSettings(String connectionAddress,String intervalResetCounter, String intervalRevoke, String defaultTransaktionCount,
-            String defaultGasUsedCount,String registerAddress) {
+    public DefaultSettings(){}
+
+    public DefaultSettings(String connectionAddress, String resetIntervall, String revokeMultiplier, String defaultTransaktionCount,
+                           String defaultGasUsedCount, String registerAddress) {
         this.connectionAddress=connectionAddress;
-        this.intervalResetCounter = Integer.parseInt(intervalResetCounter);
-        this.intervalRevoke = Integer.parseInt(intervalRevoke);
+        this.resetIntervall = Integer.parseInt(resetIntervall);
+        this.revokeMultiplier = Integer.parseInt(revokeMultiplier);
         this.defaultTransaktionCount =defaultTransaktionCount;
         this.defaultGasUsedCount = defaultGasUsedCount;
         this.registerAddress=registerAddress;
     }
 
-    public int getIntervalResetCounter() {
-        return intervalResetCounter;
+    public int getResetIntervall() {
+        return resetIntervall;
     }
 
-    public void setIntervalResetCounter(int intervalResetCounter) {
-        this.intervalResetCounter = intervalResetCounter;
+    public void setResetIntervall(int resetIntervall) {
+        this.resetIntervall = resetIntervall;
     }
 
-    public int getIntervalRevoke() {
-        return intervalRevoke;
+    public int getRevokeMultiplier() {
+        return revokeMultiplier;
     }
 
-    public void setIntervalRevoke(int intervalRevoke) {
-        this.intervalRevoke = intervalRevoke;
+    public void setRevokeMultiplier(int revokeMultiplier) {
+        this.revokeMultiplier = revokeMultiplier;
     }
 
     public String getDefaultTransaktionCount() {

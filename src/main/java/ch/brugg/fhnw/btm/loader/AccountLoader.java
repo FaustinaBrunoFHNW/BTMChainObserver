@@ -1,7 +1,6 @@
 package ch.brugg.fhnw.btm.loader;
 
 import ch.brugg.fhnw.btm.pojo.Account;
-import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -130,7 +129,7 @@ public class AccountLoader {
         Account account = new Account(fileInput[0],
                 this.defaultSettingsLoader.getDefaultSettings().getDefaultTransaktionCount(),
                 this.defaultSettingsLoader.getDefaultSettings().getDefaultGasUsedCount(),
-                this.defaultSettingsLoader.getDefaultSettings().getIntervalRevoke());
+                this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
         account.setDefaultSettings(true);
         log.info("Folgender Account wurde geladen: " + account.getAdressValue()
                 + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
@@ -145,7 +144,7 @@ public class AccountLoader {
      */
     private void readAccountValuesSimple(String[] fileInput) {
         Account account = new Account(fileInput[0], fileInput[1], fileInput[2],
-                this.defaultSettingsLoader.getDefaultSettings().getIntervalRevoke());
+                this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier());
         account.setDefaultSettings(false);
         log.info("Folgender Account wurde geladen: " + account.getAdressValue() + " Mit Max Transaktionen: " + account
                 .getMaxTransaktionCounter() + " und max GasUsed:" + account.getMaxGasUsed());
@@ -163,7 +162,7 @@ public class AccountLoader {
      */
     private void readAccountValuesComplex(String[] fileInput) {
         Account account = new Account(fileInput[0], fileInput[1], fileInput[2],
-                this.defaultSettingsLoader.getDefaultSettings().getIntervalRevoke(), fileInput[3], fileInput[4]);
+                this.defaultSettingsLoader.getDefaultSettings().getRevokeMultiplier(), fileInput[3], fileInput[4]);
         log.info("Folgender Account wurde geladen: " + account.getAdressValue()
                 + " Es wurden die Default werde für max Transaktionen und max Gas Used gesetzt ");
         if (account.getRevokePeriodCounter() == account.getRevokePeriod()) {

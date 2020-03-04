@@ -1,0 +1,6 @@
+[
+  {"adressValue": "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b", "revokePeriodCounter": 5, "revoked": 2},
+  {"adressValue": "0xf13264C4bD595AEbb966E089E99435641082ff24"},
+  {"adressValue": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72", "transaktionCounter": 5, "gasUsedCounter": 20000000},
+  {"adressValue": "0xaf02DcCdEf3418F8a12f4LDD4ed49FaAa8FD366b", "revokePeriodCounter": 5, "revoked": 2, "transaktionCounter": 3, "gasUsedCounter": 50000000}
+]

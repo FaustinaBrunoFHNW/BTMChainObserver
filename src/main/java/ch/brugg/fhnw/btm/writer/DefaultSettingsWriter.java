@@ -1,6 +1,5 @@
 package ch.brugg.fhnw.btm.writer;
 
-import ch.brugg.fhnw.btm.loader.AccountLoader;
 import ch.brugg.fhnw.btm.loader.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.DefaultSettings;
 import org.slf4j.Logger;
@@ -52,8 +51,8 @@ public class DefaultSettingsWriter {
         String defaultSettingsLine;
         defaultSettingsLine =
                 defaultSettings.getConnectionAddress() + ";" +
-                        defaultSettings.getIntervalResetCounter() + ";" +
-                        defaultSettings.getIntervalRevoke() + ";" +
+                        defaultSettings.getResetIntervall() + ";" +
+                        defaultSettings.getRevokeMultiplier() + ";" +
                         defaultSettings.getDefaultTransaktionCount() + ";" +
                         defaultSettings.getDefaultGasUsedCount() + ";" +
                         defaultSettings.getRegisterAddress()+ ";" +

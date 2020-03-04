@@ -1,0 +1,10 @@
+{
+  "connectionAddress": "myConnectionString",
+  "resetIntervall": 20,
+  "revokeMultiplier": 2,
+  "defaultTransaktionCount": 5,
+  "defaultGasUsedCount": 50000000,
+  "registerAddress": "0x0000000000000000000000000000000000001337",
+  "certifyierAddress": null,
+  "timestampLastReset": null
+}
