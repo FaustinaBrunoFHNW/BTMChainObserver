@@ -1,12 +1,9 @@
 package ch.brugg.fhnw.btm.loader;
 
 import ch.brugg.fhnw.btm.pojo.Account;
-import ch.brugg.fhnw.btm.pojo.JSONDefaultSettings;
 import ch.brugg.fhnw.btm.pojo.MasterKey;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.slf4j.Logger;
