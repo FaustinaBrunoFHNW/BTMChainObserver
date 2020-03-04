@@ -9,7 +9,7 @@ import org.web3j.protocol.Web3j;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-/**
+
         JSONDefaultSettingsLoader jsonDefaultSettingsLoader = JSONDefaultSettingsLoader.getInstance();
 
         jsonDefaultSettingsLoader.loadDefaultSettings();
@@ -26,7 +26,7 @@ public class Main {
         System.out.println("Writing Accounts");
         jsonAccountLoader.writeAccountList();
 
-*/
+/*
 
         //TODO revoke all acounts die certifyed sind
 
@@ -60,7 +60,7 @@ public class Main {
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
         subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
-
+*/
     }
 
 
