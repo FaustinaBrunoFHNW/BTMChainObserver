@@ -16,6 +16,13 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 //TODO Beschreischbung was diese Klasse macht
+
+/**
+ * In dieser Klasse wird die Subscription gemacht um die gemachten Transaktionen beobachten zu können
+ * In dieser Klasse werden die Transaktionen gefiltert, um bei gratis Transaktionen den DoS Algorithmus zu starten
+ * In dieser Klasse wird das ResetIntervall gestartet, welches alle Counters Resettet und das Speichern der daten reguliert
+ * @Author Faustina Bruno, Serge-Jurij Maikoff
+ */
 public class SubscriptionTX {
 
     private Web3j web3j;
@@ -31,15 +38,24 @@ public class SubscriptionTX {
         dosAlgorithm.setChainInteractions(chainInteractions);
     }
 
-    //TODO JAVADOC
+
+    /**
+     * Mit dieser Methode wird der filter und der Intervall gestaret
+     * @param min Anzahl Minuten wo das Intervall neu gestartet wird
+     * @throws Exception
+     */
     public void run(int min) throws Exception {
-        log.info("Doing simple subscription");
+        log.info("Filter und Intervall werden gestartet");
         this.txFilter();
         this.intervall(min);
-
     }
 
-    void txFilter() {
+    /**
+     * In dieser Methode wird eine Subscription gemacht und geprüft ob die getätigten Transaktionen
+     * gratis Transaktionen sind.
+     * Wenn ja, wird der DoS Algorithmus gestartet.
+     */
+    private void txFilter() {
         Disposable subscription = web3j.transactionFlowable().subscribe(tx -> {
             //TODO Gas pro Zeiteinheit anzeigen
             log.info("Eine Transaktion von folgender Adresse wurde gefunden: " + tx.getFrom());
@@ -58,10 +74,8 @@ public class SubscriptionTX {
         });
     }
 
-    //TODO Intervall Methode wo alle Counter von Accounts raufzählt
-    //TODO javadoc
-    /*
-
+    /**
+     * In dieser Methode werden alle Counters zurückgesetzt
      */
     private void setAllCountersToMax() {
 
@@ -72,12 +86,19 @@ public class SubscriptionTX {
 
     }
 
-    //TODO JAVADOC<
-    //TODO eigener THREAD
+    /**
+     * In dieser Methode wird der Intervall ausgeführt Nach jedem ausführen werden alleCounters zurückgesetzt
+     * und der Zustand der Accounts wie auch der DefaultSettings in die dateien gespeichert.
+     * @param min Anzahl Minuten des Intervalls
+     * @throws InterruptedException
+     * @throws IOException
+     */
     private void intervall(int min) throws InterruptedException, IOException {
-        System.out.println("*************Intervall ist gestartet********************");
+        log.info("*************Intervall ist gestartet********************");
         while (true) {
             log.info(new Date().toString());
+
+            //TODO eigener THREAD
             Thread.sleep(min * 60 * 1000);
             this.setAllCountersToMax();
             this.jsonDefaultSettingsHandler.getDefaultSettings()
