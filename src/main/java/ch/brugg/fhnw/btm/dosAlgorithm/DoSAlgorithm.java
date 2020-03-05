@@ -18,6 +18,14 @@ import java.util.Queue;
 
 import static java.util.Comparator.comparing;
 
+//TODO JavaDov ergänzen
+/**
+ * In dieser Klasse ist der Dos Algorithmus implementiert, der gratis Transaktionen überwacht
+ * Der Account der die Transaktion auslöst hat eine max. Anzahl Transaktionen und Gas die er benutzen kann,
+ * bis er gesperrt wird
+ *
+ * @Author Faustina Bruno, Serge-Jurij Maikoff
+ */
 public class DoSAlgorithm {
     public static DoSAlgorithm instance;
     private ChainInteractions chainInteractions;
@@ -26,6 +34,7 @@ public class DoSAlgorithm {
     private  Logger log = LoggerFactory.getLogger(DoSAlgorithm.class);
     private Queue<Command> queue = new PriorityQueue<>(comparing(Command::getTimestamp));
 
+    //TODO JAVADOC
     public static DoSAlgorithm getInstance() {
 
         if (DoSAlgorithm.instance == null) {
@@ -33,11 +42,11 @@ public class DoSAlgorithm {
         }
         return DoSAlgorithm.instance;
     }
-
+    //TODO JAVADOC
     public void setChainInteractions(ChainInteractions chainInteractions) {
         this.chainInteractions = chainInteractions;
     }
-
+    //TODO JAVADOC
     private DoSAlgorithm(){
 
         log.info("Queue wird gestartet");
@@ -45,6 +54,7 @@ public class DoSAlgorithm {
         log.info("Queue wurde erfolgreich gestartet");
     }
 
+    //TODO JAVADOC
     public void dosAlgorithm(Account account) {
         Timestamp tempStamp = new Timestamp(System.currentTimeMillis());
         long temp = tempStamp.getTime();
@@ -81,6 +91,7 @@ public class DoSAlgorithm {
         log.info("Account Datei wird aktualisiert");
         JsonAccountHandler.getInstance().writeAccountList();
     }
+    //TODO JAVADOC
     public void offerAccount(Account acc){
         queue.add(new CertifyCommand(acc));
     }
@@ -103,6 +114,8 @@ public class DoSAlgorithm {
                 //TODO wieso 1000, müssen Zahlen als Konstanten definieren
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
+                //TODO error Meldung schreiben
+                log.error("");
                 e.printStackTrace();
             }
 

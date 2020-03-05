@@ -16,6 +16,7 @@ import org.web3j.protocol.Web3j;
  */
 public class Main {
     private static Logger log = LoggerFactory.getLogger(Main.class);
+
     //TODO diese methode entfernen
     public static void main(String[] args) throws Exception {
 
@@ -30,18 +31,12 @@ public class Main {
         log.info("Schreiben von Accounts Accounts");
         jsonAccountHandler.writeAccountList();
 
-
-
         log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
         jsonDefaultSettingsHandler.loadDefaultSettings();
-
-
-
 
         ChainSetup.getInstance().setUpAfterChainStart();
         //       chainSetUp.initChain();
         ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
-
 
         //TODO load all accounts from list
         jsonAccountHandler.loadAccounts();
@@ -54,12 +49,7 @@ public class Main {
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
 
-
-
-
-
     }
-
 
     //TODO für CML init Methode schreiben
 
@@ -68,6 +58,7 @@ public class Main {
      * Hier wird der certifyer deployed
      * Die certify Adresse Gebrinted
      * Zertifizieren des JavaProgramm Accounts
+     *
      * @throws Exception
      */
     public static void init() throws Exception {
@@ -75,16 +66,14 @@ public class Main {
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
 
-        ChainSetup chainSetUup =  ChainSetup.getInstance();
+        ChainSetup chainSetUup = ChainSetup.getInstance();
         chainSetUup.initChain();
 
         ChainInteractions chainInteractions = new ChainInteractions(chainSetUup);
-        SubscriptionTX subscriptionTX = new SubscriptionTX( chainInteractions);
+        SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
 
     }
-
-
 
     //TODO für CML run Methode schreiiben
 
@@ -94,6 +83,7 @@ public class Main {
      * Alle Accounts aus dem File einlesen
      * Alle Accounts Zertifizieren
      * Intervall starten
+     *
      * @throws Exception
      */
     public static void run() throws Exception {
@@ -104,7 +94,6 @@ public class Main {
         //Accaounts laden gegebenfalls löschen
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.loadAccounts();
-
 
         log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
 
@@ -119,10 +108,6 @@ public class Main {
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
 
-
-
-
-
     }
 
     //TODO für CML stop Methode schreiiben
@@ -133,7 +118,23 @@ public class Main {
      * @throws Exception
      */
     public static void stop() throws Exception {
+        //Default Settings laden
+        JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
+        jsonDefaultSettingsHandler.loadDefaultSettings();
 
+        //Accaounts laden gegebenfalls löschen
+        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+        jsonAccountHandler.loadAccounts();
+
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+
+        ChainSetup.getInstance().setUpAfterChainStart();
+        ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
+        chainInteractions.revokeAccountList((jsonAccountHandler.getAccountList()));
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+        //TODO Chain Stoppen
+        //TODO Subscription/Filter stoppen
+        //TODO interval stoppen
     }
 
 }

@@ -21,6 +21,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * In dieser Klasse werden Accounts aus dem JSON File geladen und wieder reingeschrieben
+ *
+ * @Author Faustina Bruno, Serge-Jurij Maikoff
+ */
 public class JsonAccountHandler {
 
     private static JsonAccountHandler instance;
@@ -33,7 +38,7 @@ public class JsonAccountHandler {
     private String accountsFile = "src/main/resources/whitelist/AccountList.json";
 
 
-
+//TODO JAVADOC
     public static JsonAccountHandler getInstance() {
 
         if (JsonAccountHandler.instance == null) {
@@ -42,10 +47,12 @@ public class JsonAccountHandler {
         return JsonAccountHandler.instance;
     }
 
+    //TODO JAVADOC
     private JsonAccountHandler(){
         this.JSONDefaultSettingsHandler = JSONDefaultSettingsHandler.getInstance();
     }
 
+    //TODO JAVADOC
     public void loadAccounts() {
         Gson gson = new Gson();
         try {
@@ -67,23 +74,32 @@ public class JsonAccountHandler {
             }
             certifyLoadedAccounts();
         } catch (FileNotFoundException e) {
+            //TODO error log ausfüllen
+            log.error("");
             e.printStackTrace();
         }
     }
 
 
+    //TODO JAVADOC
     public void writeAccountList() {
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
             Writer writer = Files.newBufferedWriter(Paths.get(accountsFile));
             gson.toJson(accountList,writer);
             writer.close();
+            //TODO log Info ausfüllen
+            log.info("");
         } catch (IOException e) {
+            //TODO error log ausfüllen
+            log.error("");
             e.printStackTrace();
 
         }
     }
 
+    //TODO JAVADOC
+    //TODO public?
     public Account getAccount(String address){
         for (Account acc: accountList){
             if (acc.getAddress().equalsIgnoreCase(address)){
@@ -93,6 +109,7 @@ public class JsonAccountHandler {
         return null;
     }
 
+    //TODO JAVADOC
     public Account processAccount(String address, BigInteger gasUsed){
         Account toProcess = getAccount(address);
         toProcess.decraseTransactionCounter();
@@ -104,7 +121,7 @@ public class JsonAccountHandler {
         return toProcess;
     }
 
-    //TODO WAS passiert hier
+    //TODO Frage: WAS passiert hier?
     public void certifyLoadedAccounts(){
 
     }

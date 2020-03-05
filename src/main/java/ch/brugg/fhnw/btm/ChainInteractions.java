@@ -42,6 +42,7 @@ public class ChainInteractions {
     }
 
     //TODO JavaDoc
+    //TODO Frage: Brauchen wir das?
     public TransactionReceipt sendEtherToAccount(BigInteger gasPrice, BigInteger gasLimit, String accountAddress)
             throws Exception {
         this.log.info("Methode sendEtherToAccount wurde aufgerufen.");
@@ -49,6 +50,8 @@ public class ChainInteractions {
         return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
     }
 
+
+    //TODO public checken
     /**
      * In dieser Methode werden alle Account einer Liste von der Whiteliste entfernt
      * @param accounts Liste mit Accounts
@@ -61,27 +64,35 @@ public class ChainInteractions {
         }
     }
 
-
-    public boolean revokeAccount(String accountAddress)   {
+    /**
+     * Dieser Methode entfernt einen Account aus der Whitelist und kontrolliert ob es erfolgreich war
+     * @param accountAddress Adresse des zu sperrenden Accounts
+     */
+    public void revokeAccount(String accountAddress)   {
         this.log.info("Methode revokeAccount wurde aufgerufen. Folgender Account wird aus der Whiteliste entfernt: "
                 + accountAddress);
 
         try {
+            //TODO log info ausfüllen
+            log.info("");
             this.simpleCertifier.revoke(accountAddress).send();
         } catch (Exception e) {
+            //TODO log error ausfüllen
+            this.log.error("");
             e.printStackTrace();
         }
 
         if (!this.isCertified(accountAddress)) {
             this.log.info(accountAddress + " wurde  erfolgreich aus der Whiteliste entfernt");
-            return true;
         }
         this.log.info(accountAddress + " wurde NICHT erfolgreich aus der Whiteliste entfernt");
-        return false;
     }
 
     /**
-     * In dieser Methode werden alle Account einer Liste in die Whiteliste integriert
+     * In dieser Methode werden alle geladenen Accounts geprüft ob sie einen Timestamp besitzten oder nicht
+     * kein TimeStamp --> Account wird in Whiteliste aufgenommen
+     * Timestamp in Vergangenheit --> Account wird in die Whiteliste aufgenommen
+     * Timestamp in der zukunft --> Account ist gesperrt und wird in die PrioQue hinzugefügt
      * @param accounts Liste mit Accounts
      */
     public void certifyAccountList(ArrayList<Account> accounts) {
@@ -121,6 +132,8 @@ public class ChainInteractions {
             log.info("Zertifizierung erfolgreich");
             return isCertified(add);
         } catch (Exception e) {
+            //TODO log error ausfüllen
+            this.log.error("");
             e.printStackTrace();
         }
         return false;
@@ -137,6 +150,8 @@ public class ChainInteractions {
         try {
             return simpleCertifier.certified(add).send();
         } catch (Exception e) {
+            //TODO log error ausfüllen
+            this.log.error("");
             e.printStackTrace();
         }
         return false;

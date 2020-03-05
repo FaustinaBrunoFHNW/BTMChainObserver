@@ -113,7 +113,7 @@ public class ChainSetup {
             //TODO owner speichern in Variable
             log.info("Besitzer von Registry: " + simpleRegistry.owner().send());
         } catch (Exception e) {
-            log.warn("Simple Registry konnte nicht geladen werden");
+            log.error("Simple Registry konnte nicht geladen werden");
             e.printStackTrace();
         }
 
@@ -139,7 +139,7 @@ public class ChainSetup {
             this.jsonDefaultSettingsHandler.writeDefaultSettings();
 
         }
-        log.warn("Es gab ein Problem beim Setup und Deployen und Registrieren des Certifier ");
+        log.error("Es gab ein Problem beim Setup und Deployen und Registrieren des Certifier ");
 
     }
 
@@ -166,7 +166,7 @@ public class ChainSetup {
             log.info("Deployment vom Certifier erfolgreich");
             return true;
         } catch (Exception e) {
-            log.warn("Deployen vom Certifier hat nicht funktioniert.");
+            log.error("Deployen vom Certifier hat nicht funktioniert.");
             e.printStackTrace();
         }
         return false;
@@ -190,7 +190,7 @@ public class ChainSetup {
             log.info("Registrierung vom Certifier erfolgreich");
             return true;
         } catch (Exception e) {
-            log.warn("Registrierung vom Certifier hat nicht funktioniert.");
+            log.error("Registrierung vom Certifier hat nicht funktioniert.");
             e.printStackTrace();
         }
         return false;
@@ -214,6 +214,9 @@ public class ChainSetup {
             log.info("Gas Preis " + gasPrice.getGasPrice());
 
         } catch (IOException e) {
+            //TODO log error ausfüllen
+            this.log.error("");
+            //TODO Exception auf Deutsch
             throw new RuntimeException("Error whilst sending json-rpc requests", e);
         }
     }

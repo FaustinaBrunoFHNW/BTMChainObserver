@@ -28,33 +28,7 @@ public class Account {
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
-//    //TODO JAVADOC
-//    public Account(String address) {
-//        this.address = address;
-//    }
-//
-//    //TODO JAVADOC Constructor für initial Lösung
-//    public Account(String address, String transactionLimit, String gasLimit, Double revokedPeriodCounter) {
-//        this.address = address;
-//        this.transactionLimit = new BigInteger(transactionLimit);
-//        this.gasLimit = new BigInteger(gasLimit);
-//        this.revokeTime = revokedPeriodCounter;
-//        this.transactionCounter = this.transactionLimit.intValue();
-//        this.gasUsedCounter = this.gasLimit.intValue();
-//    }
-//
-//    //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
-//    public Account(String address, String transactionLimit, String gasLimit, String revokedPeriodCounter) {
-//        this.address = address;
-//        this.transactionLimit = new BigInteger(transactionLimit);
-//        this.gasLimit = new BigInteger(gasLimit);
-//        this.revokeTime = Integer.parseInt(revokedPeriodCounter);
-//        this.transactionCounter = this.transactionLimit.intValue();
-//        this.gasUsedCounter = this.gasLimit.intValue();
-//    }
-
-    //TODO
-
+    //TODO brauch es das?
     /**
      * Erhöht den Counter bis er auf den definierten maximal Wert komnmt
      */
@@ -66,6 +40,7 @@ public class Account {
 
     }
 
+    //TODO brauch es das?
     public void increaseGasUsedCounter() {
         if (this.gasUsedCounter < this.transactionLimit.intValue()) {
             this.gasUsedCounter++;
