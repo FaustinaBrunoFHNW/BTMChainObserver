@@ -26,7 +26,7 @@ public class JsonAccountHandler {
     private static JsonAccountHandler instance;
     private static JsonDefaultSettingsHandler JSONDefaultSettingsHandler;
     private ArrayList<Account> accountList = new ArrayList<>();
-    private static Logger log = LoggerFactory.getLogger(JsonAccountHandler.class);
+    private  Logger log = LoggerFactory.getLogger(JsonAccountHandler.class);
     private int deletedAccounts = 0, revokedAccounts = 0;
 
 

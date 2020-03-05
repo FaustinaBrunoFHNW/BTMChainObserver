@@ -23,7 +23,7 @@ public class DoSAlgorithm {
     private ChainInteractions chainInteractions;
     private JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
     private JsonDefaultSettingsHandler defaultSettingsHandler =JsonDefaultSettingsHandler.getInstance();
-    private static Logger log = LoggerFactory.getLogger(DoSAlgorithm.class);
+    private  Logger log = LoggerFactory.getLogger(DoSAlgorithm.class);
     private Queue<Command> queue = new PriorityQueue<>(comparing(Command::getTimestamp));
 
     public static DoSAlgorithm getInstance() {

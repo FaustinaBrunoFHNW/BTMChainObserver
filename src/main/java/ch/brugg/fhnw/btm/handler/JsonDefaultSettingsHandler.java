@@ -21,7 +21,7 @@ import java.time.Instant;
 
 public class JsonDefaultSettingsHandler {
 
-    private static Logger log = LoggerFactory.getLogger(DefaultSettingsLoader.class);
+    private Logger log = LoggerFactory.getLogger(DefaultSettingsLoader.class);
 
     private static JsonDefaultSettingsHandler instance;
     private MasterKey masterKey;

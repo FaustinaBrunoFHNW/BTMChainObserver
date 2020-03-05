@@ -3,10 +3,12 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.web3j.protocol.Web3j;
 
 public class Main {
-
+    private static Logger log = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) throws Exception {
 
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
@@ -17,12 +19,12 @@ public class Main {
         jsonAccountHandler.loadAccounts();
 
         jsonDefaultSettingsHandler.writeDefaultSettings();
-        System.out.println("Schreiben von Accounts Accounts");
+        log.info("Schreiben von Accounts Accounts");
         jsonAccountHandler.writeAccountList();
 
 
 
-        System.out.println("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
         jsonDefaultSettingsHandler.loadDefaultSettings();
 
 
@@ -42,7 +44,7 @@ public class Main {
         System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
         System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
 
-        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
+        SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
 
 
@@ -61,42 +63,21 @@ public class Main {
      * Zertifizieren des JavaProgramm Accounts
      * @throws Exception
      */
-    /*
     public static void init() throws Exception {
 
-        AccountLoader accountLoader =  AccountLoader.getInstance();
+        JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
+        jsonDefaultSettingsHandler.loadDefaultSettings();
 
-        DefaultSettingsLoader defaultSettingsLoader = DefaultSettingsLoader.getInstance();
-        System.out.println("Anzahl Accounts: " + accountLoader.getAccountArrayList().size());
+        ChainSetup chainSetUup =  ChainSetup.getInstance();
+        chainSetUup.initChain();
 
-
-        defaultSettingsLoader.loadDefaultSettings();
-
-        //TODO Settings in DfaultSettings File speichern
-        //TODO Singleton parameter übergeben
-        ChainSetUp chainSetUp =  ChainSetUp.getInstance();
-        chainSetUp.initChain();
-
-        ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
-
-        Web3j web3j = chainSetUp.getWeb3j();
-
-        accountLoader.loadAccounts();
-        defaultSettingsLoader.setCertifierAddress(chainSetUp.getCertifierAddress());
-        //TODO Register ADD speichern
-        chainInteractions.certifyAccountList(accountLoader.getAccountArrayList());
-        chainInteractions.revokeAccountList(accountLoader.getDeleteAccountList());
-
-
-        System.out.println("Anzahl zertifizierte Accounts: " + accountLoader.getAccountArrayList().size());
-        System.out.println("Anzahl gesperrte Accounts: " + accountLoader.getRevokedAccountArrayList().size());
-        System.out.println("Anzahl gelöschte Accounts: " + accountLoader.getDeleteAccountList().size());
-        SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
-        subscriptionTX.run(defaultSettingsLoader.getDefaultSettings().getResetIntervall());
+        ChainInteractions chainInteractions = new ChainInteractions(chainSetUup);
+        SubscriptionTX subscriptionTX = new SubscriptionTX( chainInteractions);
+        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
 
     }
 
-     */
+
 
     //TODO für CML run Methode schreiiben
 

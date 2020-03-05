@@ -26,14 +26,14 @@ import java.util.Date;
 public class SubscriptionTX {
 
     private Web3j web3j;
-    private static Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
+    private  Logger log = LoggerFactory.getLogger(SubscriptionTX.class);
     private ChainInteractions chainInteractions;
     private JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
     private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
     private DoSAlgorithm dosAlgorithm = DoSAlgorithm.getInstance();
 
-    public SubscriptionTX(Web3j web3j, ChainInteractions chainInteractions) {
-        this.web3j = web3j;
+    public SubscriptionTX( ChainInteractions chainInteractions) {
+        this.web3j = ChainSetup.getInstance().getWeb3j();
         this.chainInteractions = chainInteractions;
         dosAlgorithm.setChainInteractions(chainInteractions);
     }

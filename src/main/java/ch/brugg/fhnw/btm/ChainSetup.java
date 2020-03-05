@@ -42,7 +42,7 @@ public class ChainSetup {
     private TransactionManager transactionManager;
     private byte[] hash;
     private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
-    private static Logger log = LoggerFactory.getLogger(ChainSetup.class);
+    private Logger log = LoggerFactory.getLogger(ChainSetup.class);
 
     public static ChainSetup getInstance() {
         if (ChainSetup.instance == null) {
@@ -108,7 +108,7 @@ public class ChainSetup {
      */
     private void loadSimpleRegistry() {
         simpleRegistry = SimpleRegistry
-                .load("0x0000000000000000000000000000000000001337", web3j, getCredentialsFromPrivateKey(),
+                .load(jsonDefaultSettingsHandler.getDefaultSettings().getNameRegistryAddress(), web3j, getCredentialsFromPrivateKey(),
                         new DefaultGasProvider());
         try {
             log.info("Fee of Registry: " + simpleRegistry.fee().send());
@@ -137,9 +137,11 @@ public class ChainSetup {
             log.info("Certifying hat funktioniert");
             log.info("Addresse vom Certifier: " + simpleCertifier.getContractAddress());
             this.certifierAddress = simpleCertifier.getContractAddress();
+            this.jsonDefaultSettingsHandler.getDefaultSettings().setCertifierAddress(certifierAddress);
+            this.jsonDefaultSettingsHandler.writeDefaultSettings();
 
         }
-        log.warn("Es gab ein Probelm beim Setup und Deployen und Registrieren des certifier ");
+        log.warn("Es gab ein Problem beim Setup und Deployen und Registrieren des Certifier ");
 
     }
 

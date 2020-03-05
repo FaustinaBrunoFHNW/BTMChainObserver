@@ -4,7 +4,7 @@
   "defaultTxLimit": 5,
   "defaultGasLimit": 50000000,
   "certifierAddress": "0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221",
-  "timestampLastReset": "Mar 5, 2020 2:56:24 PM",
+  "timestampLastReset": "Mar 5, 2020 3:16:24 PM",
   "nameRegistryAddress": "0x0000000000000000000000000000000000001337",
   "defaultRevokeTime": 3
 }
