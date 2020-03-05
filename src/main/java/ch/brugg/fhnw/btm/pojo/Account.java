@@ -11,7 +11,7 @@ public class Account {
 
     private String address;
     private int transactionCounter;
-    private BigInteger txLimit;
+    private BigInteger transactionLimit;
     private BigInteger revokeTime;
     private BigInteger gasLimit;
     private long gasUsedCounter;
@@ -34,22 +34,22 @@ public class Account {
 //    }
 //
 //    //TODO JAVADOC Constructor für initial Lösung
-//    public Account(String address, String txLimit, String gasLimit, Double revokedPeriodCounter) {
+//    public Account(String address, String transactionLimit, String gasLimit, Double revokedPeriodCounter) {
 //        this.address = address;
-//        this.txLimit = new BigInteger(txLimit);
+//        this.transactionLimit = new BigInteger(transactionLimit);
 //        this.gasLimit = new BigInteger(gasLimit);
 //        this.revokeTime = revokedPeriodCounter;
-//        this.transactionCounter = this.txLimit.intValue();
+//        this.transactionCounter = this.transactionLimit.intValue();
 //        this.gasUsedCounter = this.gasLimit.intValue();
 //    }
 //
 //    //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
-//    public Account(String address, String txLimit, String gasLimit, String revokedPeriodCounter) {
+//    public Account(String address, String transactionLimit, String gasLimit, String revokedPeriodCounter) {
 //        this.address = address;
-//        this.txLimit = new BigInteger(txLimit);
+//        this.transactionLimit = new BigInteger(transactionLimit);
 //        this.gasLimit = new BigInteger(gasLimit);
 //        this.revokeTime = Integer.parseInt(revokedPeriodCounter);
-//        this.transactionCounter = this.txLimit.intValue();
+//        this.transactionCounter = this.transactionLimit.intValue();
 //        this.gasUsedCounter = this.gasLimit.intValue();
 //    }
 
@@ -59,7 +59,7 @@ public class Account {
      * Erhöht den Counter bis er auf den definierten maximal Wert komnmt
      */
     public void increaseTransactionCounter() {
-        if (this.transactionCounter < this.txLimit.intValue()) {
+        if (this.transactionCounter < this.transactionLimit.intValue()) {
             this.transactionCounter++;
         }
         log.info("Account " + address + " hat noch " + transactionCounter + " Transktionen");
@@ -67,7 +67,7 @@ public class Account {
     }
 
     public void increaseGasUsedCounter() {
-        if (this.gasUsedCounter < this.txLimit.intValue()) {
+        if (this.gasUsedCounter < this.transactionLimit.intValue()) {
             this.gasUsedCounter++;
         }
         log.info("Account " + address + " hat noch " + gasUsedCounter + " Gas zu verbrauchen");
@@ -144,17 +144,17 @@ public class Account {
         this.gasUsedCounter = gasUsedCounter;
     }
 
-    public BigInteger getTxLimit() {
+    public BigInteger getTransactionLimit() {
 
-        if (txLimit == null){
+        if (transactionLimit == null){
             return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultTxLimit();
         }
 
-        return txLimit;
+        return transactionLimit;
     }
 
-    public void setTxLimit(BigInteger txLimit) {
-        this.txLimit = txLimit;
+    public void setTransactionLimit(BigInteger transactionLimit) {
+        this.transactionLimit = transactionLimit;
     }
 
 }

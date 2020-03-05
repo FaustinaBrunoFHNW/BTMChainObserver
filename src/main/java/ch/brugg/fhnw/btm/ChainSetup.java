@@ -24,10 +24,8 @@ import java.math.BigInteger;
 
 /**
  * In dieser Klasse wird die Blockchain aufgesetzt
- * <p>
- * Teile dieser Klasse wurden aus dem Tutorial gezogen
- * https://kauri.io/connecting-to-an-ethereum-client-with-java-eclipse-and-web3j/b9eb647c47a546bc95693acc0be72546/a
- * Video Tutorial https://www.youtube.com/watch?v=kJ905hVbQ_E
+ *
+ * @Author Faustina Bruno, Serge-Jurij-Maikoff
  */
 public class ChainSetup {
 

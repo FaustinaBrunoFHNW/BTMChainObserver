@@ -80,7 +80,7 @@
 //                    account.getAddress() + ";" + account.getRevokeTime();
 //        } else {
 //            accountLine =
-//                    account.getAddress() + ";" + account.getTxLimit() + ";" + account.getGasLimit()
+//                    account.getAddress() + ";" + account.getTransactionLimit() + ";" + account.getGasLimit()
 //                            + ";" + account.getRevokeTime() ;
 //        }
 //        return accountLine;

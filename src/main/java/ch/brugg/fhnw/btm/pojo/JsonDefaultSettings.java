@@ -3,6 +3,7 @@ package ch.brugg.fhnw.btm.pojo;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
+//TODO Naming
 public class JsonDefaultSettings {
 
     public static JsonDefaultSettings instance;
@@ -15,39 +16,17 @@ public class JsonDefaultSettings {
         return JsonDefaultSettings.instance;
     }
     private JsonDefaultSettings(){};
-
     private String connectionAddress;
-
     private int resetInterval;
-
     private BigInteger defaultTxLimit;
-
     private BigInteger defaultGasLimit;
-
     private String certifierAddress;
-
     private Timestamp timestampLastReset;
     private String nameRegistryAddress;
-
-
     private  BigInteger defaultRevokeTime;
 
 
-
-
-
-
-
-
-
 //**************************GETTER und SETTER*********************************
-
-
-
-
-
-
-
 
 
     public String getConnectionAddress() {

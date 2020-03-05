@@ -7,8 +7,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.protocol.Web3j;
 
+//TODO evtl Klasse unbennennen
+
+/**
+ * In dieser Klasse befinden sich die 3 Befehle die der Benutzer über die Command Line aufrufen kann
+ *
+ * @Author Faustina Bruno, Serhe-Jurij Maikoff
+ */
 public class Main {
     private static Logger log = LoggerFactory.getLogger(Main.class);
+    //TODO diese methode entfernen
     public static void main(String[] args) throws Exception {
 
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();

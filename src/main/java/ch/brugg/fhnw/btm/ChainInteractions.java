@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 /**
  * In dieser Klasse sind alle Interaktionen mit der Blockchain über den SimpleCertifier
+ *
+ * @Author Faustina Bruno, Serge-Jurij Maikoff
  */
 public class ChainInteractions {
 

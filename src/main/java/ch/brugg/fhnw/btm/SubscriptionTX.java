@@ -80,7 +80,7 @@ public class SubscriptionTX {
     private void setAllCountersToMax() {
 
         for (Account account : accountHandler.getAccountList()) {
-            account.setTransactionCounter(account.getTxLimit().intValue());
+            account.setTransactionCounter(account.getTransactionLimit().intValue());
             account.setGasUsedCounter(account.getGasLimit().intValue());
         }
 
