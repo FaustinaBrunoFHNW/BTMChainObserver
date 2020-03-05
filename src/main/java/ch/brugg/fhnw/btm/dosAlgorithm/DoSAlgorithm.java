@@ -60,8 +60,7 @@ public class DoSAlgorithm {
         long temp = tempStamp.getTime();
         if (account.getTransactionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAddress());
-            int intervall= this.defaultSettingsHandler.getDefaultSettings().getResetInterval();
-           long revokeTime = account.getRevokeTime().intValue()*intervall *60 * 1000;
+           long revokeTime = account.getRevokeTime().intValue() *60 * 1000;
 
             tempStamp.setTime(temp + revokeTime);
             account.setTimeStamp(tempStamp);
@@ -75,8 +74,7 @@ public class DoSAlgorithm {
 
         }  if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAddress());
-            int intervall= this.defaultSettingsHandler.getDefaultSettings().getResetInterval();
-            long revokeTime = account.getRevokeTime().intValue()*intervall *60 * 1000;
+            long revokeTime = account.getRevokeTime().intValue()*60 * 1000;
             tempStamp.setTime(temp + revokeTime);
 
             account.setTimeStamp(tempStamp);
