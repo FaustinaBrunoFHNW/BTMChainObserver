@@ -102,9 +102,9 @@ public class DoSAlgorithm {
             if (queue.peek() !=null){
                 log.info("Timestamp now: "+now.toString());
                 log.info("Timestamp account: " +queue.peek().getTimestamp());
+                //TODO wieso ist es hier umgekehrt
                 if (!queue.peek().getTimestamp().after(now)){
                     queue.poll().execute();
-
                     //TODO Frage: darf man das hier?
                     this.accountHandler.writeAccountList();
                 }

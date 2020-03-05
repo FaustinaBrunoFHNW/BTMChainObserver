@@ -1,11 +1,9 @@
 package ch.brugg.fhnw.btm.handler;
-import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.pojo.Account;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import com.sun.javafx.iio.gif.GIFImageLoaderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +15,6 @@ import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,7 +26,7 @@ import java.util.Iterator;
 public class JsonAccountHandler {
 
     private static JsonAccountHandler instance;
-    private static JsonDefaultSettingsHandler JSONDefaultSettingsHandler;
+    private static JsonDefaultSettingsHandler jsonDefaultSettingsHandler;
     private ArrayList<Account> accountList = new ArrayList<>();
     private  Logger log = LoggerFactory.getLogger(JsonAccountHandler.class);
     private int deletedAccounts = 0, revokedAccounts = 0;
@@ -49,7 +46,7 @@ public class JsonAccountHandler {
 
     //TODO JAVADOC
     private JsonAccountHandler(){
-        this.JSONDefaultSettingsHandler = JSONDefaultSettingsHandler.getInstance();
+        jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
     }
 
     //TODO JAVADOC
