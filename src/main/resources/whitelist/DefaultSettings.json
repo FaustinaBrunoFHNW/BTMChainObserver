@@ -1,10 +1,10 @@
 {
-  "connectionAddress": "myConnectionString",
-  "resetIntervall": 20,
-  "revokeMultiplier": 2,
-  "defaultTransaktionCount": 5,
-  "defaultGasUsedCount": 50000000,
-  "certifyierAddress": null,
-  "timestampLastReset": "2020-03-04T19:54:47.613Z",
-  "registerAddress": "0x0000000000000000000000000000000000001337"
+  "connectionAddress": "http://jurijnas.myqnapcloud.com:8545/",
+  "resetInterval": 2,
+  "defaultTxLimit": 5,
+  "defaultGasLimit": 50000000,
+  "certifierAddress": "0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221",
+  "timestampLastReset": "Mar 5, 2020 1:53:50 AM",
+  "nameRegistryAddress": "0x0000000000000000000000000000000000001337",
+  "defaultRevokeTime": 1
 }

@@ -1,42 +1,32 @@
 [
   {
-    "address": null,
-    "adressValue": "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b",
-    "transaktionCounter": 5,
-    "maxTransaktionCounter": null,
-    "revokePeriodCounter": 5,
-    "maxGasUsed": null,
-    "gasUsedCounter": 50000000,
-    "defaultSettings": false
+    "address": "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b",
+    "transactionCounter": 4,
+    "txLimit": null,
+    "revokeTime": null,
+    "gasLimit": null,
+    "gasUsedCounter": 49979000,
+    "deleteMe": false,
+    "timeStamp": null
   },
   {
-    "address": null,
-    "adressValue": "0xf13264C4bD595AEbb966E089E99435641082ff24",
-    "transaktionCounter": 5,
-    "maxTransaktionCounter": null,
-    "revokePeriodCounter": 0,
-    "maxGasUsed": null,
+    "address": "0xf13264C4bD595AEbb966E089E99435641082ff24",
+    "transactionCounter": 5,
+    "txLimit": null,
+    "revokeTime": null,
+    "gasLimit": null,
     "gasUsedCounter": 50000000,
-    "defaultSettings": false
+    "deleteMe": false,
+    "timeStamp": null
   },
   {
-    "address": null,
-    "adressValue": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
-    "transaktionCounter": 5,
-    "maxTransaktionCounter": null,
-    "revokePeriodCounter": 0,
-    "maxGasUsed": null,
-    "gasUsedCounter": 20000000,
-    "defaultSettings": false
-  },
-  {
-    "address": null,
-    "adressValue": "0xaf02DcCdEf3418F8a12f4LDD4ed49FaAa8FD366b",
-    "transaktionCounter": 3,
-    "maxTransaktionCounter": null,
-    "revokePeriodCounter": 5,
-    "maxGasUsed": null,
-    "gasUsedCounter": 50000000,
-    "defaultSettings": false
+    "address": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
+    "transactionCounter": 1000,
+    "txLimit": 1000,
+    "revokeTime": 25,
+    "gasLimit": 99999,
+    "gasUsedCounter": 99999,
+    "deleteMe": false,
+    "timeStamp": null
   }
 ]

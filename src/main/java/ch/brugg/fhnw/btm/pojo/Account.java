@@ -1,70 +1,73 @@
 package ch.brugg.fhnw.btm.pojo;
 
+import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.web3j.abi.datatypes.Address;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 
 public class Account {
 
-    private Address address;
-    private String adressValue;
-    private int transaktionCounter;
-    private BigInteger maxTransaktionCounter;
-    private int revokePeriodCounter;
-    private BigInteger maxGasUsed;
+    private String address;
+    private int transactionCounter;
+    private BigInteger txLimit;
+    private BigInteger revokeTime;
+    private BigInteger gasLimit;
     private long gasUsedCounter;
-    private boolean defaultSettings;
+    public boolean deleteMe = false;
+    private Timestamp timeStamp = null;
+
+    public Timestamp getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Timestamp timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
     private static Logger log = LoggerFactory.getLogger(Account.class);
 
-    //TODO JAVADOC
-    public Account(String address) {
-        this.address = new Address(address.trim().toLowerCase());
-        this.adressValue = address;
-    }
-
-    //TODO JAVADOC Constructor für initial Lesung
-    public Account(String address, String maxTransaktionCounter, String maxGasUsed, int revokedPeriodCounter) {
-        this.address = new Address(address.trim().toLowerCase());
-        this.adressValue = address;
-        this.maxTransaktionCounter = new BigInteger(maxTransaktionCounter);
-        this.maxGasUsed = new BigInteger(maxGasUsed);
-        this.revokePeriodCounter = revokedPeriodCounter;
-
-        this.transaktionCounter = this.maxTransaktionCounter.intValue();
-        this.gasUsedCounter = this.maxGasUsed.intValue();
-    }
-
-    //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
-    public Account(String address, String maxTransaktionCounter, String maxGasUsed, String revokedPeriodCounter) {
-        this.address = new Address(address.trim().toLowerCase());
-        this.adressValue = address;
-        this.maxTransaktionCounter = new BigInteger(maxTransaktionCounter);
-        this.maxGasUsed = new BigInteger(maxGasUsed);
-        this.revokePeriodCounter = Integer.parseInt(revokedPeriodCounter);
-
-
-        this.transaktionCounter = this.maxTransaktionCounter.intValue();
-        this.gasUsedCounter = this.maxGasUsed.intValue();
-    }
+//    //TODO JAVADOC
+//    public Account(String address) {
+//        this.address = address;
+//    }
+//
+//    //TODO JAVADOC Constructor für initial Lösung
+//    public Account(String address, String txLimit, String gasLimit, Double revokedPeriodCounter) {
+//        this.address = address;
+//        this.txLimit = new BigInteger(txLimit);
+//        this.gasLimit = new BigInteger(gasLimit);
+//        this.revokeTime = revokedPeriodCounter;
+//        this.transactionCounter = this.txLimit.intValue();
+//        this.gasUsedCounter = this.gasLimit.intValue();
+//    }
+//
+//    //TODO JAVADOC Constructor für  Lesung mit Revoked und revoked Period
+//    public Account(String address, String txLimit, String gasLimit, String revokedPeriodCounter) {
+//        this.address = address;
+//        this.txLimit = new BigInteger(txLimit);
+//        this.gasLimit = new BigInteger(gasLimit);
+//        this.revokeTime = Integer.parseInt(revokedPeriodCounter);
+//        this.transactionCounter = this.txLimit.intValue();
+//        this.gasUsedCounter = this.gasLimit.intValue();
+//    }
 
     //TODO
 
     /**
-     * Erhöht den Counter bis er auf den definiertern maximal Wert komnmt
+     * Erhöht den Counter bis er auf den definierten maximal Wert komnmt
      */
-    public void increaseTransaktionCounter() {
-        if (this.transaktionCounter < this.maxTransaktionCounter.intValue()) {
-            this.transaktionCounter++;
+    public void increaseTransactionCounter() {
+        if (this.transactionCounter < this.txLimit.intValue()) {
+            this.transactionCounter++;
         }
-        log.info("Account " + address + " hat noch " + transaktionCounter + " Transktionen");
+        log.info("Account " + address + " hat noch " + transactionCounter + " Transktionen");
 
     }
 
     public void increaseGasUsedCounter() {
-        if (this.gasUsedCounter < this.maxTransaktionCounter.intValue()) {
+        if (this.gasUsedCounter < this.txLimit.intValue()) {
             this.gasUsedCounter++;
         }
         log.info("Account " + address + " hat noch " + gasUsedCounter + " Gas zu verbrauchen");
@@ -75,62 +78,62 @@ public class Account {
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
-    public void decraseTransaktionCounter() {
-        if (transaktionCounter > 0) {
-            this.transaktionCounter--;
+    public void decraseTransactionCounter() {
+        if (transactionCounter > 0) {
+            this.transactionCounter--;
         }
-        log.info("Account " + address + " hat noch " + transaktionCounter + " Transktionen");
+        log.info("Account " + address + " hat noch " + transactionCounter + " Transktionen");
     }
 
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
-    public void decraseGasUsedCounter(int gasUsedOnTX) {
+    public void decreaseGasUsedCounter(long gasUsedOnTX) {
         if (gasUsedCounter > 0) {
             this.gasUsedCounter= this.getGasUsedCounter()-gasUsedOnTX;
         }
         log.info("Account " + address + " hat noch " + gasUsedCounter + " Gas zu verbrauchen");
     }
 
-    // Getter und Setter
-    public Address getAddress() {
+
+
+
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getAdressValue() {
-        return adressValue;
+    public BigInteger getRevokeTime() {
+        if (revokeTime == null){
+            return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultRevokeTime();
+        }
+        return revokeTime;
     }
 
-    public void setAdressValue(String adressValue) {
-        this.adressValue = adressValue;
+    public void setRevokeTime(BigInteger revokeTime) {
+        this.revokeTime = revokeTime;
     }
 
-    public int getRevokePeriodCounter() {
-        return revokePeriodCounter;
+    public BigInteger getGasLimit() {
+        if (gasLimit == null){
+            return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultGasLimit();
+        }
+        return gasLimit;
     }
 
-    public void setRevokePeriodCounter(int revokePeriodCounter) {
-        this.revokePeriodCounter = revokePeriodCounter;
+    public void setGasLimit(BigInteger gasLimit) {
+        this.gasLimit = gasLimit;
     }
 
-    public BigInteger getMaxGasUsed() {
-        return maxGasUsed;
+    public int getTransactionCounter() {
+        return transactionCounter;
     }
 
-    public void setMaxGasUsed(BigInteger maxGasUsed) {
-        this.maxGasUsed = maxGasUsed;
-    }
-
-    public int getTransaktionCounter() {
-        return transaktionCounter;
-    }
-
-    public void setTransaktionCounter(int transaktionCounter) {
-        this.transaktionCounter = transaktionCounter;
+    public void setTransactionCounter(int transactionCounter) {
+        this.transactionCounter = transactionCounter;
     }
 
     public long getGasUsedCounter() {
@@ -141,19 +144,17 @@ public class Account {
         this.gasUsedCounter = gasUsedCounter;
     }
 
-    public BigInteger getMaxTransaktionCounter() {
-        return maxTransaktionCounter;
+    public BigInteger getTxLimit() {
+
+        if (txLimit == null){
+            return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultTxLimit();
+        }
+
+        return txLimit;
     }
 
-    public void setMaxTransaktionCounter(BigInteger maxTransaktionCounter) {
-        this.maxTransaktionCounter = maxTransaktionCounter;
+    public void setTxLimit(BigInteger txLimit) {
+        this.txLimit = txLimit;
     }
 
-    public boolean isDefaultSettings() {
-        return defaultSettings;
-    }
-
-    public void setDefaultSettings(boolean defaultSettings) {
-        this.defaultSettings = defaultSettings;
-    }
 }

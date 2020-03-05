@@ -2,6 +2,7 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
+import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.pojo.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.web3j.utils.Convert;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -21,14 +23,14 @@ import java.util.ArrayList;
 public class ChainInteractions {
 
     private Logger log = LoggerFactory.getLogger(ChainInteractions.class);
-    private ChainSetUp chainSetUp;
+    private ChainSetup chainSetUp;
     private SimpleCertifier simpleCertifier;
     private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
     private Web3j web3j;
 
     //TODO JavaDoc für Constructor
-    public ChainInteractions(ChainSetUp chainSetUp) {
+    public ChainInteractions(ChainSetup chainSetUp) {
         this.chainSetUp = chainSetUp;
         this.simpleCertifier = chainSetUp.getSimpleCertifier();
         this.simpleRegistry = chainSetUp.getSimpleRegistry();
@@ -46,26 +48,24 @@ public class ChainInteractions {
     }
 
     /**
-     * In dieser Methode werden alle Account einer Liste in die Whiteliste integriert
+     * In dieser Methode werden alle Account einer Liste von der Whiteliste entfernt
      * @param accounts Liste mit Accounts
      */
     public void revokeAccountList(ArrayList<Account> accounts){
         log.info("Alle Accounts von Liste werden revoked");
         for (Account account : accounts) {
-            log.info("Revoked: "+account.getAdressValue());
-            this.revokeAccount(account.getAdressValue());
+            log.info("Revoked: "+account.getAddress());
+            this.revokeAccount(account.getAddress());
         }
     }
 
-    //TODO java doc
+
     public boolean revokeAccount(String accountAddress)   {
         this.log.info("Methode revokeAccount wurde aufgerufen. Folgender Account wird aus der Whiteliste entfernt: "
                 + accountAddress);
 
         try {
             this.simpleCertifier.revoke(accountAddress).send();
-           // log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,12 +82,27 @@ public class ChainInteractions {
      * In dieser Methode werden alle Account einer Liste in die Whiteliste integriert
      * @param accounts Liste mit Accounts
      */
-    public void certifyAccountList(ArrayList<Account> accounts){
-        log.info("Alle Accounts von Liste werden certifyed");
-        for (Account account : accounts) {
-            this.certifyAccount(account.getAdressValue());
+    public void certifyAccountList(ArrayList<Account> accounts) {
+
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+
+        for (Account acc : accounts) {
+            if (acc.getTimeStamp() == null) {
+                log.info("Account hat keinen TimeStamp und wurde in die Whitelist aufgenommen: " + acc.getAddress());
+                certifyAccount(acc.getAddress());
+            }
+            else if(acc.getTimeStamp().before(now)){
+                log.info("Account hat einen Timestamp, liegt aber in der Vergangenheit: " + acc.getAddress());
+                acc.setTimeStamp(null);
+                certifyAccount(acc.getAddress());
+            }
+            else if (acc.getTimeStamp().after(now)){
+                log.info("Account hat einen TimeStamp.. diser liegt in der Zukunft: " + acc.getAddress());
+                DoSAlgorithm.getInstance().offerAccount(acc);
+            }
         }
     }
+
 
     /**
      * Hier wird ein Account in die Whiteliste hinzugefügt
@@ -99,6 +114,7 @@ public class ChainInteractions {
         try {
             log.info("Certifying Account mit folgender Adresse: " + add);
             this.simpleCertifier.certify(add).send();
+            //what the cinnamon toast fuck is this?
             log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
             log.info("Done certifying account");
             return isCertified(add);
