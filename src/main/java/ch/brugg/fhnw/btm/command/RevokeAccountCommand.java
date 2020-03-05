@@ -14,6 +14,7 @@ public class RevokeAccountCommand extends AbstractCommand implements Command {
     @Override
     public void execute() {
         try {
+            log.info("Der Account "+account.getAddress()+" wird versucht aus der Whiteliste zu entfernen.");
             instance.getSimpleCertifier().revoke(account.getAddress()).send();
         } catch (Exception e) {
             log.error("Account konnte nicht von Whitelist entfernt werden");

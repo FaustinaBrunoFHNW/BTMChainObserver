@@ -40,7 +40,7 @@ public class JsonDefaultSettings {
 
 
 
-
+//**************************GETTER und SETTER*********************************
 
 
 

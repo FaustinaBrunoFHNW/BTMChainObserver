@@ -52,7 +52,7 @@ public class JsonAccountHandler {
             JsonReader reader = new JsonReader(new FileReader(accountsFile));
             Type accountListType = new TypeToken<ArrayList<Account>>(){}.getType();
             accountList = gson.fromJson(reader, accountListType);
-            log.info("Accounts wurden aus Datei geladen. Es sind " + accountList.size()+ " Accounts geladen worden ");
+            log.info("Accounts wurden aus Datei geladen. Es sind " + accountList.size()+ " Accounts geladen worden. ");
 
 
             Iterator<Account> itr = accountList.iterator();
@@ -104,9 +104,12 @@ public class JsonAccountHandler {
         return toProcess;
     }
 
+    //TODO WAS passiert hier
     public void certifyLoadedAccounts(){
 
     }
+
+    //******************GETTER und SETTER*******************************
 
     public ArrayList<Account> getAccountList() {
         return accountList;

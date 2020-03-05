@@ -4,11 +4,14 @@ import ch.brugg.fhnw.btm.ChainInteractions;
 import ch.brugg.fhnw.btm.command.CertifyCommand;
 import ch.brugg.fhnw.btm.command.Command;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
+import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
+import ch.brugg.fhnw.btm.handler.old.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sound.midi.Soundbank;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -19,6 +22,7 @@ public class DoSAlgorithm {
     public static DoSAlgorithm instance;
     private ChainInteractions chainInteractions;
     private JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
+    private JsonDefaultSettingsHandler defaultSettingsHandler =JsonDefaultSettingsHandler.getInstance();
     private static Logger log = LoggerFactory.getLogger(DoSAlgorithm.class);
     private Queue<Command> queue = new PriorityQueue<>(comparing(Command::getTimestamp));
 
@@ -35,9 +39,10 @@ public class DoSAlgorithm {
     }
 
     private DoSAlgorithm(){
-        System.out.printf("Start Queue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        log.info("Queue wird gestartet");
         new Thread(queueInspector).start();
-        System.out.printf("fucking did it ..................................");
+        log.info("Queue wurde erfolgreich gestartet");
     }
 
     public void dosAlgorithm(Account account) {
@@ -45,10 +50,12 @@ public class DoSAlgorithm {
         long temp = tempStamp.getTime();
         if (account.getTransactionCounter() == 0) {
             this.chainInteractions.revokeAccount(account.getAddress());
-            long revokeTime = account.getRevokeTime().intValue() *60 * 1000;
+            int intervall= this.defaultSettingsHandler.getDefaultSettings().getResetInterval();
+           long revokeTime = account.getRevokeTime().intValue()*intervall *60 * 1000;
 
             tempStamp.setTime(temp + revokeTime);
             account.setTimeStamp(tempStamp);
+
             queue.add(new CertifyCommand(account));
             //TODO Account in Priority Queue werfen
             log.info("Der Acccount "+ account.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
@@ -56,10 +63,12 @@ public class DoSAlgorithm {
 
             accountHandler.writeAccountList();
 
-        } else if (account.getGasUsedCounter() < 0) {
+        }  if (account.getGasUsedCounter() < 0) {
             this.chainInteractions.revokeAccount(account.getAddress());
-            long revokeTime = account.getRevokeTime().intValue() *60 * 1000;
+            int intervall= this.defaultSettingsHandler.getDefaultSettings().getResetInterval();
+            long revokeTime = account.getRevokeTime().intValue()*intervall *60 * 1000;
             tempStamp.setTime(temp + revokeTime);
+
             account.setTimeStamp(tempStamp);
             queue.add(new CertifyCommand(account));
 
@@ -76,16 +85,22 @@ public class DoSAlgorithm {
         queue.add(new CertifyCommand(acc));
     }
     Runnable queueInspector = () -> {
-        log.info("Queue is up and running");
+        log.info("Queue wurde gestartet und läuft.");
         while (true) {
             Timestamp now = new Timestamp(System.currentTimeMillis());
             if (queue.peek() !=null){
-                if (queue.peek().getTimestamp().after(now)){
+                log.info("Timestamp now: "+now.toString());
+                log.info("Timestamp account: " +queue.peek().getTimestamp());
+                if (!queue.peek().getTimestamp().after(now)){
                     queue.poll().execute();
+
+                    //TODO Frage: darf man das hier?
+                    this.accountHandler.writeAccountList();
                 }
 
             }
             try {
+                //TODO wieso 1000, müssen Zahlen als Konstanten definieren
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

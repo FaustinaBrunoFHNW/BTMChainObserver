@@ -1,11 +1,11 @@
 [
   {
     "address": "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b",
-    "transactionCounter": 4,
+    "transactionCounter": 5,
     "txLimit": null,
     "revokeTime": null,
     "gasLimit": null,
-    "gasUsedCounter": 49979000,
+    "gasUsedCounter": 50000000,
     "deleteMe": false,
     "timeStamp": null
   },
@@ -21,11 +21,11 @@
   },
   {
     "address": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
-    "transactionCounter": 1000,
-    "txLimit": 1000,
-    "revokeTime": 25,
-    "gasLimit": 99999,
-    "gasUsedCounter": 99999,
+    "transactionCounter": 2,
+    "txLimit": 2,
+    "revokeTime": 3,
+    "gasLimit": 999999,
+    "gasUsedCounter": 999999,
     "deleteMe": false,
     "timeStamp": null
   }

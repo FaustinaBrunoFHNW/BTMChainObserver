@@ -112,11 +112,11 @@ public class ChainInteractions {
     public boolean certifyAccount(String add) {
 
         try {
-            log.info("Certifying Account mit folgender Adresse: " + add);
+            log.info("zertifizierung des Accounts mit folgender Adresse: " + add);
             this.simpleCertifier.certify(add).send();
             //what the cinnamon toast fuck is this?
             log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
-            log.info("Done certifying account");
+            log.info("Zertifizierung erfolgreich");
             return isCertified(add);
         } catch (Exception e) {
             e.printStackTrace();

@@ -96,7 +96,7 @@ public class Account {
     }
 
 
-
+    //**************************GETTER und SETTER*********************************
 
     public String getAddress() {
         return address;

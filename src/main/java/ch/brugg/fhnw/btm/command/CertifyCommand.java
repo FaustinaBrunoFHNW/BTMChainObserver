@@ -16,7 +16,12 @@ public class CertifyCommand extends AbstractCommand implements Command {
         account.setTimeStamp(null);
         try {
             instance.getSimpleCertifier().certify(account.getAddress()).send();
+            account.setTransactionCounter(account.getTxLimit().intValue());
+            account.setGasUsedCounter(account.getGasLimit().intValue());
+
+            log.info("Zertifizierung hat funktioniert.");
         } catch (Exception e) {
+            log.warn("Zertifizierung hat nicht funktioniert.");
             e.printStackTrace();
         }
 

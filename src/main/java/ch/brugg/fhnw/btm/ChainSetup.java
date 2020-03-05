@@ -44,20 +44,18 @@ public class ChainSetup {
     private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
     private static Logger log = LoggerFactory.getLogger(ChainSetup.class);
 
-
-    public static ChainSetup getInstance(){
-        if (ChainSetup.instance == null){
+    public static ChainSetup getInstance() {
+        if (ChainSetup.instance == null) {
             ChainSetup.instance = new ChainSetup();
         }
         return ChainSetup.instance;
     }
 
-
     //TODO naming
     //TODO JAVADOC
+
     /**
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
-     *
      */
     private ChainSetup() {
         log.info("connecting");
@@ -102,7 +100,6 @@ public class ChainSetup {
         this.setUpCertifier();
     }
 
-
     /**
      * Erstellt die Simple Registry
      * und speichert den Certifier Owner
@@ -114,14 +111,13 @@ public class ChainSetup {
                 .load("0x0000000000000000000000000000000000001337", web3j, getCredentialsFromPrivateKey(),
                         new DefaultGasProvider());
         try {
-           log.info("Fee of Registry: " + simpleRegistry.fee().send());
+            log.info("Fee of Registry: " + simpleRegistry.fee().send());
             //TODO owner speichern in Variable
-           log.info("Besitzer von Registry: " + simpleRegistry.owner().send());
+            log.info("Besitzer von Registry: " + simpleRegistry.owner().send());
         } catch (Exception e) {
             log.warn("Simple Registry konnte nicht geladen werden");
             e.printStackTrace();
         }
-
 
     }
 
@@ -131,7 +127,6 @@ public class ChainSetup {
     /**
      * Hier wird der certifier deployed
      * Certifier Adresse wird ausgegeben und gespeichert
-     *
      */
     private void setUpCertifier() {
 
