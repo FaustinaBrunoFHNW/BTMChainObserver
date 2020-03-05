@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 public class JsonDefaultSettingsHandler {
@@ -54,7 +55,7 @@ public class JsonDefaultSettingsHandler {
     public void writeDefaultSettings() {
 
 
-        defaultSettings.setTimestampLastReset(Instant.now().toString());
+        defaultSettings.setTimestampLastReset(new Timestamp(System.currentTimeMillis()));
 
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {

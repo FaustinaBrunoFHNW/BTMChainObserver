@@ -11,6 +11,10 @@ public abstract class AbstractCommand implements Command {
     ChainSetup instance;
     Timestamp timestamp;
 
+    public Timestamp getTimestamp(){
+        return timestamp;
+    }
+
     public AbstractCommand(Account account){
         this.account = account;
         this.timestamp = account.getTimeStamp();

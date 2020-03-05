@@ -1,6 +1,8 @@
 package ch.brugg.fhnw.btm.command;
 
-public interface Command {
+import java.sql.Timestamp;
 
+public interface Command {
+    public Timestamp getTimestamp();
     public void execute();
 }

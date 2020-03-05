@@ -2,6 +2,7 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
+import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.pojo.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.web3j.utils.Convert;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -80,12 +82,27 @@ public class ChainInteractions {
      * In dieser Methode werden alle Account einer Liste in die Whiteliste integriert
      * @param accounts Liste mit Accounts
      */
-    public void certifyAccountList(ArrayList<Account> accounts){
-        log.info("Alle Accounts von Liste werden certified");
-        for (Account account : accounts) {
-            this.certifyAccount(account.getAddress());
+    public void certifyAccountList(ArrayList<Account> accounts) {
+
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+
+        for (Account acc : accounts) {
+            if (acc.getTimeStamp() == null) {
+                log.info("Account hat keinen TimeStamp und wurde in die Whitelist aufgenommen: " + acc.getAddress());
+                certifyAccount(acc.getAddress());
+            }
+            else if(acc.getTimeStamp().before(now)){
+                log.info("Account hat einen Timestamp, liegt aber in der Vergangenheit: " + acc.getAddress());
+                acc.setTimeStamp(null);
+                certifyAccount(acc.getAddress());
+            }
+            else if (acc.getTimeStamp().after(now)){
+                log.info("Account hat einen TimeStamp.. diser liegt in der Zukunft: " + acc.getAddress());
+                DoSAlgorithm.getInstance().offerAccount(acc);
+            }
         }
     }
+
 
     /**
      * Hier wird ein Account in die Whiteliste hinzugefügt

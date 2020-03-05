@@ -88,7 +88,7 @@ public class Account {
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
-    public void decreaseGasUsedCounter(int gasUsedOnTX) {
+    public void decreaseGasUsedCounter(long gasUsedOnTX) {
         if (gasUsedCounter > 0) {
             this.gasUsedCounter= this.getGasUsedCounter()-gasUsedOnTX;
         }

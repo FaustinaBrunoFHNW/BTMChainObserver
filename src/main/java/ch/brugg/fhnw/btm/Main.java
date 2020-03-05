@@ -1,5 +1,6 @@
 package ch.brugg.fhnw.btm;
 
+import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.web3j.protocol.Web3j;
@@ -36,7 +37,6 @@ public class Main {
         //TODO load all accounts from list
         jsonAccountHandler.loadAccounts();
         chainInteractions.certifyAccountList(jsonAccountHandler.getAccountList());
-       // chainInteractions.revokeAccountList(jsonAccountHandler.getDeleteAccountList());
 
         System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getAccountList().size());
         System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
@@ -44,6 +44,8 @@ public class Main {
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(web3j, chainInteractions);
         subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
+
+
 
 
 

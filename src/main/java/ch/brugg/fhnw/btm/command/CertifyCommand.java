@@ -13,6 +13,7 @@ public class CertifyCommand extends AbstractCommand implements Command {
     @Override
     public void execute() {
         log.info("Certifying Account mit folgender Adresse: " + account.getAddress());
+        account.setTimeStamp(null);
         try {
             instance.getSimpleCertifier().certify(account.getAddress()).send();
         } catch (Exception e) {

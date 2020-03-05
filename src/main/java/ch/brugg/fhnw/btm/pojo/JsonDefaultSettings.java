@@ -1,6 +1,7 @@
 package ch.brugg.fhnw.btm.pojo;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 
 public class JsonDefaultSettings {
 
@@ -25,7 +26,7 @@ public class JsonDefaultSettings {
 
     private String certifierAddress;
 
-    private String timestampLastReset;
+    private Timestamp timestampLastReset;
     private String nameRegistryAddress;
 
 
@@ -70,7 +71,7 @@ public class JsonDefaultSettings {
         return certifierAddress;
     }
 
-    public String getTimestampLastReset() {
+    public Timestamp getTimestampLastReset() {
         return timestampLastReset;
     }
 
@@ -82,7 +83,7 @@ public class JsonDefaultSettings {
         this.certifierAddress = certifierAddress;
     }
 
-    public void setTimestampLastReset(String timestampLastReset) {
+    public void setTimestampLastReset(Timestamp timestampLastReset) {
         this.timestampLastReset = timestampLastReset;
     }
 
