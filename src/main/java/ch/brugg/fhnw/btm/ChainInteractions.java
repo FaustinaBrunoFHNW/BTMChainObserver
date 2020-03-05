@@ -92,21 +92,23 @@ public class ChainInteractions {
                 certifyAccount(acc.getAddress());
             }
             else if(acc.getTimeStamp().before(now)){
-                log.info("Account hat einen Timestamp, liegt aber in der Vergangenheit: " + acc.getAddress());
+                log.info("Account hat einen Timestamp, liegt aber in der Vergangenheit und "
+                        + "wird in die Whitelist aufegnommen: " + acc.getAddress());
                 acc.setTimeStamp(null);
                 certifyAccount(acc.getAddress());
             }
             else if (acc.getTimeStamp().after(now)){
-                log.info("Account hat einen TimeStamp.. diser liegt in der Zukunft: " + acc.getAddress());
+                log.info("Account hat einen TimeStamp in der Zukunft. Account ist gesperrt: " + acc.getAddress());
                 DoSAlgorithm.getInstance().offerAccount(acc);
             }
         }
     }
 
+    //TODO public kontrollieren
 
     /**
      * Hier wird ein Account in die Whiteliste hinzugefügt
-     * @param add Adresse des Accounts welches in die Whiteliste hinzugefügt wirde
+     * @param add Adresse des Accounts welches in die Whiteliste hinzugefügt wird
      * @return es wird ausgegeben ob der Account in der Whiteliste hinzugefügt wurde
      */
     public boolean certifyAccount(String add) {
@@ -115,6 +117,7 @@ public class ChainInteractions {
             log.info("zertifizierung des Accounts mit folgender Adresse: " + add);
             this.simpleCertifier.certify(add).send();
             //what the cinnamon toast fuck is this?
+            //TODO check wtf this is and if its usefull
             log.info(simpleRegistry.getAddress(this.chainSetUp.getHash(), "A").send());
             log.info("Zertifizierung erfolgreich");
             return isCertified(add);
@@ -124,7 +127,13 @@ public class ChainInteractions {
         return false;
     }
 
-    //TODO JavaDoc
+
+    //TODO public kontrollieren
+    /**
+     * Diese Methode gibts aus ob ein Account zertifiziert/in der Whiteliste ist
+     * @param add Adresse des Accounts
+     * @return boolean ob Adresse zertifiziert ist --> true oder eben nicht --> false
+     */
     public boolean isCertified(String add) {
         try {
             return simpleCertifier.certified(add).send();

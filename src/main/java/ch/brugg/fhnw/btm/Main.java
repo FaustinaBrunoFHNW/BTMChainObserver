@@ -34,7 +34,6 @@ public class Main {
         //       chainSetUp.initChain();
         ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
 
-        Web3j web3j = ChainSetup.getInstance().getWeb3j();
 
         //TODO load all accounts from list
         jsonAccountHandler.loadAccounts();
@@ -83,20 +82,50 @@ public class Main {
 
     /**
      * Ausführbare Methode über CMD für das laufen lassen des Programms
-     * Revoken aller Accounts
+     * Default Settings laden
      * Alle Accounts aus dem File einlesen
      * Alle Accounts Zertifizieren
      * Intervall starten
      * @throws Exception
      */
-    public static void run() throws Exception {}
+    public static void run() throws Exception {
+        //Default Settings laden
+        JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
+        jsonDefaultSettingsHandler.loadDefaultSettings();
+
+        //Accaounts laden gegebenfalls löschen
+        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+        jsonAccountHandler.loadAccounts();
+
+
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+
+        ChainSetup.getInstance().setUpAfterChainStart();
+        ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
+        chainInteractions.certifyAccountList(jsonAccountHandler.getAccountList());
+
+        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getAccountList().size());
+        System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
+        System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
+
+        SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
+        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
+
+
+
+
+
+    }
 
     //TODO für CML stop Methode schreiiben
 
     /**
      * Ausführbare Methode fürs stoppen aller Vorgänge und das Revoken aller Accounts
+     *
      * @throws Exception
      */
-    public static void stop() throws Exception {}
+    public static void stop() throws Exception {
+
+    }
 
 }

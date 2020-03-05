@@ -46,7 +46,7 @@ public class JsonDefaultSettingsHandler {
         try {
             JsonReader reader = new JsonReader(new FileReader(defaultSettingsFile));
             defaultSettings = gson.fromJson(reader, JsonDefaultSettings.class);
-            System.out.println("done");
+            log.info("Default Settings wurden aus dem JSON File geladen");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
