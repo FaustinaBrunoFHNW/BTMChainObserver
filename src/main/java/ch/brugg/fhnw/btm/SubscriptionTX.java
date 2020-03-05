@@ -3,7 +3,7 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import io.reactivex.disposables.Disposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,9 +79,9 @@ public class SubscriptionTX {
      */
     private void setAllCountersToMax() {
 
-        for (Account account : accountHandler.getAccountList()) {
-            account.setTransactionCounter(account.getTransactionLimit().intValue());
-            account.setGasUsedCounter(account.getGasLimit().intValue());
+        for (JsonAccount jsonAccount : accountHandler.getJsonAccountList()) {
+            jsonAccount.setTransactionCounter(jsonAccount.getTransactionLimit().intValue());
+            jsonAccount.setGasUsedCounter(jsonAccount.getGasLimit().intValue());
         }
 
     }

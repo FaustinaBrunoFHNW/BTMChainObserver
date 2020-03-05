@@ -1,7 +1,7 @@
 package ch.brugg.fhnw.btm.command;
 
 import ch.brugg.fhnw.btm.ChainSetup;
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.JsonAccount;
 
 import java.sql.Timestamp;
 
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  */
 public abstract class AbstractCommand implements Command {
     //TODO parameter public/private setzen
-    Account account;
+    JsonAccount jsonAccount;
     ChainSetup instance;
     Timestamp timestamp;
 
@@ -21,9 +21,9 @@ public abstract class AbstractCommand implements Command {
         return timestamp;
     }
     //TODO JAVADOC
-    public AbstractCommand(Account account){
-        this.account = account;
-        this.timestamp = account.getTimeStamp();
+    public AbstractCommand(JsonAccount jsonAccount){
+        this.jsonAccount = jsonAccount;
+        this.timestamp = jsonAccount.getTimeStamp();
         instance = ChainSetup.getInstance();
     }
 

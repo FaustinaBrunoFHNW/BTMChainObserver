@@ -1,5 +1,5 @@
 package ch.brugg.fhnw.btm.handler;
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +27,7 @@ public class JsonAccountHandler {
 
     private static JsonAccountHandler instance;
     private static JsonDefaultSettingsHandler jsonDefaultSettingsHandler;
-    private ArrayList<Account> accountList = new ArrayList<>();
+    private ArrayList<JsonAccount> jsonAccountList = new ArrayList<>();
     private  Logger log = LoggerFactory.getLogger(JsonAccountHandler.class);
     private int deletedAccounts = 0, revokedAccounts = 0;
 
@@ -54,14 +54,14 @@ public class JsonAccountHandler {
         Gson gson = new Gson();
         try {
             JsonReader reader = new JsonReader(new FileReader(accountsFile));
-            Type accountListType = new TypeToken<ArrayList<Account>>(){}.getType();
-            accountList = gson.fromJson(reader, accountListType);
-            log.info("Accounts wurden aus Datei geladen. Es sind " + accountList.size()+ " Accounts geladen worden. ");
+            Type accountListType = new TypeToken<ArrayList<JsonAccount>>(){}.getType();
+            jsonAccountList = gson.fromJson(reader, accountListType);
+            log.info("Accounts wurden aus Datei geladen. Es sind " + jsonAccountList.size()+ " Accounts geladen worden. ");
 
 
-            Iterator<Account> itr = accountList.iterator();
+            Iterator<JsonAccount> itr = jsonAccountList.iterator();
             while(itr.hasNext()){
-                Account temp = itr.next();
+                JsonAccount temp = itr.next();
                 if (temp.deleteMe){
                     log.info("Account zum Löschen wurde gefunden. Folgender Account wird gelöscht: "+temp.getAddress());
                     deletedAccounts++;
@@ -69,7 +69,6 @@ public class JsonAccountHandler {
                 }
 
             }
-            certifyLoadedAccounts();
         } catch (FileNotFoundException e) {
             //TODO error log ausfüllen
             log.error("");
@@ -83,7 +82,7 @@ public class JsonAccountHandler {
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
             Writer writer = Files.newBufferedWriter(Paths.get(accountsFile));
-            gson.toJson(accountList,writer);
+            gson.toJson(jsonAccountList,writer);
             writer.close();
             //TODO log Info ausfüllen
             log.info("");
@@ -97,8 +96,8 @@ public class JsonAccountHandler {
 
     //TODO JAVADOC
     //TODO public?
-    public Account getAccount(String address){
-        for (Account acc: accountList){
+    public JsonAccount getAccount(String address){
+        for (JsonAccount acc: jsonAccountList){
             if (acc.getAddress().equalsIgnoreCase(address)){
                 return acc;
             }
@@ -107,8 +106,8 @@ public class JsonAccountHandler {
     }
 
     //TODO JAVADOC
-    public Account processAccount(String address, BigInteger gasUsed){
-        Account toProcess = getAccount(address);
+    public JsonAccount processAccount(String address, BigInteger gasUsed){
+        JsonAccount toProcess = getAccount(address);
         toProcess.decraseTransactionCounter();
         toProcess.decreaseGasUsedCounter(gasUsed.longValue());
 
@@ -118,19 +117,15 @@ public class JsonAccountHandler {
         return toProcess;
     }
 
-    //TODO Frage: WAS passiert hier?
-    public void certifyLoadedAccounts(){
-
-    }
 
     //******************GETTER und SETTER*******************************
 
-    public ArrayList<Account> getAccountList() {
-        return accountList;
+    public ArrayList<JsonAccount> getJsonAccountList() {
+        return jsonAccountList;
     }
 
-    public void setAccountList(ArrayList<Account> accountList) {
-        this.accountList = accountList;
+    public void setJsonAccountList(ArrayList<JsonAccount> jsonAccountList) {
+        this.jsonAccountList = jsonAccountList;
     }
 
     public int getDeletedAccounts() {

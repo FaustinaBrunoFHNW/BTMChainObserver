@@ -3,7 +3,7 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.contracts.SimpleCertifier;
 import ch.brugg.fhnw.btm.contracts.SimpleRegistry;
 import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.protocol.Web3j;
@@ -41,26 +41,17 @@ public class ChainInteractions {
 
     }
 
-    //TODO JavaDoc
-    //TODO Frage: Brauchen wir das?
-    public TransactionReceipt sendEtherToAccount(BigInteger gasPrice, BigInteger gasLimit, String accountAddress)
-            throws Exception {
-        this.log.info("Methode sendEtherToAccount wurde aufgerufen.");
-        Transfer transfer = new Transfer(this.web3j, this.transactionManager);
-        return transfer.sendFunds(accountAddress, new BigDecimal(1000), Convert.Unit.ETHER, gasPrice, gasLimit).send();
-    }
-
 
     //TODO public checken
     /**
      * In dieser Methode werden alle Account einer Liste von der Whiteliste entfernt
-     * @param accounts Liste mit Accounts
+     * @param jsonAccounts Liste mit Accounts
      */
-    public void revokeAccountList(ArrayList<Account> accounts){
+    public void revokeAccountList(ArrayList<JsonAccount> jsonAccounts){
         log.info("Alle Accounts von Liste werden revoked");
-        for (Account account : accounts) {
-            log.info("Revoked: "+account.getAddress());
-            this.revokeAccount(account.getAddress());
+        for (JsonAccount jsonAccount : jsonAccounts) {
+            log.info("Revoked: "+ jsonAccount.getAddress());
+            this.revokeAccount(jsonAccount.getAddress());
         }
     }
 
@@ -93,13 +84,13 @@ public class ChainInteractions {
      * kein TimeStamp --> Account wird in Whiteliste aufgenommen
      * Timestamp in Vergangenheit --> Account wird in die Whiteliste aufgenommen
      * Timestamp in der zukunft --> Account ist gesperrt und wird in die PrioQue hinzugefügt
-     * @param accounts Liste mit Accounts
+     * @param jsonAccounts Liste mit Accounts
      */
-    public void certifyAccountList(ArrayList<Account> accounts) {
+    public void certifyAccountList(ArrayList<JsonAccount> jsonAccounts) {
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
-        for (Account acc : accounts) {
+        for (JsonAccount acc : jsonAccounts) {
             if (acc.getTimeStamp() == null) {
                 log.info("Account hat keinen TimeStamp und wurde in die Whitelist aufgenommen: " + acc.getAddress());
                 certifyAccount(acc.getAddress());

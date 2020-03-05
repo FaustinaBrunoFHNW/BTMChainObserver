@@ -5,13 +5,10 @@ import ch.brugg.fhnw.btm.command.CertifyCommand;
 import ch.brugg.fhnw.btm.command.Command;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
-import ch.brugg.fhnw.btm.handler.old.DefaultSettingsLoader;
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sound.midi.Soundbank;
-import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -55,33 +52,40 @@ public class DoSAlgorithm {
     }
 
     //TODO JAVADOC
-    public void dosAlgorithm(Account account) {
+    public void dosAlgorithm(JsonAccount jsonAccount) {
+
+
+        if (jsonAccount.getAddress().equalsIgnoreCase(defaultSettingsHandler.getMasterKey())){
+            log.info("a free transaction with the master key has been ignored");
+            return;
+        }
+
         Timestamp tempStamp = new Timestamp(System.currentTimeMillis());
         long temp = tempStamp.getTime();
-        if (account.getTransactionCounter() == 0) {
-            this.chainInteractions.revokeAccount(account.getAddress());
-           long revokeTime = account.getRevokeTime().intValue() *60 * 1000;
+        if (jsonAccount.getTransactionCounter() == 0) {
+            this.chainInteractions.revokeAccount(jsonAccount.getAddress());
+           long revokeTime = jsonAccount.getRevokeTime().intValue() *60 * 1000;
 
             tempStamp.setTime(temp + revokeTime);
-            account.setTimeStamp(tempStamp);
+            jsonAccount.setTimeStamp(tempStamp);
 
-            queue.add(new CertifyCommand(account));
+            queue.add(new CertifyCommand(jsonAccount));
             //TODO Account in Priority Queue werfen
-            log.info("Der Acccount "+ account.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
+            log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
                     " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
             accountHandler.writeAccountList();
 
-        }  if (account.getGasUsedCounter() < 0) {
-            this.chainInteractions.revokeAccount(account.getAddress());
-            long revokeTime = account.getRevokeTime().intValue()*60 * 1000;
+        }  if (jsonAccount.getGasUsedCounter() < 0) {
+            this.chainInteractions.revokeAccount(jsonAccount.getAddress());
+            long revokeTime = jsonAccount.getRevokeTime().intValue()*60 * 1000;
             tempStamp.setTime(temp + revokeTime);
 
-            account.setTimeStamp(tempStamp);
-            queue.add(new CertifyCommand(account));
+            jsonAccount.setTimeStamp(tempStamp);
+            queue.add(new CertifyCommand(jsonAccount));
 
             //TODO Account in Priority Queue werfen
-            log.info("Der Acccount "+ account.getAddress()+" hat zu viel Gas verbraucht und wurde gesperrt. " +
+            log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viel Gas verbraucht und wurde gesperrt. " +
                     " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
             accountHandler.writeAccountList();
@@ -90,7 +94,7 @@ public class DoSAlgorithm {
         JsonAccountHandler.getInstance().writeAccountList();
     }
     //TODO JAVADOC
-    public void offerAccount(Account acc){
+    public void offerAccount(JsonAccount acc){
         queue.add(new CertifyCommand(acc));
     }
     Runnable queueInspector = () -> {

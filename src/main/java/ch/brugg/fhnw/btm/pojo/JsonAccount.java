@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-public class Account {
+public class JsonAccount {
 
     private String address;
     private int transactionCounter;
@@ -26,7 +26,7 @@ public class Account {
         this.timeStamp = timeStamp;
     }
 
-    private static Logger log = LoggerFactory.getLogger(Account.class);
+    private static Logger log = LoggerFactory.getLogger(JsonAccount.class);
 
     //TODO brauch es das?
     /**

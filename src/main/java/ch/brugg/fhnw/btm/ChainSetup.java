@@ -96,6 +96,7 @@ public class ChainSetup {
         this.log.info("Simpleregistry und Certifier werden aufgesetzt.");
         this.loadSimpleRegistry();
         this.setUpCertifier();
+        this.registerSelf();
     }
 
     /**
@@ -230,6 +231,15 @@ public class ChainSetup {
 
         simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
         log.info("Laden vom Certifier erfolgreich");
+    }
+
+    public void registerSelf(){
+        try {
+            simpleCertifier.certify(getCredentialsFromPrivateKey().getAddress()).send();
+        } catch (Exception e) {
+            log.error("Zertifizierung des MasterKeys war nicht erfolgreich");
+            e.printStackTrace();
+        }
     }
 
     //GETTER UND SETTER

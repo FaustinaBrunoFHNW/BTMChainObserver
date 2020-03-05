@@ -1,7 +1,6 @@
 package ch.brugg.fhnw.btm.command;
 
-import ch.brugg.fhnw.btm.ChainSetup;
-import ch.brugg.fhnw.btm.pojo.Account;
+import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +12,8 @@ import org.slf4j.LoggerFactory;
  */
 public class RevokeAccountCommand extends AbstractCommand implements Command {
     private Logger log = LoggerFactory.getLogger(AbstractCommand.class);
-    public RevokeAccountCommand(Account account){
-        super(account);
+    public RevokeAccountCommand(JsonAccount jsonAccount){
+        super(jsonAccount);
     }
 
     //TODO JAVADOC
@@ -25,11 +24,11 @@ public class RevokeAccountCommand extends AbstractCommand implements Command {
     @Override
     public void execute() {
         try {
-            log.info("Der Account "+account.getAddress()+" wird versucht aus der Whiteliste zu entfernen.");
+            log.info("Der Account "+ jsonAccount.getAddress()+" wird versucht aus der Whiteliste zu entfernen.");
 
             //TODO timestemp setzten?
-            instance.getSimpleCertifier().revoke(account.getAddress()).send();
-            log.info("Der Account "+account.getAddress()+" wurde erfolgreich aus der Whiteliste  entfernt.");
+            instance.getSimpleCertifier().revoke(jsonAccount.getAddress()).send();
+            log.info("Der Account "+ jsonAccount.getAddress()+" wurde erfolgreich aus der Whiteliste  entfernt.");
         } catch (Exception e) {
             log.error("Account konnte nicht von Whitelist entfernt werden");
             e.printStackTrace();

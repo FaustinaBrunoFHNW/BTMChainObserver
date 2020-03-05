@@ -1,11 +1,9 @@
 package ch.brugg.fhnw.btm;
 
-import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.web3j.protocol.Web3j;
 
 //TODO evtl Klasse unbennennen
 
@@ -31,7 +29,7 @@ public class Main {
         log.info("Schreiben von Accounts Accounts");
         jsonAccountHandler.writeAccountList();
 
-        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getJsonAccountList().size());
         jsonDefaultSettingsHandler.loadDefaultSettings();
 
         ChainSetup.getInstance().setUpAfterChainStart();
@@ -40,9 +38,9 @@ public class Main {
 
         //TODO load all accounts from list
         jsonAccountHandler.loadAccounts();
-        chainInteractions.certifyAccountList(jsonAccountHandler.getAccountList());
+        chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
 
-        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getAccountList().size());
+        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getJsonAccountList().size());
         System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
         System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
 
@@ -91,17 +89,17 @@ public class Main {
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
 
-        //Accaounts laden gegebenfalls löschen
+        //Accounts laden gegebenfalls löschen
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.loadAccounts();
 
-        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getJsonAccountList().size());
 
         ChainSetup.getInstance().setUpAfterChainStart();
         ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
-        chainInteractions.certifyAccountList(jsonAccountHandler.getAccountList());
+        chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
 
-        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getAccountList().size());
+        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getJsonAccountList().size());
         System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
         System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
 
@@ -126,12 +124,12 @@ public class Main {
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.loadAccounts();
 
-        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getJsonAccountList().size());
 
         ChainSetup.getInstance().setUpAfterChainStart();
         ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
-        chainInteractions.revokeAccountList((jsonAccountHandler.getAccountList()));
-        log.info("Anzahl Accounts: " + jsonAccountHandler.getAccountList().size());
+        chainInteractions.revokeAccountList((jsonAccountHandler.getJsonAccountList()));
+        log.info("Anzahl Accounts: " + jsonAccountHandler.getJsonAccountList().size());
         //TODO Chain Stoppen
         //TODO Subscription/Filter stoppen
         //TODO interval stoppen
