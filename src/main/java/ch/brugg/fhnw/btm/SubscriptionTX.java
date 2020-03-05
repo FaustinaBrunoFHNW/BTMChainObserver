@@ -80,8 +80,8 @@ public class SubscriptionTX {
     private void setAllCountersToMax() {
 
         for (JsonAccount jsonAccount : accountHandler.getJsonAccountList()) {
-            jsonAccount.setTransactionCounter(jsonAccount.getTransactionLimit().intValue());
-            jsonAccount.setGasUsedCounter(jsonAccount.getGasLimit().intValue());
+            jsonAccount.setRemainingTransactions(jsonAccount.getTransactionLimit().intValue());
+            jsonAccount.setRemainingGas(jsonAccount.getGasLimit().intValue());
         }
 
     }

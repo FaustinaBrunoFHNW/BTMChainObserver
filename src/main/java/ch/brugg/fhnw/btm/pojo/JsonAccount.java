@@ -10,11 +10,11 @@ import java.sql.Timestamp;
 public class JsonAccount {
 
     private String address;
-    private int transactionCounter;
+    private int remainingTransactions;
     private BigInteger transactionLimit;
     private BigInteger revokeTime;
     private BigInteger gasLimit;
-    private long gasUsedCounter;
+    private long remainingGas;
     public boolean deleteMe = false;
     private Timestamp timeStamp = null;
 
@@ -33,19 +33,19 @@ public class JsonAccount {
      * Erhöht den Counter bis er auf den definierten maximal Wert komnmt
      */
     public void increaseTransactionCounter() {
-        if (this.transactionCounter < this.transactionLimit.intValue()) {
-            this.transactionCounter++;
+        if (this.remainingTransactions < this.transactionLimit.intValue()) {
+            this.remainingTransactions++;
         }
-        log.info("Account " + address + " hat noch " + transactionCounter + " Transktionen");
+        log.info("Account " + address + " hat noch " + remainingTransactions + " Transktionen");
 
     }
 
     //TODO brauch es das?
     public void increaseGasUsedCounter() {
-        if (this.gasUsedCounter < this.transactionLimit.intValue()) {
-            this.gasUsedCounter++;
+        if (this.remainingGas < this.transactionLimit.intValue()) {
+            this.remainingGas++;
         }
-        log.info("Account " + address + " hat noch " + gasUsedCounter + " Gas zu verbrauchen");
+        log.info("Account " + address + " hat noch " + remainingGas + " Gas zu verbrauchen");
 
     }
 
@@ -54,20 +54,20 @@ public class JsonAccount {
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
     public void decraseTransactionCounter() {
-        if (transactionCounter > 0) {
-            this.transactionCounter--;
+        if (remainingTransactions > 0) {
+            this.remainingTransactions--;
         }
-        log.info("Account " + address + " hat noch " + transactionCounter + " Transktionen");
+        log.info("Account " + address + " hat noch " + remainingTransactions + " Transktionen");
     }
 
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
     public void decreaseGasUsedCounter(long gasUsedOnTX) {
-        if (gasUsedCounter > 0) {
-            this.gasUsedCounter= this.getGasUsedCounter()-gasUsedOnTX;
+        if (remainingGas > 0) {
+            this.remainingGas = this.getRemainingGas()-gasUsedOnTX;
         }
-        log.info("Account " + address + " hat noch " + gasUsedCounter + " Gas zu verbrauchen");
+        log.info("Account " + address + " hat noch " + remainingGas + " Gas zu verbrauchen");
     }
 
 
@@ -103,20 +103,20 @@ public class JsonAccount {
         this.gasLimit = gasLimit;
     }
 
-    public int getTransactionCounter() {
-        return transactionCounter;
+    public int getRemainingTransactions() {
+        return remainingTransactions;
     }
 
-    public void setTransactionCounter(int transactionCounter) {
-        this.transactionCounter = transactionCounter;
+    public void setRemainingTransactions(int remainingTransactions) {
+        this.remainingTransactions = remainingTransactions;
     }
 
-    public long getGasUsedCounter() {
-        return gasUsedCounter;
+    public long getRemainingGas() {
+        return remainingGas;
     }
 
-    public void setGasUsedCounter(long gasUsedCounter) {
-        this.gasUsedCounter = gasUsedCounter;
+    public void setRemainingGas(long remainingGas) {
+        this.remainingGas = remainingGas;
     }
 
     public BigInteger getTransactionLimit() {

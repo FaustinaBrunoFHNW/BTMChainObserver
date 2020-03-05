@@ -111,9 +111,9 @@ public class JsonAccountHandler {
         toProcess.decraseTransactionCounter();
         toProcess.decreaseGasUsedCounter(gasUsed.longValue());
 
-        log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getTransactionCounter()
+        log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getRemainingTransactions()
                 + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + toProcess
-                .getGasUsedCounter());
+                .getRemainingGas());
         return toProcess;
     }
 

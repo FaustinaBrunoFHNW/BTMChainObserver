@@ -1,6 +1,5 @@
 package ch.brugg.fhnw.btm.handler;
 
-import ch.brugg.fhnw.btm.handler.old.DefaultSettingsLoader;
 import ch.brugg.fhnw.btm.pojo.JsonDefaultSettings;
 import ch.brugg.fhnw.btm.pojo.MasterKey;
 import com.google.gson.Gson;
@@ -25,7 +24,7 @@ import java.time.Instant;
  */
 public class JsonDefaultSettingsHandler {
 
-    private Logger log = LoggerFactory.getLogger(DefaultSettingsLoader.class);
+    private Logger log = LoggerFactory.getLogger(JsonDefaultSettingsHandler.class);
 
     private static JsonDefaultSettingsHandler instance;
     private MasterKey masterKey;

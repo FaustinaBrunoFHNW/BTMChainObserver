@@ -27,8 +27,8 @@ public class CertifyCommand extends AbstractCommand implements Command {
         jsonAccount.setTimeStamp(null);
         try {
             instance.getSimpleCertifier().certify(jsonAccount.getAddress()).send();
-            jsonAccount.setTransactionCounter(jsonAccount.getTransactionLimit().intValue());
-            jsonAccount.setGasUsedCounter(jsonAccount.getGasLimit().intValue());
+            jsonAccount.setRemainingTransactions(jsonAccount.getTransactionLimit().intValue());
+            jsonAccount.setRemainingGas(jsonAccount.getGasLimit().intValue());
             log.info("Zertifizierung hat funktioniert.");
         } catch (Exception e) {
             log.error("Zertifizierung hat nicht funktioniert.");

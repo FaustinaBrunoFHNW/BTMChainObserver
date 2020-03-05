@@ -62,7 +62,7 @@ public class DoSAlgorithm {
 
         Timestamp tempStamp = new Timestamp(System.currentTimeMillis());
         long temp = tempStamp.getTime();
-        if (jsonAccount.getTransactionCounter() == 0) {
+        if (jsonAccount.getRemainingTransactions() == 0) {
             this.chainInteractions.revokeAccount(jsonAccount.getAddress());
            long revokeTime = jsonAccount.getRevokeTime().intValue() *60 * 1000;
 
@@ -76,7 +76,7 @@ public class DoSAlgorithm {
 
             accountHandler.writeAccountList();
 
-        }  if (jsonAccount.getGasUsedCounter() < 0) {
+        }  if (jsonAccount.getRemainingGas() < 0) {
             this.chainInteractions.revokeAccount(jsonAccount.getAddress());
             long revokeTime = jsonAccount.getRevokeTime().intValue()*60 * 1000;
             tempStamp.setTime(temp + revokeTime);
