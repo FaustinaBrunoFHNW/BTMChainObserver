@@ -2,36 +2,38 @@ package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
+import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class AccountCertifyTest {
 
-    private ChainSetup chainSetup;
-    private ChainInteractions chainInteractions;
-    private JsonAccountHandler jsonAccountHandler;
 
-    @BeforeClass public void setUpChain() throws Exception {
-        chainSetup = ChainSetup.getInstance();
-        chainInteractions = new ChainInteractions(chainSetup);
+    @Test public void certifyAccountTest() throws Exception {
 
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
+
         jsonDefaultSettingsHandler.loadDefaultSettings();
-        jsonAccountHandler = JsonAccountHandler.getInstance();
-
+        ChainSetup chainSetup = ChainSetup.getInstance();
         ChainSetup.getInstance().setUpAfterChainStart();
-    }
+        ChainInteractions chainInteractions = new ChainInteractions(chainSetup);
+        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+        jsonAccountHandler.loadAccounts();
+        jsonAccountHandler.writeAccountList();
 
-    @Test public void certifyAccount() {
-        Assert.assertEquals(0, jsonAccountHandler.getJsonAccountList().size());
-        String accountAddress = "";
-        Assert.assertFalse(chainInteractions.isCertified(accountAddress));
-        chainInteractions.certifyAccount(accountAddress);
-        Assert.assertTrue(chainInteractions.isCertified(accountAddress));
-        Assert.assertEquals(1, jsonAccountHandler.getJsonAccountList().size());
-    }
+        JsonAccount account= new JsonAccount();
+        account.setAddress("0xf13264C4bD595AEbb966E089E99435641082ff24");
+
+        chainInteractions.revokeAccount(account.getAddress());
+        Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+        //TODO do gratis TX asser false
+        chainInteractions.certifyAccount(account.getAddress());
+        //TODO do gratis TX asser true
+        Assert.assertTrue(chainInteractions.isCertified(account.getAddress()));
+        }
 
 }
