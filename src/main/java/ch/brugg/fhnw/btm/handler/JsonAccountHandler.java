@@ -53,25 +53,25 @@ public class JsonAccountHandler {
     public void loadAccounts() {
         Gson gson = new Gson();
         try {
-            JsonReader reader = new JsonReader(new FileReader(accountsFile));
+            JsonReader reader = new JsonReader(new FileReader(this.accountsFile));
             Type accountListType = new TypeToken<ArrayList<JsonAccount>>(){}.getType();
-            jsonAccountList = gson.fromJson(reader, accountListType);
-            log.info("Accounts wurden aus Datei geladen. Es sind " + jsonAccountList.size()+ " Accounts geladen worden. ");
+            this.jsonAccountList = gson.fromJson(reader, accountListType);
+            this.log.info("Accounts wurden aus Datei geladen. Es sind " + this.jsonAccountList.size()+ " Accounts geladen worden. ");
 
 
-            Iterator<JsonAccount> itr = jsonAccountList.iterator();
+            Iterator<JsonAccount> itr = this.jsonAccountList.iterator();
             while(itr.hasNext()){
                 JsonAccount temp = itr.next();
                 if (temp.deleteMe){
-                    log.info("Account zum Löschen wurde gefunden. Folgender Account wird gelöscht: "+temp.getAddress());
-                    deletedAccounts++;
+                    this.log.info("Account zum Löschen wurde gefunden. Folgender Account wird gelöscht: "+temp.getAddress());
+                    this.deletedAccounts++;
                     itr.remove();
                 }
 
             }
         } catch (FileNotFoundException e) {
             //TODO error log ausfüllen
-            log.error("");
+            this.log.error("");
             e.printStackTrace();
         }
     }
@@ -81,14 +81,14 @@ public class JsonAccountHandler {
     public void writeAccountList() {
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
-            Writer writer = Files.newBufferedWriter(Paths.get(accountsFile));
-            gson.toJson(jsonAccountList,writer);
+            Writer writer = Files.newBufferedWriter(Paths.get(this.accountsFile));
+            gson.toJson(this.jsonAccountList,writer);
             writer.close();
             //TODO log Info ausfüllen
-            log.info("");
+            this.log.info("");
         } catch (IOException e) {
             //TODO error log ausfüllen
-            log.error("");
+            this.log.error("");
             e.printStackTrace();
 
         }
@@ -97,7 +97,7 @@ public class JsonAccountHandler {
     //TODO JAVADOC
     //TODO public?
     public JsonAccount getAccount(String address){
-        for (JsonAccount acc: jsonAccountList){
+        for (JsonAccount acc: this.jsonAccountList){
             if (acc.getAddress().equalsIgnoreCase(address)){
                 return acc;
             }
@@ -107,11 +107,11 @@ public class JsonAccountHandler {
 
     //TODO JAVADOC
     public JsonAccount processAccount(String address, BigInteger gasUsed){
-        JsonAccount toProcess = getAccount(address);
+        JsonAccount toProcess = this.getAccount(address);
         toProcess.decraseTransactionCounter();
         toProcess.decreaseGasUsedCounter(gasUsed.longValue());
 
-        log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getRemainingTransactions()
+        this.log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getRemainingTransactions()
                 + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + toProcess
                 .getRemainingGas());
         return toProcess;
@@ -121,7 +121,7 @@ public class JsonAccountHandler {
     //******************GETTER und SETTER*******************************
 
     public ArrayList<JsonAccount> getJsonAccountList() {
-        return jsonAccountList;
+        return this.jsonAccountList;
     }
 
     public void setJsonAccountList(ArrayList<JsonAccount> jsonAccountList) {
@@ -129,10 +129,10 @@ public class JsonAccountHandler {
     }
 
     public int getDeletedAccounts() {
-        return deletedAccounts;
+        return this.deletedAccounts;
     }
 
     public int getRevokedAccounts() {
-        return revokedAccounts;
+        return this.revokedAccounts;
     }
 }

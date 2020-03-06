@@ -24,13 +24,13 @@ public class RevokeAccountCommand extends AbstractCommand implements Command {
     @Override
     public void execute() {
         try {
-            log.info("Der Account "+ jsonAccount.getAddress()+" wird versucht aus der Whiteliste zu entfernen.");
+            this.log.info("Der Account "+ jsonAccount.getAddress()+" wird versucht aus der Whiteliste zu entfernen.");
 
             //TODO timestemp setzten?
             instance.getSimpleCertifier().revoke(jsonAccount.getAddress()).send();
-            log.info("Der Account "+ jsonAccount.getAddress()+" wurde erfolgreich aus der Whiteliste  entfernt.");
+            this.log.info("Der Account "+ jsonAccount.getAddress()+" wurde erfolgreich aus der Whiteliste  entfernt.");
         } catch (Exception e) {
-            log.error("Account konnte nicht von Whitelist entfernt werden");
+            this.log.error("Account konnte nicht von Whitelist entfernt werden");
             e.printStackTrace();
         }
 

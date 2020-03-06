@@ -19,7 +19,7 @@ public class JsonAccount {
     private Timestamp timeStamp = null;
 
     public Timestamp getTimeStamp() {
-        return timeStamp;
+        return this.timeStamp;
     }
 
     public void setTimeStamp(Timestamp timeStamp) {
@@ -36,7 +36,7 @@ public class JsonAccount {
         if (this.remainingTransactions < this.transactionLimit.intValue()) {
             this.remainingTransactions++;
         }
-        log.info("Account " + address + " hat noch " + remainingTransactions + " Transktionen");
+        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
 
     }
 
@@ -45,7 +45,7 @@ public class JsonAccount {
         if (this.remainingGas < this.transactionLimit.intValue()) {
             this.remainingGas++;
         }
-        log.info("Account " + address + " hat noch " + remainingGas + " Gas zu verbrauchen");
+        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
 
     }
 
@@ -54,27 +54,27 @@ public class JsonAccount {
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
     public void decraseTransactionCounter() {
-        if (remainingTransactions > 0) {
+        if (this.remainingTransactions > 0) {
             this.remainingTransactions--;
         }
-        log.info("Account " + address + " hat noch " + remainingTransactions + " Transktionen");
+        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
     }
 
     /**
      * Zählt den Counter runter bis er bei 0 angekommen ist
      */
     public void decreaseGasUsedCounter(long gasUsedOnTX) {
-        if (remainingGas > 0) {
+        if (this.remainingGas > 0) {
             this.remainingGas = this.getRemainingGas()-gasUsedOnTX;
         }
-        log.info("Account " + address + " hat noch " + remainingGas + " Gas zu verbrauchen");
+        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
     }
 
 
     //**************************GETTER und SETTER*********************************
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -82,10 +82,10 @@ public class JsonAccount {
     }
 
     public BigInteger getRevokeTime() {
-        if (revokeTime == null){
+        if (this.revokeTime == null){
             return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultRevokeTime();
         }
-        return revokeTime;
+        return this.revokeTime;
     }
 
     public void setRevokeTime(BigInteger revokeTime) {
@@ -93,10 +93,10 @@ public class JsonAccount {
     }
 
     public BigInteger getGasLimit() {
-        if (gasLimit == null){
+        if (this.gasLimit == null){
             return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultGasLimit();
         }
-        return gasLimit;
+        return this.gasLimit;
     }
 
     public void setGasLimit(BigInteger gasLimit) {
@@ -104,7 +104,7 @@ public class JsonAccount {
     }
 
     public int getRemainingTransactions() {
-        return remainingTransactions;
+        return this.remainingTransactions;
     }
 
     public void setRemainingTransactions(int remainingTransactions) {
@@ -112,7 +112,7 @@ public class JsonAccount {
     }
 
     public long getRemainingGas() {
-        return remainingGas;
+        return this.remainingGas;
     }
 
     public void setRemainingGas(long remainingGas) {
@@ -121,11 +121,11 @@ public class JsonAccount {
 
     public BigInteger getTransactionLimit() {
 
-        if (transactionLimit == null){
+        if (this.transactionLimit == null){
             return JsonDefaultSettingsHandler.getInstance().getDefaultSettings().getDefaultTxLimit();
         }
 
-        return transactionLimit;
+        return this.transactionLimit;
     }
 
     public void setTransactionLimit(BigInteger transactionLimit) {

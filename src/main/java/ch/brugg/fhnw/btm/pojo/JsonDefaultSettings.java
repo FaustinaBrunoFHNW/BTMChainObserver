@@ -30,32 +30,32 @@ public class JsonDefaultSettings {
 
 
     public String getConnectionAddress() {
-        return connectionAddress;
+        return this.connectionAddress;
     }
 
     public int getResetInterval() {
-        return resetInterval;
+        return this.resetInterval;
     }
 
 
     public BigInteger getDefaultTxLimit() {
-        return defaultTxLimit;
+        return this.defaultTxLimit;
     }
 
     public BigInteger getDefaultGasLimit() {
-        return defaultGasLimit;
+        return this.defaultGasLimit;
     }
 
     public String getCertifierAddress() {
-        return certifierAddress;
+        return this.certifierAddress;
     }
 
     public Timestamp getTimestampLastReset() {
-        return timestampLastReset;
+        return this.timestampLastReset;
     }
 
     public String getNameRegistryAddress() {
-        return nameRegistryAddress;
+        return this.nameRegistryAddress;
     }
 
     public void setCertifierAddress(String certifierAddress) {
@@ -67,7 +67,7 @@ public class JsonDefaultSettings {
     }
 
     public BigInteger getDefaultRevokeTime() {
-        return defaultRevokeTime;
+        return this.defaultRevokeTime;
     }
 
 }

@@ -23,15 +23,15 @@ public class CertifyCommand extends AbstractCommand implements Command {
      */
     @Override
     public void execute() {
-        log.info("Certifying Account mit folgender Adresse: " + jsonAccount.getAddress());
+        this.log.info("Certifying Account mit folgender Adresse: " + jsonAccount.getAddress());
         jsonAccount.setTimeStamp(null);
         try {
             instance.getSimpleCertifier().certify(jsonAccount.getAddress()).send();
             jsonAccount.setRemainingTransactions(jsonAccount.getTransactionLimit().intValue());
             jsonAccount.setRemainingGas(jsonAccount.getGasLimit().intValue());
-            log.info("Zertifizierung hat funktioniert.");
+            this.log.info("Zertifizierung hat funktioniert.");
         } catch (Exception e) {
-            log.error("Zertifizierung hat nicht funktioniert.");
+            this.log.error("Zertifizierung hat nicht funktioniert.");
             e.printStackTrace();
         }
 

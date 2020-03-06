@@ -35,7 +35,7 @@ public class SubscriptionTX {
     public SubscriptionTX( ChainInteractions chainInteractions) {
         this.web3j = ChainSetup.getInstance().getWeb3j();
         this.chainInteractions = chainInteractions;
-        dosAlgorithm.setChainInteractions(chainInteractions);
+        this.dosAlgorithm.setChainInteractions(chainInteractions);
     }
 
 
@@ -45,7 +45,7 @@ public class SubscriptionTX {
      * @throws Exception
      */
     public void run(int min) throws Exception {
-        log.info("Filter und Intervall werden gestartet");
+        this.log.info("Filter und Intervall werden gestartet");
         this.txFilter();
         this.intervall(min);
     }
@@ -56,19 +56,19 @@ public class SubscriptionTX {
      * Wenn ja, wird der DoS Algorithmus gestartet.
      */
     private void txFilter() {
-        Disposable subscription = web3j.transactionFlowable().subscribe(tx -> {
+        Disposable subscription = this.web3j.transactionFlowable().subscribe(tx -> {
             //TODO Gas pro Zeiteinheit anzeigen
-            log.info("Eine Transaktion von folgender Adresse wurde gefunden: " + tx.getFrom());
-            log.info("Gas price used: " + tx.getGasPrice());
-            log.info("Gas : " + tx.getGas());
-            log.info("Gas : " + tx.getGasRaw());
-            log.info("Transferierter Ether: " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
+            this.log.info("Eine Transaktion von folgender Adresse wurde gefunden: " + tx.getFrom());
+            this.log.info("Gas price used: " + tx.getGasPrice());
+            this.log.info("Gas : " + tx.getGas());
+            this.log.info("Gas : " + tx.getGasRaw());
+            this.log.info("Transferierter Ether: " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
 
             //TODO Admin Account darf unendlich viele Transaktionen machen (ID von Account == dann nicht revoked)
             if (tx.getGasPrice().equals(BigInteger.ZERO)) {
-                log.info("Transaktionskosten waren 0");
+                this.log.info("Transaktionskosten waren 0");
 
-                this.dosAlgorithm.dosAlgorithm(accountHandler.processAccount(tx.getFrom(), tx.getGas()));
+                this.dosAlgorithm.dosAlgorithm(this.accountHandler.processAccount(tx.getFrom(), tx.getGas()));
 
             }
         });
@@ -79,7 +79,7 @@ public class SubscriptionTX {
      */
     private void setAllCountersToMax() {
 
-        for (JsonAccount jsonAccount : accountHandler.getJsonAccountList()) {
+        for (JsonAccount jsonAccount : this.accountHandler.getJsonAccountList()) {
             jsonAccount.setRemainingTransactions(jsonAccount.getTransactionLimit().intValue());
             jsonAccount.setRemainingGas(jsonAccount.getGasLimit().intValue());
         }
@@ -94,9 +94,9 @@ public class SubscriptionTX {
      * @throws IOException
      */
     private void intervall(int min) throws InterruptedException, IOException {
-        log.info("*************Intervall ist gestartet********************");
+        this.log.info("*************Intervall ist gestartet********************");
         while (true) {
-            log.info(new Date().toString());
+            this.log.info(new Date().toString());
 
             //TODO eigener THREAD
             Thread.sleep(min * 60 * 1000);

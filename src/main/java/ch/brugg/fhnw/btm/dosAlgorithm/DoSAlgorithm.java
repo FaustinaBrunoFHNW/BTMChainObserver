@@ -46,17 +46,17 @@ public class DoSAlgorithm {
     //TODO JAVADOC
     private DoSAlgorithm(){
 
-        log.info("Queue wird gestartet");
-        new Thread(queueInspector).start();
-        log.info("Queue wurde erfolgreich gestartet");
+        this.log.info("Queue wird gestartet");
+        new Thread(this.queueInspector).start();
+        this.log.info("Queue wurde erfolgreich gestartet");
     }
 
     //TODO JAVADOC
     public void dosAlgorithm(JsonAccount jsonAccount) {
 
 
-        if (jsonAccount.getAddress().equalsIgnoreCase(defaultSettingsHandler.getMasterKey())){
-            log.info("a free transaction with the master key has been ignored");
+        if (jsonAccount.getAddress().equalsIgnoreCase(this.defaultSettingsHandler.getMasterKey())){
+            this.log.info("a free transaction with the master key has been ignored");
             return;
         }
 
@@ -69,12 +69,12 @@ public class DoSAlgorithm {
             tempStamp.setTime(temp + revokeTime);
             jsonAccount.setTimeStamp(tempStamp);
 
-            queue.add(new CertifyCommand(jsonAccount));
+            this.queue.add(new CertifyCommand(jsonAccount));
             //TODO Account in Priority Queue werfen
-            log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
+            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
                     " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
-            accountHandler.writeAccountList();
+            this.accountHandler.writeAccountList();
 
         }  if (jsonAccount.getRemainingGas() < 0) {
             this.chainInteractions.revokeAccount(jsonAccount.getAddress());
@@ -82,31 +82,31 @@ public class DoSAlgorithm {
             tempStamp.setTime(temp + revokeTime);
 
             jsonAccount.setTimeStamp(tempStamp);
-            queue.add(new CertifyCommand(jsonAccount));
+            this.queue.add(new CertifyCommand(jsonAccount));
 
             //TODO Account in Priority Queue werfen
-            log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viel Gas verbraucht und wurde gesperrt. " +
+            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viel Gas verbraucht und wurde gesperrt. " +
                     " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
-            accountHandler.writeAccountList();
+            this.accountHandler.writeAccountList();
         }
-        log.info("Account Datei wird aktualisiert");
+        this.log.info("Account Datei wird aktualisiert");
         JsonAccountHandler.getInstance().writeAccountList();
     }
     //TODO JAVADOC
     public void offerAccount(JsonAccount acc){
-        queue.add(new CertifyCommand(acc));
+        this.queue.add(new CertifyCommand(acc));
     }
     Runnable queueInspector = () -> {
-        log.info("Queue wurde gestartet und läuft.");
+        this.log.info("Queue wurde gestartet und läuft.");
         while (true) {
             Timestamp now = new Timestamp(System.currentTimeMillis());
-            if (queue.peek() !=null){
-                log.info("Timestamp now: "+now.toString());
-                log.info("Timestamp account: " +queue.peek().getTimestamp());
+            if (this.queue.peek() !=null){
+                this.log.info("Timestamp now: "+now.toString());
+                this.log.info("Timestamp account: " + this.queue.peek().getTimestamp());
                 //TODO wieso ist es hier umgekehrt
-                if (!queue.peek().getTimestamp().after(now)){
-                    queue.poll().execute();
+                if (!this.queue.peek().getTimestamp().after(now)){
+                    this.queue.poll().execute();
                     //TODO Frage: darf man das hier?
                     this.accountHandler.writeAccountList();
                 }
@@ -117,7 +117,7 @@ public class DoSAlgorithm {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 //TODO error Meldung schreiben
-                log.error("");
+                this.log.error("");
                 e.printStackTrace();
             }
 

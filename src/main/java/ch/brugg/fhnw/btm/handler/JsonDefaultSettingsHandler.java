@@ -47,30 +47,30 @@ public class JsonDefaultSettingsHandler {
     public void loadDefaultSettings() {
         Gson gson = new Gson();
         try {
-            JsonReader reader = new JsonReader(new FileReader(defaultSettingsFile));
-            defaultSettings = gson.fromJson(reader, JsonDefaultSettings.class);
-            log.info("Default Settings wurden aus dem JSON File geladen");
+            JsonReader reader = new JsonReader(new FileReader(this.defaultSettingsFile));
+            this.defaultSettings = gson.fromJson(reader, JsonDefaultSettings.class);
+            this.log.info("Default Settings wurden aus dem JSON File geladen");
         } catch (FileNotFoundException e) {
             //TODO error log ausfüllen
-            log.error("");
+            this.log.error("");
             e.printStackTrace();
         }
     }
     //TODO JAVADOC
     public void writeDefaultSettings() {
 
-        defaultSettings.setTimestampLastReset(new Timestamp(System.currentTimeMillis()));
+        this.defaultSettings.setTimestampLastReset(new Timestamp(System.currentTimeMillis()));
 
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
-            Writer writer = Files.newBufferedWriter(Paths.get(defaultSettingsFile));
-            gson.toJson(defaultSettings,writer);
+            Writer writer = Files.newBufferedWriter(Paths.get(this.defaultSettingsFile));
+            gson.toJson(this.defaultSettings,writer);
             //TODO log info ausfüllen
-            log.info("");
+            this.log.info("");
             writer.close();
         } catch (IOException e) {
             //TODO error log ausfüllen
-            log.error("");
+            this.log.error("");
             e.printStackTrace();
         }
 
@@ -82,14 +82,14 @@ public class JsonDefaultSettingsHandler {
         Gson gson = new Gson();
         try {
 
-            JsonReader reader = new JsonReader(new FileReader(transaktionManagerAccountFile));
-            masterKey = gson.fromJson(reader, MasterKey.class);
+            JsonReader reader = new JsonReader(new FileReader(this.transaktionManagerAccountFile));
+            this.masterKey = gson.fromJson(reader, MasterKey.class);
             //TODO log info ausfüllen
-            log.info("");
-            return  masterKey.getPrivateKey();
+            this.log.info("");
+            return  this.masterKey.getPrivateKey();
         } catch (FileNotFoundException e) {
             //TODO error log ausfüllen
-            log.error("");
+            this.log.error("");
             e.printStackTrace();
             return  null;
         }
@@ -100,7 +100,7 @@ public class JsonDefaultSettingsHandler {
     //*************************GETTER und SETTER *************************
 
     public JsonDefaultSettings getDefaultSettings() {
-        return defaultSettings;
+        return this.defaultSettings;
     }
 
 }

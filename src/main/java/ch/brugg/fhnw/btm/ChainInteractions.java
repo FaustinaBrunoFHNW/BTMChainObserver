@@ -48,9 +48,9 @@ public class ChainInteractions {
      * @param jsonAccounts Liste mit Accounts
      */
     public void revokeAccountList(ArrayList<JsonAccount> jsonAccounts){
-        log.info("Alle Accounts von Liste werden revoked");
+        this.log.info("Alle Accounts von Liste werden revoked");
         for (JsonAccount jsonAccount : jsonAccounts) {
-            log.info("Revoked: "+ jsonAccount.getAddress());
+            this.log.info("Revoked: "+ jsonAccount.getAddress());
             this.revokeAccount(jsonAccount.getAddress());
         }
     }
@@ -65,7 +65,7 @@ public class ChainInteractions {
 
         try {
             //TODO log info ausfüllen
-            log.info("");
+            this.log.info("");
             this.simpleCertifier.revoke(accountAddress).send();
         } catch (Exception e) {
             //TODO log error ausfüllen
@@ -92,17 +92,17 @@ public class ChainInteractions {
 
         for (JsonAccount acc : jsonAccounts) {
             if (acc.getTimeStamp() == null) {
-                log.info("Account hat keinen TimeStamp und wurde in die Whitelist aufgenommen: " + acc.getAddress());
-                certifyAccount(acc.getAddress());
+                this.log.info("Account hat keinen TimeStamp und wurde in die Whitelist aufgenommen: " + acc.getAddress());
+                this.certifyAccount(acc.getAddress());
             }
             else if(acc.getTimeStamp().before(now)){
-                log.info("Account hat einen Timestamp, liegt aber in der Vergangenheit und "
+                this.log.info("Account hat einen Timestamp, liegt aber in der Vergangenheit und "
                         + "wird in die Whitelist aufegnommen: " + acc.getAddress());
                 acc.setTimeStamp(null);
-                certifyAccount(acc.getAddress());
+                this.certifyAccount(acc.getAddress());
             }
             else if (acc.getTimeStamp().after(now)){
-                log.info("Account hat einen TimeStamp in der Zukunft. Account ist gesperrt: " + acc.getAddress());
+                this.log.info("Account hat einen TimeStamp in der Zukunft. Account ist gesperrt: " + acc.getAddress());
                 DoSAlgorithm.getInstance().offerAccount(acc);
             }
         }
@@ -118,10 +118,10 @@ public class ChainInteractions {
     public boolean certifyAccount(String add) {
 
         try {
-            log.info("zertifizierung des Accounts mit folgender Adresse: " + add);
+            this.log.info("zertifizierung des Accounts mit folgender Adresse: " + add);
             this.simpleCertifier.certify(add).send();
-            log.info("Zertifizierung erfolgreich");
-            return isCertified(add);
+            this.log.info("Zertifizierung erfolgreich");
+            return this.isCertified(add);
         } catch (Exception e) {
             //TODO log error ausfüllen
             this.log.error("");
@@ -139,7 +139,7 @@ public class ChainInteractions {
      */
     public boolean isCertified(String add) {
         try {
-            return simpleCertifier.certified(add).send();
+            return this.simpleCertifier.certified(add).send();
         } catch (Exception e) {
             //TODO log error ausfüllen
             this.log.error("");

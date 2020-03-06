@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * In dieser Klasse befinden sich die 3 Befehle die der Benutzer über die Command Line aufrufen kann
  *
- * @Author Faustina Bruno, Serhe-Jurij Maikoff
+ * @Author Faustina Bruno, Serge-Jurij Maikoff
  */
 public class Main {
     private static Logger log = LoggerFactory.getLogger(Main.class);

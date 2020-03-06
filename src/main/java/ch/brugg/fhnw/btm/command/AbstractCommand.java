@@ -18,13 +18,13 @@ public abstract class AbstractCommand implements Command {
 
     //TODO JAVADOC
     public Timestamp getTimestamp(){
-        return timestamp;
+        return this.timestamp;
     }
     //TODO JAVADOC
     public AbstractCommand(JsonAccount jsonAccount){
         this.jsonAccount = jsonAccount;
         this.timestamp = jsonAccount.getTimeStamp();
-        instance = ChainSetup.getInstance();
+        this.instance = ChainSetup.getInstance();
     }
 
 
