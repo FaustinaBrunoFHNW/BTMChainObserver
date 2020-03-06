@@ -21,12 +21,12 @@
   },
   {
     "address": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
-    "remainingTransactions": 2,
+    "remainingTransactions": 0,
     "transactionLimit": 2,
     "revokeTime": 3,
     "gasLimit": 111111,
-    "remainingGas": 111111,
+    "remainingGas": 48111,
     "deleteMe": false,
-    "timeStamp": null
+    "timeStamp": "Mar 6, 2020 8:26:19 PM"
   }
 ]

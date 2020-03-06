@@ -102,8 +102,9 @@ public class DoSAlgorithm {
         while (true) {
             Timestamp now = new Timestamp(System.currentTimeMillis());
             if (this.queue.peek() !=null){
-                this.log.info("Timestamp now: "+now.toString());
-                this.log.info("Timestamp account: " + this.queue.peek().getTimestamp());
+                //TODO ist dieser log nötig?
+           //     this.log.info("Timestamp now: "+now.toString());
+               // this.log.info("Timestamp account: " + this.queue.peek().getTimestamp());
                 //TODO wieso ist es hier umgekehrt
                 if (!this.queue.peek().getTimestamp().after(now)){
                     this.queue.poll().execute();

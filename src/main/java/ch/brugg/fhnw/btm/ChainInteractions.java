@@ -41,25 +41,27 @@ public class ChainInteractions {
 
     }
 
-
     //TODO public checken
+
     /**
      * In dieser Methode werden alle Account einer Liste von der Whiteliste entfernt
+     *
      * @param jsonAccounts Liste mit Accounts
      */
-    public void revokeAccountList(ArrayList<JsonAccount> jsonAccounts){
+    public void revokeAccountList(ArrayList<JsonAccount> jsonAccounts) {
         this.log.info("Alle Accounts von Liste werden revoked");
         for (JsonAccount jsonAccount : jsonAccounts) {
-            this.log.info("Revoked: "+ jsonAccount.getAddress());
+            this.log.info("Revoked: " + jsonAccount.getAddress());
             this.revokeAccount(jsonAccount.getAddress());
         }
     }
 
     /**
      * Dieser Methode entfernt einen Account aus der Whitelist und kontrolliert ob es erfolgreich war
+     *
      * @param accountAddress Adresse des zu sperrenden Accounts
      */
-    public void revokeAccount(String accountAddress)   {
+    public void revokeAccount(String accountAddress) {
         this.log.info("Methode revokeAccount wurde aufgerufen. Folgender Account wird aus der Whiteliste entfernt: "
                 + accountAddress);
 
@@ -75,8 +77,9 @@ public class ChainInteractions {
 
         if (!this.isCertified(accountAddress)) {
             this.log.info(accountAddress + " wurde  erfolgreich aus der Whiteliste entfernt");
+        } else {
+            this.log.info(accountAddress + " wurde NICHT erfolgreich aus der Whiteliste entfernt");
         }
-        this.log.info(accountAddress + " wurde NICHT erfolgreich aus der Whiteliste entfernt");
     }
 
     /**
@@ -84,6 +87,7 @@ public class ChainInteractions {
      * kein TimeStamp --> Account wird in Whiteliste aufgenommen
      * Timestamp in Vergangenheit --> Account wird in die Whiteliste aufgenommen
      * Timestamp in der zukunft --> Account ist gesperrt und wird in die PrioQue hinzugefügt
+     *
      * @param jsonAccounts Liste mit Accounts
      */
     public void certifyAccountList(ArrayList<JsonAccount> jsonAccounts) {
@@ -92,16 +96,15 @@ public class ChainInteractions {
 
         for (JsonAccount acc : jsonAccounts) {
             if (acc.getTimeStamp() == null) {
-                this.log.info("Account hat keinen TimeStamp und wurde in die Whitelist aufgenommen: " + acc.getAddress());
+                this.log.info(
+                        "Account hat keinen TimeStamp und wurde in die Whitelist aufgenommen: " + acc.getAddress());
                 this.certifyAccount(acc.getAddress());
-            }
-            else if(acc.getTimeStamp().before(now)){
+            } else if (acc.getTimeStamp().before(now)) {
                 this.log.info("Account hat einen Timestamp, liegt aber in der Vergangenheit und "
                         + "wird in die Whitelist aufegnommen: " + acc.getAddress());
                 acc.setTimeStamp(null);
                 this.certifyAccount(acc.getAddress());
-            }
-            else if (acc.getTimeStamp().after(now)){
+            } else if (acc.getTimeStamp().after(now)) {
                 this.log.info("Account hat einen TimeStamp in der Zukunft. Account ist gesperrt: " + acc.getAddress());
                 DoSAlgorithm.getInstance().offerAccount(acc);
             }
@@ -112,6 +115,7 @@ public class ChainInteractions {
 
     /**
      * Hier wird ein Account in die Whiteliste hinzugefügt
+     *
      * @param add Adresse des Accounts welches in die Whiteliste hinzugefügt wird
      * @return es wird ausgegeben ob der Account in der Whiteliste hinzugefügt wurde
      */
@@ -130,10 +134,11 @@ public class ChainInteractions {
         return false;
     }
 
-
     //TODO public kontrollieren
+
     /**
      * Diese Methode gibts aus ob ein Account zertifiziert/in der Whiteliste ist
+     *
      * @param add Adresse des Accounts
      * @return boolean ob Adresse zertifiziert ist --> true oder eben nicht --> false
      */
