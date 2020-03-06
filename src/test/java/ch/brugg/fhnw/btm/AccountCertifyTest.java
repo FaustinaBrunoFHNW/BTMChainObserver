@@ -1,64 +1,37 @@
-//package ch.brugg.fhnw.btm;
-//
-//import org.junit.BeforeClass;
-//import org.junit.Test;
-//
-//import java.math.BigInteger;
-//
-//public class AccountCertifyTest {
-//
-//    //TODO richtige Adressen
-//    private final static String PRIVATE_KEY = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
-//    private final static String PRIVATE_ADD = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
-//    private final static String CERTIFIED_ADD = "0x84b51678f9a4869e384f737ed2a5d56c8ca16c81";
-//    private static BigInteger GAS_LIMIT = BigInteger.valueOf(21000L);
-//    private static BigInteger GAS_PRICE = BigInteger.valueOf(1000000000); //1 GWEI
-//    // private static BigInteger GAS_PRICE = BigInteger.valueOf(0);
-//
-//    //TODO Singleton parameter übergeben
-//    public ChainSetup chainSetUp = new ChainSetup();
-//    private ChainInteractions chainInteractions = new ChainInteractions(chainSetUp);
-//
-//    @BeforeClass public void setUpChain() throws Exception {
-//       // chainSetUp.setUpAfterChaiStart(CERTIFIED_ADD, PRIVATE_KEY);
-//    }
-//
-//    @Test public void main(String[] args) throws Exception {
-//         String adress="0x84b51678f9a4869e384f737ed2a5d56c8ca16c81";
-//        //Load Simple Cert
-//        //Entweder SetUp oder Load
-//        //Dieses wird benutzt wenn Chain schonmal gelaufen ist
-//        //Parameter wird aus Info vom First Run ausgegeben
-//        this.chainSetUp.loadCertifier(adress);
-//
-//
-//        //Verify
-//      //  System.out.println("Certified Adress is certified: "+ String.valueOf(this.chainSetUp.isCertified(CERTIFIED_ADD) ));
-//        //TODO für uncertified Account
-//     //   log.info("Uncertified Adress is certified: " + String.valueOf(isCertified(TEST_ADD)));
-//
-//
-//        doTestTransactionsCertified();
-//        doTestTransactionsCertified();
-//       //TODO für uncertified Account
-//        // doTestTransactionsUnCertified();
-//
-//    }
-//
-//
-//    private  void doTestTransactionsCertified() {
-//        System.out.println("Certified Transaction should work");
-//        try {
-//           boolean status = this.chainInteractions.sendEtherToAccount(GAS_PRICE,GAS_LIMIT,CERTIFIED_ADD).isStatusOK();
-//            if (status == false) {
-//                System.out.println("But did not work. Status: " + status);
-//            } else {
-//                System.out.println("and it did work. Status:" + status);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
-//}
+package ch.brugg.fhnw.btm;
+
+import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
+import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.math.BigInteger;
+
+public class AccountCertifyTest {
+
+    private ChainSetup chainSetup;
+    private ChainInteractions chainInteractions;
+    private JsonAccountHandler jsonAccountHandler;
+
+    @BeforeClass public void setUpChain() throws Exception {
+        chainSetup = ChainSetup.getInstance();
+        chainInteractions = new ChainInteractions(chainSetup);
+
+        JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
+        jsonDefaultSettingsHandler.loadDefaultSettings();
+        jsonAccountHandler = JsonAccountHandler.getInstance();
+
+        ChainSetup.getInstance().setUpAfterChainStart();
+    }
+
+    @Test public void certifyAccount() {
+        Assert.assertEquals(0, jsonAccountHandler.getJsonAccountList().size());
+        String accountAddress = "";
+        Assert.assertFalse(chainInteractions.isCertified(accountAddress));
+        chainInteractions.certifyAccount(accountAddress);
+        Assert.assertTrue(chainInteractions.isCertified(accountAddress));
+        Assert.assertEquals(1, jsonAccountHandler.getJsonAccountList().size());
+    }
+
+}
