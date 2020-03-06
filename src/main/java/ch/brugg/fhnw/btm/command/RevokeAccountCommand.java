@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * @Author Faustina Bruno, Serge-Jurij Maikoff
  */
 public class RevokeAccountCommand extends AbstractCommand implements Command {
-    private Logger log = LoggerFactory.getLogger(AbstractCommand.class);
+    private Logger log = LoggerFactory.getLogger(RevokeAccountCommand.class);
     public RevokeAccountCommand(JsonAccount jsonAccount){
         super(jsonAccount);
     }

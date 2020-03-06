@@ -1,5 +1,6 @@
 package ch.brugg.fhnw.btm;
 
+import ch.brugg.fhnw.btm.command.ResetAccountsCommand;
 import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
@@ -47,7 +48,7 @@ public class SubscriptionTX {
     public void run(int min) throws Exception {
         this.log.info("Filter und Intervall werden gestartet");
         this.txFilter();
-        this.intervall(min);
+        this.intervall();
     }
 
     /**
@@ -77,35 +78,12 @@ public class SubscriptionTX {
     /**
      * In dieser Methode werden alle Counters zurückgesetzt
      */
-    private void setAllCountersToMax() {
 
-        for (JsonAccount jsonAccount : this.accountHandler.getJsonAccountList()) {
-            jsonAccount.setRemainingTransactions(jsonAccount.getTransactionLimit().intValue());
-            jsonAccount.setRemainingGas(jsonAccount.getGasLimit().intValue());
-        }
 
-    }
 
-    /**
-     * In dieser Methode wird der Intervall ausgeführt Nach jedem ausführen werden alleCounters zurückgesetzt
-     * und der Zustand der Accounts wie auch der DefaultSettings in die dateien gespeichert.
-     * @param min Anzahl Minuten des Intervalls
-     * @throws InterruptedException
-     * @throws IOException
-     */
-    private void intervall(int min) throws InterruptedException, IOException {
+    private void intervall()  {
         this.log.info("*************Intervall ist gestartet********************");
-        while (true) {
-            this.log.info(new Date().toString());
-
-            //TODO eigener THREAD
-            Thread.sleep(min * 60 * 1000);
-            this.setAllCountersToMax();
-            this.jsonDefaultSettingsHandler.getDefaultSettings()
-                    .setTimestampLastReset(new Timestamp(System.currentTimeMillis()));
-            this.accountHandler.writeAccountList();
-            this.jsonDefaultSettingsHandler.writeDefaultSettings();
-        }
+        DoSAlgorithm.getInstance().offerCommand(new ResetAccountsCommand());
     }
 
 }

@@ -124,5 +124,9 @@ public class DoSAlgorithm {
         }
     };
 
+    public void offerCommand(Command command){
+        queue.add(command);
+    }
+
 
 }
