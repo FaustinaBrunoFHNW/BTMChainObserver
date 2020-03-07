@@ -18,10 +18,10 @@ public class SendEtherHelper {
     private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
     private ChainSetup chainSetup = ChainSetup.getInstance();
 
-    public void sendEther(String addresseTo, BigDecimal etherValue, BigInteger gasPrice, BigInteger gasLimit)
+    public TransactionReceipt sendEther(String addresseTo, BigDecimal etherValue, BigInteger gasPrice, BigInteger gasLimit)
             throws Exception {
         Transfer transfer = new Transfer(chainSetup.getWeb3j(), chainSetup.getTransactionManager());
-        transfer.sendFunds(addresseTo, etherValue, Convert.Unit.ETHER, gasPrice, gasLimit).send();
+      return  transfer.sendFunds(addresseTo, etherValue, Convert.Unit.ETHER, gasPrice, gasLimit).send();
 
     }
 
@@ -29,9 +29,10 @@ public class SendEtherHelper {
             BigInteger gasLimit) throws Exception {
         int counter = 0;
         while (counter<loopCount) {
-            this.sendEther(addressTo, etherValue, gasPrice, gasLimit);
+            System.out.println( this.sendEther(addressTo, etherValue, gasPrice, gasLimit).toString());
             counter++;
         }
     }
+
 
 }
