@@ -2,15 +2,12 @@ package ch.brugg.fhnw.btm.performance;
 
 import ch.brugg.fhnw.btm.ChainInteractions;
 import ch.brugg.fhnw.btm.ChainSetup;
-import ch.brugg.fhnw.btm.Main;
 import ch.brugg.fhnw.btm.SubscriptionTX;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import ch.brugg.fhnw.btm.helper.SendEtherHelper;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.math.BigDecimal;

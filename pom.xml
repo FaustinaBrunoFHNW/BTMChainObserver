@@ -58,7 +58,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>ch.brugg.fhnw.btm.Main</mainClass>
+                                    <mainClass>ch.brugg.fhnw.btm.Run</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
