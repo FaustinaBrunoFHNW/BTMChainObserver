@@ -9,6 +9,8 @@ import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.exceptions.TransactionException;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.RawTransactionManager;
+import org.web3j.tx.TransactionManager;
 import org.web3j.tx.Transfer;
 import org.web3j.utils.Convert;
 
@@ -31,9 +33,9 @@ public class SendEtherHelper {
 
     private TransactionReceipt sendEther(String addresseTo, BigDecimal etherValue, BigInteger gasPrice,
             BigInteger gasLimit) throws Exception {
-        Credentials credentials = this.getCredentialsFromPrivateKey();
-        return Transfer.sendFunds(chainSetup.getWeb3j(), credentials, addresseTo, etherValue, Convert.Unit.ETHER)
-                .send();
+        TransactionManager transactionManager= new RawTransactionManager(chainSetup.getWeb3j(), this.getCredentialsFromPrivateKey());
+        Transfer transfer= new Transfer(chainSetup.getWeb3j(),transactionManager);
+        return transfer.sendFunds(addresseTo, etherValue, Convert.Unit.ETHER, gasPrice, gasLimit).send();
     }
 
     public void txLoop(int loopCount, String addressTo, BigDecimal etherValue, BigInteger gasPrice, BigInteger gasLimit)
