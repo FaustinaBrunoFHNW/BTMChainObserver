@@ -5,6 +5,7 @@ import ch.brugg.fhnw.btm.ChainSetup;
 import ch.brugg.fhnw.btm.SubscriptionTX;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
+import ch.brugg.fhnw.btm.helper.ResetHelper;
 import ch.brugg.fhnw.btm.helper.SendEtherHelper;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.junit.Assert;
@@ -20,6 +21,7 @@ import java.math.BigInteger;
  */
 public class DoSAttackWithTransactions {
     private SendEtherHelper sendEtherHelper;
+    private ResetHelper resetHelper= new ResetHelper();
     private ChainInteractions chainInteractions;
     private static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
     private static String TOADDRESS = "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b";
@@ -35,6 +37,7 @@ public class DoSAttackWithTransactions {
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.loadAccounts();
         jsonAccountHandler.writeAccountList();
+        resetHelper.setAccountsCountersToMax();
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
         sendEtherHelper = new SendEtherHelper();
         sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);

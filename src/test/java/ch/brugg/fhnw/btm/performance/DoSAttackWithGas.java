@@ -1,8 +1,10 @@
 package ch.brugg.fhnw.btm.performance;
 
 import ch.brugg.fhnw.btm.*;
+import ch.brugg.fhnw.btm.command.ResetAccountsCommand;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
+import ch.brugg.fhnw.btm.helper.ResetHelper;
 import ch.brugg.fhnw.btm.helper.SendEtherHelper;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.junit.After;
@@ -22,11 +24,13 @@ import org.web3j.utils.Convert;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class DoSAttackWithGas {
 
     private SendEtherHelper sendEtherHelper;
     private ChainInteractions chainInteractions;
+   private ResetHelper resetHelper= new ResetHelper();
     private static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
     private static BigInteger GASPRICEZERO = new BigInteger("0");
     private static BigInteger GASLIMIT = new BigInteger("21000");
@@ -37,12 +41,12 @@ public class DoSAttackWithGas {
         ChainSetup chainSetup = ChainSetup.getInstance();
         ChainSetup.getInstance().setUpAfterChainStart();
         chainInteractions = new ChainInteractions(chainSetup);
-        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
-        jsonAccountHandler.loadAccounts();
-        jsonAccountHandler.writeAccountList();
-        chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
+        resetHelper.setAccountsCountersToMax();
         sendEtherHelper = new SendEtherHelper();
         sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
+        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+        chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
+
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
     }
@@ -73,8 +77,10 @@ public class DoSAttackWithGas {
             Assert.assertFalse(this.chainInteractions.isCertified(ADDRESS));
         }
         catch (RuntimeException e){Assert.assertEquals(e.getClass(), RuntimeException.class);
-            Assert.assertFalse(this.chainInteractions.isCertified(ADDRESS));}
+            Assert.assertFalse(this.chainInteractions.isCertified(ADDRESS));
+            }
 
     }
+
 
 }
