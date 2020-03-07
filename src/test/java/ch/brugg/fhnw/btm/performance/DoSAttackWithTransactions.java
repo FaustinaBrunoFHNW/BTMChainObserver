@@ -23,6 +23,7 @@ import java.math.BigInteger;
 public class DoSAttackWithTransactions {
     private SendEtherHelper sendEtherHelper;
     private ChainInteractions chainInteractions;
+    private static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
 
     private void setUpChain() throws Exception {
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
@@ -45,7 +46,7 @@ public class DoSAttackWithTransactions {
     @Test public void txAttack4() throws Exception {
         this.setUpChain();
         JsonAccount account= new JsonAccount();
-        account.setAddress("0xf13264c4bd595aebb966e089e99435641082ff24");
+        account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("543");
         BigInteger gasPrice = new BigInteger("0");
         BigInteger gasLimit = new BigInteger("21000");
@@ -62,7 +63,7 @@ public class DoSAttackWithTransactions {
     @Test public void txAttack6() throws Exception {
         this.setUpChain();
         JsonAccount account= new JsonAccount();
-        account.setAddress("0xf13264c4bd595aebb966e089e99435641082ff24");
+        account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("543");
         BigInteger gasPrice = new BigInteger("0");
         BigInteger gasLimit = new BigInteger("21000");
@@ -73,7 +74,7 @@ public class DoSAttackWithTransactions {
     @Test public void txAttack10() throws Exception {
         this.setUpChain();
         JsonAccount account= new JsonAccount();
-        account.setAddress("0xf13264c4bd595aebb966e089e99435641082ff24");
+        account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("543");
         BigInteger gasPrice = new BigInteger("0");
         BigInteger gasLimit = new BigInteger("21000");
@@ -84,7 +85,7 @@ public class DoSAttackWithTransactions {
     @Test public void txAttack100000() throws Exception {
         this.setUpChain();
         JsonAccount account= new JsonAccount();
-        account.setAddress("0xf13264c4bd595aebb966e089e99435641082ff24");
+        account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("543");
         BigInteger gasPrice = new BigInteger("0");
         BigInteger gasLimit = new BigInteger("21000");
@@ -95,7 +96,7 @@ public class DoSAttackWithTransactions {
     @Test public void txAttack1000000() throws Exception {
         this.setUpChain();
         JsonAccount account= new JsonAccount();
-        account.setAddress("0xf13264c4bd595aebb966e089e99435641082ff24");
+        account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("56");
         BigInteger gasPrice = new BigInteger("0");
         BigInteger gasLimit = new BigInteger("21000");
@@ -106,7 +107,7 @@ public class DoSAttackWithTransactions {
     @Test public void txAttack10000000() throws Exception {
         this.setUpChain();
         JsonAccount account= new JsonAccount();
-        account.setAddress("0xf13264c4bd595aebb966e089e99435641082ff24");
+        account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("34");
         BigInteger gasPrice = new BigInteger("0");
         BigInteger gasLimit = new BigInteger("21000");
@@ -117,7 +118,7 @@ public class DoSAttackWithTransactions {
     @Test public void txAttack100000000() throws Exception {
         this.setUpChain();
         JsonAccount account= new JsonAccount();
-        account.setAddress("0xf13264c4bd595aebb966e089e99435641082ff24");
+        account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("23");
         BigInteger gasPrice = new BigInteger("0");
         BigInteger gasLimit = new BigInteger("21000");

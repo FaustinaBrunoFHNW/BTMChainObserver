@@ -45,7 +45,7 @@ public class DoSAttackWithGas {
     }
 
     @Test public void gasAttack100000() throws Exception {
-        String addressTo = "0xf13264C4bD595AEbb966E089E99435641082ff24";
+        String addressTo = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
         this.certifyAddress(addressTo);
         BigDecimal ether = new BigDecimal("100000");
         BigInteger gasPrice = new BigInteger("0");
@@ -54,7 +54,7 @@ public class DoSAttackWithGas {
     }
 
     @Test public void gasAttack1000000() throws Exception {
-        String addressTo = "0xf13264C4bD595AEbb966E089E99435641082ff24";
+        String addressTo = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
         this.certifyAddress(addressTo);
         BigDecimal ether = new BigDecimal("1000000");
         BigInteger gasPrice = new BigInteger("0");
@@ -63,7 +63,7 @@ public class DoSAttackWithGas {
     }
 
     @Test public void gasAttack10000000() throws Exception {
-        String addressTo = "0xf13264C4bD595AEbb966E089E99435641082ff24";
+        String addressTo = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
         this.certifyAddress(addressTo);
         BigDecimal ether = new BigDecimal("10000000");
         BigInteger gasPrice = new BigInteger("0");
@@ -72,7 +72,7 @@ public class DoSAttackWithGas {
     }
 
     @Test public void gasAttack100000000() throws Exception {
-        String addressTo = "0xf13264C4bD595AEbb966E089E99435641082ff24";
+        String addressTo = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
         this.certifyAddress(addressTo);
         BigDecimal ether = new BigDecimal("100000000");
         BigInteger gasPrice = new BigInteger("0");
