@@ -40,7 +40,7 @@ public class SendEtherHelper {
             throws Exception {
         int counter = 0;
         while (counter < loopCount) {
-            System.out.println(this.sendEther(addressTo, etherValue, gasPrice, gasLimit).toString());
+            System.out.println(counter+". Transaktion: "+this.sendEther(addressTo, etherValue, gasPrice, gasLimit).toString());
             counter++;
         }
     }
