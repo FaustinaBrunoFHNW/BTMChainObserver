@@ -56,19 +56,19 @@ public class ChainSetup {
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
      */
     private ChainSetup() {
-        this.log.info("connecting");
+        log.info("connecting");
 
-        this.certifierAddress = this.jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress();
-        this.web3j = Web3j.build(new HttpService(this.jsonDefaultSettingsHandler.getDefaultSettings().getConnectionAddress()));
+        this.certifierAddress = jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress();
+        web3j = Web3j.build(new HttpService(jsonDefaultSettingsHandler.getDefaultSettings().getConnectionAddress()));
 
-        this.privateKey = this.jsonDefaultSettingsHandler.getMasterKey();
-        this.transactionManager = new RawTransactionManager(this.web3j, this.getCredentialsFromPrivateKey());
+        this.privateKey = jsonDefaultSettingsHandler.getMasterKey();
+        this.transactionManager = new RawTransactionManager(web3j, this.getCredentialsFromPrivateKey());
 
         String str_hash = "6d3815e6a4f3c7fcec92b83d73dda2754a69c601f07723ec5a2274bd6e81e155";
 
         //Umwandeln in Bytearray Hexadecimal
-        this.hash = new BigInteger(str_hash, 16).toByteArray();
-        this.getInfo(this.web3j);
+        hash = new BigInteger(str_hash, 16).toByteArray();
+        getInfo(web3j);
     }
 
     /**
@@ -77,9 +77,9 @@ public class ChainSetup {
      * @throws Exception
      */
     public void setUpAfterChainStart() throws Exception {
-        this.getInfo(this.web3j);
+        this.getInfo(web3j);
         this.loadSimpleRegistry();
-        this.loadCertifier(this.certifierAddress);
+        this.loadCertifier(certifierAddress);
 
     }
 
@@ -106,16 +106,15 @@ public class ChainSetup {
      * @return boolean Wert ob das laden der Simpleregistry funktioniert hat
      */
     private void loadSimpleRegistry() {
-        this.simpleRegistry = SimpleRegistry
-                .load(this.jsonDefaultSettingsHandler.getDefaultSettings().getNameRegistryAddress(),
-                        this.web3j, this.getCredentialsFromPrivateKey(),
+        simpleRegistry = SimpleRegistry
+                .load(jsonDefaultSettingsHandler.getDefaultSettings().getNameRegistryAddress(), web3j, getCredentialsFromPrivateKey(),
                         new DefaultGasProvider());
         try {
-            this.log.info("Fee of Registry: " + this.simpleRegistry.fee().send());
+            log.info("Fee of Registry: " + simpleRegistry.fee().send());
             //TODO owner speichern in Variable
-            this.log.info("Besitzer von Registry: " + this.simpleRegistry.owner().send());
+            log.info("Besitzer von Registry: " + simpleRegistry.owner().send());
         } catch (Exception e) {
-            this.log.error("Simple Registry konnte nicht geladen werden");
+            log.error("Simple Registry konnte nicht geladen werden");
             e.printStackTrace();
         }
 
@@ -130,18 +129,18 @@ public class ChainSetup {
      */
     private void setUpCertifier() {
 
-        if (this.deployCertifier(this.transactionManager) && this.registerCertifier()) {
+        if (deployCertifier(transactionManager) && registerCertifier()) {
 
-            this.log.info("Deployen des Certifier hat funktioniert");
-            this.log.info("Das Registrieren des Certifiers hat funktioniert");
-            this.log.info("Certifying hat funktioniert");
-            this.log.info("Addresse vom Certifier: " + this.simpleCertifier.getContractAddress());
-            this.certifierAddress = this.simpleCertifier.getContractAddress();
-            this.jsonDefaultSettingsHandler.getDefaultSettings().setCertifierAddress(this.certifierAddress);
+            log.info("Deployen des Certifier hat funktioniert");
+            log.info("Das Registrieren des Certifiers hat funktioniert");
+            log.info("Certifying hat funktioniert");
+            log.info("Addresse vom Certifier: " + simpleCertifier.getContractAddress());
+            this.certifierAddress = simpleCertifier.getContractAddress();
+            this.jsonDefaultSettingsHandler.getDefaultSettings().setCertifierAddress(certifierAddress);
             this.jsonDefaultSettingsHandler.writeDefaultSettings();
 
         }
-        this.log.error("Es gab ein Problem beim Setup und Deployen und Registrieren des Certifier ");
+        log.error("Es gab ein Problem beim Setup und Deployen und Registrieren des Certifier ");
 
     }
 
@@ -163,12 +162,12 @@ public class ChainSetup {
     private boolean deployCertifier(TransactionManager transactionManager) {
 
         try {
-            this.log.info("Deployment vom Certifier");
-            this.simpleCertifier = SimpleCertifier.deploy(this.web3j, transactionManager, new DefaultGasProvider()).send();
-            this.log.info("Deployment vom Certifier erfolgreich");
+            log.info("Deployment vom Certifier");
+            simpleCertifier = SimpleCertifier.deploy(web3j, transactionManager, new DefaultGasProvider()).send();
+            log.info("Deployment vom Certifier erfolgreich");
             return true;
         } catch (Exception e) {
-            this.log.error("Deployen vom Certifier hat nicht funktioniert.");
+            log.error("Deployen vom Certifier hat nicht funktioniert.");
             e.printStackTrace();
         }
         return false;
@@ -183,16 +182,16 @@ public class ChainSetup {
     private boolean registerCertifier() {
 
         try {
-            this.log.info("Registrieren vom Certifier");
-            TransactionReceipt receipt1 = this.simpleRegistry.reserve(this.hash, REGISTRATION_FEE).send();
-            this.log.info("TX-Hash für reserve: " + receipt1.getTransactionHash());
-            TransactionReceipt receipt2 = this.simpleRegistry.setAddress(this.hash, "A", this.simpleCertifier.getContractAddress())
+            log.info("Registrieren vom Certifier");
+            TransactionReceipt receipt1 = simpleRegistry.reserve(hash, REGISTRATION_FEE).send();
+            log.info("TX-Hash für reserve: " + receipt1.getTransactionHash());
+            TransactionReceipt receipt2 = simpleRegistry.setAddress(hash, "A", simpleCertifier.getContractAddress())
                     .send();
-            this.log.info("Tx-Hash für setAddress: " + receipt2.getTransactionHash());
-            this.log.info("Registrierung vom Certifier erfolgreich");
+            log.info("Tx-Hash für setAddress: " + receipt2.getTransactionHash());
+            log.info("Registrierung vom Certifier erfolgreich");
             return true;
         } catch (Exception e) {
-            this.log.error("Registrierung vom Certifier hat nicht funktioniert.");
+            log.error("Registrierung vom Certifier hat nicht funktioniert.");
             e.printStackTrace();
         }
         return false;
@@ -211,9 +210,9 @@ public class ChainSetup {
 
             EthGasPrice gasPrice = web3j.ethGasPrice().send();
 
-            this.log.info("Client Version " + clientVersion.getWeb3ClientVersion());
-            this.log.info("Block Nummer " + blockNumber.getBlockNumber());
-            this.log.info("Gas Preis " + gasPrice.getGasPrice());
+            log.info("Client Version " + clientVersion.getWeb3ClientVersion());
+            log.info("Block Nummer " + blockNumber.getBlockNumber());
+            log.info("Gas Preis " + gasPrice.getGasPrice());
 
         } catch (IOException e) {
             //TODO log error ausfüllen
@@ -231,8 +230,8 @@ public class ChainSetup {
      */
     public void loadCertifier(String add) {
 
-        this.simpleCertifier = SimpleCertifier.load(add, this.web3j, this.getCredentialsFromPrivateKey(), new DefaultGasProvider());
-        this.log.info("Laden vom Certifier erfolgreich");
+        simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
+        log.info("Laden vom Certifier erfolgreich");
     }
 
     //TODO JAVADOC + public
@@ -241,11 +240,11 @@ public class ChainSetup {
      */
     public void registerSelf(){
         try {
-            this.simpleCertifier.certify(this.getCredentialsFromPrivateKey().getAddress()).send();
+            simpleCertifier.certify(getCredentialsFromPrivateKey().getAddress()).send();
             //TODO Logger
-            this.log.info("");
+            log.info("");
         } catch (Exception e) {
-            this.log.error("Zertifizierung des MasterKeys war nicht erfolgreich");
+            log.error("Zertifizierung des MasterKeys war nicht erfolgreich");
             e.printStackTrace();
         }
     }
@@ -253,11 +252,11 @@ public class ChainSetup {
     //GETTER UND SETTER
 
     public Web3j getWeb3j() {
-        return this.web3j;
+        return web3j;
     }
 
     public SimpleCertifier getSimpleCertifier() {
-        return this.simpleCertifier;
+        return simpleCertifier;
     }
 
     public void setSimpleCertifier(SimpleCertifier simpleCertifier) {
@@ -265,7 +264,7 @@ public class ChainSetup {
     }
 
     public TransactionManager getTransactionManager() {
-        return this.transactionManager;
+        return transactionManager;
     }
 
     public void setTransactionManager(TransactionManager transactionManager) {
@@ -273,7 +272,7 @@ public class ChainSetup {
     }
 
     public SimpleRegistry getSimpleRegistry() {
-        return this.simpleRegistry;
+        return simpleRegistry;
     }
 
     public void setSimpleRegistry(SimpleRegistry simpleRegistry) {
@@ -281,7 +280,7 @@ public class ChainSetup {
     }
 
     public byte[] getHash() {
-        return this.hash;
+        return hash;
     }
 
     public void setHash(byte[] hash) {
@@ -289,7 +288,7 @@ public class ChainSetup {
     }
 
     public String getCertifierAddress() {
-        return this.certifierAddress;
+        return certifierAddress;
     }
 
     public void setCertifierAddress(String certifierAddress) {

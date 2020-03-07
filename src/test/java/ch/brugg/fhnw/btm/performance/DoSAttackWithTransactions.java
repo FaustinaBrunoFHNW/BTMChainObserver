@@ -55,8 +55,25 @@ public class DoSAttackWithTransactions {
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("1");
-        sendEtherHelper.txLoop(4, TOADDRESS, ether, GASPRICEZERO, GASLIMIT);
+        sendEtherHelper.txLoop(4, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
         Assert.assertTrue(this.chainInteractions.isCertified(account.getAddress()));
+
+    }
+
+    /**
+     * Test mir Randlimite genau der Limite
+     *
+     * @throws Exception
+     */
+    @Test public void txAttack5() throws Exception {
+        this.setUpChain();
+        JsonAccount account = new JsonAccount();
+        account.setAddress(ADDRESS);
+        BigDecimal ether = new BigDecimal("1");
+
+        sendEtherHelper.txLoop(5, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
+        Assert.assertTrue(this.chainInteractions.isCertified(account.getAddress()));
+
     }
 
     /**
@@ -69,8 +86,16 @@ public class DoSAttackWithTransactions {
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("1");
-        sendEtherHelper.txLoop(7, TOADDRESS, ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+        try {
+            Thread.sleep(1000);
+            sendEtherHelper.txLoop(6, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
+            Thread.sleep(15000);
+            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+        } catch (RuntimeException e) {
+            Assert.assertEquals(e.getClass(), RuntimeException.class);
+            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+        }
+
     }
 
     @Test public void txAttack10() throws Exception {
@@ -78,8 +103,18 @@ public class DoSAttackWithTransactions {
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("1");
-        sendEtherHelper.txLoop(10, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+
+        try {
+            Thread.sleep(1000);
+            sendEtherHelper.txLoop(10, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
+            Thread.sleep(15000);
+            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+
+        } catch (RuntimeException e) {
+            Assert.assertEquals(e.getClass(), RuntimeException.class);
+            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+        }
+
     }
 
     @Test public void txAttack100() throws Exception {
@@ -87,61 +122,32 @@ public class DoSAttackWithTransactions {
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("1");
-        Thread.sleep(1000);
         try {
+            Thread.sleep(1000);
             sendEtherHelper.txLoop(100, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
+            Thread.sleep(5000);
             Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
         } catch (RuntimeException e) {
-            Assert.assertEquals(e.,RuntimeException.class);
+            Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
         }
 
     }
 
-
-
-    @Test public void txAttack100000() throws Exception {
+    @Test public void txAttack1000() throws Exception {
         this.setUpChain();
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("1");
         try {
-            sendEtherHelper.txLoop(100000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);  // call function
-
+            Thread.sleep(1000);
+            sendEtherHelper.txLoop(1000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
+            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
         } catch (RuntimeException e) {
-            Assert.assertEquals(e.getMessage(),
-                    "Error processing transaction request: Transaction gas price is too low. It does not satisfy your node's minimal gas price (minimal: 1000000000, got: 0). Try increasing the gas price.");
-
+            Assert.assertEquals(e.getClass(), RuntimeException.class);
+            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
         }
-        sendEtherHelper.txLoop(100000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
-    }
 
-    @Test public void txAttack1000000() throws Exception {
-        this.setUpChain();
-        JsonAccount account = new JsonAccount();
-        account.setAddress(ADDRESS);
-        BigDecimal ether = new BigDecimal("1");
-        sendEtherHelper.txLoop(100000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
-    }
-
-    @Test public void txAttack10000000() throws Exception {
-        this.setUpChain();
-        JsonAccount account = new JsonAccount();
-        account.setAddress(ADDRESS);
-        BigDecimal ether = new BigDecimal("1");
-        sendEtherHelper.txLoop(100000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
-    }
-
-    @Test public void txAttack100000000() throws Exception {
-        this.setUpChain();
-        JsonAccount account = new JsonAccount();
-        account.setAddress(ADDRESS);
-        BigDecimal ether = new BigDecimal("1");
-        sendEtherHelper.txLoop(100000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
     }
 
 }
