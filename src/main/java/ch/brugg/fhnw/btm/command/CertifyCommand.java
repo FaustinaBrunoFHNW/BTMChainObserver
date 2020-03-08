@@ -4,7 +4,7 @@ import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//TODO JAVADOC
+
 /**
  * Command Pattern fürs Zertifizieren von Accounts
  * @Author Faustina Bruno, Serge-Jurij Maikoff
@@ -12,14 +12,17 @@ import org.slf4j.LoggerFactory;
 public class CertifyCommand extends AbstractCommand implements Command {
     private Logger log = LoggerFactory.getLogger(AbstractCommand.class);
 
-    //TODO JAVADOC
+    /**
+     * Construcotr für das CertifyCommand
+     * @param jsonAccount Account welcher zertifiziert werden soll
+     */
     public CertifyCommand(JsonAccount jsonAccount){
         super(jsonAccount);
     }
 
 
     /**
-     * In dieser Execute Methode wird ein Account zertifiziert und die Counter wieder zurückgesetzt
+     * In dieser Execute Methode wird ein Account zertifiziert und die Counters wieder zurückgesetzt
      */
     @Override
     public void execute() {

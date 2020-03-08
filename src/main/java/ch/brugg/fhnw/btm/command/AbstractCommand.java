@@ -6,26 +6,29 @@ import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import java.sql.Timestamp;
 
 //TODO JAVADOC
+
 /**
- *
  * @Author Faustina Bruno, Serge-Jurij Maikoff
  */
 public abstract class AbstractCommand implements Command {
-    //TODO parameter public/private setzen
-    JsonAccount jsonAccount;
-    ChainSetup instance;
-    Timestamp timestamp;
+     JsonAccount jsonAccount;
+     ChainSetup instance;
+    private Timestamp timestamp;
 
-    //TODO JAVADOC
-    public Timestamp getTimestamp(){
+
+    /**
+     * Getter für den Timestamp
+     * @return
+     */
+    public Timestamp getTimestamp() {
         return this.timestamp;
     }
+
     //TODO JAVADOC
-    public AbstractCommand(JsonAccount jsonAccount){
+    public AbstractCommand(JsonAccount jsonAccount) {
         this.jsonAccount = jsonAccount;
         this.timestamp = jsonAccount.getTimeStamp();
         this.instance = ChainSetup.getInstance();
     }
-
 
 }

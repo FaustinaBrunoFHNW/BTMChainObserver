@@ -24,14 +24,17 @@ import static java.util.Comparator.comparing;
  * @Author Faustina Bruno, Serge-Jurij Maikoff
  */
 public class DoSAlgorithm {
-    public static DoSAlgorithm instance;
+    private static DoSAlgorithm instance;
     private ChainInteractions chainInteractions;
     private JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
     private JsonDefaultSettingsHandler defaultSettingsHandler =JsonDefaultSettingsHandler.getInstance();
     private  Logger log = LoggerFactory.getLogger(DoSAlgorithm.class);
     private Queue<Command> queue = new PriorityQueue<>(comparing(Command::getTimestamp));
 
-    //TODO JAVADOC
+    /**
+     * Getter um die Instanz des DoSAlgorithmus zu holen
+      * @return die Instanz
+     */
     public static DoSAlgorithm getInstance() {
 
         if (DoSAlgorithm.instance == null) {
@@ -39,11 +42,20 @@ public class DoSAlgorithm {
         }
         return DoSAlgorithm.instance;
     }
-    //TODO JAVADOC
+
+    /**
+     * In diesem Setter wird das bereits instanzierte ChainInteractions Objekt übergeben,
+     * um in diese Klasse Interaktionen mit der Chain betätigen zu können
+     * @param chainInteractions das bereits instanzierte Objekt
+     */
     public void setChainInteractions(ChainInteractions chainInteractions) {
         this.chainInteractions = chainInteractions;
     }
-    //TODO JAVADOC
+
+    /**
+     * privater Constuctor für das Singleton Patter
+     * Hier wird der queueInspector gestartet
+     */
     private DoSAlgorithm(){
 
         this.log.info("Queue wird gestartet");
@@ -51,12 +63,18 @@ public class DoSAlgorithm {
         this.log.info("Queue wurde erfolgreich gestartet");
     }
 
-    //TODO JAVADOC
+    /**
+     * Der DoS Algorithmus kontrolliert ob der Account der die gratis Transaktion betätigt hat
+     * noch genug Gas oder Transaktionen hat. Wenn nicht, dann revoked/sperrt er den Account.
+     * Am Ende fügt er den Account in die Priority Queue mit dem CertifyCommand
+     * @param jsonAccount der Account der inspiziert wird
+     */
     public void dosAlgorithm(JsonAccount jsonAccount) {
 
-
+        //Hier wird kontrolliert ob die Adresse des Accounts die vom Master Key ist.
+        // Der Master Key Account wird nie gesperrt
         if (jsonAccount.getAddress().equalsIgnoreCase(this.defaultSettingsHandler.getMasterKey())){
-            this.log.info("a free transaction with the master key has been ignored");
+            this.log.info("Eine gratis Transaktion mit Master Key wurde ignoriert.");
             return;
         }
 
@@ -97,18 +115,13 @@ public class DoSAlgorithm {
     public void offerAccount(JsonAccount acc){
         this.queue.add(new CertifyCommand(acc));
     }
-    Runnable queueInspector = () -> {
+    private Runnable queueInspector = () -> {
         this.log.info("Queue wurde gestartet und läuft.");
         while (true) {
             Timestamp now = new Timestamp(System.currentTimeMillis());
             if (this.queue.peek() !=null){
-                //TODO ist dieser log nötig?
-           //     this.log.info("Timestamp now: "+now.toString());
-               // this.log.info("Timestamp account: " + this.queue.peek().getTimestamp());
-                //TODO wieso ist es hier umgekehrt
                 if (!this.queue.peek().getTimestamp().after(now)){
                     this.queue.poll().execute();
-                    //TODO Frage: darf man das hier?
                     this.accountHandler.writeAccountList();
                 }
 

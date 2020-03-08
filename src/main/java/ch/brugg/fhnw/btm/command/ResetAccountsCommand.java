@@ -9,10 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.util.Date;
-//JAVADOC
 
 /**
- * Command Pattern fürs
+ * Command Pattern fürs Resetten von Accounts
  *
  * @Author Faustina Bruno, Serge-Jurij Maikoff
  */
@@ -20,7 +19,6 @@ public class ResetAccountsCommand implements Command {
     private Logger log = LoggerFactory.getLogger(ResetAccountsCommand.class);
     private JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
     private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
-
     private Timestamp timestamp;
 
     /**
@@ -56,11 +54,6 @@ public class ResetAccountsCommand implements Command {
 
     }
 
-    @Override public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    //TODO JAVADOC
 
     /**
      * In dieser Methode werden die Methode um alle Counters zurückzusetzten und den Timestamp zu setzen gestartet,
@@ -77,5 +70,10 @@ public class ResetAccountsCommand implements Command {
         this.jsonDefaultSettingsHandler.writeDefaultSettings();
 
         DoSAlgorithm.getInstance().offerCommand(new ResetAccountsCommand());
+    }
+
+    //************************GETTER**********************************
+    @Override public Timestamp getTimestamp() {
+        return timestamp;
     }
 }
