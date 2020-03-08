@@ -12,7 +12,7 @@ public class BaseTest {
 
      SendEtherHelper sendEtherHelper;
     private ChainInteractions chainInteractions;
-    private ResetHelper resetHelper= new ResetHelper();
+     ResetHelper resetHelper= new ResetHelper();
     static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
     static BigInteger GASPRICEZERO = new BigInteger("0");
     static BigInteger GASLIMIT = new BigInteger("21000");
@@ -25,6 +25,7 @@ public class BaseTest {
         ChainSetup.getInstance().setUpAfterChainStart();
         chainInteractions = new ChainInteractions(chainSetup);
         resetHelper.setAccountsCountersToMax();
+
         sendEtherHelper = new SendEtherHelper();
         sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();

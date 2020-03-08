@@ -132,4 +132,11 @@ public class JsonAccount {
         this.transactionLimit = transactionLimit;
     }
 
+    public boolean isDeleteMe() {
+        return deleteMe;
+    }
+
+    public void setDeleteMe(boolean deleteMe) {
+        this.deleteMe = deleteMe;
+    }
 }
