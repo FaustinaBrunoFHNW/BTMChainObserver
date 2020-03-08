@@ -1,4 +1,4 @@
-package ch.brugg.fhnw.btm.performance;
+package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.*;
 import ch.brugg.fhnw.btm.command.ResetAccountsCommand;
@@ -26,30 +26,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class DoSAttackWithGas {
+public class DoSAttackWithGas extends BaseTest {
 
-    private SendEtherHelper sendEtherHelper;
-    private ChainInteractions chainInteractions;
-   private ResetHelper resetHelper= new ResetHelper();
-    private static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
-    private static BigInteger GASPRICEZERO = new BigInteger("0");
-    private static BigInteger GASLIMIT = new BigInteger("21000");
 
-    private void setUpChain() throws Exception {
-        JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
-        jsonDefaultSettingsHandler.loadDefaultSettings();
-        ChainSetup chainSetup = ChainSetup.getInstance();
-        ChainSetup.getInstance().setUpAfterChainStart();
-        chainInteractions = new ChainInteractions(chainSetup);
-        resetHelper.setAccountsCountersToMax();
-        sendEtherHelper = new SendEtherHelper();
-        sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
-        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
-        chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
-
-        SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
-        subscriptionTX.run();
-    }
 
     @Test public void gasAttack21000() throws Exception {
         this.setUpChain();
@@ -57,7 +36,7 @@ public class DoSAttackWithGas {
         Thread.sleep(1000);
         sendEtherHelper.txLoop(1,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
         Thread.sleep(15000);
-        Assert.assertTrue(this.chainInteractions.isCertified(ADDRESS));
+        Assert.assertTrue(chainInteractions.isCertified(ADDRESS));
     }
     @Test public void gasAttack42000() throws Exception {
         this.setUpChain();
@@ -65,7 +44,8 @@ public class DoSAttackWithGas {
         Thread.sleep(1000);
         sendEtherHelper.txLoop(2,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
         Thread.sleep(15000);
-        Assert.assertTrue(this.chainInteractions.isCertified(ADDRESS));
+        Assert.assertTrue(chainInteractions.isCertified(ADDRESS));
+        resetHelper.setAccountsCountersToMax();
     }
     @Test public void gasAttack10500() throws Exception {
         this.setUpChain();
@@ -74,12 +54,12 @@ public class DoSAttackWithGas {
         try {
             sendEtherHelper.txLoop(5,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
             Thread.sleep(15000);
-            Assert.assertFalse(this.chainInteractions.isCertified(ADDRESS));
+            Assert.assertFalse(chainInteractions.isCertified(ADDRESS));
         }
         catch (RuntimeException e){Assert.assertEquals(e.getClass(), RuntimeException.class);
-            Assert.assertFalse(this.chainInteractions.isCertified(ADDRESS));
+            Assert.assertFalse(chainInteractions.isCertified(ADDRESS));
             }
-
+        resetHelper.setAccountsCountersToMax();
     }
 
 

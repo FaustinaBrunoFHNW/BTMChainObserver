@@ -34,6 +34,7 @@ public class AccountCertifyTest {
         chainInteractions.certifyAccount(account.getAddress());
         //TODO do gratis TX asser true
         Assert.assertTrue(chainInteractions.isCertified(account.getAddress()));
+
         }
 
 }

@@ -9,6 +9,7 @@ import org.junit.Test;
 import sun.reflect.generics.tree.BaseType;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class ReadFromFileTest extends BaseTest {
 
@@ -27,6 +28,7 @@ public class ReadFromFileTest extends BaseTest {
     @Test public void readAccountFileTest() throws Exception {
 
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+        jsonAccountHandler.setJsonAccountList(new ArrayList<>());
         Assert.assertEquals(0, jsonAccountHandler.getJsonAccountList().size());
         jsonAccountHandler.loadAccounts();
         Assert.assertEquals(4, jsonAccountHandler.getJsonAccountList().size());

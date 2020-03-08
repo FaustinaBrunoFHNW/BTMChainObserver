@@ -13,7 +13,7 @@ import java.math.BigInteger;
 public class IntervallResetterTest extends BaseTest {
 
     @Test public void transactionReset() throws Exception {
-
+Thread.sleep(2000);
         this.setUpChain();
         Thread.sleep(1000);
         JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
@@ -27,10 +27,11 @@ public class IntervallResetterTest extends BaseTest {
                 account.getRemainingTransactions());
         Thread.sleep(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval() * 60000);
         Assert.assertEquals(account.getTransactionLimit().intValue(), account.getRemainingTransactions());
+        resetHelper.setAccountsCountersToMax();
     }
 
     @Test public void gasReset() throws Exception {
-
+        Thread.sleep(2000);
         this.setUpChain();
         Thread.sleep(1000);
         JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
@@ -43,5 +44,6 @@ public class IntervallResetterTest extends BaseTest {
         Assert.assertEquals(21000, account.getRemainingGas());
         Thread.sleep(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval() * 60000);
         Assert.assertEquals(42000, account.getRemainingGas());
+        resetHelper.setAccountsCountersToMax();
     }
 }

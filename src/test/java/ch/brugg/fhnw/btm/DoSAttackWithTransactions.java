@@ -1,4 +1,4 @@
-package ch.brugg.fhnw.btm.performance;
+package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.ChainInteractions;
 import ch.brugg.fhnw.btm.ChainSetup;
@@ -56,8 +56,8 @@ public class DoSAttackWithTransactions {
         account.setAddress(ADDRESS);
         BigDecimal ether = new BigDecimal("1");
         sendEtherHelper.txLoop(4, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertTrue(this.chainInteractions.isCertified(account.getAddress()));
-
+        Assert.assertTrue(chainInteractions.isCertified(account.getAddress()));
+        resetHelper.setAccountsCountersToMax();
     }
 
     /**
@@ -72,8 +72,8 @@ public class DoSAttackWithTransactions {
         BigDecimal ether = new BigDecimal("1");
 
         sendEtherHelper.txLoop(5, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Assert.assertTrue(this.chainInteractions.isCertified(account.getAddress()));
-
+        Assert.assertTrue(chainInteractions.isCertified(account.getAddress()));
+        resetHelper.setAccountsCountersToMax();
     }
 
     /**
@@ -90,12 +90,12 @@ public class DoSAttackWithTransactions {
             Thread.sleep(1000);
             sendEtherHelper.txLoop(6, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(15000);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
         }
-
+        resetHelper.setAccountsCountersToMax();
     }
 
     @Test public void txAttack10() throws Exception {
@@ -108,13 +108,13 @@ public class DoSAttackWithTransactions {
             Thread.sleep(1000);
             sendEtherHelper.txLoop(10, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(15000);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
 
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
         }
-
+        resetHelper.setAccountsCountersToMax();
     }
 
     @Test public void txAttack100() throws Exception {
@@ -126,12 +126,12 @@ public class DoSAttackWithTransactions {
             Thread.sleep(1000);
             sendEtherHelper.txLoop(100, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(5000);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
         }
-
+        resetHelper.setAccountsCountersToMax();
     }
 
     @Test public void txAttack1000() throws Exception {
@@ -147,7 +147,7 @@ public class DoSAttackWithTransactions {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
         }
-
+        resetHelper.setAccountsCountersToMax();
     }
 
 }

@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class BaseTest {
 
      SendEtherHelper sendEtherHelper;
-    private ChainInteractions chainInteractions;
+     ChainInteractions chainInteractions;
      ResetHelper resetHelper= new ResetHelper();
     static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
     static BigInteger GASPRICEZERO = new BigInteger("0");
@@ -27,9 +27,9 @@ public class BaseTest {
         resetHelper.setAccountsCountersToMax();
 
         sendEtherHelper = new SendEtherHelper();
-        sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
-        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
+        sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run();
