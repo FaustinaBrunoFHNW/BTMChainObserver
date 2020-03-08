@@ -25,35 +25,6 @@ public class Run {
      */
     public static void main(String[] args) throws Exception {
 
-//        JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
-//
-//        jsonDefaultSettingsHandler.loadDefaultSettings();
-//
-//        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
-//        jsonAccountHandler.loadAccounts();
-//
-//        jsonDefaultSettingsHandler.writeDefaultSettings();
-//        log.info("Schreiben von Accounts Accounts");
-//        jsonAccountHandler.writeAccountList();
-//
-//        log.info("Anzahl Accounts: " + jsonAccountHandler.getJsonAccountList().size());
-//        jsonDefaultSettingsHandler.loadDefaultSettings();
-//
-//        ChainSetup.getInstance().setUpAfterChainStart();
-//        //       chainSetUp.initChain();
-//        ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
-//
-//        //TODO load all accounts from list
-//        jsonAccountHandler.loadAccounts();
-//        chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
-//
-//        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getJsonAccountList().size());
-//        System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
-//        System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
-//
-//        SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
-//        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
-
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
 

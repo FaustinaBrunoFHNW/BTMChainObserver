@@ -34,7 +34,10 @@ public class JsonAccountHandler {
     private String accountsFile = "src/main/resources/whitelist/AccountList.json";
 
 
-//TODO JAVADOC
+    /**
+     * Getter zum einamlige Klassen Instanz zo holen
+     * @return JsonAccont Objekt
+     */
     public static JsonAccountHandler getInstance() {
 
         if (JsonAccountHandler.instance == null) {
@@ -43,12 +46,17 @@ public class JsonAccountHandler {
         return JsonAccountHandler.instance;
     }
 
-    //TODO JAVADOC
+    /**
+     * privater Constructor für Singleton
+     */
     private JsonAccountHandler(){
 
     }
 
     //TODO JAVADOC
+    /**
+     *
+     */
     public void loadAccounts() {
         Gson gson = new Gson();
         try {
@@ -75,36 +83,47 @@ public class JsonAccountHandler {
         }
     }
 
-
-    //TODO JAVADOC
+    /**
+     * Diese Methode schreibt alle Accounts in die Datei
+     */
     public void writeAccountList() {
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
             Writer writer = Files.newBufferedWriter(Paths.get(this.accountsFile));
             gson.toJson(this.jsonAccountList,writer);
             writer.close();
-            //TODO log Info ausfüllen
-            this.log.info("");
+            this.log.info("Accounts wurden in die Datei geschrieben");
         } catch (IOException e) {
-            //TODO error log ausfüllen
-            this.log.error("");
+            this.log.error("Es ist Fehler aufgetreten beim Schreiben der Accounts in die Datei");
             e.printStackTrace();
 
         }
     }
 
-    //TODO JAVADOC
-    //TODO public?
-    public JsonAccount getAccount(String address){
-        for (JsonAccount acc: this.jsonAccountList){
-            if (acc.getAddress().equalsIgnoreCase(address)){
-                return acc;
+    /**
+     * Diese Methode itiriert durch alle Accounts und gibt den Account mit der übergebenen Adresse zurück
+     * @param address Adresse des gewünschten Accounts
+     * @return Account passent zur Adresse
+     */
+    private JsonAccount getAccount(String address){
+        for (JsonAccount account: this.jsonAccountList){
+            if (account.getAddress().equalsIgnoreCase(address)){
+                return account;
             }
         }
         return null;
     }
 
-    //TODO JAVADOC
+
+    /**
+     * in dieser Methode wird vom Account der zur übergebenen Adresse passt,
+     * der Transaktionscounter um eins runter gezählt und
+     * das übergebene Gas vom Gas Counter abgezogen.
+     * Am Ende wird der Gas und Transaktions Stand des Accounts ausgegeben.
+     * @param address Adresse des Accounts
+     * @param gasUsed eine Gas Value
+     * @return ein JsonAccount Objekt das zur übergebenen Adresse passt und aktuelisiert ist
+     */
     public JsonAccount processAccount(String address, BigInteger gasUsed){
         JsonAccount toProcess = this.getAccount(address);
         toProcess.decraseTransactionCounter();
