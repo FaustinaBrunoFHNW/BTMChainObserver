@@ -1,9 +1,13 @@
 package ch.brugg.fhnw.btm;
 
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+//TODO javadoc
 public class Init {
-    //TODO für CML init Methode schreiben
+    //TODO logs einbauen
+    private static Logger log = LoggerFactory.getLogger(Init.class);
+
 
     /**
      * Auführbare Methode fürs Aufsetzten der Blockchain
@@ -24,7 +28,7 @@ public class Init {
 
         ChainInteractions chainInteractions = new ChainInteractions(chainSetUup);
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
-        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
+        subscriptionTX.run();
 
     }
 

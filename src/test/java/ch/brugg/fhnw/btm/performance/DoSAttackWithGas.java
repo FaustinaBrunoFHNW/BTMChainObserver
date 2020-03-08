@@ -48,7 +48,7 @@ public class DoSAttackWithGas {
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
-        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
+        subscriptionTX.run();
     }
 
     @Test public void gasAttack21000() throws Exception {

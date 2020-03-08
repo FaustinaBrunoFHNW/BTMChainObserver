@@ -26,7 +26,6 @@ import java.util.Iterator;
 public class JsonAccountHandler {
 
     private static JsonAccountHandler instance;
-    private static JsonDefaultSettingsHandler jsonDefaultSettingsHandler;
     private ArrayList<JsonAccount> jsonAccountList = new ArrayList<>();
     private  Logger log = LoggerFactory.getLogger(JsonAccountHandler.class);
     private int deletedAccounts = 0, revokedAccounts = 0;
@@ -46,7 +45,7 @@ public class JsonAccountHandler {
 
     //TODO JAVADOC
     private JsonAccountHandler(){
-        jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
+
     }
 
     //TODO JAVADOC

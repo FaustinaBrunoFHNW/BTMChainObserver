@@ -4,16 +4,15 @@ import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+//TODO javadoc
 public class Stop {
+
+    private static Logger log = LoggerFactory.getLogger(Stop.class);
     /**
      * Ausführbare Methode fürs stoppen aller Vorgänge und das Revoken aller Accounts
      *
      * @throws Exception
      */
-
-    private static Logger log = LoggerFactory.getLogger(Stop.class);
-
     public static void main(String[] args) throws Exception {
             //Default Settings laden
             JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();

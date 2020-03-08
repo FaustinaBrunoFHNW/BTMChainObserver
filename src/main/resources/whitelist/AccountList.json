@@ -21,11 +21,11 @@
   },
   {
     "address": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
-    "remainingTransactions": 1,
+    "remainingTransactions": 2,
     "transactionLimit": 2,
     "revokeTime": 3,
     "gasLimit": 111111,
-    "remainingGas": 90111,
+    "remainingGas": 111111,
     "deleteMe": false,
     "timeStamp": null
   },

@@ -16,7 +16,6 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Date;
 
-//TODO Beschreischbung was diese Klasse macht
 
 /**
  * In dieser Klasse wird die Subscription gemacht um die gemachten Transaktionen beobachten zu können
@@ -33,6 +32,10 @@ public class SubscriptionTX {
     private JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
     private DoSAlgorithm dosAlgorithm = DoSAlgorithm.getInstance();
 
+    /**
+     * Constructor der Klasse
+     * @param chainInteractions instanzertes Objekt
+     */
     public SubscriptionTX( ChainInteractions chainInteractions) {
         this.web3j = ChainSetup.getInstance().getWeb3j();
         this.chainInteractions = chainInteractions;
@@ -42,10 +45,9 @@ public class SubscriptionTX {
 
     /**
      * Mit dieser Methode wird der filter und der Intervall gestaret
-     * @param min Anzahl Minuten wo das Intervall neu gestartet wird
      * @throws Exception
      */
-    public void run(int min) throws Exception {
+    public void run() throws Exception {
         this.log.info("Filter und Intervall werden gestartet");
         this.txFilter();
         this.intervall();

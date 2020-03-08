@@ -42,7 +42,7 @@ public class DoSAttackWithTransactions {
         sendEtherHelper = new SendEtherHelper();
         sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
-        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
+        subscriptionTX.run();
     }
 
     /**

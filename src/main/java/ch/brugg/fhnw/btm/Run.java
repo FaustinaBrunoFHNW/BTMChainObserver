@@ -5,8 +5,7 @@ import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//TODO evtl Klasse unbennennen
-
+//TODO anderes JAvadoc
 /**
  * In dieser Klasse befinden sich die 3 Befehle die der Benutzer über die Command Line aufrufen kann
  *
@@ -73,7 +72,7 @@ public class Run {
         System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
-        subscriptionTX.run(jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
+        subscriptionTX.run();
 
     }
 
