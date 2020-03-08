@@ -105,7 +105,7 @@ public class JsonAccountHandler {
      * @param address Adresse des gewünschten Accounts
      * @return Account passent zur Adresse
      */
-    private JsonAccount getAccount(String address){
+    public JsonAccount getAccount(String address){
         for (JsonAccount account: this.jsonAccountList){
             if (account.getAddress().equalsIgnoreCase(address)){
                 return account;
