@@ -13,9 +13,9 @@ import java.math.BigInteger;
 public class IntervallResetterTest extends BaseTest {
 
     @Test public void transactionReset() throws Exception {
-Thread.sleep(2000);
+        Thread.sleep(100000);
         this.setUpChain();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
         JsonAccount account = accountHandler.getAccount(ADDRESS);
         BigDecimal ether = new BigDecimal("1");
@@ -31,9 +31,9 @@ Thread.sleep(2000);
     }
 
     @Test public void gasReset() throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(100000);
         this.setUpChain();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         JsonAccountHandler accountHandler = JsonAccountHandler.getInstance();
         JsonAccount account = accountHandler.getAccount(ADDRESS);
         BigDecimal ether = new BigDecimal("100");

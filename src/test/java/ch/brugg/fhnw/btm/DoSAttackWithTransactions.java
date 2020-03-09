@@ -9,6 +9,7 @@ import ch.brugg.fhnw.btm.helper.ResetHelper;
 import ch.brugg.fhnw.btm.helper.SendEtherHelper;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -134,6 +135,7 @@ public class DoSAttackWithTransactions {
         resetHelper.setAccountsCountersToMax();
     }
 
+    @Ignore
     @Test public void txAttack1000() throws Exception {
         this.setUpChain();
         JsonAccount account = new JsonAccount();
