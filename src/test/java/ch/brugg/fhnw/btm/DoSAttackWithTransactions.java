@@ -135,21 +135,5 @@ public class DoSAttackWithTransactions {
         resetHelper.setAccountsCountersToMax();
     }
 
-    @Ignore
-    @Test public void txAttack1000() throws Exception {
-        this.setUpChain();
-        JsonAccount account = new JsonAccount();
-        account.setAddress(ADDRESS);
-        BigDecimal ether = new BigDecimal("1");
-        try {
-            Thread.sleep(1000);
-            sendEtherHelper.txLoop(1000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
-        } catch (RuntimeException e) {
-            Assert.assertEquals(e.getClass(), RuntimeException.class);
-            Assert.assertFalse(this.chainInteractions.isCertified(account.getAddress()));
-        }
-        resetHelper.setAccountsCountersToMax();
-    }
 
 }

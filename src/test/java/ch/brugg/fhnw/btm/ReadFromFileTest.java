@@ -31,7 +31,7 @@ public class ReadFromFileTest extends BaseTest {
         jsonAccountHandler.setJsonAccountList(new ArrayList<>());
         Assert.assertEquals(0, jsonAccountHandler.getJsonAccountList().size());
         jsonAccountHandler.loadAccounts();
-        Assert.assertEquals(4, jsonAccountHandler.getJsonAccountList().size());
+        Assert.assertEquals(5, jsonAccountHandler.getJsonAccountList().size());
         JsonAccount account1 = jsonAccountHandler.getAccount("0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b");
         Assert.assertEquals("0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b", account1.getAddress());
         Assert.assertEquals(50000000, account1.getRemainingGas());

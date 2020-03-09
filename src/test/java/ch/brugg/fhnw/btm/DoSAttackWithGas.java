@@ -37,6 +37,7 @@ public class DoSAttackWithGas extends BaseTest {
         sendEtherHelper.txLoop(1,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
         Thread.sleep(15000);
         Assert.assertTrue(chainInteractions.isCertified(ADDRESS));
+        resetHelper.setAccountsCountersToMax();
     }
     @Test public void gasAttack42000() throws Exception {
         this.setUpChain();
@@ -59,7 +60,9 @@ public class DoSAttackWithGas extends BaseTest {
         catch (RuntimeException e){Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(chainInteractions.isCertified(ADDRESS));
             }
+
         resetHelper.setAccountsCountersToMax();
+
     }
 
 
