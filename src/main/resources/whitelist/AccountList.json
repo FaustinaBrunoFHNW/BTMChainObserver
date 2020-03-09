@@ -21,23 +21,23 @@
   },
   {
     "address": "0x00a329c0648769A73afAc7F9381E08FB43dBEA72",
-    "remainingTransactions": 0,
+    "remainingTransactions": 2,
     "transactionLimit": 2,
     "revokeTime": 3,
     "gasLimit": 111111,
-    "remainingGas": -14889,
+    "remainingGas": 111111,
     "deleteMe": false,
-    "timeStamp": "Mar 9, 2020 5:01:58 PM"
+    "timeStamp":null
   },
   {
     "address": "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34",
-    "remainingTransactions": 0,
+    "remainingTransactions":5,
     "transactionLimit": 5,
     "revokeTime": 1,
     "gasLimit": 42000,
-    "remainingGas": 0,
+    "remainingGas": 42000,
     "deleteMe": false,
-    "timeStamp": "Mar 9, 2020 5:00:02 PM"
+    "timeStamp": null
   },
   {
     "address": "0x2063Cfc6a737a9033459014C0ad444a1ae02d2DB",

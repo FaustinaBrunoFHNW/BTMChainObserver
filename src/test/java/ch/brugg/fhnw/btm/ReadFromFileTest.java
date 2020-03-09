@@ -71,5 +71,6 @@ public class ReadFromFileTest extends BaseTest {
         Assert.assertEquals(new BigInteger("42000"), account4.getGasLimit());
         Assert.assertEquals(null, account4.getTimeStamp());
         Assert.assertEquals(false,account4.isDeleteMe());
+        this.resetHelper.setAccountsCountersToMax();
     }
 }
