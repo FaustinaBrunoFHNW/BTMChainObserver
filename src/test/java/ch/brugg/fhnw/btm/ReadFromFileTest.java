@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 public class ReadFromFileTest extends BaseTest {
 
-    @Test public void readDefaultSettingsFileTest() {
+    @Test public void readDefaultSettingsFileTest() throws InterruptedException {
+        Thread.sleep(1000*60*3);
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler=JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
         Assert.assertEquals("0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221",jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress());
@@ -26,7 +27,7 @@ public class ReadFromFileTest extends BaseTest {
     }
 
     @Test public void readAccountFileTest() throws Exception {
-
+        Thread.sleep(1000*60*3);
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.setJsonAccountList(new ArrayList<>());
         Assert.assertEquals(0, jsonAccountHandler.getJsonAccountList().size());

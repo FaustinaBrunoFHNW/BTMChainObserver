@@ -14,7 +14,7 @@ public class RevokeAccountTest {
 
 
     @Test public void revokeAccountTest() throws Exception {
-
+        Thread.sleep(1000*60*3);
          JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
 
         jsonDefaultSettingsHandler.loadDefaultSettings();

@@ -31,6 +31,7 @@ public class DoSAttackWithGas extends BaseTest {
 
 
     @Test public void gasAttack21000() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         BigDecimal ether = new BigDecimal("2");
         Thread.sleep(1000);
@@ -40,6 +41,7 @@ public class DoSAttackWithGas extends BaseTest {
         resetHelper.setAccountsCountersToMax();
     }
     @Test public void gasAttack42000() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         BigDecimal ether = new BigDecimal("2");
         Thread.sleep(1000);
@@ -49,6 +51,7 @@ public class DoSAttackWithGas extends BaseTest {
         resetHelper.setAccountsCountersToMax();
     }
     @Test public void gasAttack10500() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         BigDecimal ether = new BigDecimal("2");
         Thread.sleep(1000);

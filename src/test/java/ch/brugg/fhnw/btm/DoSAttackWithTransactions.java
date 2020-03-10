@@ -22,7 +22,7 @@ import java.math.BigInteger;
  */
 public class DoSAttackWithTransactions {
     private SendEtherHelper sendEtherHelper;
-    private ResetHelper resetHelper= new ResetHelper();
+    private ResetHelper resetHelper = new ResetHelper();
     private ChainInteractions chainInteractions;
     private static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
     private static String TOADDRESS = "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b";
@@ -52,6 +52,7 @@ public class DoSAttackWithTransactions {
      * @throws Exception
      */
     @Test public void txAttack4() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
@@ -67,6 +68,7 @@ public class DoSAttackWithTransactions {
      * @throws Exception
      */
     @Test public void txAttack5() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
@@ -83,6 +85,7 @@ public class DoSAttackWithTransactions {
      * @throws Exception
      */
     @Test public void txAttack6() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
@@ -95,11 +98,13 @@ public class DoSAttackWithTransactions {
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+            Thread.sleep(5000);
         }
         resetHelper.setAccountsCountersToMax();
     }
 
     @Test public void txAttack10() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
@@ -114,11 +119,13 @@ public class DoSAttackWithTransactions {
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+            Thread.sleep(5000);
         }
         resetHelper.setAccountsCountersToMax();
     }
 
     @Test public void txAttack100() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS);
@@ -131,9 +138,9 @@ public class DoSAttackWithTransactions {
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+            Thread.sleep(15000);
         }
         resetHelper.setAccountsCountersToMax();
     }
-
 
 }

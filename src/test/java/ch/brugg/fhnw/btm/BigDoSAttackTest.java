@@ -21,6 +21,7 @@ public class BigDoSAttackTest extends BaseTest {
 
 
     @Test public void txAttack500() throws Exception {
+        Thread.sleep(1000*60*3);
         this.setUpChain();
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS_TXLIMITHIGH);
