@@ -92,7 +92,7 @@ public class JsonAccountHandler {
             Writer writer = Files.newBufferedWriter(Paths.get(this.accountsFile));
             gson.toJson(this.jsonAccountList,writer);
             writer.close();
-//            this.log.info("Accounts wurden in die Datei geschrieben");
+            this.log.info("Accounts wurden in die Datei geschrieben");
         } catch (IOException e) {
             this.log.error("Es ist Fehler aufgetreten beim Schreiben der Accounts in die Datei");
             e.printStackTrace();

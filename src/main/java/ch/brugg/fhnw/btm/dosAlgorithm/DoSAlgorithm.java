@@ -83,7 +83,7 @@ public class DoSAlgorithm {
             this.log.info("Eine gratis Transaktion mit Master Key wurde ignoriert.");
             return;
         }
-
+        log.info("Dos Erreicht");
         Timestamp tempStamp = new Timestamp(System.currentTimeMillis());
         long temp = tempStamp.getTime();
         //Abfrage ob der Account noch genügend Transaktionen hat

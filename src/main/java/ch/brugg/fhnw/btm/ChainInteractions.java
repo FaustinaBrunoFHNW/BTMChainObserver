@@ -66,13 +66,11 @@ public class ChainInteractions {
                 + accountAddress);
 
         try {
-            //TODO log info ausfüllen
-            this.log.info("");
             this.simpleCertifier.revoke(accountAddress).send();
         } catch (Exception e) {
-            //TODO log error ausfüllen
-            this.log.error("");
-            e.printStackTrace();
+
+            this.log.error("Es gab ein Error, der Account konnte nicht von der Whitelist entfernt werden");
+           e.printStackTrace();
         }
 
         if (!this.isCertified(accountAddress)) {
