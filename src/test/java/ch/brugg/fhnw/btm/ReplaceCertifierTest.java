@@ -27,19 +27,6 @@ public class ReplaceCertifierTest {
     private static String NAMEREGADDCORRECT = "0x0000000000000000000000000000000000001337";
 
 
-    /**
-    @Test public void registrierungNameRegMitNeuemCertifyer() {
-        JsonDefaultSettingsHandler defaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
-
-        defaultSettingsHandler.loadDefaultSettings();
-        defaultSettingsHandler.getDefaultSettings().setCertifierAddress(ADDRESS_TXLIMITHIGH);
-        ChainSetup chainSetup = ChainSetup.getInstance();
-
-        //Wird aber schon aus dem File ausgelesen
-        chainSetup.setPrivateKey(PRIVATE_KEY);
-        chainSetup.loadCertifier(ADDRESS_TXLIMITHIGH);
-    }
-*/
     @Test
     public void replaceCertifierTest() throws Exception {
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
