@@ -26,6 +26,10 @@ public class JsonDefaultSettings {
     private  BigInteger defaultRevokeTime;
 
 
+
+    private String masterKeyAddress;
+
+
 //**************************GETTER und SETTER*********************************
 
 
@@ -92,5 +96,12 @@ public class JsonDefaultSettings {
 
     public void setDefaultRevokeTime(BigInteger defaultRevokeTime) {
         this.defaultRevokeTime = defaultRevokeTime;
+    }
+    public String getMasterKeyAddress() {
+        return masterKeyAddress;
+    }
+
+    public void setMasterKeyAddress(String masterKeyAddress) {
+        this.masterKeyAddress = masterKeyAddress;
     }
 }

@@ -92,7 +92,7 @@ public class JsonAccountHandler {
             Writer writer = Files.newBufferedWriter(Paths.get(this.accountsFile));
             gson.toJson(this.jsonAccountList,writer);
             writer.close();
-            this.log.info("Accounts wurden in die Datei geschrieben");
+//            this.log.info("Accounts wurden in die Datei geschrieben");
         } catch (IOException e) {
             this.log.error("Es ist Fehler aufgetreten beim Schreiben der Accounts in die Datei");
             e.printStackTrace();
@@ -129,9 +129,9 @@ public class JsonAccountHandler {
         toProcess.decraseTransactionCounter();
         toProcess.decreaseGasUsedCounter(gasUsed.longValue());
 
-        this.log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getRemainingTransactions()
-                + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + toProcess
-                .getRemainingGas());
+//        this.log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getRemainingTransactions()
+////                + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + toProcess
+////                .getRemainingGas());
         return toProcess;
     }
 

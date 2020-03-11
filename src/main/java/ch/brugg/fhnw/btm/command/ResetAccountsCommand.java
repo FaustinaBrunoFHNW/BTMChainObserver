@@ -36,8 +36,6 @@ public class ResetAccountsCommand implements Command {
             lastReset = new Timestamp(System.currentTimeMillis());
             jsonDefaultSettingsHandler.writeDefaultSettings();
         }
-        //TODO auf Deutsch oder weg
-        //Timestamp is dependent on timestamp in DefaultSettings. If not present, a new one is created dependent on now
         this.timestamp.setTime(
                 lastReset.getTime() + 60 * 1000 * jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());
     }

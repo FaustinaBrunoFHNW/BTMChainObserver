@@ -57,14 +57,14 @@ public class SubscriptionTX {
      */
     private void txFilter() {
         Disposable subscription = this.web3j.transactionFlowable().subscribe(tx -> {
-            this.log.info("Eine Transaktion von folgender Adresse wurde gefunden: " + tx.getFrom());
-            this.log.info("Gas price: " + tx.getGasPrice());
-            this.log.info("Gas : " + tx.getGas());
-            this.log.info("Gas Raw: " + tx.getGasRaw());
-            this.log.info("Transferierter Ether: " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
+//            this.log.info("Eine Transaktion von folgender Adresse wurde gefunden: " + tx.getFrom());
+//            this.log.info("Gas price: " + tx.getGasPrice());
+//            this.log.info("Gas : " + tx.getGas());
+//            this.log.info("Gas Raw: " + tx.getGasRaw());
+//            this.log.info("Transferierter Ether: " + Convert.fromWei(tx.getValue().toString(), Convert.Unit.ETHER));
 
             if (tx.getGasPrice().equals(BigInteger.ZERO)) {
-                this.log.info("Transaktionskosten waren 0");
+//                this.log.info("Transaktionskosten waren 0");
                 this.dosAlgorithm.dosAlgorithm(this.accountHandler.processAccount(tx.getFrom(), tx.getGas()));
             }
         });

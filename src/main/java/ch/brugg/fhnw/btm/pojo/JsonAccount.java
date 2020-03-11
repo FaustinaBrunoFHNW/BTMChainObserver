@@ -36,16 +36,16 @@ public class JsonAccount {
         if (this.remainingTransactions < this.transactionLimit.intValue()) {
             this.remainingTransactions++;
         }
-        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
+//        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
 
     }
 
-    //TODO brauch es das?
+
     public void increaseGasUsedCounter() {
         if (this.remainingGas < this.transactionLimit.intValue()) {
             this.remainingGas++;
         }
-        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
+//        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
 
     }
 
@@ -57,7 +57,7 @@ public class JsonAccount {
         if (this.remainingTransactions > 0) {
             this.remainingTransactions--;
         }
-        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
+//        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
     }
 
     /**
@@ -67,7 +67,7 @@ public class JsonAccount {
         if (this.remainingGas > 0) {
             this.remainingGas = this.getRemainingGas()-gasUsedOnTX;
         }
-        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
+//        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
     }
 
 

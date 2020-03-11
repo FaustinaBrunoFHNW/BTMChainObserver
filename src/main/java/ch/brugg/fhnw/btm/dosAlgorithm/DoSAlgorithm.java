@@ -79,7 +79,7 @@ public class DoSAlgorithm {
 
         //Hier wird kontrolliert ob die Adresse des Accounts die vom Master Key ist.
         // Der Master Key Account wird nie gesperrt
-        if (jsonAccount.getAddress().equalsIgnoreCase(this.defaultSettingsHandler.getMasterKey())){
+        if (jsonAccount.getAddress().equalsIgnoreCase(this.defaultSettingsHandler.getDefaultSettings().getMasterKeyAddress())){
             this.log.info("Eine gratis Transaktion mit Master Key wurde ignoriert.");
             return;
         }
@@ -97,8 +97,8 @@ public class DoSAlgorithm {
             //Account wird in Priorityqueue hinzugefügt
             this.queue.add(new CertifyCommand(jsonAccount));
 
-            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
-                    " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
+//            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
+//                    " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
             this.accountHandler.writeAccountList();
 
@@ -112,12 +112,12 @@ public class DoSAlgorithm {
             jsonAccount.setTimeStamp(tempStamp);
             this.queue.add(new CertifyCommand(jsonAccount));
 
-            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viel Gas verbraucht und wurde gesperrt. " +
-                    " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
+//            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viel Gas verbraucht und wurde gesperrt. " +
+//                    " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
             this.accountHandler.writeAccountList();
         }
-        this.log.info("Account Datei wird aktualisiert");
+//        this.log.info("Account Datei wird aktualisiert");
         JsonAccountHandler.getInstance().writeAccountList();
     }
 

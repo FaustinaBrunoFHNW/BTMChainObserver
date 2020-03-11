@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.web3j.crypto.Credentials;
 
 
 import java.io.FileNotFoundException;
@@ -65,12 +66,10 @@ public class JsonDefaultSettingsHandler {
         try {
             Writer writer = Files.newBufferedWriter(Paths.get(this.defaultSettingsFile));
             gson.toJson(this.defaultSettings,writer);
-            //TODO log info ausfüllen
-            this.log.info("");
+            this.log.info("DefaultSettings werden geschrieben");
             writer.close();
         } catch (IOException e) {
-            //TODO error log ausfüllen
-            this.log.error("");
+            this.log.error("Default Settings konnten nicht geschrieben werden");
             e.printStackTrace();
         }
 
@@ -84,12 +83,12 @@ public class JsonDefaultSettingsHandler {
 
             JsonReader reader = new JsonReader(new FileReader(this.transaktionManagerAccountFile));
             this.masterKey = gson.fromJson(reader, MasterKey.class);
-            //TODO log info ausfüllen
-            this.log.info("");
+            JsonDefaultSettings.getInstance().setMasterKeyAddress(Credentials.create(this.masterKey.getPrivateKey()).getAddress());
+            this.log.info("Private Key des Transaktionsmanagers ist geladen");
             return  this.masterKey.getPrivateKey();
         } catch (FileNotFoundException e) {
-            //TODO error log ausfüllen
-            this.log.error("");
+
+            this.log.error("Private Key des Transaktionsmanagers konnte nich geladen werden");
             e.printStackTrace();
             return  null;
         }
