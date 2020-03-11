@@ -19,14 +19,15 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class BigDoSAttackTest {
-    private static String PRIVATE_KEY = "2D4E070C7586E271AE9DB6C2F44E154A5BCBEDFBC6AA7BEFD2A7E9EACAC2BFFE";
-    private static String ADDRESS_TXLIMITHIGH = "0x2063Cfc6a737a9033459014C0ad444a1ae02d2DB";
+    private static String PRIVATE_KEY = "A80A5A835B765FAD581C63E5EE89F028814171D9011803EEF0B3E942D865CAAA";
+    private static String ADDRESS_TXLIMITHIGH = "0xEebDD74cB758A1809880533ea6E1481D45b29639";
 
     private static SendEtherHelper sendEtherHelper;
     private static ChainInteractions chainInteractions;
     private static ResetHelper resetHelper = new ResetHelper();
     private static ChainSetup chainSetup;
-    private static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
+    private static String TO_ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
+    private static String ADDRESS_SHITLOAD = "0x00a329c0648769A73afAc7F9381E08FB43dBEA72";
     private static BigInteger GASPRICEZERO = new BigInteger("0");
     private static BigInteger GASLIMIT = new BigInteger("21000");
     private static JsonDefaultSettingsHandler jsonDefaultSettingsHandler;
@@ -42,7 +43,7 @@ public class BigDoSAttackTest {
         sendEtherHelper = new SendEtherHelper();
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
-        sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
+       // sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run();
@@ -57,19 +58,18 @@ public class BigDoSAttackTest {
 
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS_TXLIMITHIGH);
-       sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
+    //  sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
        Thread.sleep(5000);
         BigDecimal ether = new BigDecimal("1");
-        EthGetBalance balanceWeiBefore = chainSetup.getWeb3j()
-                .ethGetBalance(ADDRESS, DefaultBlockParameterName.LATEST).send();
+        EthGetBalance balanceWeiBefore = chainSetup.getWeb3j().ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST).send();
         System.out.println("**********************Balance before: "+balanceWeiBefore.getBalance().intValue());
         try {
             Thread.sleep(1000);
-            this.txLoop(1000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
+            this.txLoop(500, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(40000);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
             EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
-                    .ethGetBalance(ADDRESS, DefaultBlockParameterName.LATEST)
+                    .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
                     .send();
             System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
             Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
@@ -78,7 +78,38 @@ public class BigDoSAttackTest {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
             EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
-                    .ethGetBalance(ADDRESS, DefaultBlockParameterName.LATEST)
+                    .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
+                    .send();
+            System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
+            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
+        }
+    }
+
+    @Test public void txAttack1000() throws Exception {
+
+        JsonAccount account = new JsonAccount();
+        account.setAddress(ADDRESS_TXLIMITHIGH);
+       // sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
+        Thread.sleep(5000);
+        BigDecimal ether = new BigDecimal("1");
+        EthGetBalance balanceWeiBefore = chainSetup.getWeb3j().ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST).send();
+        System.out.println("**********************Balance before: "+balanceWeiBefore.getBalance().intValue());
+        try {
+            Thread.sleep(1000);
+            this.txLoop(1000, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
+            Thread.sleep(40000);
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+            EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
+                    .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
+                    .send();
+            System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
+            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
+
+        } catch (RuntimeException e) {
+            Assert.assertEquals(e.getClass(), RuntimeException.class);
+            Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+            EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
+                    .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
                     .send();
             System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
             Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
