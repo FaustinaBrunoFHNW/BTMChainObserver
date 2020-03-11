@@ -31,11 +31,11 @@
   },
   {
     "address": "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34",
-    "remainingTransactions": 3,
+    "remainingTransactions": 5,
     "transactionLimit": 5,
     "revokeTime": 1,
     "gasLimit": 42000,
-    "remainingGas": 0,
+    "remainingGas": 42000,
     "deleteMe": false,
     "timeStamp": null
   },
@@ -43,7 +43,7 @@
     "address": "0x2063Cfc6a737a9033459014C0ad444a1ae02d2DB",
     "remainingTransactions": 450,
     "transactionLimit": 450,
-    "revokeTime": 10,
+    "revokeTime": 1,
     "gasLimit": 21021000,
     "remainingGas": 21021000,
     "deleteMe": false,
@@ -53,20 +53,10 @@
     "address": "0xEebDD74cB758A1809880533ea6E1481D45b29639",
     "remainingTransactions": 450,
     "transactionLimit": 450,
-    "revokeTime": 10,
+    "revokeTime": 1,
     "gasLimit": 21021000,
     "remainingGas": 21021000,
     "deleteMe": false,
     "timeStamp": null
-  },
-  {
-    "address": "0xD4810f6177e8BD64a4156e1f439ac202E9Ffca22",
-    "remainingTransactions": 0,
-    "transactionLimit": 450,
-    "revokeTime": 10,
-    "gasLimit": 21021000,
-    "remainingGas": 5796000,
-    "deleteMe": false,
-    "timeStamp": "Mar 11, 2020, 7:09:15 PM"
   }
 ]
