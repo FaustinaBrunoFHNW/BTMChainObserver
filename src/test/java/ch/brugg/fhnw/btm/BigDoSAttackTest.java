@@ -7,6 +7,8 @@ import ch.brugg.fhnw.btm.helper.SendEtherHelper;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.junit.*;
 import org.web3j.crypto.Credentials;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.TransactionManager;
@@ -20,18 +22,16 @@ public class BigDoSAttackTest {
     private static String PRIVATE_KEY = "2D4E070C7586E271AE9DB6C2F44E154A5BCBEDFBC6AA7BEFD2A7E9EACAC2BFFE";
     private static String ADDRESS_TXLIMITHIGH = "0x2063Cfc6a737a9033459014C0ad444a1ae02d2DB";
 
-
-    private  static SendEtherHelper sendEtherHelper;
+    private static SendEtherHelper sendEtherHelper;
     private static ChainInteractions chainInteractions;
     private static ResetHelper resetHelper = new ResetHelper();
     private static ChainSetup chainSetup;
-    private  static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
+    private static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
     private static BigInteger GASPRICEZERO = new BigInteger("0");
     private static BigInteger GASLIMIT = new BigInteger("21000");
     private static JsonDefaultSettingsHandler jsonDefaultSettingsHandler;
 
-    @BeforeClass
-    public static void setUpChain() throws Exception {
+    @BeforeClass public static void setUpChain() throws Exception {
         jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
         chainSetup = ChainSetup.getInstance();
@@ -47,26 +47,41 @@ public class BigDoSAttackTest {
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run();
     }
-@Before
-    @After
-    public void reset() throws InterruptedException {
+
+    @Before public void reset() throws InterruptedException {
         Thread.sleep(5000);
         resetHelper.setAccountsCountersToMax();
     }
+
     @Test public void txAttack500() throws Exception {
 
         JsonAccount account = new JsonAccount();
         account.setAddress(ADDRESS_TXLIMITHIGH);
-        sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
+       sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
+       Thread.sleep(5000);
         BigDecimal ether = new BigDecimal("1");
+        EthGetBalance balanceWeiBefore = chainSetup.getWeb3j()
+                .ethGetBalance(ADDRESS, DefaultBlockParameterName.LATEST).send();
+        System.out.println("**********************Balance before: "+balanceWeiBefore.getBalance().intValue());
         try {
             Thread.sleep(1000);
-            this.txLoop(500, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
+            this.txLoop(1000, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(40000);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+            EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
+                    .ethGetBalance(ADDRESS, DefaultBlockParameterName.LATEST)
+                    .send();
+            System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
+            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
+
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
+            EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
+                    .ethGetBalance(ADDRESS, DefaultBlockParameterName.LATEST)
+                    .send();
+            System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
+            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
         }
     }
 
