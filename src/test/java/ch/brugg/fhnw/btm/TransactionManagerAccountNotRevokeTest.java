@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class TransactionManagerAccountNotRevokeTest {
+    private static String TM_ADDRESS="";
 
     @Test
     public void tmOneTxMoreThenLimit(){
@@ -11,7 +12,9 @@ public class TransactionManagerAccountNotRevokeTest {
         }
 
         @Test
-    public void tmDoubleTxThenLimit(){
+    public void tmDoubleTxThenLimit()
+        {
+            //
         Assert.assertFalse(true);
         }
 }
