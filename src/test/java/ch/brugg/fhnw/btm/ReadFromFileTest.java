@@ -4,7 +4,9 @@ import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import sun.reflect.generics.tree.BaseType;
 
@@ -13,8 +15,17 @@ import java.util.ArrayList;
 
 public class ReadFromFileTest extends BaseTest {
 
+    @After
+    @Before
+    public void reset() throws InterruptedException {
+        Thread.sleep(5000);
+        resetHelper.setAccountsCountersToMax();
+    }
+
+
+
     @Test public void readDefaultSettingsFileTest() throws InterruptedException {
-        Thread.sleep(1000*60*3);
+        Thread.sleep(2000);
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler=JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
         Assert.assertEquals("0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221",jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress());
@@ -27,7 +38,7 @@ public class ReadFromFileTest extends BaseTest {
     }
 
     @Test public void readAccountFileTest() throws Exception {
-        Thread.sleep(1000*60*3);
+        Thread.sleep(2000);
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.setJsonAccountList(new ArrayList<>());
         Assert.assertEquals(0, jsonAccountHandler.getJsonAccountList().size());
@@ -72,6 +83,6 @@ public class ReadFromFileTest extends BaseTest {
         Assert.assertEquals(new BigInteger("42000"), account4.getGasLimit());
         Assert.assertEquals(null, account4.getTimeStamp());
         Assert.assertEquals(false,account4.isDeleteMe());
-        this.resetHelper.setAccountsCountersToMax();
+
     }
 }

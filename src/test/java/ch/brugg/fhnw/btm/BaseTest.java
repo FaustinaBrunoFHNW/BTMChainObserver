@@ -10,25 +10,25 @@ import java.math.BigInteger;
 
 public class BaseTest {
 
-     SendEtherHelper sendEtherHelper;
-     ChainInteractions chainInteractions;
-     ResetHelper resetHelper= new ResetHelper();
-    ChainSetup chainSetup ;
+    SendEtherHelper sendEtherHelper;
+    ChainInteractions chainInteractions;
+    ResetHelper resetHelper = new ResetHelper();
+    ChainSetup chainSetup;
     static String ADDRESS = "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34";
     static BigInteger GASPRICEZERO = new BigInteger("0");
     static BigInteger GASLIMIT = new BigInteger("21000");
     JsonDefaultSettingsHandler jsonDefaultSettingsHandler;
 
     public void setUpChain() throws Exception {
-         jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
+        jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
-      chainSetup = ChainSetup.getInstance();
+        chainSetup = ChainSetup.getInstance();
         ChainSetup.getInstance().setUpAfterChainStart();
         chainInteractions = new ChainInteractions(chainSetup);
         resetHelper.setAccountsCountersToMax();
 
         sendEtherHelper = new SendEtherHelper();
-         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
+        JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
         sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
 
