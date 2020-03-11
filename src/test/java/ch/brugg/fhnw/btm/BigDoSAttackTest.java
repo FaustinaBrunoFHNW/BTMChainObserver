@@ -97,7 +97,7 @@ public class BigDoSAttackTest {
         System.out.println("**********************Balance before: "+balanceWeiBefore.getBalance().intValue());
         try {
             Thread.sleep(1000);
-            this.txLoop(2000, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
+            this.txLoop(5000, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(40000);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
             EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()

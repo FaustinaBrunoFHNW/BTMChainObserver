@@ -1,10 +1,10 @@
 {
   "connectionAddress": "http://jurijnas.myqnapcloud.com:8545/",
-  "resetInterval": 2,
+  "resetInterval": 10,
   "defaultTxLimit": 5,
   "defaultGasLimit": 50000000,
   "certifierAddress": "0x89e716d530eb0554641a5d13680f5378d96814c6",
-  "timestampLastReset": "Mar 11, 2020, 6:58:05 PM",
+  "timestampLastReset": "Mar 11, 2020, 7:39:56 PM",
   "nameRegistryAddress": "0x0000000000000000000000000000000000001337",
   "defaultRevokeTime": 3,
   "masterKeyAddress": null
