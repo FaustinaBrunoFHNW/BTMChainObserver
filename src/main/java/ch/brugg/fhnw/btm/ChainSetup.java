@@ -77,10 +77,10 @@ public class ChainSetup {
      * @throws Exception
      */
     public void setUpAfterChainStart() throws Exception {
+        this.privateKey = jsonDefaultSettingsHandler.getMasterKey();
         this.getInfo(web3j);
         this.loadSimpleRegistry();
         this.loadCertifier(certifierAddress);
-
     }
 
     //TODO evtl in Genesis Block auslagern
@@ -92,7 +92,6 @@ public class ChainSetup {
      * @throws Exception
      */
     public void initChain() throws Exception {
-
         this.log.info("Simpleregistry und Certifier werden aufgesetzt.");
         this.loadSimpleRegistry();
         this.setUpCertifier();
@@ -105,7 +104,7 @@ public class ChainSetup {
      *
      * @return boolean Wert ob das laden der Simpleregistry funktioniert hat
      */
-    private void loadSimpleRegistry() {
+    void loadSimpleRegistry() {
         simpleRegistry = SimpleRegistry
                 .load(jsonDefaultSettingsHandler.getDefaultSettings().getNameRegistryAddress(), web3j, getCredentialsFromPrivateKey(),
                         new DefaultGasProvider());
@@ -127,7 +126,7 @@ public class ChainSetup {
      * Hier wird der certifier deployed
      * Certifier Adresse wird ausgegeben und gespeichert
      */
-    private void setUpCertifier() {
+    public void setUpCertifier() {
 
         if (deployCertifier(transactionManager) && registerCertifier()) {
 
@@ -159,7 +158,7 @@ public class ChainSetup {
      * @param transactionManager
      * @return
      */
-    private boolean deployCertifier(TransactionManager transactionManager) {
+    public boolean deployCertifier(TransactionManager transactionManager) {
 
         try {
             log.info("Deployment vom Certifier");
@@ -179,7 +178,7 @@ public class ChainSetup {
     /**
      * @return
      */
-    private boolean registerCertifier() {
+    public boolean registerCertifier() {
 
         try {
             log.info("Registrieren vom Certifier");
@@ -231,6 +230,7 @@ public class ChainSetup {
     public void loadCertifier(String add) {
 
         simpleCertifier = SimpleCertifier.load(add, web3j, getCredentialsFromPrivateKey(), new DefaultGasProvider());
+
         log.info("Laden vom Certifier erfolgreich");
     }
 

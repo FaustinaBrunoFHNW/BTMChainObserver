@@ -70,5 +70,27 @@ public class JsonDefaultSettings {
         return this.defaultRevokeTime;
     }
 
+    public void setConnectionAddress(String connectionAddress) {
+        this.connectionAddress = connectionAddress;
+    }
 
+    public void setResetInterval(int resetInterval) {
+        this.resetInterval = resetInterval;
+    }
+
+    public void setDefaultTxLimit(BigInteger defaultTxLimit) {
+        this.defaultTxLimit = defaultTxLimit;
+    }
+
+    public void setDefaultGasLimit(BigInteger defaultGasLimit) {
+        this.defaultGasLimit = defaultGasLimit;
+    }
+
+    public void setNameRegistryAddress(String nameRegistryAddress) {
+        this.nameRegistryAddress = nameRegistryAddress;
+    }
+
+    public void setDefaultRevokeTime(BigInteger defaultRevokeTime) {
+        this.defaultRevokeTime = defaultRevokeTime;
+    }
 }
