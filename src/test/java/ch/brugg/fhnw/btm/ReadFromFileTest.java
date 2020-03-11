@@ -3,12 +3,11 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import sun.reflect.generics.tree.BaseType;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
