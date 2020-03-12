@@ -3,11 +3,16 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//TODO javadoc
-public class Init {
-    //TODO logs einbauen
-    private static Logger log = LoggerFactory.getLogger(Init.class);
 
+/**
+ * In dieser Klasse befinden sich der Befehl welcher der Benutzer
+ * für das Initieren des Programms nach dem Starten der Blockchain
+ * ausführen kann
+ *
+ * @Author Faustina Bruno, Serge Jurij Maikoff
+ */
+public class Init {
+    private static Logger log = LoggerFactory.getLogger(Init.class);
 
     /**
      * Auführbare Methode fürs Aufsetzten der Blockchain
@@ -18,7 +23,7 @@ public class Init {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-
+        log.info("Init Befehl wurde gestartet.");
 
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
@@ -31,8 +36,5 @@ public class Init {
         subscriptionTX.run();
 
     }
-
-
-
 
 }

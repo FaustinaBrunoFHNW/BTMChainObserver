@@ -6,10 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //TODO anderes JAvadoc
+
 /**
- * In dieser Klasse befinden sich die 3 Befehle die der Benutzer über die Command Line aufrufen kann
+ * In dieser Klasse befinden sich der Befehl welcher der benutzer für
+ * das Starten des Programms ausführen kann
  *
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class Run {
     private static Logger log = LoggerFactory.getLogger(Run.class);
@@ -24,7 +26,7 @@ public class Run {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-
+        log.info("Run Befehl wurde gestartet");
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
 
@@ -37,17 +39,13 @@ public class Run {
         ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
 
-        //TODO als logs
-//        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getJsonAccountList().size());
-//        System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
-//        System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
+        log.info("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getJsonAccountList().size());
+        log.info("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
+        log.info("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run();
 
     }
-
-
-
 
 }

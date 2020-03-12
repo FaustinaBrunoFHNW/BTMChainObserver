@@ -19,12 +19,11 @@ import org.web3j.tx.gas.DefaultGasProvider;
 import java.io.IOException;
 import java.math.BigInteger;
 
-//TODO JAVADOC
 
 /**
  * In dieser Klasse wird die Blockchain aufgesetzt
  *
- * @Author Faustina Bruno, Serge-Jurij-Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class ChainSetup {
 
@@ -49,7 +48,6 @@ public class ChainSetup {
     }
 
 
-    //TODO JAVADOC
 
     /**
      * Dies wird ausgeführt wenn die Blockchain schon mal gestartet wurde
@@ -82,11 +80,9 @@ public class ChainSetup {
         this.loadCertifier(certifierAddress);
     }
 
-    //TODO evtl in Genesis Block auslagern
-    //TODO Javadoc
 
     /**
-     * Wird ausgeführt bei einer komplett neuer Blockchain (beim Neustart einer Blockchain)
+     * Wird ausgeführt wenn die Blockchain neu gestartet wurde (beim Neustart einer Blockchain)
      *
      * @throws Exception
      */
@@ -118,9 +114,6 @@ public class ChainSetup {
 
     }
 
-    //TODO JAVA DOC
-    //TODO return wert
-
     /**
      * Hier wird der certifier deployed
      * Certifier Adresse wird ausgegeben und gespeichert
@@ -151,11 +144,11 @@ public class ChainSetup {
         return Credentials.create(this.privateKey);
     }
 
-    //TODO JAVADOC
 
     /**
-     * @param transactionManager
-     * @return
+     * Hier wird der Certifier deployed
+     * @param transactionManager Account für die Depoyement Transaktion
+     * @return ein booelan Wert ob das Deployment erfolgreich war oder nicht
      */
     public boolean deployCertifier(TransactionManager transactionManager) {
 
@@ -172,10 +165,10 @@ public class ChainSetup {
 
     }
 
-    //TODO JAVA DOC
 
     /**
-     * @return
+     * In dieser Methode wird der certifier in die SimpleRegestry Registriert
+     * @return boolean Wert ob die Registrierung funktioniert hat
      */
     public boolean registerCertifier() {
 
@@ -213,14 +206,11 @@ public class ChainSetup {
             log.info("Gas Preis " + gasPrice.getGasPrice());
 
         } catch (IOException e) {
-            //TODO log error ausfüllen
-            this.log.error("");
-            //TODO Exception auf Deutsch
-            throw new RuntimeException("Error whilst sending json-rpc requests", e);
+            this.log.error("Es gab ein Fehler beim holen der Web3J Informationen");
+            throw new RuntimeException("Error während dem Senden einer json-rpc Requests", e);
         }
     }
 
-    //TODO JAVA DOC + public
 
     /**
      * Hier wird der certifier geladen
@@ -233,17 +223,15 @@ public class ChainSetup {
         log.info("Laden vom Certifier erfolgreich");
     }
 
-    //TODO JAVADOC + public
     /**
-     *
+     * In dieser Methode wird der SimpleCertifier zertifiziert
      */
     public void registerSelf(){
         try {
             simpleCertifier.certify(getCredentialsFromPrivateKey().getAddress()).send();
-            //TODO Logger
-            log.info("");
+            log.info("SimpleCertifier wurde zertifiziert");
         } catch (Exception e) {
-            log.error("Zertifizierung des MasterKeys war nicht erfolgreich");
+            log.error("Zertifizierung des Cimplecertifier war nicht erfolgreich");
             e.printStackTrace();
         }
     }

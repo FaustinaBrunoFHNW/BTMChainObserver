@@ -6,7 +6,6 @@ import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tx.TransactionManager;
 import org.web3j.tx.Transfer;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 /**
  * In dieser Klasse sind alle Interaktionen mit der Blockchain über den SimpleCertifier
  *
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class ChainInteractions {
 
@@ -29,7 +28,7 @@ public class ChainInteractions {
     private SimpleCertifier simpleCertifier;
     private SimpleRegistry simpleRegistry;
     private TransactionManager transactionManager;
-    private Web3j web3j;
+
 
 
 
@@ -41,7 +40,7 @@ public class ChainInteractions {
         this.chainSetUp = chainSetUp;
         this.simpleCertifier = chainSetUp.getSimpleCertifier();
         this.simpleRegistry = chainSetUp.getSimpleRegistry();
-        this.web3j = chainSetUp.getWeb3j();
+
         this.transactionManager = chainSetUp.getTransactionManager();
 
     }
@@ -128,8 +127,7 @@ public class ChainInteractions {
             this.log.info("Zertifizierung erfolgreich");
             return this.isCertified(add);
         } catch (Exception e) {
-            //TODO log error ausfüllen
-            this.log.error("");
+            this.log.error("Zertifizierung des Accounts: "+add+" nicht erfolgreich");
             e.printStackTrace();
         }
         return false;
@@ -146,8 +144,7 @@ public class ChainInteractions {
         try {
             return this.simpleCertifier.certified(add).send();
         } catch (Exception e) {
-            //TODO log error ausfüllen
-            this.log.error("");
+            this.log.error("Es ist ein Fehler aufgetreten bei der Abfrage ob ein Account in der Whiteliste ist");
             e.printStackTrace();
         }
         return false;

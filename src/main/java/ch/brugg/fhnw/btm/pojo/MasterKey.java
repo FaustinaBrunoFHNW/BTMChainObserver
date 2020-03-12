@@ -1,6 +1,9 @@
 package ch.brugg.fhnw.btm.pojo;
 
-//TODO what is this?
+/**
+ * Klasse um den PrivatKey des Transaktion Managers zu speichern
+ * @Author Faustina Bruno, Serge Jurij Maikoff
+ */
 public class MasterKey {
     private String privateKey;
 

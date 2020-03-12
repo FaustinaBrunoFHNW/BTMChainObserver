@@ -3,18 +3,13 @@ package ch.brugg.fhnw.btm.pojo;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-//TODO Naming
+/**
+ * Default Settings Klasse um die Default Settings der Chain aus einem File in ein Objekt zu speichern
+ * @Author Faustina Bruno, Serge Jurij Maikoff
+ */
 public class JsonDefaultSettings {
 
-    public static JsonDefaultSettings instance;
-
-    public static JsonDefaultSettings getInstance() {
-
-        if (JsonDefaultSettings.instance == null) {
-            JsonDefaultSettings.instance = new JsonDefaultSettings();
-        }
-        return JsonDefaultSettings.instance;
-    }
+    private static JsonDefaultSettings instance;
     private JsonDefaultSettings(){};
     private String connectionAddress;
     private int resetInterval;
@@ -28,6 +23,19 @@ public class JsonDefaultSettings {
 
 
     private String masterKeyAddress;
+
+    /**
+     * Getter um Singleton Instanz der Klasse zu holen
+     * @return instanzierte Instanz der Klasse
+     */
+    public static JsonDefaultSettings getInstance() {
+
+        if (JsonDefaultSettings.instance == null) {
+            JsonDefaultSettings.instance = new JsonDefaultSettings();
+        }
+        return JsonDefaultSettings.instance;
+    }
+
 
 
 //**************************GETTER und SETTER*********************************

@@ -21,7 +21,7 @@ import java.time.Instant;
 
 /**
  * In dieser Klasse werden die Defaul Setting aus dem JSON File gelesen und wieder reingeschrieben
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class JsonDefaultSettingsHandler {
 

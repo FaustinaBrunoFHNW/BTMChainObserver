@@ -21,7 +21,7 @@ import java.util.Iterator;
 /**
  * In dieser Klasse werden Accounts aus dem JSON File geladen und wieder reingeschrieben
  *
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class JsonAccountHandler {
 

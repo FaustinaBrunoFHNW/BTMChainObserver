@@ -22,7 +22,7 @@ import static java.util.Comparator.comparing;
  * Falls ein Account gesperrt wird, wird er mit einem Timestamp und dem CertifyCommand in die Queue gespeichert
  * um zur gespeicherten Zeit wieder zertifiziert zu werden
  *
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class DoSAlgorithm {
     private static DoSAlgorithm instance;
