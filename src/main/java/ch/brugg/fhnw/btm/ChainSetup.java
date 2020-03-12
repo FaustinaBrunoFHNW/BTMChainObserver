@@ -137,9 +137,9 @@ public class ChainSetup {
             this.jsonDefaultSettingsHandler.getDefaultSettings().setCertifierAddress(certifierAddress);
             this.jsonDefaultSettingsHandler.writeDefaultSettings();
 
+        }else {
+            log.error("Es gab ein Problem beim Setup und Deployen und Registrieren des Certifier ");
         }
-        log.error("Es gab ein Problem beim Setup und Deployen und Registrieren des Certifier ");
-
     }
 
     /**
