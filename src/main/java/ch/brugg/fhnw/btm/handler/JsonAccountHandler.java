@@ -53,9 +53,8 @@ public class JsonAccountHandler {
 
     }
 
-    //TODO JAVADOC
     /**
-     *
+     *Diese Methode holt alle Accounts aus der Account Datei und speichert sie als JsonAccount Objekte in einer Liste ab
      */
     public void loadAccounts() {
         Gson gson = new Gson();
@@ -77,8 +76,7 @@ public class JsonAccountHandler {
 
             }
         } catch (FileNotFoundException e) {
-            //TODO error log ausfüllen
-            this.log.error("");
+            this.log.error("Es gab Probleme beim Laden der Accounts aud der Daei");
             e.printStackTrace();
         }
     }
@@ -129,6 +127,7 @@ public class JsonAccountHandler {
         toProcess.decraseTransactionCounter();
         toProcess.decreaseGasUsedCounter(gasUsed.longValue());
 
+        //TODO LOG AUSKOMMENTIEREN
 //        this.log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getRemainingTransactions()
 ////                + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + toProcess
 ////                .getRemainingGas());

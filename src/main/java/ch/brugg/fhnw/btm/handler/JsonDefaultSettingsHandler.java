@@ -35,7 +35,12 @@ public class JsonDefaultSettingsHandler {
     private String defaultSettingsFile = "src/main/resources/whitelist/DefaultSettings.json";
     private String transaktionManagerAccountFile = "src/main/resources/whitelist/TransaktionsManagerAccount.json";
 
-    //TODO JAVADOC
+
+
+    /**
+     * Getter um Singleton Instanz der Klasse zu holen
+     * @return
+     */
     public static JsonDefaultSettingsHandler getInstance() {
 
         if (JsonDefaultSettingsHandler.instance == null) {
@@ -44,7 +49,10 @@ public class JsonDefaultSettingsHandler {
         return JsonDefaultSettingsHandler.instance;
     }
 
-    //TODO JAVADOC
+
+    /**
+     * Ladet aus der JSON Datei die gesetzten Default Settings und speiehrt diese in einem JsonDefaultSettings Objekt ab
+     */
     public void loadDefaultSettings() {
         Gson gson = new Gson();
         try {
@@ -52,12 +60,15 @@ public class JsonDefaultSettingsHandler {
             this.defaultSettings = gson.fromJson(reader, JsonDefaultSettings.class);
             this.log.info("Default Settings wurden aus dem JSON File geladen");
         } catch (FileNotFoundException e) {
-            //TODO error log ausfüllen
-            this.log.error("");
+            this.log.error("Beim laden der Default Settings gabs Probleme");
             e.printStackTrace();
         }
     }
-    //TODO JAVADOC
+
+    /**
+     * In dieser Methode wird ein neuer Timestamp gesetzt und
+     * die aktuellen Settings der DefaultSettings in die Datei gespeichert
+     */
     public void writeDefaultSettings() {
 
         this.defaultSettings.setTimestampLastReset(new Timestamp(System.currentTimeMillis()));
@@ -76,7 +87,13 @@ public class JsonDefaultSettingsHandler {
     }
 
 
-    //TODO JAVADOC
+
+
+    /**
+     * Diese Methode holt den privat Key des transaktion Manager Accounts,
+     * welches in einer separaten Datei gespeichert wird
+     * @return der Account Private Key des TM Accounts
+     */
     public String getMasterKey(){
         Gson gson = new Gson();
         try {

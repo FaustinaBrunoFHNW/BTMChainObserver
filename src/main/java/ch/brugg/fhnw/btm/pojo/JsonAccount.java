@@ -11,6 +11,7 @@ import java.sql.Timestamp;
  * Account Klasse um Accounts aus der datei einlesen zu können und diese verwalten zu können
  */
 public class JsonAccount {
+    private static Logger log = LoggerFactory.getLogger(JsonAccount.class);
 
     private String address;
     private int remainingTransactions;
@@ -30,13 +31,6 @@ public class JsonAccount {
     }
 
 
-    public void increaseGasUsedCounter() {
-        if (this.remainingGas < this.transactionLimit.intValue()) {
-            this.remainingGas++;
-        }
-//        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
-
-    }
 
 
     /**
@@ -46,6 +40,7 @@ public class JsonAccount {
         if (this.remainingTransactions > 0) {
             this.remainingTransactions--;
         }
+        //TODO LOG EINKOMMENTIEREN
 //        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
     }
 
@@ -56,6 +51,7 @@ public class JsonAccount {
         if (this.remainingGas > 0) {
             this.remainingGas = this.getRemainingGas()-gasUsedOnTX;
         }
+        //TODO LOG EINKOMMENTIEREN
 //        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
     }
 
