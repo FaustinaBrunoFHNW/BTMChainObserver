@@ -63,7 +63,7 @@ public class DoSAttackWithGas  {
     @Test public void gasAttack21000() throws Exception {
 
         BigDecimal ether = new BigDecimal("2");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         sendEtherHelper.txLoop(1,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
         Thread.sleep(15000);
         Assert.assertTrue(chainInteractions.isCertified(ADDRESS));
@@ -72,7 +72,7 @@ public class DoSAttackWithGas  {
     @Test public void gasAttack42000() throws Exception {
 
         BigDecimal ether = new BigDecimal("2");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         sendEtherHelper.txLoop(2,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
         Thread.sleep(15000);
         Assert.assertTrue(chainInteractions.isCertified(ADDRESS));
@@ -80,7 +80,7 @@ public class DoSAttackWithGas  {
     @Test public void gasAttack10500() throws Exception {
 
         BigDecimal ether = new BigDecimal("2");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         try {
             sendEtherHelper.txLoop(5,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
             Thread.sleep(15000);

@@ -44,7 +44,7 @@ public class BigDoSAttackTest {
         sendEtherHelper = new SendEtherHelper();
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
-       // sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
+        sendEtherHelper.sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
 
         SubscriptionTX subscriptionTX = new SubscriptionTX(chainInteractions);
         subscriptionTX.run();
