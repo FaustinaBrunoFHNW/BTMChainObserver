@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Command Pattern fürs Revoken/Sperren von Accounts
  *
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class RevokeAccountCommand extends AbstractCommand implements Command {
     private Logger log = LoggerFactory.getLogger(RevokeAccountCommand.class);

@@ -97,6 +97,7 @@ public class DoSAlgorithm {
             //Account wird in Priorityqueue hinzugefügt
             this.queue.add(new CertifyCommand(jsonAccount));
 
+            //TODO LOGS EINKOMMENTIEREN
 //            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viele Transaktionen getätigt und wurde gesperrt. " +
 //                    " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
@@ -105,18 +106,18 @@ public class DoSAlgorithm {
             //Abfrage ob der Account noch genügend Gas hat
         }  if (jsonAccount.getRemainingGas() < 0) {
             this.chainInteractions.revokeAccount(jsonAccount.getAddress());
-            //TODO Konstante bennen
-            long revokeTime = jsonAccount.getRevokeTime().intValue()*60 * 1000;
+            long revokeTime = jsonAccount.getRevokeTime().intValue()*SEC_IN_MIN * MILLISEC_IN_SEC;
             tempStamp.setTime(temp + revokeTime);
 
             jsonAccount.setTimeStamp(tempStamp);
             this.queue.add(new CertifyCommand(jsonAccount));
-
+            //TODO LOGS EINKOMMENTIEREN
 //            this.log.info("Der Acccount "+ jsonAccount.getAddress()+" hat zu viel Gas verbraucht und wurde gesperrt. " +
 //                    " Die Sperrung  wird um "+ tempStamp.toString() +" aufgehoben ");
 
             this.accountHandler.writeAccountList();
         }
+        //TODO LOGS EINKOMMENTIEREN
 //        this.log.info("Account Datei wird aktualisiert");
         JsonAccountHandler.getInstance().writeAccountList();
     }

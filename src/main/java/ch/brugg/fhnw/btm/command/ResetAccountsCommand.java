@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Command Pattern fürs Resetten von Accounts
  *
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class ResetAccountsCommand implements Command {
     private Logger log = LoggerFactory.getLogger(ResetAccountsCommand.class);

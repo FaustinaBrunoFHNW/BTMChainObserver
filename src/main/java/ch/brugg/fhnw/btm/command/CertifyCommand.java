@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Command Pattern fürs Zertifizieren von Accounts
- * @Author Faustina Bruno, Serge-Jurij Maikoff
+ * @Author Faustina Bruno, Serge Jurij Maikoff
  */
 public class CertifyCommand extends AbstractCommand implements Command {
     private Logger log = LoggerFactory.getLogger(AbstractCommand.class);
