@@ -31,7 +31,12 @@ public class ChainInteractions {
     private TransactionManager transactionManager;
     private Web3j web3j;
 
-    //TODO JavaDoc für Constructor
+
+
+    /**
+     * public Constructor der Klasse
+     * @param chainSetUp
+     */
     public ChainInteractions(ChainSetup chainSetUp) {
         this.chainSetUp = chainSetUp;
         this.simpleCertifier = chainSetUp.getSimpleCertifier();
@@ -41,7 +46,6 @@ public class ChainInteractions {
 
     }
 
-    //TODO public checken
 
     /**
      * In dieser Methode werden alle Account einer Liste von der Whiteliste entfernt
@@ -109,7 +113,6 @@ public class ChainInteractions {
         }
     }
 
-    //TODO public kontrollieren
 
     /**
      * Hier wird ein Account in die Whiteliste hinzugefügt
@@ -132,7 +135,6 @@ public class ChainInteractions {
         return false;
     }
 
-    //TODO public kontrollieren
 
     /**
      * Diese Methode gibts aus ob ein Account zertifiziert/in der Whiteliste ist

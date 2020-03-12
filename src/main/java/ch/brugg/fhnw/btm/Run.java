@@ -37,6 +37,7 @@ public class Run {
         ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
 
+        //TODO als logs
 //        System.out.println("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getJsonAccountList().size());
 //        System.out.println("Anzahl gesperrte Accounts: " + jsonAccountHandler.getRevokedAccounts());
 //        System.out.println("Anzahl gelöschte Accounts: " + jsonAccountHandler.getDeletedAccounts());

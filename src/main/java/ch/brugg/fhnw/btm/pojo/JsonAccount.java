@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
+/**
+ * Account Klasse um Accounts aus der datei einlesen zu können und diese verwalten zu können
+ */
 public class JsonAccount {
 
     private String address;
@@ -24,20 +27,6 @@ public class JsonAccount {
 
     public void setTimeStamp(Timestamp timeStamp) {
         this.timeStamp = timeStamp;
-    }
-
-    private static Logger log = LoggerFactory.getLogger(JsonAccount.class);
-
-    //TODO brauch es das?
-    /**
-     * Erhöht den Counter bis er auf den definierten maximal Wert komnmt
-     */
-    public void increaseTransactionCounter() {
-        if (this.remainingTransactions < this.transactionLimit.intValue()) {
-            this.remainingTransactions++;
-        }
-//        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
-
     }
 
 

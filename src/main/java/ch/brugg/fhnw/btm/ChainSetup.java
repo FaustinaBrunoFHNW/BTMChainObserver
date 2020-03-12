@@ -19,7 +19,6 @@ import org.web3j.tx.gas.DefaultGasProvider;
 import java.io.IOException;
 import java.math.BigInteger;
 
-//TODO als Singelton Paater implementieren
 //TODO JAVADOC
 
 /**
@@ -49,7 +48,7 @@ public class ChainSetup {
         return ChainSetup.instance;
     }
 
-    //TODO naming
+
     //TODO JAVADOC
 
     /**
@@ -249,7 +248,7 @@ public class ChainSetup {
         }
     }
 
-    //GETTER UND SETTER
+    //********************************GETTER UND SETTER**********************************
 
     public Web3j getWeb3j() {
         return web3j;
