@@ -31,8 +31,8 @@ public class JsonAccountHandler {
     private int deletedAccounts = 0, revokedAccounts = 0;
 
 
-    private String accountsFile = "src/main/resources/whitelist/AccountList.json";
-
+//    private String accountsFile = "src/main/resources/whitelist/AccountList.json";
+    private String accountsFile = "./AccountList.json";
 
     /**
      * Getter zum einamlige Klassen Instanz zo holen

@@ -32,10 +32,11 @@ public class JsonDefaultSettingsHandler {
 
     private JsonDefaultSettings defaultSettings = JsonDefaultSettings.getInstance();
 
-    private String defaultSettingsFile = "src/main/resources/whitelist/DefaultSettings.json";
-    private String transaktionManagerAccountFile = "src/main/resources/whitelist/TransaktionsManagerAccount.json";
+//    private String defaultSettingsFile = "src/main/resources/whitelist/DefaultSettings.json";
+//    private String transaktionManagerAccountFile = "src/main/resources/whitelist/TransaktionsManagerAccount.json";
 
-
+    private String defaultSettingsFile = "./DefaultSettings.json";
+    private String transaktionManagerAccountFile = "./TransaktionsManagerAccount.json";
 
     /**
      * Getter um Singleton Instanz der Klasse zu holen
