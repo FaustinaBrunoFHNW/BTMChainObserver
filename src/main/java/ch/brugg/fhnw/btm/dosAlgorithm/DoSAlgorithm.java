@@ -109,7 +109,7 @@ public class DoSAlgorithm {
 
                 //Abfrage ob der Account noch genügend Gas hat
             }
-            if (jsonAccount.getRemainingGas() < 0) {
+            if (jsonAccount.getRemainingGas() <= 0) {
                 this.chainInteractions.revokeAccount(jsonAccount.getAddress());
                 long revokeTime = jsonAccount.getRevokeTime().intValue() * SEC_IN_MIN * MILLISEC_IN_SEC;
                 tempStamp.setTime(temp + revokeTime);
