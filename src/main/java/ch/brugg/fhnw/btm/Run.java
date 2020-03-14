@@ -33,10 +33,12 @@ public class Run {
         JsonAccountHandler jsonAccountHandler = JsonAccountHandler.getInstance();
         jsonAccountHandler.loadAccounts();
 
+
         log.info("Anzahl Accounts: " + jsonAccountHandler.getJsonAccountList().size());
 
         ChainSetup.getInstance().setUpAfterChainStart();
         ChainInteractions chainInteractions = new ChainInteractions(ChainSetup.getInstance());
+        chainInteractions.revokeAccountList(jsonAccountHandler.getJsonAccountsToDelete());
         chainInteractions.certifyAccountList(jsonAccountHandler.getJsonAccountList());
 
         log.info("Anzahl zertifizierte Accounts: " + jsonAccountHandler.getJsonAccountList().size());

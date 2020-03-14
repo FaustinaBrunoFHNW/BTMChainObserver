@@ -1,4 +1,5 @@
 package ch.brugg.fhnw.btm.handler;
+
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,15 +28,16 @@ public class JsonAccountHandler {
 
     private static JsonAccountHandler instance;
     private ArrayList<JsonAccount> jsonAccountList = new ArrayList<>();
-    private  Logger log = LoggerFactory.getLogger(JsonAccountHandler.class);
+    private ArrayList<JsonAccount> jsonAccountsToDelete= new ArrayList<>();
+    private Logger log = LoggerFactory.getLogger(JsonAccountHandler.class);
     private int deletedAccounts = 0, revokedAccounts = 0;
 
-
-//    private String accountsFile = "src/main/resources/whitelist/AccountList.json";
+    //    private String accountsFile = "src/main/resources/whitelist/AccountList.json";
     private String accountsFile = "./AccountList.json";
 
     /**
      * Getter zum einamlige Klassen Instanz zo holen
+     *
      * @return JsonAccont Objekt
      */
     public static JsonAccountHandler getInstance() {
@@ -49,29 +51,33 @@ public class JsonAccountHandler {
     /**
      * privater Constructor für Singleton
      */
-    private JsonAccountHandler(){
+    private JsonAccountHandler() {
 
     }
 
     /**
-     *Diese Methode holt alle Accounts aus der Account Datei und speichert sie als JsonAccount Objekte in einer Liste ab
+     * Diese Methode holt alle Accounts aus der Account Datei und speichert sie als JsonAccount Objekte in einer Liste ab
      */
     public void loadAccounts() {
         Gson gson = new Gson();
         try {
             JsonReader reader = new JsonReader(new FileReader(this.accountsFile));
-            Type accountListType = new TypeToken<ArrayList<JsonAccount>>(){}.getType();
+            Type accountListType = new TypeToken<ArrayList<JsonAccount>>() {
+            }.getType();
             this.jsonAccountList = gson.fromJson(reader, accountListType);
-            this.log.info("Accounts wurden aus Datei geladen. Es sind " + this.jsonAccountList.size()+ " Accounts geladen worden. ");
+            this.log.info("Accounts wurden aus Datei geladen. Es sind " + this.jsonAccountList.size()
+                    + " Accounts geladen worden. ");
 
-
-            Iterator<JsonAccount> itr = this.jsonAccountList.iterator();
-            while(itr.hasNext()){
-                JsonAccount temp = itr.next();
-                if (temp.deleteMe){
-                    this.log.info("Account zum Löschen wurde gefunden. Folgender Account wird gelöscht: "+temp.getAddress());
+            Iterator<JsonAccount> itrAccount = this.jsonAccountList.iterator();
+            while (itrAccount.hasNext()) {
+                JsonAccount accountToDelete = itrAccount.next();
+                if (accountToDelete.deleteMe) {
+                    this.log.info(
+                            "Account zum Löschen wurde gefunden. Folgender Account wird gelöscht: " + accountToDelete
+                                    .getAddress());
                     this.deletedAccounts++;
-                    itr.remove();
+                    this.jsonAccountsToDelete.add(accountToDelete);
+                    itrAccount.remove();
                 }
 
             }
@@ -88,7 +94,7 @@ public class JsonAccountHandler {
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try {
             Writer writer = Files.newBufferedWriter(Paths.get(this.accountsFile));
-            gson.toJson(this.jsonAccountList,writer);
+            gson.toJson(this.jsonAccountList, writer);
             writer.close();
             this.log.info("Accounts wurden in die Datei geschrieben");
         } catch (IOException e) {
@@ -100,40 +106,42 @@ public class JsonAccountHandler {
 
     /**
      * Diese Methode itiriert durch alle Accounts und gibt den Account mit der übergebenen Adresse zurück
+     *
      * @param address Adresse des gewünschten Accounts
      * @return Account passent zur Adresse
      */
-    public JsonAccount getAccount(String address){
-        for (JsonAccount account: this.jsonAccountList){
-            if (account.getAddress().equalsIgnoreCase(address)){
+    public JsonAccount getAccount(String address) {
+        for (JsonAccount account : this.jsonAccountList) {
+            if (account.getAddress().equalsIgnoreCase(address)) {
                 return account;
             }
         }
         return null;
     }
 
-
     /**
      * in dieser Methode wird vom Account der zur übergebenen Adresse passt,
      * der Transaktionscounter um eins runter gezählt und
      * das übergebene Gas vom Gas Counter abgezogen.
      * Am Ende wird der Gas und Transaktions Stand des Accounts ausgegeben.
+     *
      * @param address Adresse des Accounts
      * @param gasUsed eine Gas Value
      * @return ein JsonAccount Objekt das zur übergebenen Adresse passt und aktuelisiert ist
      */
-    public JsonAccount processAccount(String address, BigInteger gasUsed){
-        JsonAccount toProcess = this.getAccount(address);
-        toProcess.decraseTransactionCounter();
-        toProcess.decreaseGasUsedCounter(gasUsed.longValue());
+    public JsonAccount processAccount(String address, BigInteger gasUsed) {
+        JsonAccount accountToProcess = this.getAccount(address);
+        if (accountToProcess != null) {
+            accountToProcess.decraseTransactionCounter();
+            accountToProcess.decreaseGasUsedCounter(gasUsed.longValue());
 
-        //TODO LOG AUSKOMMENTIEREN
-//        this.log.info("Account: " + toProcess.getAddress() + " hat noch " + toProcess.getRemainingTransactions()
-////                + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + toProcess
-////                .getRemainingGas());
-        return toProcess;
+            this.log.info("Account: " + accountToProcess.getAddress() + " hat noch " + accountToProcess.getRemainingTransactions()
+                    + " Transaktionen auf dem Counter und noch so viel Gas zum verbauchen " + accountToProcess
+                    .getRemainingGas());
+        }
+            return accountToProcess;
+
     }
-
 
     //******************GETTER und SETTER*******************************
 
@@ -151,5 +159,13 @@ public class JsonAccountHandler {
 
     public int getRevokedAccounts() {
         return this.revokedAccounts;
+    }
+
+    public ArrayList<JsonAccount> getJsonAccountsToDelete() {
+        return jsonAccountsToDelete;
+    }
+
+    public void setJsonAccountsToDelete(ArrayList<JsonAccount> jsonAccountsToDelete) {
+        this.jsonAccountsToDelete = jsonAccountsToDelete;
     }
 }

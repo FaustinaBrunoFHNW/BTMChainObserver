@@ -105,7 +105,6 @@ public class ChainSetup {
                         new DefaultGasProvider());
         try {
             log.info("Fee of Registry: " + simpleRegistry.fee().send());
-            //TODO owner speichern in Variable
             log.info("Besitzer von Registry: " + simpleRegistry.owner().send());
         } catch (Exception e) {
             log.error("Simple Registry konnte nicht geladen werden");
