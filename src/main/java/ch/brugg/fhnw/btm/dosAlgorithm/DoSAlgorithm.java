@@ -6,6 +6,7 @@ import ch.brugg.fhnw.btm.command.Command;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
+import ch.brugg.fhnw.btm.pojo.JsonDefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,11 +80,10 @@ public class DoSAlgorithm {
      * @param jsonAccount der Account der inspiziert wird
      */
     public void dosAlgorithm(JsonAccount jsonAccount) {
-
-
+        JsonDefaultSettings defaultSettings=JsonDefaultSettings.getInstance();
             //Hier wird kontrolliert ob die Adresse des Accounts die vom Master Key ist.
             // Der Master Key Account wird nie gesperrt
-            if (jsonAccount.getAddress().equalsIgnoreCase(this.defaultSettingsHandler.getDefaultSettings().getMasterKeyAddress())) {
+            if (jsonAccount.getAddress().equalsIgnoreCase(defaultSettings.getMasterKeyAddress())) {
                 this.log.info("Eine gratis Transaktion mit Master Key wurde ignoriert.");
                 return;
             }

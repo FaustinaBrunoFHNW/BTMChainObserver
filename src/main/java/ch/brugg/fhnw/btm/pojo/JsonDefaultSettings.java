@@ -19,9 +19,6 @@ public class JsonDefaultSettings {
     private Timestamp timestampLastReset;
     private String nameRegistryAddress;
     private  BigInteger defaultRevokeTime;
-
-
-
     private String masterKeyAddress;
 
     /**

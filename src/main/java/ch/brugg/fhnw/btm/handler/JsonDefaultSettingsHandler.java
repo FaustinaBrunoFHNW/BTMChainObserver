@@ -101,7 +101,9 @@ public class JsonDefaultSettingsHandler {
 
             JsonReader reader = new JsonReader(new FileReader(this.transaktionManagerAccountFile));
             this.masterKey = gson.fromJson(reader, MasterKey.class);
-            JsonDefaultSettings.getInstance().setMasterKeyAddress(Credentials.create(this.masterKey.getPrivateKey()).getAddress());
+            String masterKeyAddress=Credentials.create(this.masterKey.getPrivateKey()).getAddress();
+            this.log.info("MasterKeyAddress"+masterKeyAddress);
+            JsonDefaultSettings.getInstance().setMasterKeyAddress(masterKeyAddress);
             this.log.info("Private Key des Transaktionsmanagers ist geladen");
             return  this.masterKey.getPrivateKey();
         } catch (FileNotFoundException e) {
