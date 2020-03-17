@@ -5,7 +5,6 @@ import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//TODO anderes JAvadoc
 
 /**
  * In dieser Klasse befinden sich der Befehl welcher der benutzer für

@@ -40,8 +40,8 @@ public class JsonAccount {
         if (this.remainingTransactions > 0) {
             this.remainingTransactions--;
         }
-        //TODO LOG EINKOMMENTIEREN
-//        log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
+
+      log.info("Account " + this.address + " hat noch " + this.remainingTransactions + " Transktionen");
     }
 
     /**
@@ -51,8 +51,7 @@ public class JsonAccount {
         if (this.remainingGas > 0) {
             this.remainingGas = this.getRemainingGas()-gasUsedOnTX;
         }
-        //TODO LOG EINKOMMENTIEREN
-//        log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
+       log.info("Account " + this.address + " hat noch " + this.remainingGas + " Gas zu verbrauchen");
     }
 
 
