@@ -7,10 +7,7 @@ import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import ch.brugg.fhnw.btm.helper.ResetHelper;
 import ch.brugg.fhnw.btm.helper.SendEtherHelper;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
@@ -54,9 +51,10 @@ public class DoSAttackWithGas  {
         subscriptionTX.run();
     }
 
+    @Before
     @After
     public void reset() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(30000);
         resetHelper.setAccountsCountersToMax();
     }
 

@@ -14,7 +14,7 @@ public class AccountCertifyTest {
 
 
     @Test public void certifyAccountTest() throws Exception {
-
+        Thread.sleep(30000);
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler = JsonDefaultSettingsHandler.getInstance();
 
         jsonDefaultSettingsHandler.loadDefaultSettings();
@@ -30,9 +30,7 @@ public class AccountCertifyTest {
 
         chainInteractions.revokeAccount(account.getAddress());
         Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
-        //TODO do gratis TX asser false
         chainInteractions.certifyAccount(account.getAddress());
-        //TODO do gratis TX asser true
         Assert.assertTrue(chainInteractions.isCertified(account.getAddress()));
 
         }

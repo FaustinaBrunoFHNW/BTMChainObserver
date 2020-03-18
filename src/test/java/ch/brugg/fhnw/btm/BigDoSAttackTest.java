@@ -50,8 +50,9 @@ public class BigDoSAttackTest {
         subscriptionTX.run();
     }
 
+    @After
     @Before public void reset() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(30000);
         resetHelper.setAccountsCountersToMax();
     }
 
@@ -62,26 +63,15 @@ public class BigDoSAttackTest {
     //  sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
        Thread.sleep(5000);
         BigDecimal ether = new BigDecimal("1");
-        EthGetBalance balanceWeiBefore = chainSetup.getWeb3j().ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST).send();
-        System.out.println("**********************Balance before: "+balanceWeiBefore.getBalance().intValue());
         try {
             Thread.sleep(1000);
             this.txLoop(500, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(50000);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
-            EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
-                    .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
-                    .send();
-            System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
-
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
-            EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
-                    .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
-                    .send();
-            System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
-            }
+              }
     }
 
     @Test public void txAttack2000() throws Exception {
@@ -91,9 +81,7 @@ public class BigDoSAttackTest {
        // sendEtherFromTransaktionManager(ADDRESS_TXLIMITHIGH, new BigDecimal("10000"), GASPRICEZERO, GASLIMIT);
         Thread.sleep(5000);
         BigDecimal ether = new BigDecimal("1");
-        EthGetBalance balanceWeiBefore = chainSetup.getWeb3j().ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST).send();
-        System.out.println("**********************Balance before: "+balanceWeiBefore.getBalance().intValue());
-        try {
+       try {
             Thread.sleep(1000);
             this.txLoop(5000, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
             Thread.sleep(50000);
@@ -101,7 +89,6 @@ public class BigDoSAttackTest {
             EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
                     .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
                     .send();
-            System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
 
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
@@ -109,19 +96,8 @@ public class BigDoSAttackTest {
             EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
                     .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
                     .send();
-            System.out.println("***********************Balance Before: " + balanceWeiBefore.getBalance().intValue());
-            System.out.println("***********************Balance After: " + balanceWeiAfter.getBalance().intValue());
-            int diff = balanceWeiBefore.getBalance().intValue() - balanceWeiAfter.getBalance().intValue();
-            System.out.println("Diff: " + diff);
            }
 
-        EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
-                .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
-                .send();
-        System.out.println("Not in Catch ***********************Balance Before: " + balanceWeiBefore.getBalance().intValue());
-        System.out.println("***********************Balance After: " + balanceWeiAfter.getBalance().intValue());
-        int diff = balanceWeiBefore.getBalance().intValue() - balanceWeiAfter.getBalance().intValue();
-        System.out.println("Diff: " + diff);
     }
 
     private TransactionReceipt sendEtherFromTransaktionManager(String addresseTo, BigDecimal etherValue,

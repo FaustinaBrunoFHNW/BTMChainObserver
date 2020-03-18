@@ -41,7 +41,7 @@ public class IntervallResetterTest  {
     @Before
     @After
     public void reset() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(30000);
         resetHelper.setAccountsCountersToMax();
     }
 

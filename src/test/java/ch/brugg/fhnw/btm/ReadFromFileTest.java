@@ -17,7 +17,7 @@ public class ReadFromFileTest extends BaseTest {
     @After
     @Before
     public void reset() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(30000);
         resetHelper.setAccountsCountersToMax();
     }
 
