@@ -10,8 +10,7 @@ Für die individuelle Suspendierung wird eine Priority-Queue in Kombination mit 
 
 # Betriebsanleitung
 
-Für die Inbetriebnahme muss Docker auf dem
-Rechner installiert sein.
+Für die Inbetriebnahme muss Docker auf dem Rechner installiert sein.
 
 ## Hochfahren der Parity Instanz
 
@@ -26,8 +25,8 @@ Rechner installiert sein.
   ```config.toml``` Datei übereinstimmen. Siehe \ref{sec_prac_spec} für den Aufbau der
   Datei ```instant_seal.json```.
 
-3. Für die "Stable"-Version von Parity kann folgender Befehl verwendet werden:\
-   ``` docker pull parity/parity:stable```
+3. Für dieses Projekt ist mti der Version 2.5.13 gearbeitet worden:\
+    ``` docker pull parity/parity:2.5.13```
 
 4. Mit follgendem Befehl wird ein neuer Party-Container erstellt:\
    ```docker run -ti -p 8545:8545 -p 8546:8546 -p 30303:30303 -p 30303:30303/udp -v ~/.local/share/io.parity.ethereum/docker/:/home/parity/.local/share/io.parity.ethereum/ parity/parity:stable --config /home/parity/.local/share/io.parity.ethereum/docker.toml --jsonrpc-interface all ```
