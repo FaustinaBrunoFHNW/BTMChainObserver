@@ -9,7 +9,6 @@ import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import ch.brugg.fhnw.btm.pojo.JsonDefaultSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.sql.Timestamp;
 import java.util.PriorityQueue;
 import java.util.Queue;

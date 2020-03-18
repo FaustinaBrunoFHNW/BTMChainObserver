@@ -28,7 +28,6 @@ public class BigDoSAttackTest {
     private static ResetHelper resetHelper = new ResetHelper();
     private static ChainSetup chainSetup;
     private static String TO_ADDRESS = "0xe0280100D5B3f35d771903B1E6f6eA253977E56B";
-    private static String ADDRESS_ALL_THE_MONEY = "0x00a329c0648769A73afAc7F9381E08FB43dBEA72";
     private static BigInteger GASPRICEZERO = new BigInteger("0");
     private static BigInteger GASLIMIT = new BigInteger("21000");
     private static JsonDefaultSettingsHandler jsonDefaultSettingsHandler;

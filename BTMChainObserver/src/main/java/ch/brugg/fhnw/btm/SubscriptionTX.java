@@ -3,19 +3,12 @@ package ch.brugg.fhnw.btm;
 import ch.brugg.fhnw.btm.command.ResetAccountsCommand;
 import ch.brugg.fhnw.btm.dosAlgorithm.DoSAlgorithm;
 import ch.brugg.fhnw.btm.handler.JsonAccountHandler;
-import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
-import ch.brugg.fhnw.btm.pojo.JsonAccount;
 import io.reactivex.disposables.Disposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.protocol.Web3j;
 import org.web3j.utils.Convert;
-
-import java.io.IOException;
 import java.math.BigInteger;
-import java.sql.Timestamp;
-import java.util.Date;
-
 
 /**
  * In dieser Klasse wird die Subscription gemacht um die gemachten Transaktionen beobachten zu können

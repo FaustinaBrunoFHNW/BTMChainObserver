@@ -1,0 +1,1524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="447b2500-39e0-4c28-8070-fa9e1e5d0efb" name="Default" comment="Tests verbessert" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="BTMChainObserver" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>web3j</find>
+      <find>transaktionManagerAccountFile</find>
+      <find>0xD4810f6177e8BD64a4156e1f439ac202E9Ffca22</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$/../../../Semester4/ws4/workspace/ws4c-courseware-FaustinaBrunoFHNW" value="3040519635871" />
+        <entry key="$PROJECT_DIR$/../../../oop2/workspace/a1-FaustinaBrunoFHNW" value="2978664759223" />
+        <entry key="$PROJECT_DIR$/../../../oop2/workspace/a2-FaustinaBrunoFHNW" value="2980241234397" />
+        <entry key="$PROJECT_DIR$/../../../oop2/workspace/countryfx-FaustinaBrunoFHNW" value="2989685784008" />
+        <entry key="$PROJECT_DIR$/../../../oop2/workspace/oop2-courseware-FaustinaBrunoFHNW" value="2975186700672" />
+      </map>
+    </option>
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../../../Semester4/ws4/workspace/abgabe1/a1-fs18-FaustinaBrunoFHNW-master" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Semester4/ws4/workspace/dolphin-crud-FS18-FaustinaBrunoFHNW" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Semester5/CustomUserControlElements/ws/CuieCourseware" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Semester5/CustomUserControlElements/ws/a1-hs18-FaustinaBrunoFHNW" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Semester5/CustomUserControlElements/ws/skiareas-cc-FaustinaBrunoFHNW" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/whitelist/AccountList.json" />
+        <option value="$PROJECT_DIR$/src/main/resources/whitelist/DefaultSettings.json" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/Command.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/CertifyCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/RevokeAccountCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/MasterKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Init.java" />
+        <option value="$PROJECT_DIR$/TransaktionsManagerAccount.json" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/JsonDefaultSettings.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Run.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/IntervallResetterTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithTransactions.java" />
+        <option value="$PROJECT_DIR$/AccountList.json" />
+        <option value="$PROJECT_DIR$/DefaultSettings.json" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/AccountCertifyTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/RevokeAccountTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithGas.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/TransactionManagerAccountNotRevokeTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/ReadFromFileTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/helper/ResetHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainInteractions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/SubscriptionTX.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/AbstractCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/ResetAccountsCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/dosAlgorithm/DoSAlgorithm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/handler/JsonAccountHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/handler/JsonDefaultSettingsHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/JsonAccount.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainSetup.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/BigDoSAttackTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/helper/SendEtherHelper.java" />
+        <option value="$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/DefaultSettings.json" />
+        <option value="$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/AccountList.json" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="BTMChainObserver" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="BTMChainObserver" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-17" />
+    <option name="width" value="1128" />
+    <option name="height" value="787" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+              <item name="command" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+              <item name="contracts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+              <item name="dosAlgorithm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+              <item name="pojo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ch" type="462c0819:PsiDirectoryNode" />
+              <item name="brugg" type="462c0819:PsiDirectoryNode" />
+              <item name="fhnw" type="462c0819:PsiDirectoryNode" />
+              <item name="btm" type="462c0819:PsiDirectoryNode" />
+              <item name="helper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BTMChainObserver" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BTMChainObserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/BTMChainObserver" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\FHNW\Semester7\Bachlorthesis\BTMChainObserver\src\test\java\resources\testFilesForWhitelist" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\FHNW\Semester7\Bachlorthesis\BTMChainObserver\src\test\java\resources" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/.gitignore</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/AccountList.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/BTMChainObserver.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/DefaultSettings.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/TransaktionsManagerAccount.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/pom.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/ChainInteractions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/ChainSetup.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/Init.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/Run.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/SubscriptionTX.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/command/AbstractCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/command/CertifyCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/command/Command.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/command/ResetAccountsCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/command/RevokeAccountCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/contracts/SimpleCertifier.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/contracts/SimpleRegistry.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/dosAlgorithm/DoSAlgorithm.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/handler/JsonAccountHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/handler/JsonDefaultSettingsHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/pojo/JsonAccount.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/pojo/JsonDefaultSettings.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/java/ch/brugg/fhnw/btm/pojo/MasterKey.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/certifier/Certifier.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/certifier/Owned.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/certifier/SimpleCertifier.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/certifier/out/SimpleCertifier.abi</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/certifier/out/SimpleCertifier.bin</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/registry/Owned.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/registry/Registry.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/registry/SimpleRegistry.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/registry/out/SimpleRegistry.abi</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/solidity/registry/out/SimpleRegistry.bin</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/uml/classdiagram/KlassendiagrammComplete.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/uml/classdiagram/KlassendiagrammDependencys.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/main/resources/uml/classdiagram/KlassendiagrammMethodes.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/AccountCertifyTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/BaseTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/BigDoSAttackTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithGas.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithTransactions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/IntervallResetterTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/ReadFromFileTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/ReplaceCertifierTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/RevokeAccountTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/TransactionManagerAccountNotRevokeTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/helper/ResetHelper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/ch/brugg/fhnw/btm/helper/SendEtherHelper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/resources/testFilesForWhitelist/AccountList.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/resources/testFilesForWhitelist/DefaultSettings.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver/src/test/java/resources/testFilesForWhitelist/TransaktionsManagerAccount.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Parity/docker.toml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Parity/dockerCommand.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Parity/instant_seal.json</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.gitignore</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/AccountList.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/BTMChainObserver.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/DefaultSettings.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/TransaktionsManagerAccount.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pom.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainInteractions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainSetup.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Init.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Run.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/SubscriptionTX.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/AbstractCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/CertifyCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/Command.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/ResetAccountsCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/RevokeAccountCommand.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/contracts/SimpleCertifier.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/contracts/SimpleRegistry.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/dosAlgorithm/DoSAlgorithm.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/handler/JsonAccountHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/handler/JsonDefaultSettingsHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/JsonAccount.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/JsonDefaultSettings.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/MasterKey.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/certifier/Certifier.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/certifier/Owned.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/certifier/SimpleCertifier.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/certifier/out/SimpleCertifier.abi</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/certifier/out/SimpleCertifier.bin</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/registry/Owned.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/registry/Registry.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/registry/SimpleRegistry.sol</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/registry/out/SimpleRegistry.abi</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/solidity/registry/out/SimpleRegistry.bin</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/uml/classdiagram/KlassendiagrammComplete.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/uml/classdiagram/KlassendiagrammDependencys.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/uml/classdiagram/KlassendiagrammMethodes.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/AccountCertifyTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/BaseTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/BigDoSAttackTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithGas.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithTransactions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/IntervallResetterTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/ReadFromFileTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/ReplaceCertifierTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/RevokeAccountTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/TransactionManagerAccountNotRevokeTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/helper/ResetHelper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/helper/SendEtherHelper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/AccountList.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/DefaultSettings.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/TransaktionsManagerAccount.json</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.ch.brugg.fhnw.btm in BTMChainObserver">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="IntervallResetterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BTMChainObserver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.brugg.fhnw.btm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ch.brugg.fhnw.btm" />
+      <option name="MAIN_CLASS_NAME" value="ch.brugg.fhnw.btm.IntervallResetterTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ReadFromFileTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BTMChainObserver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.brugg.fhnw.btm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ch.brugg.fhnw.btm" />
+      <option name="MAIN_CLASS_NAME" value="ch.brugg.fhnw.btm.ReadFromFileTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ReadFromFileTest.readAccountFileTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BTMChainObserver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.brugg.fhnw.btm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ch.brugg.fhnw.btm" />
+      <option name="MAIN_CLASS_NAME" value="ch.brugg.fhnw.btm.ReadFromFileTest" />
+      <option name="METHOD_NAME" value="readAccountFileTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TransactionManagerAccountNotRevokeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BTMChainObserver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.brugg.fhnw.btm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ch.brugg.fhnw.btm" />
+      <option name="MAIN_CLASS_NAME" value="ch.brugg.fhnw.btm.TransactionManagerAccountNotRevokeTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ch.brugg.fhnw.btm in BTMChainObserver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BTMChainObserver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.brugg.fhnw.btm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ch.brugg.fhnw.btm" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.IntervallResetterTest" />
+      <item itemvalue="JUnit.ReadFromFileTest" />
+      <item itemvalue="JUnit.TransactionManagerAccountNotRevokeTest" />
+      <item itemvalue="JUnit.ReadFromFileTest.readAccountFileTest" />
+      <item itemvalue="JUnit.ch.brugg.fhnw.btm in BTMChainObserver" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ch.brugg.fhnw.btm in BTMChainObserver" />
+        <item itemvalue="JUnit.ReadFromFileTest" />
+        <item itemvalue="JUnit.ReadFromFileTest.readAccountFileTest" />
+        <item itemvalue="JUnit.TransactionManagerAccountNotRevokeTest" />
+        <item itemvalue="JUnit.IntervallResetterTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="447b2500-39e0-4c28-8070-fa9e1e5d0efb" name="Default" comment="" />
+      <created>1583953776790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583953776790</updated>
+    </task>
+    <task id="LOCAL-00001" summary="TM Not Revoking Test">
+      <created>1584012087576</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1584012087576</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Unnötiger Code entfernt &#10;Todos abgebaut&#10;codestyle&#10;todos eingebaut">
+      <created>1584015339309</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1584015339309</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Unnötiger Code entfernt &#10;Todos abgebaut&#10;codestyle&#10;todos eingebaut">
+      <created>1584016462800</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584016462800</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Error richtig loggen">
+      <created>1584017267911</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1584017267911</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Loggs richtig&#10;TODOs abgebaut&#10;JAVADOC geschrieben">
+      <created>1584019285223</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1584019285223</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Alle Todos und Javadoc gemacht">
+      <created>1584022540106</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1584022540106</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Accounts werden gelsöcht&#10;Logs wieder reinkommentiert">
+      <created>1584181614568</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1584181614568</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Nach Gas Used sperren">
+      <created>1584182748253</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1584182748253</updated>
+    </task>
+    <task id="LOCAL-00009" summary="MasterKeyAdress wird richtig geholt.&#10;TM Account wird nicht gesperrt">
+      <created>1584288661521</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1584288661521</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Delete Klasse entfernt">
+      <created>1584460065562</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1584460065562</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Todos im code entfernt">
+      <created>1584461043400</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1584461043400</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Tests verbessert">
+      <created>1584539928920</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1584539928920</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Tests verbessert">
+      <created>1584547467169</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1584547467169</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Test">
+      <created>1584547505113</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1584547505114</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Testfiles in Test Recources package, fürs Ausführen der Tests">
+      <created>1584547633123</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1584547633123</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Alte Whiteliste Resources gelöscht">
+      <created>1584547783736</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1584547783736</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="ReadFromFileTest - 2020.03.18 at 17h 23m 37s.xml">
+      <configuration name="ReadFromFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ReadFromFileTest_readAccountFileTest - 2020.03.18 at 17h 24m 42s.xml">
+      <configuration name="ReadFromFileTest.readAccountFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ReadFromFileTest - 2020.03.18 at 17h 25m 05s.xml">
+      <configuration name="ReadFromFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ReadFromFileTest_readAccountFileTest - 2020.03.18 at 17h 25m 20s.xml">
+      <configuration name="ReadFromFileTest.readAccountFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ReadFromFileTest_readAccountFileTest - 2020.03.18 at 17h 25m 40s.xml">
+      <configuration name="ReadFromFileTest.readAccountFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ReadFromFileTest - 2020.03.18 at 17h 26m 35s.xml">
+      <configuration name="ReadFromFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ReadFromFileTest - 2020.03.18 at 17h 27m 27s.xml">
+      <configuration name="ReadFromFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ReadFromFileTest - 2020.03.18 at 17h 32m 53s.xml">
+      <configuration name="ReadFromFileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ch_brugg_fhnw_btm_in_BTMChainObserver - 2020.03.18 at 18h 04m 20s.xml">
+      <configuration name="ch.brugg.fhnw.btm in BTMChainObserver" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ch_brugg_fhnw_btm_in_BTMChainObserver - 2020.03.18 at 18h 09m 04s.xml">
+      <configuration name="ch.brugg.fhnw.btm in BTMChainObserver" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <layout>
+      <window_info anchor="right" id="PlantUML" order="3" weight="0.32980332" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.009077156" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Structure" order="1" sideWeight="0.60502285" side_tool="true" weight="0.31240544" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.41653904" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.041347627" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21898928" />
+      <window_info anchor="bottom" id="CheckStyle" order="7" weight="0.32924962" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.39497718" visible="true" weight="0.37367624" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="UML design tool window" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" sideWeight="0.5009346" side_tool="true" weight="0.30937973" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="PlantUML" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.049004596" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="CheckStyle" order="9" weight="0.32924962" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.38591117" />
+      <window_info anchor="right" id="UML design tool window" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30937973" />
+      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32924962" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="TM Not Revoking Test" />
+    <MESSAGE value="Unnötiger Code entfernt &#10;Todos abgebaut&#10;codestyle&#10;todos eingebaut" />
+    <MESSAGE value="Error richtig loggen" />
+    <MESSAGE value="Loggs richtig&#10;TODOs abgebaut&#10;JAVADOC geschrieben" />
+    <MESSAGE value="Alle Todos und Javadoc gemacht" />
+    <MESSAGE value="Accounts werden gelsöcht&#10;Logs wieder reinkommentiert" />
+    <MESSAGE value="Nach Gas Used sperren" />
+    <MESSAGE value="MasterKeyAdress wird richtig geholt.&#10;TM Account wird nicht gesperrt" />
+    <MESSAGE value="Delete Klasse entfernt" />
+    <MESSAGE value="Todos im code entfernt" />
+    <MESSAGE value="Test" />
+    <MESSAGE value="Testfiles in Test Recources package, fürs Ausführen der Tests" />
+    <MESSAGE value="Alte Whiteliste Resources gelöscht" />
+    <MESSAGE value="Tests verbessert" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests verbessert" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/CertifyCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/ResetAccountsCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/RevokeAccountCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainInteractions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2227">
+          <caret line="145" column="31" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainSetup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3638">
+          <caret line="233" column="57" selection-start-line="233" selection-start-column="57" selection-end-line="233" selection-end-column="57" />
+          <folding>
+            <element signature="e#8576#8577#0" expanded="true" />
+            <element signature="e#8604#8605#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Init.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/SubscriptionTX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="67" column="43" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar!/com/google/gson/internal/bind/util/ISO8601Utils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="206" selection-start-line="206" selection-end-line="206" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/Iterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="91" column="17" selection-start-line="91" selection-start-column="17" selection-end-line="91" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Stop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/whitelist/AccountList.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/whitelist/DefaultSettings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/ReplaceCertifierTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/AccountCertifyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="32" column="63" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/RevokeAccountTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="31" column="62" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/TransaktionsManagerAccount.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/TransactionManagerAccountNotRevokeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.4/junit-4.4.jar!/org/junit/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="241" selection-start-line="241" selection-end-line="241" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/ReadFromFileTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainInteractions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1972">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/AbstractCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/CertifyCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/ResetAccountsCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/command/RevokeAccountCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/contracts/SimpleCertifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/contracts/SimpleRegistry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/dosAlgorithm/DoSAlgorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/handler/JsonAccountHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+          <folding>
+            <element signature="e#5875#5876#0" expanded="true" />
+            <element signature="e#5918#5919#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/handler/JsonDefaultSettingsHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/JsonAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/JsonDefaultSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/pojo/MasterKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding>
+            <element signature="e#243#244#0" expanded="true" />
+            <element signature="e#276#277#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/ChainSetup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Init.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/Run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/brugg/fhnw/btm/SubscriptionTX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/IntervallResetterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithTransactions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TransaktionsManagerAccount.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="84" selection-start-line="1" selection-start-column="84" selection-end-line="1" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/BaseTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/helper/ResetHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/BigDoSAttackTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="55" />
+          <folding>
+            <element signature="e#6181#6182#0" expanded="true" />
+            <element signature="e#6235#6236#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/DoSAttackWithGas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/brugg/fhnw/btm/helper/SendEtherHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DefaultSettings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="1" lean-forward="true" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountList.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="21" lean-forward="true" selection-end-line="71" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/AccountList.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="71" column="1" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/resources/testFilesForWhitelist/DefaultSettings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>BTMChainObserver</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

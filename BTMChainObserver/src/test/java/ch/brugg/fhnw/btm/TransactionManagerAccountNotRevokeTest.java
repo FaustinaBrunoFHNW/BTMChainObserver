@@ -54,14 +54,4 @@ public class TransactionManagerAccountNotRevokeTest {
 
     }
 
-    @Test public void tmDoubleTxThenLimit() throws Exception {
-
-        JsonAccount account = new JsonAccount();
-        account.setAddress(TOADDRESS);
-        BigDecimal ether = new BigDecimal("1");
-        sendEtherHelper.txLoop(10, account.getAddress(), ether, GASPRICEZERO, GASLIMIT);
-        Thread.sleep(15000);
-        Assert.assertTrue(chainInteractions.isCertified(account.getAddress()));
-
-    }
 }

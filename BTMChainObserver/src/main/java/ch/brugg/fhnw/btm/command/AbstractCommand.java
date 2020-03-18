@@ -2,7 +2,6 @@ package ch.brugg.fhnw.btm.command;
 
 import ch.brugg.fhnw.btm.ChainSetup;
 import ch.brugg.fhnw.btm.pojo.JsonAccount;
-
 import java.sql.Timestamp;
 
 

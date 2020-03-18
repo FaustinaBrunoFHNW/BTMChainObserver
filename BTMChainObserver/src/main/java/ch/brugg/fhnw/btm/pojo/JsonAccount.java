@@ -3,7 +3,6 @@ package ch.brugg.fhnw.btm.pojo;
 import ch.brugg.fhnw.btm.handler.JsonDefaultSettingsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
