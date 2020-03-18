@@ -1,0 +1,26 @@
+[parity]
+# Custom chain
+chain = "/home/parity/.local/share/io.parity.ethereum/genesis/instant_seal.json"
+base_path = "/home/parity/"
+# Blockchain and settings will be stored in D:\Workspaces\myBlockChain\parity_chain.
+# Automaticly created User
+# 0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7
+
+[rpc]
+# Allows Cross-Origin Requests from domain 'all'.
+cors = ["all"]
+# Only selected APIs will be exposed over this interface.
+apis = ["net", "private", "parity", "personal", "web3", "eth"]
+
+#[mining]
+[mining]
+min_gas_price = 100000
+tx_queue_no_unfamiliar_locals = true
+refuse_service_transactions = false
+reseal_on_txs = "all"
+reseal_min_period = 0
+reseal_max_period = 6000
+
+[misc]
+# All servers will listen on external interfaces and will be remotely accessible. It's equivalent with setting the following: --[ws,jsonrpc,ipfs-api,secretstore,stratum,dapps,secretstore-http]-interface=all --*-hosts=all    This option is UNSAFE and should be used with great care!
+unsafe_expose = true
