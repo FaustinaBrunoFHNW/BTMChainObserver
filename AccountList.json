@@ -5,7 +5,7 @@
     "transactionLimit": null,
     "revokeTime": null,
     "gasLimit": null,
-    "remainingGas": 62000,
+    "remainingGas": 50000000,
     "deleteMe": false,
     "timeStamp": null
   },
@@ -15,7 +15,7 @@
     "transactionLimit": null,
     "revokeTime": null,
     "gasLimit": null,
-    "remainingGas": 62000,
+    "remainingGas": 50000000,
     "deleteMe": false,
     "timeStamp": null
   },
@@ -34,8 +34,8 @@
     "remainingTransactions": 5,
     "transactionLimit": 5,
     "revokeTime": 3,
-    "gasLimit": null,
-    "remainingGas": 62000,
+    "gasLimit": 42000,
+    "remainingGas": 42000,
     "deleteMe": false,
     "timeStamp": null
   },
@@ -61,8 +61,8 @@
   },
   {
     "address": "0xD4810f6177e8BD64a4156e1f439ac202E9Ffca22",
-    "remainingTransactions": 1300,
-    "transactionLimit": 1300,
+    "remainingTransactions": 450,
+    "transactionLimit": 450,
     "revokeTime": 10,
     "gasLimit": 21021000,
     "remainingGas": 21021000,

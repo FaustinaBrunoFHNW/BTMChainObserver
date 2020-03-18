@@ -27,7 +27,8 @@ public class ReadFromFileTest extends BaseTest {
         Thread.sleep(2000);
         JsonDefaultSettingsHandler jsonDefaultSettingsHandler=JsonDefaultSettingsHandler.getInstance();
         jsonDefaultSettingsHandler.loadDefaultSettings();
-        Assert.assertEquals("0xee35211c4d9126d520bbfeaf3cfee5fe7b86f221",jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress());
+        //wenn die Blockchain neu
+        Assert.assertEquals("0x731a10897d267e19b34503ad902d0a29173ba4b1",jsonDefaultSettingsHandler.getDefaultSettings().getCertifierAddress());
         Assert.assertEquals("http://jurijnas.myqnapcloud.com:8545/",jsonDefaultSettingsHandler.getDefaultSettings().getConnectionAddress());
         Assert.assertEquals("0x0000000000000000000000000000000000001337",jsonDefaultSettingsHandler.getDefaultSettings().getNameRegistryAddress());
         Assert.assertEquals(2,jsonDefaultSettingsHandler.getDefaultSettings().getResetInterval());

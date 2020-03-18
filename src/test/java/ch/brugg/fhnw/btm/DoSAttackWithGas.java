@@ -74,8 +74,8 @@ public class DoSAttackWithGas  {
         BigDecimal ether = new BigDecimal("2");
         Thread.sleep(2000);
         sendEtherHelper.txLoop(2,ADDRESS,ether,GASPRICEZERO,GASLIMIT);
-        Thread.sleep(15000);
-        Assert.assertTrue(chainInteractions.isCertified(ADDRESS));
+        Thread.sleep(30000);
+        Assert.assertFalse(chainInteractions.isCertified(ADDRESS));
     }
     @Test public void gasAttack10500() throws Exception {
 

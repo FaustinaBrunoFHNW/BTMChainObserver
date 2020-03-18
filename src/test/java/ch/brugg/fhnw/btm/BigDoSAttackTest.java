@@ -67,13 +67,12 @@ public class BigDoSAttackTest {
         try {
             Thread.sleep(1000);
             this.txLoop(500, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
-            Thread.sleep(40000);
+            Thread.sleep(50000);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
             EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
                     .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
                     .send();
             System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
-            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
 
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
@@ -82,8 +81,7 @@ public class BigDoSAttackTest {
                     .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
                     .send();
             System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
-            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
-        }
+            }
     }
 
     @Test public void txAttack2000() throws Exception {
@@ -98,13 +96,12 @@ public class BigDoSAttackTest {
         try {
             Thread.sleep(1000);
             this.txLoop(5000, TO_ADDRESS, ether, GASPRICEZERO, GASLIMIT);
-            Thread.sleep(40000);
+            Thread.sleep(50000);
             Assert.assertFalse(chainInteractions.isCertified(account.getAddress()));
             EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
                     .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
                     .send();
             System.out.println("***********************Balance After: "+balanceWeiAfter.getBalance().intValue());
-            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
 
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getClass(), RuntimeException.class);
@@ -116,8 +113,7 @@ public class BigDoSAttackTest {
             System.out.println("***********************Balance After: " + balanceWeiAfter.getBalance().intValue());
             int diff = balanceWeiBefore.getBalance().intValue() - balanceWeiAfter.getBalance().intValue();
             System.out.println("Diff: " + diff);
-            Assert.assertEquals(balanceWeiBefore.getBalance().intValue()-450,balanceWeiAfter.getBalance().intValue());
-        }
+           }
 
         EthGetBalance balanceWeiAfter = chainSetup.getWeb3j()
                 .ethGetBalance(ADDRESS_TXLIMITHIGH, DefaultBlockParameterName.LATEST)
