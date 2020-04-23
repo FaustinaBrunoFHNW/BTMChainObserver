@@ -2,9 +2,9 @@
   {
     "address": "0xaf02DcCdEf3418F8a12f41CB4ed49FaAa8FD366b",
     "remainingTransactions": 2,
-    "transactionLimit": null,
-    "revokeTime": null,
-    "gasLimit": null,
+    "transactionLimit": 4,
+    "revokeTime": 2,
+    "gasLimit": 50000000,
     "remainingGas": 50000000,
     "deleteMe": false,
     "timeStamp": null
@@ -15,7 +15,7 @@
     "transactionLimit": null,
     "revokeTime": null,
     "gasLimit": null,
-    "remainingGas": 50000000,
+    "remainingGas": null,
     "deleteMe": false,
     "timeStamp": null
   },
@@ -31,9 +31,9 @@
   },
   {
     "address": "0x3e7Beee9585bA4526e8a7E41715D93B2bE014B34",
-    "remainingTransactions": 5,
+    "remainingTransactions": 1,
     "transactionLimit": 5,
-    "revokeTime": 3,
+    "revokeTime": 2,
     "gasLimit": 42000,
     "remainingGas": 42000,
     "deleteMe": false,
@@ -43,7 +43,7 @@
     "address": "0x2063Cfc6a737a9033459014C0ad444a1ae02d2DB",
     "remainingTransactions": 450,
     "transactionLimit": 450,
-    "revokeTime": 10,
+    "revokeTime": 2,
     "gasLimit": 21021000,
     "remainingGas": 21021000,
     "deleteMe": false,
